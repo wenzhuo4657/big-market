@@ -1,7 +1,11 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * (StrategyAward)表数据库访问层
@@ -12,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StrategyAwardDao {
 
-  
 
+    List<StrategyAwardEntity> queryStrategyAwardListByStrategyId(@Param("strategyId") Long strategyId);
 }
 

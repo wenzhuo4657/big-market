@@ -13,11 +13,29 @@ import java.util.Map;
  * @description: 策略服务仓储接口
  */
 public interface IStrategyRepository {
+
+      /**
+         *  des:
+       *  如果redis中存在不为空的键值对，直接返回，否则从mysql中查询返回，并更新redis中的键值对。
+         * */
     List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId);
 
+      /**
+         *  des:
+       *  在redis中存储/更新对应策略的抽奖策略范围值[0，rateRange）和<策略范围值-奖品id >分布表
+         * */
     void storeStrategyAwardSearchRateTable(Long strategyId, Integer rateRange, Map<Integer, Integer> strategyAwardSearchRateTable);
 
+
+      /**
+         *  des:
+       *  返回对应奖品id
+         * */
     Integer getStrategyAwardAssemble(Long strategyId, Integer rateKey);
 
+      /**
+         *  des:
+       *  查询对应策略的分布范围
+         * */
     int getRateRange(Long strategyId);
 }

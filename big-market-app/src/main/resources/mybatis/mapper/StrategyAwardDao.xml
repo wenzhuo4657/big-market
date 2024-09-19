@@ -17,7 +17,15 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-   
+    <sql id="StrategyAwardEntity">
+        strategy_id, award_id, award_count, award_count_surplus, award_rate
+    </sql>
+    <select id="queryStrategyAwardListByStrategyId" resultMap="StrategyAwardMap">
+        select  <include refid="StrategyAwardEntity"></include>
+            from strategy_award
+        where  strategy_id=#{strategyId}
+    </select>
+
 
 </mapper>
 

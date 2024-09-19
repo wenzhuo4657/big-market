@@ -1,7 +1,15 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.armory;
 
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.security.SecureRandom;
+import java.util.*;
 
 /**
  * @className: StrategyArmory
@@ -13,6 +21,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StrategyArmory implements  IStrategyArmory{
 
+    private Logger log= LoggerFactory.getLogger(StrategyArmory.class);
+
     private IStrategyRepository strategyRepository;
 
     public StrategyArmory(IStrategyRepository strategyRepository) {
@@ -21,12 +31,50 @@ public class StrategyArmory implements  IStrategyArmory{
 
     @Override
     public boolean assembleLotteryStrategy(Long strategyId) {
+        try {
+            List<StrategyAwardEntity> strategyAwardEntityList = strategyRepository.queryStrategyAwardList(strategyId);
 
-        return false;
+            BigDecimal min=strategyAwardEntityList.stream()
+                    .map(entity->{return entity.getAwardRate();})
+                    .min(BigDecimal::compareTo)
+                    .orElse(BigDecimal.ZERO);
+            BigDecimal totalDecimal = strategyAwardEntityList.stream()
+                    .map(entity -> {
+                        return entity.getAwardRate();
+                    })
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+            BigDecimal RateRange= totalDecimal.divide(min, 0, RoundingMode.CEILING);
+
+            List<Integer> list=new ArrayList<>(RateRange.intValue());
+            for (StrategyAwardEntity entity:strategyAwardEntityList){
+                Integer awardId = entity.getAwardId();
+                BigDecimal awardRate = entity.getAwardRate();
+                for (int i=0;i<RateRange.multiply(awardRate).setScale(0,RoundingMode.CEILING).intValue();i++){
+                    list.add(awardId);
+                }
+            }
+            Collections.shuffle(list);
+            Map<Integer,Integer> table=new LinkedHashMap<>();
+            for (int i=0;i<list.size();i++){
+                table.put(i,list.get(i));
+            }
+
+            strategyRepository.storeStrategyAwardSearchRateTable(strategyId,table.size(),table);
+
+
+            return true;
+        } catch (Exception e) {
+            log.info("cn.wenzhuo4657.BigMarket.domain.strategy.service.armory:assembleLotteryStrategy报错{}",e);
+           return  false;
+        }
+
     }
+
 
     @Override
     public Integer getRandomAwardId(Long strategyId) {
-        return null;
+        int rateRange=strategyRepository.getRateRange(strategyId);
+        return strategyRepository.getStrategyAwardAssemble(strategyId,new SecureRandom().nextInt(rateRange));
     }
 }

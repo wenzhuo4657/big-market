@@ -36,3 +36,34 @@ add方法中是这样写的。
 ```
 
 可以看到，方法内部除了添加元素，还有扩容方法。
+
+
+
+
+
+
+
+# 报错
+
+## mapper返回值类型不受泛型约束
+
+报错很多，但实际上仅仅java泛型的一个在应用中的错误。
+
+java泛型是一个伪泛型，这个伪是指其在实际运行中对java对象并没有约束，仅仅在编译中生效。
+
+由于反射是通过class对象操作，而class对象的生命周期是从加载阶段开始的，因此我们可以通过反射查看java泛型是否生效。
+
+![image-20240924171005751](C:\Users\14783\AppData\Roaming\Typora\typora-user-images\image-20240924171005751.png)
+
+此处实际上提醒我，java泛型在编译阶段的检查范围，我的错误是这样的，
+
+![image-20240924171105413](C:\Users\14783\AppData\Roaming\Typora\typora-user-images\image-20240924171105413.png)
+
+该方法的实际内容由xml定义，使用泛型约束，但是在运行中总是并没有生成对应的泛型对象。
+
+修正过后的xml
+
+![image-20240924171215203](C:\Users\14783\AppData\Roaming\Typora\typora-user-images\image-20240924171215203.png)
+
+这里需要重新明确resultMap的定义，不仅仅是属性的映射，而且还管理sql语句返回的数据将要转向哪一个java类。
+

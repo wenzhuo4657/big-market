@@ -18,7 +18,6 @@ public class RedissonService implements IRedisService{
     @Resource
     private RedissonClient redissonClient;
 
-    @Override
     public <T> void setValue(String key, T value) {
         redissonClient.<T>getBucket(key).set(value);
     }
@@ -29,7 +28,6 @@ public class RedissonService implements IRedisService{
         bucket.set(value, Duration.ofMillis(expired));
     }
 
-    @Override
     public <T> T getValue(String key) {
         return redissonClient.<T>getBucket(key).get();
     }
@@ -79,25 +77,21 @@ public class RedissonService implements IRedisService{
         return redissonClient.getBucket(key).isExists();
     }
 
-    @Override
     public void addToSet(String key, String value) {
         RSet<String> set = redissonClient.getSet(key);
         set.add(value);
     }
 
-    @Override
     public boolean isSetMember(String key, String value) {
         RSet<String> set = redissonClient.getSet(key);
         return set.contains(value);
     }
 
-    @Override
     public void addToList(String key, String value) {
         RList<String> list = redissonClient.getList(key);
         list.add(value);
     }
 
-    @Override
     public String getFromList(String key, int index) {
         RList<String> list = redissonClient.getList(key);
         return list.get(index);
@@ -108,13 +102,11 @@ public class RedissonService implements IRedisService{
         return redissonClient.getMap(key);
     }
 
-    @Override
     public void addToMap(String key, String field, String value) {
         RMap<String, String> map = redissonClient.getMap(key);
         map.put(field, value);
     }
 
-    @Override
     public String getFromMap(String key, String field) {
         RMap<String, String> map = redissonClient.getMap(key);
         return map.get(field);
@@ -125,7 +117,6 @@ public class RedissonService implements IRedisService{
         return redissonClient.<K, V>getMap(key).get(field);
     }
 
-    @Override
     public void addToSortedSet(String key, String value) {
         RSortedSet<String> sortedSet = redissonClient.getSortedSet(key);
         sortedSet.add(value);

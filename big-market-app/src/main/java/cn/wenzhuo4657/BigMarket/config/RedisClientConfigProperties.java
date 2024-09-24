@@ -17,6 +17,8 @@ public class RedisClientConfigProperties {
     private String host;
     private int port;
     private int poolSize;
+    private int minIdleSize;
+    private  String password;
 
 
 }

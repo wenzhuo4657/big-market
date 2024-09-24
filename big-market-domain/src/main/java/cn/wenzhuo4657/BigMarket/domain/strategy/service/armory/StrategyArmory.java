@@ -35,7 +35,7 @@ public class StrategyArmory implements  IStrategyArmory{
             List<StrategyAwardEntity> strategyAwardEntityList = strategyRepository.queryStrategyAwardList(strategyId);
 
             BigDecimal min=strategyAwardEntityList.stream()
-                    .map(entity->{return entity.getAwardRate();})
+                    .map(StrategyAwardEntity::getAwardRate)
                     .min(BigDecimal::compareTo)
                     .orElse(BigDecimal.ZERO);
             BigDecimal totalDecimal = strategyAwardEntityList.stream()
@@ -55,7 +55,7 @@ public class StrategyArmory implements  IStrategyArmory{
                 }
             }
             Collections.shuffle(list);
-            Map<Integer,Integer> table=new LinkedHashMap<>();
+            Map<Integer,Integer> table=new LinkedHashMap<>(list.size());
             for (int i=0;i<list.size();i++){
                 table.put(i,list.get(i));
             }
@@ -65,7 +65,7 @@ public class StrategyArmory implements  IStrategyArmory{
 
             return true;
         } catch (Exception e) {
-            log.info("cn.wenzhuo4657.BigMarket.domain.strategy.service.armory:assembleLotteryStrategy报错{}",e);
+            log.info("cn.wenzhuo4657.BigMarket.domain.strategy.service.armory:assembleLotteryStrategy报错,{}",e);
            return  false;
         }
 

@@ -4,6 +4,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.StrategyArmory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -19,14 +20,20 @@ import javax.annotation.Resource;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ImportAutoConfiguration(classes = {cn.wenzhuo4657.BigMarket.types.common.Constants.RedisKey.class})
 public class StrategyTest {
 
     @Resource
     private StrategyArmory strategyArmory;
+    @Test
+    public void test_strategyArmory() {
+        boolean success = strategyArmory.assembleLotteryStrategy(100001L);
+        log.info("测试结果：{}", success);
+    }
 
     @Test
     public  void test(){
-        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100002L));
+        log.info("测试结果：{} - 奖品ID值", strategyArmory.getRandomAwardId(100001L));
     }
-    }
+
 }

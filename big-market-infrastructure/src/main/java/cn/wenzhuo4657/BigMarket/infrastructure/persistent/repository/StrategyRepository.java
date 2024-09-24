@@ -35,7 +35,7 @@ public class StrategyRepository implements IStrategyRepository {
     public List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId) {
         String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY+strategyId;
         List<StrategyAwardEntity> strategyAwardEntityList=redissonService.getValue(cacheKey);
-        if (Objects.isNull(strategyAwardEntityList)&&!strategyAwardEntityList.isEmpty()) return strategyAwardEntityList;
+        if (!Objects.isNull(strategyAwardEntityList)&&!strategyAwardEntityList.isEmpty()) return strategyAwardEntityList;
 
         strategyAwardEntityList=strategyAwardDao.queryStrategyAwardListByStrategyId(strategyId);
 

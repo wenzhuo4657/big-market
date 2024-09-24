@@ -30,7 +30,9 @@ public class RedisClientConfig {
         Config config=new Config();
         config.useSingleServer()
                         .setAddress("redis://"+configProperties.getHost()+":"+configProperties.getPort())
-                                .setConnectionPoolSize(configProperties.getPoolSize());
+                                .setConnectionPoolSize(configProperties.getPoolSize())
+                                        .setConnectionMinimumIdleSize(configProperties.getMinIdleSize());
+
         config.setCodec(new Kryo5Codec());
 
         return Redisson.create(config);

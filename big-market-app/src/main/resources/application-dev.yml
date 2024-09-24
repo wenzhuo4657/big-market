@@ -17,7 +17,7 @@ spring:
   datasource:
     username: root
     password: 465700
-    url: jdbc:mysql://127.0.0.1:3307/big_market?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3308/big_market?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
     pool-name: Retail_HikariCP
@@ -34,12 +34,15 @@ spring:
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/config/mybatis-config.xml
+  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 redis:
   sdk:
     config:
       host: 127.0.0.1
       port: 6379
-      pool-size: 10
+      pool-size: 64
+      minIdleSize: 10
+      password: 465700
 
 
 

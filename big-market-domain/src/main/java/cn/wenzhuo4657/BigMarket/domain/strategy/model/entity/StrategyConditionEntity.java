@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * @author: wenzhuo4657
  * @date: 2024/9/19 9:33
  * @Version: 1.0
- * @description:    策略条件实体
+ * @description:    策略-用户对应实体
  */
 @Data
 @AllArgsConstructor

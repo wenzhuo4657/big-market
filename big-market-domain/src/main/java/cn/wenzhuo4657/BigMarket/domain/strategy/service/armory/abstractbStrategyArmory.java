@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.security.SecureRandom;
 import java.util.*;
 
 /**
@@ -19,13 +18,13 @@ import java.util.*;
  * @description:
  */
 @Service
-public class StrategyArmory implements  IStrategyArmory{
+public abstract class abstractbStrategyArmory implements  IStrategyArmory,IStrategyDispatch{
 
-    private Logger log= LoggerFactory.getLogger(StrategyArmory.class);
+    private Logger log= LoggerFactory.getLogger(abstractbStrategyArmory.class);
 
     private IStrategyRepository strategyRepository;
 
-    public StrategyArmory(IStrategyRepository strategyRepository) {
+    public abstractStrategyArmory(IStrategyRepository strategyRepository) {
         this.strategyRepository = strategyRepository;
     }
 
@@ -72,9 +71,5 @@ public class StrategyArmory implements  IStrategyArmory{
     }
 
 
-    @Override
-    public Integer getRandomAwardId(Long strategyId) {
-        int rateRange=strategyRepository.getRateRange(strategyId);
-        return strategyRepository.getStrategyAwardAssemble(strategyId,new SecureRandom().nextInt(rateRange));
-    }
+
 }

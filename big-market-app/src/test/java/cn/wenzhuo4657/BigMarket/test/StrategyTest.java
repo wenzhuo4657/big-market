@@ -1,6 +1,6 @@
 package cn.wenzhuo4657.BigMarket.test;
 
-import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.StrategyArmory;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.abstractbStrategyArmory
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 public class StrategyTest {
 
     @Resource
-    private StrategyArmory strategyArmory;
+    private abstractStrategyArmory strategyArmory;
     @Test
     public void test_strategyArmory() {
         boolean success = strategyArmory.assembleLotteryStrategy(100001L);

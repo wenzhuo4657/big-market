@@ -14,7 +14,21 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-   
+    <resultMap type="cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity" id="StrategyRuleEntity">
 
+        <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
+        <result property="awardId" column="award_id" jdbcType="INTEGER"/>
+        <result property="ruleType" column="rule_type" jdbcType="INTEGER"/>
+        <result property="ruleModel" column="rule_model" jdbcType="VARCHAR"/>
+        <result property="ruleValue" column="rule_value" jdbcType="VARCHAR"/>
+        <result property="ruleDesc" column="rule_desc" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryStrategyRuleEntity" resultMap="StrategyRuleEntity">
+        select strategy_id,award_id,rule_model,rule_type,rule_value,rule_desc
+        from strategy
+        where strategy_id = #{strategyId} and rule_model=#{ruleModel}
+    </select>
 </mapper>
 

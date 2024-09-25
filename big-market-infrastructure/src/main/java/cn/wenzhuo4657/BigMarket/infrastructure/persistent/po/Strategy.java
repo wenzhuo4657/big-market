@@ -7,10 +7,10 @@ import java.io.Serializable;
  * (Strategy)实体类
  *
  * @author makejava
- * @since 2024-09-18 20:51:37
+ * @since 2024-09-25 19:36:40
  */
 public class Strategy implements Serializable {
-    private static final long serialVersionUID = -87017063532609247L;
+    private static final long serialVersionUID = 943604272940297770L;
     /**
      * 自增ID
      */
@@ -23,6 +23,10 @@ public class Strategy implements Serializable {
      * 抽奖策略描述
      */
     private String strategyDesc;
+    /**
+     * 规则模型，rule配置的模型同步到此表，便于使用
+     */
+    private String ruleModels;
     /**
      * 创建时间
      */
@@ -55,6 +59,14 @@ public class Strategy implements Serializable {
 
     public void setStrategyDesc(String strategyDesc) {
         this.strategyDesc = strategyDesc;
+    }
+
+    public String getRuleModels() {
+        return ruleModels;
+    }
+
+    public void setRuleModels(String ruleModels) {
+        this.ruleModels = ruleModels;
     }
 
     public Date getCreateTime() {

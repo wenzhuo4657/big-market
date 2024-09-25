@@ -1,6 +1,8 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.repository;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -24,18 +26,27 @@ public interface IStrategyRepository {
          *  des:
        *  在redis中存储/更新对应策略的抽奖策略范围值[0，rateRange）和<策略范围值-奖品id >分布表
          * */
-    void storeStrategyAwardSearchRateTable(Long strategyId, Integer rateRange, Map<Integer, Integer> strategyAwardSearchRateTable);
+    void storeStrategyAwardSearchRateTable(String key, Integer rateRange, Map<Integer, Integer> strategyAwardSearchRateTable);
 
 
       /**
          *  des:
        *  返回对应奖品id
          * */
-    Integer getStrategyAwardAssemble(Long strategyId, Integer rateKey);
+    Integer getStrategyAwardAssemble(String key, Integer rateKey);
 
       /**
          *  des:
        *  查询对应策略的分布范围
          * */
     int getRateRange(Long strategyId);
+
+
+    int getRateRange(String key);
+
+    StrategyEntity queryStrategyEntityByStrategyId(Long strategyId);
+
+    StrategyRuleEntity queryStrategyRule(Long strategyId, String ruleModel);
+
+
 }

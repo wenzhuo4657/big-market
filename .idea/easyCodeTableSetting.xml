@@ -95,6 +95,13 @@
                     <option name="type" value="java.lang.String" />
                   </ColumnInfoDTO>
                   <ColumnInfoDTO>
+                    <option name="comment" value="规则模型，rule配置的模型同步到此表，便于使用" />
+                    <option name="custom" value="false" />
+                    <option name="ext" value="{}" />
+                    <option name="name" value="ruleModels" />
+                    <option name="type" value="java.lang.String" />
+                  </ColumnInfoDTO>
+                  <ColumnInfoDTO>
                     <option name="comment" value="创建时间" />
                     <option name="custom" value="false" />
                     <option name="ext" value="{}" />
@@ -113,8 +120,8 @@
               <option name="name" value="Strategy" />
               <option name="preName" value="" />
               <option name="saveModelName" value="big-market-infrastructure" />
-              <option name="savePackageName" value="cn.wenzhuo4657.BigMarket.infrastructure.persistent" />
-              <option name="savePath" value="./big-market-infrastructure/src/main/java/cn/wenzhuo4657/BigMarket/infrastructure/persistent" />
+              <option name="savePackageName" value="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po" />
+              <option name="savePath" value="./big-market-infrastructure/src/main/java/cn/wenzhuo4657/BigMarket/infrastructure/persistent/po" />
               <option name="templateGroupName" value="Default" />
             </TableInfoDTO>
           </value>

@@ -1,7 +1,9 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * (StrategyRule)表数据库访问层
@@ -12,7 +14,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StrategyRuleDao {
 
-  
 
+    StrategyRuleEntity queryStrategyRuleEntity(@Param("strategyId") Long strategyId, @Param("ruleModel") String ruleModel);
 }
 

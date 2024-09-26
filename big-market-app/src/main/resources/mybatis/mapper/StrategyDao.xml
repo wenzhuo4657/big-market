@@ -6,11 +6,24 @@
         <result property="id" column="id" jdbcType="VARCHAR"/>
         <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
         <result property="strategyDesc" column="strategy_desc" jdbcType="VARCHAR"/>
+        <result property="ruleModels" column="rule_models" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-   
+    <resultMap id="StrateEntity" type="cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity">
+        <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
+        <result property="strategyDesc" column="strategy_desc" jdbcType="VARCHAR"/>
+        <result property="ruleModels" column="rule_models" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="getStrateEntityByStrategyId" parameterType="java.lang.Long" resultMap="StrateEntity">
+        select strategy_id,strategy_desc,rule_models
+        from strategy
+        where strategy_id = #{strategyId}
+    </select>
+
 
 </mapper>
 

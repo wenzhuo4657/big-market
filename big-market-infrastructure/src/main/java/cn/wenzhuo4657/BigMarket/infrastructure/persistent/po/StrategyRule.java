@@ -49,6 +49,8 @@ public class StrategyRule implements Serializable {
     private Date updateTime;
 
 
+
+
     public String getId() {
         return id;
     }

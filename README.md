@@ -37,9 +37,13 @@ add方法中是这样写的。
 
 可以看到，方法内部除了添加元素，还有扩容方法。
 
+### java访问类型
 
+在写代码时看到一个protected修饰符，突然发现自己通常只使用私有和公有两种访问修饰类型，故此去查询了一下。
 
+<img src="C:\Users\14783\AppData\Roaming\Typora\typora-user-images\image-20240926120935494.png" alt="image-20240926120935494"  />
 
+需要注意的时private字段在其子类中也不能直接访问，只能通过public方法、反射等其他迂回的方式进行间接的访问。
 
 
 

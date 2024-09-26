@@ -10,6 +10,10 @@ import lombok.*;
  * @Version: 1.0
  * @description: 抽奖行为实体
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RuleActionEntity <T extends RuleActionEntity.RaffleEntity>{
     private String code = RuleLogicCheckTypeVO.ALLOW.getCode();
     private String info = RuleLogicCheckTypeVO.ALLOW.getInfo();

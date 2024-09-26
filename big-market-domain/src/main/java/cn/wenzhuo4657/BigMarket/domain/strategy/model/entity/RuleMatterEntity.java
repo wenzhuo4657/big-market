@@ -1,5 +1,10 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.model.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @className: RuleMatterEntity
  * @author: wenzhuo4657
@@ -8,6 +13,11 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.model.entity;
  * @description:
  */
   //  wenzhuo TODO 2024/9/26 :该实体的含义不是很明白，其中某两个字段和RaffleFactorEntity 是重合的，那么难道不可以根据上述两个字段查询后两个字段吗？将其设置为list难道不是更合理吗？
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RuleMatterEntity {
     /** 用户ID */
     private String userId;

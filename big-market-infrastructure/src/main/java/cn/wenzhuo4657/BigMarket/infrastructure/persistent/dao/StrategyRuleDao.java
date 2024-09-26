@@ -16,5 +16,10 @@ public interface StrategyRuleDao {
 
 
     StrategyRuleEntity queryStrategyRuleEntity(@Param("strategyId") Long strategyId, @Param("ruleModel") String ruleModel);
+
+    String queryStrategyRuleValue(
+            @Param("strategyId") Long strategyId,
+            @Param("awardId") Integer awardId,
+            @Param("ruleModel") String ruleModel);
 }
 

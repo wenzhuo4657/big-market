@@ -4,6 +4,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RuleActionEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
@@ -37,6 +38,10 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
         StrategyEntity strategyEntity = strategyRepository.queryStrategyEntityByStrategyId(strategyId);
         RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> raffleBeforeEntityRuleActionEntity =
                 this.doCheckRaffleBeforeLogic(new RaffleFactorEntity(userId, strategyId), strategyEntity.getRuleModels());
+
+        if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(raffleBeforeEntityRuleActionEntity.getCode())){
+
+        }
 
         return null;
     }

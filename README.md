@@ -71,3 +71,26 @@ java泛型是一个伪泛型，这个伪是指其在实际运行中对java对象
 
 这里需要重新明确resultMap的定义，不仅仅是属性的映射，而且还管理sql语句返回的数据将要转向哪一个java类。
 
+
+
+## 绕过泛型检查
+
+```
+    public Map<String, ILogicFilter<?>> logicFilterMap = new ConcurrentHashMap<>();
+
+
+
+    public <T extends RuleActionEntity.RaffleEntity>    Map<String, ILogicFilter<T>> openLogicFilter() {
+        return (Map<String, ILogicFilter<T>>) (Map<?, ?>) logicFilterMap;
+    }
+```
+
+注意该段代码有三个泛型类型，Map<String, ILogicFilter<?>>、<T extends RuleActionEntity.RaffleEntity>和 (Map<?, ?>)。对于 (Map<?, ?>)而言，很显然这是没有任何约束的泛型，等价于map<>,但问题是为什么要这样做？
+
+
+
+java的泛型是一个伪泛型，在运行时被擦除，原始信息保留在字节码文件中，不产生约束，仅仅在编译时进行约束。对于该段代码而言，我们需要注意将两个泛型进行转换，由于没有运行我们不知道能否进行转换，java编译器禁止了该种行为，将其视为报错，但是我们可以通过将其原有泛型转换为没有约束的map<?,?>类型，绕过泛型检查。
+
+需要注意的是，这样做存在风险，或者说仅仅是保证了看上去类型是这样，实际上在运行中该方法返回的集合内部元素的value不一定是所期望的ILogicFilter<T>>。
+
+对此需要明白的是，java语言在编译阶段无法得知某些泛型类型的具体类型，因此无法直接进行转换，如果进行了间接转换，即表示接受风险。

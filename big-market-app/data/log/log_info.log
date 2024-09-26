@@ -350,3 +350,18 @@ Caused by: java.sql.SQLSyntaxErrorException: Unknown column 'award_id' in 'field
 24-09-26.09:48:21.071 [main            ] INFO  StrategyTest           - 测试结果：101
 24-09-26.09:48:21.084 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
 24-09-26.09:48:21.086 [SpringApplicationShutdownHook] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+24-09-26.09:50:48.477 [main            ] INFO  StrategyTest           - Starting StrategyTest using Java 1.8.0_321 on 我不吃茄子西红柿 with PID 21056 (started by 14783 in E:\code\java\idea\project\big-market-app)
+24-09-26.09:50:48.477 [main            ] INFO  StrategyTest           - The following 1 profile is active: "dev"
+24-09-26.09:50:49.204 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-09-26.09:50:49.206 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-09-26.09:50:49.229 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10 ms. Found 0 Redis repository interfaces.
+24-09-26.09:50:50.507 [main            ] INFO  Version                - Redisson 3.23.4
+24-09-26.09:50:51.138 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-09-26.09:50:51.156 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-09-26.09:50:53.082 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-09-26.09:50:53.154 [main            ] INFO  StrategyTest           - Started StrategyTest in 5.071 seconds (JVM running for 6.16)
+24-09-26.09:50:53.609 [main            ] INFO  HikariDataSource       - HikariPool-1 - Starting...
+24-09-26.09:50:54.272 [main            ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+24-09-26.09:51:52.056 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=52s328ms236µs700ns).
+24-09-26.09:54:14.736 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m10s384ms788µs300ns).
+24-09-26.09:59:46.054 [HikariPool-1 housekeeper] WARN  HikariPool             - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m31s317ms177µs99ns).

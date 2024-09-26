@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.SecureRandom;
 import java.util.*;
 
 /**
@@ -107,11 +108,14 @@ public class StrategyArmoryDispatch implements IStrategyDispatch,IStrategyArmory
     }
     @Override
     public Integer getRandomAwardId(Long strategyId) {
-        return null;
+        int rateRange = strategyRepository.getRateRange(strategyId);
+        return strategyRepository.getStrategyAwardAssemble(String.valueOf(strategyId), new SecureRandom().nextInt(rateRange));
     }
 
     @Override
     public Integer getRandomAwardId(Long strategyId, String ruleWeightValue) {
-        return null;
+        String key = String.valueOf(strategyId).concat("_").concat(ruleWeightValue);
+        int rateRange = strategyRepository.getRateRange(key);
+        return strategyRepository.getStrategyAwardAssemble(key, new SecureRandom().nextInt(rateRange));
     }
 }

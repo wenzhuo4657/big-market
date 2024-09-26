@@ -31,6 +31,7 @@ public class StrategyArmoryDispatch implements IStrategyDispatch,IStrategyArmory
         this.strategyRepository = strategyRepository;
     }
 
+
     @Override
     public boolean assembleLotteryStrategy(Long strategyId) {
         try {
@@ -52,12 +53,29 @@ public class StrategyArmoryDispatch implements IStrategyDispatch,IStrategyArmory
 
 
             Map<String, List<Integer>> ruleWeightValues = strategyRule.getRuleWeightValues();
+            Set<String> entries = ruleWeightValues.keySet();
+            for (String key:entries){
+                List<Integer> integers = ruleWeightValues.get(key);
+                ArrayList<StrategyAwardEntity> strategyAwardEntityListClone = new ArrayList<>(strategyAwardEntityList);
+                strategyAwardEntityListClone.removeIf(entity->!integers.contains(entity.getAwardId()));
+                assembleLotteryStrategy(String.valueOf(strategyId).concat("_").concat(key),strategyAwardEntityListClone);
+            }
             return true;
         } catch (Exception e) {
-            log.info("cn.wenzhuo4657.BigMarket.domain.strategy.service.armory:assembleLotteryStrategy报错,{}",e);
+            log.info("策略装配失败。",e);
             return  false;
         }
     }
+
+    /**
+     * @Author wenzhuo4657
+     * @Param
+     * key:装配redis中的key，
+     * 此时分为了两种key，第一种权限概率装配没有改变，和第二种权重装配互不影响，因为两者的key不同。
+     * strategyAwardEntityList：装配redis的奖品实体列表
+     * des：概率表装配，
+     **/
+
     private void assembleLotteryStrategy(String key, List<StrategyAwardEntity> strategyAwardEntityList){
         BigDecimal min=strategyAwardEntityList.stream()
                 .map(StrategyAwardEntity::getAwardRate)
@@ -84,8 +102,6 @@ public class StrategyArmoryDispatch implements IStrategyDispatch,IStrategyArmory
         for (int i=0;i<list.size();i++){
             table.put(i,list.get(i));
         }
-
-          //  wenzhuo TODO 2024/9/25 : 这里与之前版本有些不同，将key和StrategyId进行了区分，key取药搭配前缀获取redis中的值，而后者不许，但问题在于并未找到存后者键值对的操作。问题在于从输入数据的角度来看，这二者的值只是数据类型的不同。
         strategyRepository.storeStrategyAwardSearchRateTable(key,table.size(),table);
 
     }

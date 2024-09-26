@@ -27,7 +27,7 @@
 
     <select id="queryStrategyRuleEntity" resultMap="StrategyRuleEntity">
         select strategy_id,award_id,rule_model,rule_type,rule_value,rule_desc
-        from strategy
+        from strategy_rule
         where strategy_id = #{strategyId} and rule_model=#{ruleModel}
     </select>
 </mapper>

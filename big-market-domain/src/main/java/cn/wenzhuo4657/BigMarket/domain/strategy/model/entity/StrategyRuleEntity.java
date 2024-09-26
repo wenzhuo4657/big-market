@@ -45,9 +45,13 @@ public class StrategyRuleEntity {
      *  @author:wenzhuo4657
         des:
      1，rule_weight：该规则的含义是抽奖策略的权重装配。
-
      方法的含义为：如果有权重装配的规则，则返回抽奖规则的比值。ruleValue有三组分隔符号，逐层解析。
+     return : Map<String, List<Integer>>
+     k：
+     v：表示对应的奖品id列表
     */
+
+
     public Map<String, List<Integer>>  getRuleWeightValues() {
 
         if (!"rule_weight".equals(ruleModel))return  null;
@@ -69,9 +73,16 @@ public class StrategyRuleEntity {
                 values.add(Integer.parseInt(valueString));
             }
             // 将键和值放入Map中
-              //  wenzhuo TODO 2024/9/25 : 这里似乎有问题。没有使用part[0]的值， ruleValue表示该组的整体没有被分割全长度，作为键似乎过于长了
+            /**
+             *  @author:wenzhuo4657
+                des:
+             ruleValue是类似100001_6000:102,103,104,105,106,107,108,109的值
+             需要注意其分隔符号’:‘，该符号可以作为redis中键的分隔符号，这意味着如果想要在redis中加载权值的mqp结构会极为方便。
+             而且此处我选择的kryo序列化方式，加上该格式，会使时间效率进一步提升。
+            */
             resultMap.put(ruleValue, values);
         }
+        return  resultMap;
 
     }
 

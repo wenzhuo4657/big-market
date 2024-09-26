@@ -32,7 +32,7 @@ public class StrategyEntity {
         des: 返回规则数组，且做了判空的处理，
     */
     public String[] ruleModels() {
-        if (StringUtils.isBlank(ruleModels)) return null;
+        if (StringUtils.isEmpty(ruleModels)) return null;
         return ruleModels.split(Constants.SPLIT);
     }
 

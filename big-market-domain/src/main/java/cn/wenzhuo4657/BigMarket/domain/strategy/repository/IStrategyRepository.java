@@ -39,6 +39,7 @@ public interface IStrategyRepository {
          *  des:
        *  查询对应策略的分布范围
          * */
+        //  wenzhuo TODO 2024/9/26 : 其实现似乎写错了，并没有看到直接测策略id的装配
     int getRateRange(Long strategyId);
 
 

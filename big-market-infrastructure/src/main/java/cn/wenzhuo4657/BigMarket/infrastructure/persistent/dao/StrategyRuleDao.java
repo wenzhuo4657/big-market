@@ -11,7 +11,6 @@ import org.apache.ibatis.annotations.Param;
  * @author makejava
  * @since 2024-09-18 20:55:40
  */
-@Mapper
 public interface StrategyRuleDao {
 
 

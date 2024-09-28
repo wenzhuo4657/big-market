@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.security.SecureRandom;
@@ -23,21 +24,21 @@ import java.util.*;
  * @Version: 1.0
  * @description:
  */
-@Service
-public class StrategyArmoryDispatch implements IStrategyDispatch,IStrategyArmory{
+@Service("strategyArmoryDispatch")
+public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch{
     private  Logger log= LoggerFactory.getLogger(StrategyArmoryDispatch.class);
+
+    @Resource(name = "strategyRepository")
     private IStrategyRepository strategyRepository;
 
-    public StrategyArmoryDispatch(IStrategyRepository strategyRepository) {
-        this.strategyRepository = strategyRepository;
-    }
+
 
 
     @Override
     public boolean assembleLotteryStrategy(Long strategyId) {
         try {
 
-//            1,测率概率的装配
+//            1,策略概率的装配
             List<StrategyAwardEntity> strategyAwardEntityList = strategyRepository.queryStrategyAwardList(strategyId);
             assembleLotteryStrategy(String.valueOf(strategyId),strategyAwardEntityList);
 

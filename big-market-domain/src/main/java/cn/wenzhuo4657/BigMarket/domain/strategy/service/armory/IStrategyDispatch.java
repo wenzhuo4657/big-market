@@ -17,7 +17,11 @@ public interface IStrategyDispatch {
     Integer getRandomAwardId(Long strategyId);
 
 
-
+/**
+ *  @author:wenzhuo4657
+    des:
+ 权重规则抽奖，
+*/
     Integer getRandomAwardId(Long strategyId, String ruleWeightValue);
 
 }

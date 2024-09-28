@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.ILogicFilter;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +36,7 @@ public class DefaultLogicFactory {
      *  @author:wenzhuo4657
         des: 装配logicFilterMap，通过字节码文件检查是否存在对应的注解。如果存在则加入.
     */
+    @Autowired
     public DefaultLogicFactory(List<ILogicFilter<?>> logicFilters) {
         logicFilters.forEach(
                 logic->{

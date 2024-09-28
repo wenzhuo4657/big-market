@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2024-09-18 20:54:36
  */
 
-@Mapper
+
 public interface AwardDao {
 
 

@@ -61,7 +61,7 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy{
         RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> ruleActionEntity = null;
         for (String ruleModel:ruleList){
             ILogicFilter<RuleActionEntity.RaffleBeforeEntity> logicFilter = LogicFilterGroup.get(ruleModel);
-            RuleMatterEntity ruleMatterEntity=new RuleMatterEntity(raffleFactorEntity.getUserId(),raffleFactorEntity.getStrategyId(),null,DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode());
+            RuleMatterEntity ruleMatterEntity=new RuleMatterEntity(raffleFactorEntity.getUserId(),raffleFactorEntity.getStrategyId(),null,ruleModel);
             ruleActionEntity = logicFilter.filter(ruleMatterEntity);
             if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(ruleActionEntity.getCode())){
                 return ruleActionEntity;

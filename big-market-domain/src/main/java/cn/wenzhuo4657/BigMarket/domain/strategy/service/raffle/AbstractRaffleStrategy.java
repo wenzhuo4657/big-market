@@ -46,11 +46,11 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
 
         if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(raffleBeforeEntityRuleActionEntity.getCode())){
-            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
+            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
                 return RaffleAwardEntity.builder().awardId(raffleBeforeEntityRuleActionEntity.getData().getAwardId())
                         .build();
 
-            }else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
+            }else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
                 RuleActionEntity.RaffleBeforeEntity data = raffleBeforeEntityRuleActionEntity.getData();
                 String ruleWeightValueKey = data.getRuleWeightValueKey();
                 Integer awarId=strategyDispatch.getRandomAwardId(data.getStrategyId(),data.getRuleWeightValueKey());

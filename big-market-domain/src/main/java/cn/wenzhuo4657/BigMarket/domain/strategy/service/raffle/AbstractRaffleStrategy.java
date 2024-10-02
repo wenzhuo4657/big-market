@@ -45,36 +45,36 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
 
 //        1,执行抽奖前策略，
-//        RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> raffleBeforeEntityRuleActionEntity =
-//                this.doCheckRaffleBeforeLogic(RaffleFactorEntity.builder()
-//                                                                    .userId(userId)
-//                                                                    .strategyId(strategyId).build()
-//                        , strategyEntity.ruleModels());
-//
-//
-//        if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(raffleBeforeEntityRuleActionEntity.getCode())){
-//
-//            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
-//                return RaffleAwardEntity.builder().awardId(raffleBeforeEntityRuleActionEntity.getData().getAwardId())
-//                        .build();
-//
-//            }else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
-//                RuleActionEntity.RaffleBeforeEntity data = raffleBeforeEntityRuleActionEntity.getData();
-//                String ruleWeightValueKey = data.getRuleWeightValueKey();
-//                Integer awarId=strategyDispatch.getRandomAwardId(strategyId,ruleWeightValueKey);
-//                return RaffleAwardEntity.builder()
-//                        .awardId(awarId)
-//                        .build();
-//            }
-//
-//        }
+        RuleActionEntity<RuleActionEntity.RaffleBeforeEntity> raffleBeforeEntityRuleActionEntity =
+                this.doCheckRaffleBeforeLogic(RaffleFactorEntity.builder()
+                                                                    .userId(userId)
+                                                                    .strategyId(strategyId).build()
+                        , strategyEntity.ruleModels());
+
+
+        if (RuleLogicCheckTypeVO.TAKE_OVER.getCode().equals(raffleBeforeEntityRuleActionEntity.getCode())){
+
+            if (DefaultLogicFactory.LogicModel.RULE_BLACKLIST.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
+                return RaffleAwardEntity.builder().awardId(raffleBeforeEntityRuleActionEntity.getData().getAwardId())
+                        .build();
+
+            }else if (DefaultLogicFactory.LogicModel.RULE_WIGHT.getCode().equals(raffleBeforeEntityRuleActionEntity.getRuleModel())){
+                RuleActionEntity.RaffleBeforeEntity data = raffleBeforeEntityRuleActionEntity.getData();
+                String ruleWeightValueKey = data.getRuleWeightValueKey();
+                Integer awarId=strategyDispatch.getRandomAwardId(strategyId,ruleWeightValueKey);
+                return RaffleAwardEntity.builder()
+                        .awardId(awarId)
+                        .build();
+            }
+
+        }
 
 
 //      2.1,抽奖中
         Integer awardId = strategyDispatch.getRandomAwardId(strategyId);
 
 
-        StrategyAwardRuleModelVO strategyAwardRuleModelVO = strategyRepository.queryStrategyAwardRuleModelVO(strategyId, 107);
+        StrategyAwardRuleModelVO strategyAwardRuleModelVO = strategyRepository.queryStrategyAwardRuleModelVO(strategyId, awardId);
 //      2.2 抽奖中过滤
         RuleActionEntity<RuleActionEntity.RaffleCenterEntity> raffleCenterEntityRuleActionEntity = this.doCheckRaffleCenterLogic(
                 RaffleFactorEntity

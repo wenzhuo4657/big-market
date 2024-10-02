@@ -107,7 +107,7 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy{
             }
             RuleMatterEntity ruleMatterEntity = new RuleMatterEntity();
             ruleMatterEntity.setUserId(raffleFactorEntity.getUserId());
-            ruleMatterEntity.setAwardId(107);
+            ruleMatterEntity.setAwardId(raffleFactorEntity.getAwardId());
             ruleMatterEntity.setStrategyId(raffleFactorEntity.getStrategyId());
             ruleMatterEntity.setRuleModel(ruleModel);
 

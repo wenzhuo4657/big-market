@@ -1,4 +1,4 @@
-package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule;
+package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RuleActionEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RuleMatterEntity;

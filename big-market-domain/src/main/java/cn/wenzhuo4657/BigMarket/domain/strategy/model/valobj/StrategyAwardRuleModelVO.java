@@ -1,6 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj;
 
-import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.factory.DefaultLogicFactory;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

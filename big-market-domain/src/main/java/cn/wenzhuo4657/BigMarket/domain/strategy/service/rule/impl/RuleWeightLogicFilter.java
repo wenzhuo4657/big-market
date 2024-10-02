@@ -62,6 +62,7 @@ public class RuleWeightLogicFilter implements ILogicFilter<RuleActionEntity.Raff
         ArrayList<Long> longs = new ArrayList<>(group.keySet());
         Collections.sort(longs);
         Long aLong = longs.stream()
+                .sorted(Comparator.reverseOrder())
                 .filter(key -> userScore >= key)
                 .findFirst().orElse(null);
 

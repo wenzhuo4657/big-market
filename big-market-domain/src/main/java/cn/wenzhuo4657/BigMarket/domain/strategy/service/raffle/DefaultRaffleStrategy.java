@@ -13,7 +13,6 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.factory.Defa
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -39,19 +38,16 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
 
     @Override
     protected RuleActionEntity<RuleActionEntity.RaffleCenterEntity> doCheckRaffleCenterLogic(RaffleFactorEntity raffleFactorEntity, String... logics) {
-        if (logics==null ||0==logics.length)
-            return RuleActionEntity.<RuleActionEntity.RaffleCenterEntity>builder()
-                    .code(RuleLogicCheckTypeVO.ALLOW.getCode())
-                    .info(RuleLogicCheckTypeVO.ALLOW.getInfo())
-                    .build();
+        if (logics == null || 0 == logics.length)
+            return RuleActionEntity.<RuleActionEntity.RaffleCenterEntity>builder().code(RuleLogicCheckTypeVO.ALLOW.getCode()).info(RuleLogicCheckTypeVO.ALLOW.getInfo()).build();
 
         Map<String, ILogicFilter<RuleActionEntity.RaffleCenterEntity>> logicFilterMap = defaultLogicFactory.openLogicFilter();
 
-        RuleActionEntity<RuleActionEntity.RaffleCenterEntity> ruleActionEntity=null;
+        RuleActionEntity<RuleActionEntity.RaffleCenterEntity> ruleActionEntity = null;
         for (String ruleModel : logics) {
             ILogicFilter<RuleActionEntity.RaffleCenterEntity> logicFilter = logicFilterMap.get(ruleModel);
-            if (Objects.isNull(logicFilter)){
-                throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
+            if (Objects.isNull(logicFilter)) {
+                throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
             }
             RuleMatterEntity ruleMatterEntity = new RuleMatterEntity();
             ruleMatterEntity.setUserId(raffleFactorEntity.getUserId());

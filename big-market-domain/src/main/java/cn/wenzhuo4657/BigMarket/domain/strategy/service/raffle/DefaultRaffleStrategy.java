@@ -7,6 +7,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleLogicCheckTypeV
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.AbstractRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.ILogicFilter;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -30,12 +31,11 @@ import java.util.Objects;
 public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
     DefaultLogicFactory defaultLogicFactory;
 
-    @Autowired
-    public DefaultRaffleStrategy( IStrategyRepository strategyRepository, IStrategyDispatch strategyDispatch, DefaultLogicFactory defaultLogicFactory) {
-        super(strategyRepository, strategyDispatch);
+
+    public DefaultRaffleStrategy(IStrategyRepository strategyRepository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory, DefaultLogicFactory defaultLogicFactory) {
+        super(strategyRepository, strategyDispatch, defaultChainFactory);
         this.defaultLogicFactory = defaultLogicFactory;
     }
-
 
     @Override
     protected RuleActionEntity<RuleActionEntity.RaffleCenterEntity> doCheckRaffleCenterLogic(RaffleFactorEntity raffleFactorEntity, String... logics) {

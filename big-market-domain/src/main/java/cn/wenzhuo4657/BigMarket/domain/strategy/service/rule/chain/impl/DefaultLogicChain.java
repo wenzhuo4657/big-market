@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author: wenzhuo4657
  * @date: 2024/10/2
  * @Version: 1.0
- * @description:
+ * @description: 默认抽奖
  */
 @Slf4j
 @Component("defautl")

@@ -88,7 +88,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public int getRateRange(String key) {
-        return redissonService.getValue(key);
+        return redissonService.getValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key);
     }
 
     @Override
@@ -115,5 +115,10 @@ public class StrategyRepository implements IStrategyRepository {
     public StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId) {
         String ruleModels = strategyAwardDao.queryStrategyAwardRuleModels(strategyId,awardId);
         return StrategyAwardRuleModelVO.builder().ruleModels(ruleModels).build();
+    }
+
+    @Override
+    public String queryStrategyRuleValue(Long strategyId, String ruleModel) {
+        return strategyRuleDao.queryStrategyRuleValue(strategyId,null,ruleModel);
     }
 }

@@ -35,7 +35,7 @@
         select rule_value
         from strategy_rule
         where strategy_id = #{strategyId} and rule_model=#{ruleModel}
-        <if test="awarId">
+        <if test="awarId!=null">
             and award_id=#{awarId}
         </if>
 

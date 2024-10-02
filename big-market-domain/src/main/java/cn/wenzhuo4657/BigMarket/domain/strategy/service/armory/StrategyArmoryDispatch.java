@@ -4,6 +4,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
+import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import org.apache.commons.lang3.StringUtils;
@@ -109,7 +110,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
     }
     @Override
     public Integer getRandomAwardId(Long strategyId) {
-        int rateRange = strategyRepository.getRateRange(strategyId);
+        int rateRange = strategyRepository.getRateRange(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+strategyId);
         return strategyRepository.getStrategyAwardAssemble(String.valueOf(strategyId), new SecureRandom().nextInt(rateRange));
     }
 

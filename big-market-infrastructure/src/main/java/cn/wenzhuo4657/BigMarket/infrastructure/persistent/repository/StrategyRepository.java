@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.StrategyAwardDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.StrategyDao;
@@ -87,7 +88,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public int getRateRange(String key) {
-        return redissonService.getValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key);
+        return redissonService.getValue(key);
     }
 
     @Override
@@ -108,5 +109,11 @@ public class StrategyRepository implements IStrategyRepository {
     @Override
     public String queryStrategyRuleValue(Long strategyId, Integer awardId, String ruleModel) {
         return strategyRuleDao.queryStrategyRuleValue(strategyId,awardId,ruleModel);
+    }
+
+    @Override
+    public StrategyAwardRuleModelVO queryStrategyAwardRuleModelVO(Long strategyId, Integer awardId) {
+        String ruleModels = strategyAwardDao.queryStrategyAwardRuleModels(strategyId,awardId);
+        return StrategyAwardRuleModelVO.builder().ruleModels(ruleModels).build();
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @description: 次数锁未命中节点
  */
 @Slf4j
-@Component("rule_luck")
+@Component("rule_lock")
 public class RuleLockLogicTreeNode implements ILogicTreeNode {
     @Override
     public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {

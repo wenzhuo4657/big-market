@@ -1,7 +1,10 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleTreeVo;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.ILogicTreeNode;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.engine.IDecisionTreeEngine;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.engine.impl.DecisionTreeEngine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +30,9 @@ public class DefaultTreeFactory{
     @Autowired
     public DefaultTreeFactory(Map<String, ILogicTreeNode> logicTreeNodeGroup) {
         this.logicTreeNodeGroup = logicTreeNodeGroup;
+    }
+    public IDecisionTreeEngine openLogicTree(RuleTreeVo ruleTreeVO) {
+        return new DecisionTreeEngine(logicTreeNodeGroup, ruleTreeVO);
     }
 
     /**

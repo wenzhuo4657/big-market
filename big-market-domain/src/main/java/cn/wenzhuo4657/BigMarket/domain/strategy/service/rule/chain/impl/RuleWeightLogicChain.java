@@ -56,7 +56,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         log.info("抽奖责任链-权重开始 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
         String ruleValue = repository.queryStrategyRuleValue(strategyId,ruleModel());
         Map<Long,String> group=getAnalyticalValue(ruleValue);
-        if (null == group ||group.isEmpty()) return null;
+        if (null == group ||group.isEmpty()) return next().logic(userId,strategyId);
 
         ArrayList<Long> keys = new ArrayList<>(group.keySet());
         Collections.sort(keys);

@@ -10,6 +10,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.ILogicFilter;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +29,14 @@ import java.util.Objects;
 @Slf4j
 @Service
 public class DefaultRaffleStrategy extends AbstractRaffleStrategy {
-    DefaultLogicFactory defaultLogicFactory;
 
 
-    public DefaultRaffleStrategy(IStrategyRepository strategyRepository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory, DefaultLogicFactory defaultLogicFactory) {
-        super(strategyRepository, strategyDispatch, defaultChainFactory);
-        this.defaultLogicFactory = defaultLogicFactory;
+    public DefaultRaffleStrategy(IStrategyRepository strategyRepository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory, DefaultTreeFactory defaultTreeFactory) {
+        super(strategyRepository, strategyDispatch, defaultChainFactory, defaultTreeFactory);
+
     }
+
+\
 
     @Override
     protected RuleActionEntity<RuleActionEntity.RaffleCenterEntity> doCheckRaffleCenterLogic(RaffleFactorEntity raffleFactorEntity, String... logics) {

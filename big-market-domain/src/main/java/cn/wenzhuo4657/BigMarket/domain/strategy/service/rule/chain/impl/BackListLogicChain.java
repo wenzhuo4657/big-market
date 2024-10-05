@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.impl;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.AbstractLogicChain;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,11 +28,11 @@ public class BackListLogicChain extends AbstractLogicChain {
 
     @Override
     protected String ruleModel() {
-        return "rule_blacklist";
+        return DefaultChainFactory.LogicModel.RULE_BLACKLIST.getCode();
     }
 
     @Override
-    public Integer logic(String userId, Long strategyId) {
+    public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
         log.info("抽奖责任链-黑名单开始 userId:{} strategyId:{} ruleModel:{}",userId,strategyId,ruleModel());
         String ruleValue = strategyRepository.queryStrategyRuleValue(strategyId, ruleModel());
         String[] split = ruleValue.split(Constants.COLON);
@@ -41,7 +42,10 @@ public class BackListLogicChain extends AbstractLogicChain {
         for (String userBlack:userBlackIds){
             if (userBlack.equals(userId)){
                 log.info("抽奖责任链-黑名单接管 userId:{} strategyId:{} ruleModel:{}",userId,strategyId,ruleModel());
-                return awardId;
+                return DefaultChainFactory.StrategyAwardVO.builder()
+                        .awardId(awardId)
+                        .logicModel(DefaultChainFactory.LogicModel.RULE_BLACKLIST.getCode())
+                        .build();
             }
         }
 

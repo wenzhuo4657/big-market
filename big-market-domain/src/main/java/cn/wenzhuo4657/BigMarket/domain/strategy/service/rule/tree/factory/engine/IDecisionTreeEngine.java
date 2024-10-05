@@ -10,5 +10,5 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.Defaul
  * @description: 装配规则树引擎接口定义
  */
 public interface IDecisionTreeEngine {
-    DefaultTreeFactory.StrategyAwardData process(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId);
 }

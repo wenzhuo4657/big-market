@@ -1,14 +1,9 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.impl;
 
-import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RuleActionEntity;
-import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RuleMatterEntity;
-import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
-import cn.wenzhuo4657.BigMarket.domain.strategy.service.annotation.LogicStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.AbstractLogicChain;
-import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.ILogicFilter;
-import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.filter.factory.DefaultLogicFactory;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -41,7 +36,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
 
     @Override
     protected String ruleModel() {
-        return "rule_weight";
+        return DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode();
     }
 
     /**
@@ -52,7 +47,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
     所谓的权重规则，表示的是根据用户消耗积分的不同来判定其奖品池中的奖品类型的规则。
      */
     @Override
-    public Integer logic(String userId, Long strategyId) {
+    public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
         log.info("抽奖责任链-权重开始 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
         String ruleValue = repository.queryStrategyRuleValue(strategyId,ruleModel());
         Map<Long,String> group=getAnalyticalValue(ruleValue);
@@ -69,7 +64,10 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         if (null != nextValue) {
             Integer awardId = strategyDispatch.getRandomAwardId(strategyId, group.get(nextValue));
             log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), awardId);
-            return awardId;
+            return DefaultChainFactory.StrategyAwardVO.builder()
+                    .awardId(awardId)
+                    .logicModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode())
+                    .build();
         }
 
         log.info("抽奖责任链-权重放行 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());

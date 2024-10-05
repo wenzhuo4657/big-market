@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.repository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleTreeVo;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 
 import java.util.List;
@@ -56,4 +57,12 @@ public interface IStrategyRepository {
 
 
     String queryStrategyRuleValue(Long strategyId, String ruleModel);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 查询规则树
+     1，从redis中查询，如果不存在去mysql中查询，
+     2，在mysql中查询到对应数据后，将其装配到符合规则树的定义。
+    */
+    RuleTreeVo queryRuleTreeVOByTreeId(String treeId);
 }

@@ -8,7 +8,7 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain;
  * @description:
  * 实现责任链装配ILogicChainArmory，也就是如何装配 ILogicChain接口的实现类
  */
-public abstract class AbstractLogicChain implements ILogicChain ,ILogicChainArmory {
+public abstract class AbstractLogicChain implements ILogicChain {
     private  ILogicChain next;
 
     @Override

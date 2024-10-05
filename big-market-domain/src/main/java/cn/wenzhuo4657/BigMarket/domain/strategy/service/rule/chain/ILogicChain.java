@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain;
 
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+
 /**
  * @className: ILogicChain
  * @author: wenzhuo4657
@@ -7,14 +9,14 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain;
  * @Version: 1.0
  * @description: 逻辑责任链行为定义接口
  */
-public interface ILogicChain {
+public interface ILogicChain extends ILogicChainArmory{
 
     /**
      * 责任链接口
      *
      * @param userId     用户ID
      * @param strategyId 策略ID
-     * @return 奖品ID
+     * @return 奖品对象
      */
-    Integer logic(String userId, Long strategyId);
+    DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId);
 }

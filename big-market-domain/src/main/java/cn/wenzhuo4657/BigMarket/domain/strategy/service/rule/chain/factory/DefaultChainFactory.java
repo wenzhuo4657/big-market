@@ -40,7 +40,7 @@ public class DefaultChainFactory {
             return logicChainMap.get(LogicModel.RULE_DEFAULT.code);
         }
         ILogicChain iLogicChain = logicChainMap.get(ruleModels[0]);
-        ILogicChainArmory current= (ILogicChainArmory) iLogicChain;
+        ILogicChainArmory current=iLogicChain;
         for (int i=1;i< ruleModels.length;i++){
             ILogicChain iLogicChain1 = logicChainMap.get(ruleModels[i]);
             current.appendNext(iLogicChain1);

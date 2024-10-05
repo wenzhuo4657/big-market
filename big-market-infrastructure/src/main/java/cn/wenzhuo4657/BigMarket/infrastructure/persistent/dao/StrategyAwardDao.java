@@ -2,7 +2,6 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

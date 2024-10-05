@@ -25,25 +25,4 @@ import java.util.List;
 public class StrategyAwardRuleModelVO {
     private String ruleModels;
 
-    public String[] raffleCenterRuleModelList(){
-        List<String> ruleModelList = new ArrayList<>();
-        String[] split = ruleModels.split(Constants.SPLIT);
-        for (String ruleModelValue:split){
-            if (DefaultLogicFactory.LogicModel.isCenter(ruleModelValue)){
-                ruleModelList.add(ruleModelValue);
-            }
-        }
-        return ruleModelList.toArray(new String[0]);
-    }
-
-    public String[] raffleAfterRuleModelList(){
-        List<String> ruleModelList = new ArrayList<>();
-        String[] split = ruleModels.split(Constants.SPLIT);
-        for (String ruleModelValue:split){
-            if (DefaultLogicFactory.LogicModel.isAfter(ruleModelValue)){
-                ruleModelList.add(ruleModelValue);
-            }
-        }
-        return ruleModelList.toArray(new String[0]);
-    }
 }

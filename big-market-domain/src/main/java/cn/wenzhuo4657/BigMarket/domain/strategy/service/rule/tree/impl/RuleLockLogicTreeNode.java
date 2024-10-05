@@ -11,13 +11,31 @@ import org.springframework.stereotype.Component;
  * @author: wenzhuo4657
  * @date: 2024/10/4
  * @Version: 1.0
- * @description: 次数锁未命中节点
+ * @description: 次数锁节点
  */
 @Slf4j
 @Component("rule_lock")
 public class RuleLockLogicTreeNode implements ILogicTreeNode {
+
+      //  wenzhuo TODO 2024/10/5 : 暂时表示用户抽奖，实现后更改
+    private Long userRaffleCount = 10L;
+
     @Override
-    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId) {
+    public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
+        log.info("规则过滤-次数锁 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
+        long RaffleCount=0L;
+        try{
+            RaffleCount=Long.parseLong(ruleValue);
+
+        }catch (Exception e){
+            throw new RuntimeException("规则过滤-次数锁异常：ruleValue "+ruleValue+"配置不正确");
+
+        }
+        if (userRaffleCount>=RaffleCount){
+            return  DefaultTreeFactory.TreeActionEntity.builder()
+                    .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
+                    .build();
+        }
         return DefaultTreeFactory.TreeActionEntity.builder()
                 .ruleLogicCheckType(RuleLogicCheckTypeVO.ALLOW)
                 .build();

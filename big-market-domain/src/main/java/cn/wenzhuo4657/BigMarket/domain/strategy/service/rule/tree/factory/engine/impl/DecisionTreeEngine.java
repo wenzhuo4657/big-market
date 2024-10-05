@@ -59,7 +59,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         }
         throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
     }
-
+  //  wenzhuo TODO 2024/10/5 : 不理解这里的找寻下一个节点的逻辑
     public boolean decisionLogic(String code,RuleTreeNodeLineVo nodeLineVo){
         switch (nodeLineVo.getRuleLimitType()){
             case EQUAL:

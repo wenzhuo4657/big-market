@@ -10,5 +10,5 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.Defaul
  * @description: 规则节点执行接口定义
  */
 public interface ILogicTreeNode {
-    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId);
+    DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId,String ruleValue);
 }

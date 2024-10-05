@@ -49,8 +49,8 @@ public class RuleTreeNode implements Serializable {
         this.id = id;
     }
 
-    public Integer getTreeId() {
-        return Integer.valueOf(treeId);
+    public String getTreeId() {
+        return treeId;
     }
 
     public void setTreeId(String treeId) {

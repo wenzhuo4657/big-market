@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RuleTreeNodeLineVo {
     /** 规则树ID */
-    private Integer treeId;
+    private String treeId;
     /** 规则Key节点 From */
     private String ruleNodeFrom;
     /** 规则Key节点 To */

@@ -10,6 +10,16 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockK
  * @description:  抽奖库存相关服务
  */
 public interface IRaffleStock {
+
+    /**
+     *  @author:wenzhuo4657
+        des: 获取延迟队列
+    */
     StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
+
+    /**
+     *  @author:wenzhuo4657
+        des: mysql中自减库存
+    */
     void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }

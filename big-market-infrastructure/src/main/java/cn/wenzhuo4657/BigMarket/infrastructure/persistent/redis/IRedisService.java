@@ -98,7 +98,7 @@ public interface IRedisService {
      * 自减 Key 的值；1、2、3、4
      *
      * @param key 键
-     * @return 自增后的值
+     * @return 自减后的值
      */
     long decr(String key);
 
@@ -265,7 +265,7 @@ public interface IRedisService {
 
     /**
      *  @author:wenzhuo4657
-        des: 设置锁？内部实现表示如果不存在指定key，则《k,"lock"》,实际上可以使用该键值实现消费的最终一致性。
+        des: 设置锁.内部实现表示如果不存在指定key，则《k,"lock"》,实际上可以使用该键值实现消费的最终一致性。
     */
     Boolean setNx(String key);
 

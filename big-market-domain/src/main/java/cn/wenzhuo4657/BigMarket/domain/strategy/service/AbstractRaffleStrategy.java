@@ -4,6 +4,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.raffle.DefaultRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -19,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
  * @description:
  */
 @Slf4j
-public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
+public abstract class AbstractRaffleStrategy implements IRaffleStrategy,IRaffleStock {
     protected IStrategyRepository strategyRepository;
     protected IStrategyDispatch strategyDispatch;
     protected final DefaultChainFactory defaultChainFactory;
@@ -40,14 +41,25 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
         if (null==strategyId||StringUtils.isBlank(userId)){
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
+        DefaultChainFactory.StrategyAwardVO chainStrategyAwardVO=raffleLogicChain(userId,strategyId);
+        log.info("抽奖策略计算-责任链 {} {} {} {}", userId, strategyId, chainStrategyAwardVO.getAwardId(), chainStrategyAwardVO.getLogicModel());
+        /**
+         *  @author:wenzhuo4657
+            des:非默认抽奖直接返回结果，
+        */
+        if (!DefaultChainFactory.LogicModel.RULE_DEFAULT.getCode().equals(equals(chainStrategyAwardVO.getLogicModel()))){
+            return RaffleAwardEntity.builder()
+                    .awardId(chainStrategyAwardVO.getAwardId())
+                    .build();
+        }
+        Integer awardId = chainStrategyAwardVO.getAwardId();
+        DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO = raffleLogicTree(userId, strategyId, awardId);
+        log.info("抽奖策略计算-规则树 {} {} {} {}", userId, strategyId, treeStrategyAwardVO.getAwardId(), treeStrategyAwardVO.getAwardRuleValue());
 
-
-
-
-
-
-
-        return  null;
+        return  RaffleAwardEntity.builder()
+                .awardId(treeStrategyAwardVO.getAwardId())
+                .awardConfig(treeStrategyAwardVO.getAwardRuleValue())
+                .build();
 
 
     }

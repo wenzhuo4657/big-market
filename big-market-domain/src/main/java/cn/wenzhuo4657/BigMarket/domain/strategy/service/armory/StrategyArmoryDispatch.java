@@ -42,7 +42,11 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
 
 //            1,策略概率的装配
             List<StrategyAwardEntity> strategyAwardEntityList = strategyRepository.queryStrategyAwardList(strategyId);
+            for (StrategyAwardEntity entity:strategyAwardEntityList){
+                    cacheStrategyAwardCount(strategyId,entity.getAwardId(),entity.getAwardCount());
+            }
             assembleLotteryStrategy(String.valueOf(strategyId),strategyAwardEntityList);
+
 
 
 
@@ -57,8 +61,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
 
 
             Map<String, List<Integer>> ruleWeightValues = strategyRule.getRuleWeightValues();
-            Set<String> entries = ruleWeightValues.keySet();
-            for (String key:entries){
+            for (String key:ruleWeightValues.keySet()){
                 List<Integer> integers = ruleWeightValues.get(key);
                 ArrayList<StrategyAwardEntity> strategyAwardEntityListClone = new ArrayList<>(strategyAwardEntityList);
                 strategyAwardEntityListClone.removeIf(entity->!integers.contains(entity.getAwardId()));
@@ -131,7 +134,17 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
 
     @Override
     public Boolean subtractionAwardStock(Long strategyId, Integer awardId) {
+        String cacaheKey=Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY+strategyId+Constants.UNDERLINE+awardId;
+        return strategyRepository.subtractionAwardStock(cacaheKey);
+    }
 
-        return null;
+    /**
+     *  @author:wenzhuo4657
+        des: 初始化策略奖品库存到redis中
+    */
+    public  void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount){
+        String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + Constants.UNDERLINE + awardId;
+        strategyRepository.cacheStrategyAwardCount(cacheKey,awardCount);
+
     }
 }

@@ -39,7 +39,8 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
 
         while(null!=nextNode){
             ILogicTreeNode treeNode = logicTreeNodeMap.get(ruleTreeNodeVo.getRuleKey());
-            DefaultTreeFactory.TreeActionEntity logicEntity = treeNode.logic(userId, strategyId, awardId);
+            String ruleValue = ruleTreeNodeVo.getRuleValue();
+            DefaultTreeFactory.TreeActionEntity logicEntity = treeNode.logic(userId, strategyId, awardId,ruleValue);
             RuleLogicCheckTypeVO ruleLogicCheckType = logicEntity.getRuleLogicCheckType();
             awardData = logicEntity.getStrategyAwardData();
             log.info("决策树引擎【{}】treeId:{} node:{} code:{}", ruleTreeVo.getTreeName(), ruleTreeVo.getTreeId(), nextNode, ruleLogicCheckType.getCode());
@@ -59,7 +60,13 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
         }
         throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
     }
-  //  wenzhuo TODO 2024/10/5 : 不理解这里的找寻下一个节点的逻辑
+
+    /**
+     *  @author:wenzhuo4657
+        des:
+    nodeLineVo.getRuleLimitValue()在数据库中的值是ALLOW/TAKE_OVER，也就是节点的校验结果RuleLogicCheckTypeVO，
+     因此猜测该方法用于根据节点的校验结果来判断该找哪一个指向节点，目前判断方式仅仅是字段对比。
+    */
     public boolean decisionLogic(String code,RuleTreeNodeLineVo nodeLineVo){
         switch (nodeLineVo.getRuleLimitType()){
             case EQUAL:

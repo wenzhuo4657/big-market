@@ -90,7 +90,7 @@ public interface IStrategyRepository {
     Boolean subtractionAwardStock(String cacheKey);
 
     /**
-     * 写入奖品库存消费队列
+     * redis中写入奖品库存消费队列
      *
      * @param strategyAwardStockKeyVO 对象值对象
      * 注意：延迟队列写入，时间间隔为3分钟
@@ -98,12 +98,12 @@ public interface IStrategyRepository {
     void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
 
     /**
-     * 获取奖品库存消费队列头
+     * 从redis中获取奖品库存消费队列头
      */
     StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
 
     /**
-     * 更新奖品库存消耗
+     * mysql中自减奖品库存消耗，
      *
      * @param strategyId 策略ID
      * @param awardId 奖品ID

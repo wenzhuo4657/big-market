@@ -181,11 +181,12 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public void cacheStrategyAwardCount(String cacheKey, Integer awardCount) {
-        if (null!=redissonService.getValue(cacheKey))return;
+        if (redissonService.isExists(cacheKey))return;
         redissonService.setAtomicLong(cacheKey,awardCount);
 
     }
 
+      //  wenzhuo TODO 2024/10/8 : 此处设置了锁，但没有看到移除锁，也就是库存同步到数据库的代码，同时如何使用该锁保证最终一致性？
     @Override
     public Boolean subtractionAwardStock(String cacheKey) {
         long surplus=redissonService.decr(cacheKey);

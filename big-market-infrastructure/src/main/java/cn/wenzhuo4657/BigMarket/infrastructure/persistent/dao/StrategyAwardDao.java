@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.StrategyAward;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,5 +20,8 @@ public interface StrategyAwardDao {
     List<StrategyAwardEntity> queryStrategyAwardListByStrategyId(@Param("strategyId") Long strategyId);
 
     String queryStrategyAwardRuleModels(@Param("strategyId") Long strategyId,@Param("awardId") Integer awardId);
+
+    void updateStrategyAwardStock(StrategyAward strategyAward);
+
 }
 

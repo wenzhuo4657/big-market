@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.strategy.service.armory;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -31,7 +32,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
 
     @Resource(name = "strategyRepository")
     private IStrategyRepository strategyRepository;
-
+    private final SecureRandom secureRandom=new SecureRandom();
 
 
 
@@ -119,5 +120,18 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
         String key = String.valueOf(strategyId).concat("_").concat(ruleWeightValue);
         int rateRange = strategyRepository.getRateRange(key);
         return strategyRepository.getStrategyAwardAssemble(key, new SecureRandom().nextInt(rateRange));
+    }
+
+
+    @Override
+    public Integer getRandomAwardId(String key) {
+        int rateRange = strategyRepository.getRateRange(key);
+        return strategyRepository.getStrategyAwardAssemble(key,secureRandom.nextInt(rateRange));
+    }
+
+    @Override
+    public Boolean subtractionAwardStock(Long strategyId, Integer awardId) {
+
+        return null;
     }
 }

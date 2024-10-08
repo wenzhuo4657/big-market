@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
+import lombok.Builder;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +11,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-09-18 20:55:24
  */
+@Builder
 public class StrategyAward implements Serializable {
     private static final long serialVersionUID = -47354748976803586L;
     /**

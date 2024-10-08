@@ -10,6 +10,22 @@ import org.redisson.api.*;
  */
 public interface IRedisService {
 
+
+    /**
+     * 设置值
+     *
+     * @param key   key 键
+     * @param value 值
+     */
+    void setAtomicLong(String key, long value);
+
+    /**
+     * 获取值
+     *
+     * @param key   key 键
+     */
+    Long getAtomicLong(String key);
+
     /**
      * 设置指定 key 的值
      *
@@ -246,5 +262,11 @@ public interface IRedisService {
      * @return 返回结果
      */
     <T> RBloomFilter<T> getBloomFilter(String key);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 设置锁？内部实现表示如果不存在指定key，则《k,"lock"》,实际上可以使用该键值实现消费的最终一致性。
+    */
+    Boolean setNx(String key);
 
 }

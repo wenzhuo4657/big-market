@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleTreeVo;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
 import java.util.List;
 import java.util.Map;
@@ -65,4 +66,47 @@ public interface IStrategyRepository {
      2，在mysql中查询到对应数据后，将其装配到符合规则树的定义。
     */
     RuleTreeVo queryRuleTreeVOByTreeId(String treeId);
+
+
+    /**
+     * 缓存奖品库存
+     *
+     * @param cacheKey   key
+     * @param awardCount 库存值
+     * 注意：仅仅当redis中存在cacheKey键时才进行缓存，实际上该方法表示该数据在redis中的初始化，而维护该数据由其他操作完成。
+     */
+    void cacheStrategyAwardCount(String cacheKey, Integer awardCount);
+
+    /**
+     * 缓存key，decr 方式扣减库存
+     *
+     * @param cacheKey 缓存Key
+     * @return 扣减结果
+     * 注意：在此处并没有更新到mysql数据库中，也没有在redis中更新cacheKey的键值对，
+     * 而是加锁扣减，生成了一个新的键值对，lockKey=cacheKey+Constants.UNDERLINE+surplus：“lock”;
+     * 根据该键值对设置的成功与否来表示扣减是否成功，该操作的好处目前看来有
+     * 1，使redis中的库存键值对无锁，取而代之的是表示扣减库存的锁，
+     */
+    Boolean subtractionAwardStock(String cacheKey);
+
+    /**
+     * 写入奖品库存消费队列
+     *
+     * @param strategyAwardStockKeyVO 对象值对象
+     * 注意：延迟队列写入，时间间隔为3分钟
+     */
+    void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
+
+    /**
+     * 获取奖品库存消费队列头
+     */
+    StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
+
+    /**
+     * 更新奖品库存消耗
+     *
+     * @param strategyId 策略ID
+     * @param awardId 奖品ID
+     */
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }

@@ -4,8 +4,9 @@ import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListRequestDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListResponseDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleRequestDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleResponseDTO;
+import cn.wenzhuo4657.BigMarket.types.models.Response;
 
-import javax.xml.ws.Response;
+
 import java.util.List;
 
 /**

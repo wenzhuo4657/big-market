@@ -19,13 +19,21 @@
     <resultMap type="cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity" id="StrategyAwardEntity">
         <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
         <result property="awardId" column="award_id" jdbcType="INTEGER"/>
+        <result property="awardTitle" column="award_title" jdbcType="VARCHAR"/>
+        <result property="awardSubtitle" column="award_subtitle" jdbcType="VARCHAR"/>
         <result property="awardCount" column="award_count" jdbcType="INTEGER"/>
         <result property="awardCountSurplus" column="award_count_surplus" jdbcType="INTEGER"/>
         <result property="awardRate" column="award_rate" jdbcType="NUMERIC"/>
+        <result property="sort" column="sort" jdbcType="INTEGER"/>
    </resultMap>
 
+    <sql id="StrategyAwardEntityColumns">
+        strategy_id, award_id,award_title, award_subtitle,award_count, award_count_surplus, award_rate,sort
+    </sql>
+
     <select id="queryStrategyAwardListByStrategyId" parameterType="java.lang.Long" resultMap="StrategyAwardEntity">
-        select strategy_id, award_id, award_count, award_count_surplus, award_rate
+        select
+            <include refid="StrategyAwardEntityColumns"></include>
         from strategy_award
         where strategy_id = #{strategyId}
     </select>
@@ -41,6 +49,12 @@
         set award_count_surplus = award_count_surplus - 1
         where strategy_id = #{strategyId} and award_id = #{awardId} and award_count_surplus > 0
     </update>
+
+    <select id="queryStrategyAwardEntity" parameterType="java.lang.Long" resultMap="StrategyAwardEntity">
+        select  <include refid="StrategyAwardEntityColumns"></include>
+        from strategy_award
+        where strategy_id = #{strategyId} and award_id = #{awardId}
+    </select>
 
 
 </mapper>

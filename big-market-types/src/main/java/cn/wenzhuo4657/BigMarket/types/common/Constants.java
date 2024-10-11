@@ -19,9 +19,15 @@ public  class Constants {
 
         /**
              *  des:
-           *  策略奖品实体集合的key的key前缀
+           *  策略奖品实体的key的key前缀,注意：该字段不在表示某一策略的奖品列表，而是某一策略下的某一奖品实体。
              * */
         public static String STRATEGY_AWARD_KEY = "big_market_strategy_award_key_";
+/**
+ *  @author:wenzhuo4657
+    des: 策略奖品列表key前缀
+*/
+
+        public static String STRATEGY_AWARD_LIST_KEY = "big_market_strategy_award_list_key_";
 
           /**
              *  des:

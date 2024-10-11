@@ -9,6 +9,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
+import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.rule.Rule;
 import org.redisson.api.RBlockingQueue;
@@ -53,7 +55,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public List<StrategyAwardEntity> queryStrategyAwardList(Long strategyId) {
-        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_KEY+strategyId;
+        String cacheKey= Constants.RedisKey.STRATEGY_AWARD_LIST_KEY+strategyId;
         List<StrategyAwardEntity> strategyAwardEntityList=redissonService.getValue(cacheKey);
         if (!Objects.isNull(strategyAwardEntityList)&&!strategyAwardEntityList.isEmpty()) return strategyAwardEntityList;
 
@@ -83,7 +85,11 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public int getRateRange(String key) {
-        return redissonService.getValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key);
+        String cacheKey=Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+key;
+        if (!redissonService.isExists(cacheKey)){
+            throw  new AppException(ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY.getCode(),cacheKey + Constants.COLON + ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY.getInfo());
+        }
+        return redissonService.getValue(cacheKey);
     }
 
     @Override
@@ -191,7 +197,7 @@ public class StrategyRepository implements IStrategyRepository {
     public Boolean subtractionAwardStock(String cacheKey) {
         long surplus=redissonService.decr(cacheKey);
         if (surplus<0){
-            redissonService.setValue(cacheKey,0);
+            redissonService.setAtomicLong(cacheKey,0);
             return  false;
         }
         String lockKey=cacheKey+Constants.UNDERLINE+surplus;
@@ -224,5 +230,17 @@ public class StrategyRepository implements IStrategyRepository {
                 .strategyId(strategyId)
                 .awardId(awardId).build();
         strategyAwardDao.updateStrategyAwardStock(strategyAward);
+    }
+
+    @Override
+    public StrategyAwardEntity queryStrategyAwardEntity(Long strategyId, Integer awardId) {
+        String cacheKey=Constants.RedisKey.STRATEGY_AWARD_KEY+strategyId+Constants.UNDERLINE+awardId;
+        StrategyAwardEntity strategyAwardEntity = redissonService.getValue(cacheKey);
+        if (null!=strategyAwardEntity)return strategyAwardEntity;
+        strategyAwardEntity=strategyAwardDao.queryStrategyAwardEntity(StrategyAwardEntity.builder()
+                .awardId(awardId)
+                .strategyId(strategyId).build());
+        redissonService.setValue(cacheKey,strategyAwardEntity);
+        return strategyAwardEntity;
     }
 }

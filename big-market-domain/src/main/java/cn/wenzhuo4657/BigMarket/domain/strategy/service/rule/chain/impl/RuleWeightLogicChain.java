@@ -7,6 +7,8 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.Defau
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -20,6 +22,7 @@ import java.util.*;
  */
 @Slf4j
 @Component("rule_weight")
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class RuleWeightLogicChain extends AbstractLogicChain {
     private IStrategyRepository repository;
 

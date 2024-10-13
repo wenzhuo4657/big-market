@@ -7,6 +7,8 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.Defau
 import lombok.extern.apachecommons.CommonsLog;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component("rule_default")
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class DefaultLogicChain extends AbstractLogicChain {
 
 

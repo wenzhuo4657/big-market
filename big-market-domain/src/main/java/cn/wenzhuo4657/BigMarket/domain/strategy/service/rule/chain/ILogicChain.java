@@ -9,7 +9,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.Defau
  * @Version: 1.0
  * @description: 逻辑责任链行为定义接口
  */
-public interface ILogicChain extends ILogicChainArmory{
+public interface ILogicChain extends ILogicChainArmory,Cloneable{
 
     /**
      * 责任链接口

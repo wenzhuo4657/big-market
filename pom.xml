@@ -61,6 +61,7 @@
     </parent>
 
     <dependencyManagement>
+
         <dependencies>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

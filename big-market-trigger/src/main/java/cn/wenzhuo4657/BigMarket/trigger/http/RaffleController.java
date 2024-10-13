@@ -29,7 +29,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@CrossOrigin("${app.config.cross-orgin}")
+@CrossOrigin("*")
 @RequestMapping("/api/${app.config.api-version}/raffle/")
 public class RaffleController implements IRaffleService {
 
@@ -67,7 +67,7 @@ public class RaffleController implements IRaffleService {
 
     @PostMapping("query_raffle_award_list")
     @Override
-    public Response<List<RaffleAwardListResponseDTO>> queryRaffleAwardList(RaffleAwardListRequestDTO requestDTO) {
+    public Response<List<RaffleAwardListResponseDTO>> queryRaffleAwardList(@RequestBody RaffleAwardListRequestDTO requestDTO) {
         try{
             log.info("查询抽奖奖品列表配开始 strategyId：{}", requestDTO.getStrategyId());
             List<StrategyAwardEntity> strategyAwardEntities = raffleAward.queryRaffleStrategyAwardList(requestDTO.getStrategyId());
@@ -96,8 +96,9 @@ public class RaffleController implements IRaffleService {
 
     }
 
+    @RequestMapping(value = "random_raffle", method = RequestMethod.POST)
     @Override
-    public Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO requestDTO) {
+    public Response<RaffleResponseDTO> randomRaffle(@RequestBody RaffleRequestDTO requestDTO) {
         try {
             log.info("随机抽奖开始 strategyId: {}", requestDTO.getStrategyId());
             RaffleAwardEntity result = raffleStrategy.performRaffle(RaffleFactorEntity.builder()

@@ -50,7 +50,7 @@
         where strategy_id = #{strategyId} and award_id = #{awardId} and award_count_surplus > 0
     </update>
 
-    <select id="queryStrategyAwardEntity" parameterType="java.lang.Long" resultMap="StrategyAwardEntity">
+    <select id="queryStrategyAwardEntity" parameterType="cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity" resultMap="StrategyAwardEntity">
         select  <include refid="StrategyAwardEntityColumns"></include>
         from strategy_award
         where strategy_id = #{strategyId} and award_id = #{awardId}

@@ -80,7 +80,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public int getRateRange(Long strategyId) {
-        return redissonService.getValue(String.valueOf(strategyId));
+        return redissonService.getValue(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+strategyId);
     }
 
     @Override

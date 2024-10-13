@@ -93,7 +93,6 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
                     return entity.getAwardRate();
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-
         BigDecimal RateRange= totalDecimal.divide(min, 0, RoundingMode.CEILING);
 
         List<Integer> list=new ArrayList<>(RateRange.intValue());
@@ -114,7 +113,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
     }
     @Override
     public Integer getRandomAwardId(Long strategyId) {
-        int rateRange = strategyRepository.getRateRange(Constants.RedisKey.STRATEGY_RATE_RANGE_KEY+strategyId);
+        int rateRange = strategyRepository.getRateRange(strategyId);
         return strategyRepository.getStrategyAwardAssemble(String.valueOf(strategyId), new SecureRandom().nextInt(rateRange));
     }
 

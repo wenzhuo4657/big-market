@@ -36,9 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-
-######自定义
-/data
-/docs
-/big-market-app/data

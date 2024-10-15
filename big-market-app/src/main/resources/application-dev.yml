@@ -38,10 +38,8 @@ thread:
 #    connection-timeout: 30000 #数据库连接超时时间,默认30秒，即30000
 #    connection-test-query: SELECT 1
 #  type: com.zaxxer.hikari.HikariDataSource
-spring:
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:sharding:classpath:shardingsphere5-JDBC.yml
+
+
 
 
 

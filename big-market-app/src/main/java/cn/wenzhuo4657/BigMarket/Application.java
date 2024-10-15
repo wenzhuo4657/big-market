@@ -7,7 +7,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -16,7 +18,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
-@SpringBootApplication
+@SpringBootApplication()
 @Configurable
 @MapperScan("cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao")
 @EnableScheduling

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.RaffleActivityDao">
+
+    <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivity" id="RaffleActivityMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
+        <result property="activityName" column="activity_name" jdbcType="VARCHAR"/>
+        <result property="activityDesc" column="activity_desc" jdbcType="VARCHAR"/>
+        <result property="beginDateTime" column="begin_date_time" jdbcType="TIMESTAMP"/>
+        <result property="endDateTime" column="end_date_time" jdbcType="TIMESTAMP"/>
+        <result property="stockCount" column="stock_count" jdbcType="INTEGER"/>
+        <result property="stockCountSurplus" column="stock_count_surplus" jdbcType="INTEGER"/>
+        <result property="activityCountId" column="activity_count_id" jdbcType="INTEGER"/>
+        <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="RaffleActivityMap">
+        select
+          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time
+        from raffle_activity
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="RaffleActivityMap">
+        select
+          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time
+        from raffle_activity
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="activityId != null">
+                and activity_id = #{activityId}
+            </if>
+            <if test="activityName != null and activityName != ''">
+                and activity_name = #{activityName}
+            </if>
+            <if test="activityDesc != null and activityDesc != ''">
+                and activity_desc = #{activityDesc}
+            </if>
+            <if test="beginDateTime != null">
+                and begin_date_time = #{beginDateTime}
+            </if>
+            <if test="endDateTime != null">
+                and end_date_time = #{endDateTime}
+            </if>
+            <if test="stockCount != null">
+                and stock_count = #{stockCount}
+            </if>
+            <if test="stockCountSurplus != null">
+                and stock_count_surplus = #{stockCountSurplus}
+            </if>
+            <if test="activityCountId != null">
+                and activity_count_id = #{activityCountId}
+            </if>
+            <if test="strategyId != null">
+                and strategy_id = #{strategyId}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from raffle_activity
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="activityId != null">
+                and activity_id = #{activityId}
+            </if>
+            <if test="activityName != null and activityName != ''">
+                and activity_name = #{activityName}
+            </if>
+            <if test="activityDesc != null and activityDesc != ''">
+                and activity_desc = #{activityDesc}
+            </if>
+            <if test="beginDateTime != null">
+                and begin_date_time = #{beginDateTime}
+            </if>
+            <if test="endDateTime != null">
+                and end_date_time = #{endDateTime}
+            </if>
+            <if test="stockCount != null">
+                and stock_count = #{stockCount}
+            </if>
+            <if test="stockCountSurplus != null">
+                and stock_count_surplus = #{stockCountSurplus}
+            </if>
+            <if test="activityCountId != null">
+                and activity_count_id = #{activityCountId}
+            </if>
+            <if test="strategyId != null">
+                and strategy_id = #{strategyId}
+            </if>
+            <if test="state != null and state != ''">
+                and state = #{state}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
+        values (#{activityId}, #{activityName}, #{activityDesc}, #{beginDateTime}, #{endDateTime}, #{stockCount}, #{stockCountSurplus}, #{activityCountId}, #{strategyId}, #{state}, #{createTime}, #{updateTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.activityCountId}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.activityCountId}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        activity_id = values(activity_id),
+        activity_name = values(activity_name),
+        activity_desc = values(activity_desc),
+        begin_date_time = values(begin_date_time),
+        end_date_time = values(end_date_time),
+        stock_count = values(stock_count),
+        stock_count_surplus = values(stock_count_surplus),
+        activity_count_id = values(activity_count_id),
+        strategy_id = values(strategy_id),
+        state = values(state),
+        create_time = values(create_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update raffle_activity
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId},
+            </if>
+            <if test="activityName != null and activityName != ''">
+                activity_name = #{activityName},
+            </if>
+            <if test="activityDesc != null and activityDesc != ''">
+                activity_desc = #{activityDesc},
+            </if>
+            <if test="beginDateTime != null">
+                begin_date_time = #{beginDateTime},
+            </if>
+            <if test="endDateTime != null">
+                end_date_time = #{endDateTime},
+            </if>
+            <if test="stockCount != null">
+                stock_count = #{stockCount},
+            </if>
+            <if test="stockCountSurplus != null">
+                stock_count_surplus = #{stockCountSurplus},
+            </if>
+            <if test="activityCountId != null">
+                activity_count_id = #{activityCountId},
+            </if>
+            <if test="strategyId != null">
+                strategy_id = #{strategyId},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from raffle_activity where id = #{id}
+    </delete>
+
+</mapper>
+

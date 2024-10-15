@@ -1,5 +1,74 @@
+management:
+  health:
+    db:
+      enabled: false # 禁用默认的数据库健康检查
 spring:
   config:
     name: big-market-app
   profiles:
     active: dev
+  shardingsphere:
+     datasource:
+       names: master,slave1,slave2
+       master:
+         type: com.zaxxer.hikari.HikariDataSource
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         jdbc-url: jdbc:mysql://localhost:3308/big_market?useSSL=false&serverTimezone=UTC
+         username: root
+         password: 465700
+         maxPoolSize: 15
+         minPoolSize: 3
+       slave1:
+         type: com.zaxxer.hikari.HikariDataSource
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         jdbc-url: jdbc:mysql://localhost:3308/big_market_01?useSSL=false&serverTimezone=UTC
+         username: root
+         password: 465700
+         maxPoolSize: 15
+         minPoolSize: 3
+       slave2:
+         type: com.zaxxer.hikari.HikariDataSource
+         driver-class-name: com.mysql.cj.jdbc.Driver
+         jdbc-url: jdbc:mysql://localhost:3308/big_market_02?useSSL=false&serverTimezone=UTC
+         username: root
+         password: 465700
+         maxPoolSize: 15
+         minPoolSize:
+     rules:
+       tables:
+         defaultDatabaseStrategy: # 默认数据库分片策略
+           standard: # 单分片键策略
+             shardingColumn: user_id  # 分片列
+             shardingAlgorithmName: database_inline  # 自定义分片算法
+         defaultTableStrategy: # 默认表分片策略
+           none: # 不分片
+         tables:
+           raffle_activity_order:
+             actualDataNodes: slave${0..1}.raffle_activity_order
+             tableStrategy: #表分片策略
+               standard:
+                 shardingColumn: user_id
+                 shardingAlgorithmName: raffle_activity_order_inline
+           raffle_activity_account_flow:
+             actualDataNodes: slave${0..1}.raffle_activity_account_flow
+             tableStrategy: #表分片策略
+               standard:
+                 shardingColumn: user_id
+                 shardingAlgorithmName: raffle_activity_account_flow_inline
+           shardingAlgorithms:
+             database_inline: ## 默认数据库分片算法配置
+               type: INLINE
+               props:
+                 algorithm-expression: master
+             raffle_activity_order_inline:
+               type: INLINE
+               props:
+                 algorithm-expression: raffle-activity-order_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1)}
+             raffle_activity_account_flow_inline:
+               type: INLINE
+               props:
+                 algorithm-expression: raffle_activity_account_flow_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1
+     props:
+       sql-show: true # 开启日志，默认级别info,
+       sql-simple: true # 打印简单风格的日志
+       kernel-executor-size: 5

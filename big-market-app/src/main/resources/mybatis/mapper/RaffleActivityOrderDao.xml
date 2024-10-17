@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.RaffleActivityOrder000Dao">
+<mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.RaffleActivityOrderDao">
 
-    <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder000" id="RaffleActivityOrder000Map">
+    <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder" id="RaffleActivityOrderMap">
         <result property="id" column="id" jdbcType="VARCHAR"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="sku" column="sku" jdbcType="INTEGER"/>
@@ -20,7 +20,7 @@
     </resultMap>
 
     <!--查询单个-->
-    <select id="queryById" resultMap="RaffleActivityOrder000Map">
+    <select id="queryById" resultMap="RaffleActivityOrderMap">
         select
           id, user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time
         from raffle_activity_order
@@ -28,7 +28,7 @@
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="RaffleActivityOrder000Map">
+    <select id="queryAllByLimit" resultMap="RaffleActivityOrderMap">
         select
           id, user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time
         from raffle_activity_order

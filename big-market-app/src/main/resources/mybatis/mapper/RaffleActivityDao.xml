@@ -19,7 +19,7 @@
         select
             id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time
         from raffle_activity
-        where ActivityId= #{ActivityId}
+        where activity_id= #{ActivityId}
     </select>
     <!--查询单个-->
     <select id="queryById" resultMap="RaffleActivityMap">

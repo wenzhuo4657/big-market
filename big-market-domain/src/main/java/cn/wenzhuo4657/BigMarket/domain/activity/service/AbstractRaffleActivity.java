@@ -26,7 +26,7 @@ public abstract class AbstractRaffleActivity implements  IRaffleOrder {
                 activityRepository.queryRaffleActivityByActivityId(activitySkuEntity.getActivityId());
         ActivityCountEntity activityCountEntity =
                 activityRepository.queryRaffleActivityCountByActivityCountId(activityEntity.getActivityId());
-        log.info("查询结果：{} {} {}", JSON.toJSONString(activitySkuEntity), JSON.toJSONString(activityEntity), JSON.toJSONString(activityCountEntity));
+        log.info("查询结果：{} {} {}", JSON.toJSONString(null), JSON.toJSONString(activityEntity), JSON.toJSONString(activityCountEntity));
 
           //  wenzhuo TODO 2024/10/17 : 这里并没有进行填充，
         return ActivityOrderEntity.builder().build();

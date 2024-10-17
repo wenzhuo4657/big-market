@@ -9,6 +9,7 @@ import java.util.Date;
  * @author makejava
  * @since 2024-10-17 08:43:07
  */
+
 public class RaffleActivitySku implements Serializable {
     private static final long serialVersionUID = -66842483358017257L;
     /**

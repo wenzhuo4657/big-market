@@ -49,12 +49,13 @@ spring:
                standard:
                  shardingColumn: user_id
                  shardingAlgorithmName: raffle_activity_order_inline
-           raffle_activity_account_flow:
+           raffle_activity_account:
              actualDataNodes: slave${0..1}.raffle_activity_account_flow
-             tableStrategy: #表分片策略
-               standard:
-                 shardingColumn: user_id
-                 shardingAlgorithmName: raffle_activity_account_flow_inline
+#             tableStrategy: #表分片策略
+#               standard:
+#                 shardingColumn: user_id
+#                 shardingAlgorithmName: raffle_activity_account_inline
+#                  none
            shardingAlgorithms:
              database_inline: ## 默认数据库分片算法配置
                type: INLINE
@@ -64,10 +65,10 @@ spring:
                type: INLINE
                props:
                  algorithm-expression: raffle-activity-order_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1)}
-             raffle_activity_account_flow_inline:
-               type: INLINE
-               props:
-                 algorithm-expression: raffle_activity_account_flow_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1
+#             raffle_activity_account_inline:
+#               type: INLINE
+#               props:
+#                 algorithm-expression: raffle_activity_account_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1)}
      props:
        sql-show: true # 开启日志，默认级别info,
        sql-simple: true # 打印简单风格的日志

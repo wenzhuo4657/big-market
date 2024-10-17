@@ -7,10 +7,10 @@ import java.util.Date;
  * 抽奖活动表(RaffleActivity)实体类
  *
  * @author makejava
- * @since 2024-10-15 19:17:18
+ * @since 2024-10-17 08:42:33
  */
 public class RaffleActivity implements Serializable {
-    private static final long serialVersionUID = 418704327116930623L;
+    private static final long serialVersionUID = 533749368061582315L;
     /**
      * 自增ID
      */
@@ -35,18 +35,6 @@ public class RaffleActivity implements Serializable {
      * 结束时间
      */
     private Date endDateTime;
-    /**
-     * 库存总量
-     */
-    private Integer stockCount;
-    /**
-     * 剩余库存
-     */
-    private Integer stockCountSurplus;
-    /**
-     * 活动参与次数配置
-     */
-    private Long activityCountId;
     /**
      * 抽奖策略ID
      */
@@ -111,30 +99,6 @@ public class RaffleActivity implements Serializable {
 
     public void setEndDateTime(Date endDateTime) {
         this.endDateTime = endDateTime;
-    }
-
-    public Integer getStockCount() {
-        return stockCount;
-    }
-
-    public void setStockCount(Integer stockCount) {
-        this.stockCount = stockCount;
-    }
-
-    public Integer getStockCountSurplus() {
-        return stockCountSurplus;
-    }
-
-    public void setStockCountSurplus(Integer stockCountSurplus) {
-        this.stockCountSurplus = stockCountSurplus;
-    }
-
-    public Long getActivityCountId() {
-        return activityCountId;
-    }
-
-    public void setActivityCountId(Long activityCountId) {
-        this.activityCountId = activityCountId;
     }
 
     public Long getStrategyId() {

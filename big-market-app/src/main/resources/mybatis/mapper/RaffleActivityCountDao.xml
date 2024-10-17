@@ -11,6 +11,12 @@
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <select id="queryRaffleActivityCountByActivityCountId" resultMap="RaffleActivityCountMap">
+        select
+            id, activity_count_id, total_count, day_count, month_count, create_time, update_time
+        from raffle_activity_count
+        where activity_count_id = #{activityCountId}
+    </select>
 
     <!--查询单个-->
     <select id="queryById" resultMap="RaffleActivityCountMap">

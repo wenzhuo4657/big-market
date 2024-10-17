@@ -10,7 +10,7 @@ import java.util.List;
  * 抽奖活动次数配置表(RaffleActivityCount)表数据库访问层
  *
  * @author makejava
- * @since 2024-10-15 19:17:26
+ * @since 2024-10-17 08:42:56
  */
 public interface RaffleActivityCountDao {
 
@@ -80,5 +80,6 @@ public interface RaffleActivityCountDao {
      */
     int deleteById(String id);
 
+    RaffleActivityCount queryRaffleActivityCountByActivityCountId(Long activityCountId);
 }
 

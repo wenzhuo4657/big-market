@@ -9,19 +9,22 @@
         <result property="activityDesc" column="activity_desc" jdbcType="VARCHAR"/>
         <result property="beginDateTime" column="begin_date_time" jdbcType="TIMESTAMP"/>
         <result property="endDateTime" column="end_date_time" jdbcType="TIMESTAMP"/>
-        <result property="stockCount" column="stock_count" jdbcType="INTEGER"/>
-        <result property="stockCountSurplus" column="stock_count_surplus" jdbcType="INTEGER"/>
-        <result property="activityCountId" column="activity_count_id" jdbcType="INTEGER"/>
         <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
         <result property="state" column="state" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="queryByActivityId" resultMap="RaffleActivityMap">
+        select
+            id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time
+        from raffle_activity
+        where ActivityId= #{ActivityId}
+    </select>
     <!--查询单个-->
     <select id="queryById" resultMap="RaffleActivityMap">
         select
-          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time
+          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time
         from raffle_activity
         where id = #{id}
     </select>
@@ -29,7 +32,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="RaffleActivityMap">
         select
-          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time
+          id, activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time
         from raffle_activity
         <where>
             <if test="id != null and id != ''">
@@ -49,15 +52,6 @@
             </if>
             <if test="endDateTime != null">
                 and end_date_time = #{endDateTime}
-            </if>
-            <if test="stockCount != null">
-                and stock_count = #{stockCount}
-            </if>
-            <if test="stockCountSurplus != null">
-                and stock_count_surplus = #{stockCountSurplus}
-            </if>
-            <if test="activityCountId != null">
-                and activity_count_id = #{activityCountId}
             </if>
             <if test="strategyId != null">
                 and strategy_id = #{strategyId}
@@ -98,15 +92,6 @@
             <if test="endDateTime != null">
                 and end_date_time = #{endDateTime}
             </if>
-            <if test="stockCount != null">
-                and stock_count = #{stockCount}
-            </if>
-            <if test="stockCountSurplus != null">
-                and stock_count_surplus = #{stockCountSurplus}
-            </if>
-            <if test="activityCountId != null">
-                and activity_count_id = #{activityCountId}
-            </if>
             <if test="strategyId != null">
                 and strategy_id = #{strategyId}
             </if>
@@ -124,23 +109,23 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
-        values (#{activityId}, #{activityName}, #{activityDesc}, #{beginDateTime}, #{endDateTime}, #{stockCount}, #{stockCountSurplus}, #{activityCountId}, #{strategyId}, #{state}, #{createTime}, #{updateTime})
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time)
+        values (#{activityId}, #{activityName}, #{activityDesc}, #{beginDateTime}, #{endDateTime}, #{strategyId}, #{state}, #{createTime}, #{updateTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-        (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.activityCountId}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
+        (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, stock_count, stock_count_surplus, activity_count_id, strategy_id, state, create_time, update_time)
+        insert into raffle_activity(activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state, create_time, update_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.activityCountId}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
+            (#{entity.activityId}, #{entity.activityName}, #{entity.activityDesc}, #{entity.beginDateTime}, #{entity.endDateTime}, #{entity.strategyId}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
         </foreach>
         on duplicate key update
         activity_id = values(activity_id),
@@ -148,9 +133,6 @@
         activity_desc = values(activity_desc),
         begin_date_time = values(begin_date_time),
         end_date_time = values(end_date_time),
-        stock_count = values(stock_count),
-        stock_count_surplus = values(stock_count_surplus),
-        activity_count_id = values(activity_count_id),
         strategy_id = values(strategy_id),
         state = values(state),
         create_time = values(create_time),
@@ -175,15 +157,6 @@
             </if>
             <if test="endDateTime != null">
                 end_date_time = #{endDateTime},
-            </if>
-            <if test="stockCount != null">
-                stock_count = #{stockCount},
-            </if>
-            <if test="stockCountSurplus != null">
-                stock_count_surplus = #{stockCountSurplus},
-            </if>
-            <if test="activityCountId != null">
-                activity_count_id = #{activityCountId},
             </if>
             <if test="strategyId != null">
                 strategy_id = #{strategyId},

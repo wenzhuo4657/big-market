@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.repository;
 
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
@@ -15,4 +16,10 @@ public interface IActivityRepository {
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
 
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 聚合事务，创建订单
+    */
+    void doSaveOrder(CreateOrderAggregate createOrderAggregate);
 }

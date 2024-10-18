@@ -1,7 +1,7 @@
-management:
-  health:
-    db:
-      enabled: false # 禁用默认的数据库健康检查
+#management:
+#  health:
+#    db:
+#      enabled: false # 禁用默认的数据库健康检查
 spring:
   config:
     name: big-market-app
@@ -65,3 +65,6 @@ spring:
        sql-show: true # 开启日志，默认级别info,
        sql-simple: true # 打印简单风格的日志
        kernel-executor-size: 5
+  datasource:
+    oracleucp:
+      sharding-mode: on

@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
+import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
@@ -11,15 +12,13 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
-import org.apache.shardingsphere.transaction.annotation.ShardingSphereTransactionType;
-import org.apache.shardingsphere.transaction.core.TransactionType;
-import org.apache.shardingsphere.transaction.core.TransactionTypeHolder;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import javax.swing.*;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
@@ -29,6 +28,7 @@ import java.util.Objects;
  * @description: 活动仓储服务
  */
 @Repository
+@Slf4j
 public class ActivityRepository implements IActivityRepository {
 
     @Resource
@@ -43,6 +43,11 @@ public class ActivityRepository implements IActivityRepository {
     private RaffleActivityOrderDao raffleActivityOrderDao;
     @Resource
     private RaffleActivityAccountDao raffleActivityAccountDao;
+
+    @Resource
+    private TransactionTemplate transactionTemplate;
+    @Resource
+    private IDBRouterStrategy dbRouter;
 
 
     @Override
@@ -97,48 +102,67 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-//    @ShardingSphereTransactionType(TransactionType.LOCAL)
-//    @Transactional(rollbackFor = Exception.class)
     public  void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
-        // 订单对象
-        ActivityOrderEntity activityOrderEntity = createOrderAggregate.getActivityOrderEntity();
-        RaffleActivityOrder raffleActivityOrder = new RaffleActivityOrder();
-        raffleActivityOrder.setUserId(activityOrderEntity.getUserId());
-        raffleActivityOrder.setSku(Long.valueOf(activityOrderEntity.getSku()));
-        raffleActivityOrder.setActivityId(activityOrderEntity.getActivityId());
-        raffleActivityOrder.setActivityName(activityOrderEntity.getActivityName());
-        raffleActivityOrder.setStrategyId(activityOrderEntity.getStrategyId());
-        raffleActivityOrder.setOrderId(activityOrderEntity.getOrderId());
-        raffleActivityOrder.setOrderTime(activityOrderEntity.getOrderTime());
-        raffleActivityOrder.setTotalCount(activityOrderEntity.getTotalCount());
-        raffleActivityOrder.setDayCount(activityOrderEntity.getDayCount());
-        raffleActivityOrder.setMonthCount(activityOrderEntity.getMonthCount());
-        raffleActivityOrder.setTotalCount(createOrderAggregate.getTotalCount());
-        raffleActivityOrder.setDayCount(createOrderAggregate.getDayCount());
-        raffleActivityOrder.setMonthCount(createOrderAggregate.getMonthCount());
-        raffleActivityOrder.setState(activityOrderEntity.getState().getCode());
-        raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
+        try {
+            // 订单对象
+            ActivityOrderEntity activityOrderEntity = createOrderAggregate.getActivityOrderEntity();
+            RaffleActivityOrder raffleActivityOrder = new RaffleActivityOrder();
+            raffleActivityOrder.setUserId(activityOrderEntity.getUserId());
+            raffleActivityOrder.setSku(Long.valueOf(activityOrderEntity.getSku()));
+            raffleActivityOrder.setActivityId(activityOrderEntity.getActivityId());
+            raffleActivityOrder.setActivityName(activityOrderEntity.getActivityName());
+            raffleActivityOrder.setStrategyId(activityOrderEntity.getStrategyId());
+            raffleActivityOrder.setOrderId(activityOrderEntity.getOrderId());
+            raffleActivityOrder.setOrderTime(activityOrderEntity.getOrderTime());
+            raffleActivityOrder.setTotalCount(activityOrderEntity.getTotalCount());
+            raffleActivityOrder.setDayCount(activityOrderEntity.getDayCount());
+            raffleActivityOrder.setMonthCount(activityOrderEntity.getMonthCount());
+            raffleActivityOrder.setTotalCount(createOrderAggregate.getTotalCount());
+            raffleActivityOrder.setDayCount(createOrderAggregate.getDayCount());
+            raffleActivityOrder.setMonthCount(createOrderAggregate.getMonthCount());
+            raffleActivityOrder.setState(activityOrderEntity.getState().getCode());
+            raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
+            raffleActivityOrder.setCreateTime(new Date());
+            raffleActivityOrder.setUpdateTime(new Date());
 
-        // 账户对象
-        RaffleActivityAccount raffleActivityAccount = new RaffleActivityAccount();
-        raffleActivityAccount.setUserId(createOrderAggregate.getUserId());
-        raffleActivityAccount.setActivityId(createOrderAggregate.getActivityId());
-        raffleActivityAccount.setTotalCount(createOrderAggregate.getTotalCount());
-        raffleActivityAccount.setTotalCountSurplus(createOrderAggregate.getTotalCount());
-        raffleActivityAccount.setDayCount(createOrderAggregate.getDayCount());
-        raffleActivityAccount.setDayCountSurplus(createOrderAggregate.getDayCount());
-        raffleActivityAccount.setMonthCount(createOrderAggregate.getMonthCount());
-        raffleActivityAccount.setMonthCountSurplus(createOrderAggregate.getMonthCount());
-        raffleActivityAccount.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        raffleActivityOrder.setUpdateTime(new Date());
-//        1,写入订单
-         raffleActivityOrderDao.insert(raffleActivityOrder);
-        // 2. 更新账户
-        int count = raffleActivityAccountDao.update(raffleActivityAccount);
-//        3,更新失败，新增账户
-        if (0 == count) {
-            raffleActivityAccountDao.insert(raffleActivityAccount);
+            // 账户对象
+            RaffleActivityAccount raffleActivityAccount = new RaffleActivityAccount();
+            raffleActivityAccount.setUserId(createOrderAggregate.getUserId());
+            raffleActivityAccount.setActivityId(createOrderAggregate.getActivityId());
+            raffleActivityAccount.setTotalCount(createOrderAggregate.getTotalCount());
+            raffleActivityAccount.setTotalCountSurplus(createOrderAggregate.getTotalCount());
+            raffleActivityAccount.setDayCount(createOrderAggregate.getDayCount());
+            raffleActivityAccount.setDayCountSurplus(createOrderAggregate.getDayCount());
+            raffleActivityAccount.setMonthCount(createOrderAggregate.getMonthCount());
+            raffleActivityAccount.setMonthCountSurplus(createOrderAggregate.getMonthCount());
+            raffleActivityAccount.setCreateTime(new Date());
+            raffleActivityAccount.setUpdateTime(new Date());
+
+            dbRouter.doRouter(createOrderAggregate.getUserId());
+            transactionTemplate.execute(status -> {
+                        try {
+                            // 1. 写入订单
+                            raffleActivityOrderDao.insert(raffleActivityOrder);
+                            // 2. 更新账户
+                            int count = raffleActivityAccountDao.update(raffleActivityAccount);
+                            // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
+                            if (0 == count) {
+                                raffleActivityAccountDao.insert(raffleActivityAccount);
+                            }
+                            return 1;
+                        } catch (DuplicateKeyException e) {
+                            status.setRollbackOnly();
+                            log.error("写入订单记录，唯一索引冲突 userId: {} activityId: {} sku: {}", activityOrderEntity.getUserId(), activityOrderEntity.getActivityId(), activityOrderEntity.getSku(), e);
+//                    throw new AppException(ResponseCode.INDEX_DUP.getCode());
+                            throw  new RuntimeException();
+                        }
+
+                    }
+            );
+        }finally {
+            dbRouter.clear();
         }
+
     }
 
 

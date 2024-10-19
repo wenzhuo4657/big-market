@@ -53,6 +53,6 @@ public class RaffleActivityService extends AbstractRaffleActivity{
     @Override
     protected void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
           //  wenzhuo TODO 2024/10/19 : 暂停使用
-//        activityRepository.doSaveOrder(createOrderAggregate);
+        activityRepository.doSaveOrder(createOrderAggregate);
     }
 }

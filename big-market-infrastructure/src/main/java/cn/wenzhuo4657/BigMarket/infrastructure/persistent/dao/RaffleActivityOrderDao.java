@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
+import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder;
 
 import java.util.List;
@@ -10,8 +12,11 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-17 09:12:07
  */
+@DBRouterStrategy(splitTable = true)
 public interface RaffleActivityOrderDao {
 
+
+    @DBRouter(key = "userId")
     void insert(RaffleActivityOrder raffleActivityOrder);
 
 

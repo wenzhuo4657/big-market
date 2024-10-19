@@ -41,12 +41,13 @@ thread:
 
 
 
-
-
-mybatis:
+mybatis-plus:
   mapper-locations: classpath:/mybatis/mapper/*.xml
-  config-location:  classpath:/mybatis/config/mybatis-config.xml
-  log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
 redis:
   sdk:
     config:

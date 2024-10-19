@@ -3,14 +3,12 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivityStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.*;
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivity;
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount;
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityCount;
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivitySku;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import org.apache.shardingsphere.transaction.annotation.ShardingSphereTransactionType;
@@ -21,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.swing.*;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
@@ -98,22 +97,48 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    @ShardingSphereTransactionType(TransactionType.LOCAL)
-    @Transactional
+//    @ShardingSphereTransactionType(TransactionType.LOCAL)
+//    @Transactional(rollbackFor = Exception.class)
     public  void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
-        RaffleActivitySku raffleActivitySku = new RaffleActivitySku();
-        raffleActivitySku.setActivityId(465456L);
-        raffleActivitySku.setId("2");
-        raffleActivitySku.setSku(13213L);
-        raffleActivitySku.setActivityCountId(12312L);
-        raffleActivitySku.setStockCountSurplus(2131);
-        raffleActivitySku.setStockCount(312);
-        raffleActivitySku.setCreateTime(new Date());
-        raffleActivitySku.setUpdateTime(new Date());
-        raffleActivitySkuDao.insert(raffleActivitySku);
-        RaffleActivityAccount activityAccount=new RaffleActivityAccount("fdsa","fajskl",12L,123,312,132,132,312,312,new Date(),new Date());
-        raffleActivityAccountDao.insert(activityAccount);
-        throw  new RuntimeException();
+        // 订单对象
+        ActivityOrderEntity activityOrderEntity = createOrderAggregate.getActivityOrderEntity();
+        RaffleActivityOrder raffleActivityOrder = new RaffleActivityOrder();
+        raffleActivityOrder.setUserId(activityOrderEntity.getUserId());
+        raffleActivityOrder.setSku(Long.valueOf(activityOrderEntity.getSku()));
+        raffleActivityOrder.setActivityId(activityOrderEntity.getActivityId());
+        raffleActivityOrder.setActivityName(activityOrderEntity.getActivityName());
+        raffleActivityOrder.setStrategyId(activityOrderEntity.getStrategyId());
+        raffleActivityOrder.setOrderId(activityOrderEntity.getOrderId());
+        raffleActivityOrder.setOrderTime(activityOrderEntity.getOrderTime());
+        raffleActivityOrder.setTotalCount(activityOrderEntity.getTotalCount());
+        raffleActivityOrder.setDayCount(activityOrderEntity.getDayCount());
+        raffleActivityOrder.setMonthCount(activityOrderEntity.getMonthCount());
+        raffleActivityOrder.setTotalCount(createOrderAggregate.getTotalCount());
+        raffleActivityOrder.setDayCount(createOrderAggregate.getDayCount());
+        raffleActivityOrder.setMonthCount(createOrderAggregate.getMonthCount());
+        raffleActivityOrder.setState(activityOrderEntity.getState().getCode());
+        raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
+
+        // 账户对象
+        RaffleActivityAccount raffleActivityAccount = new RaffleActivityAccount();
+        raffleActivityAccount.setUserId(createOrderAggregate.getUserId());
+        raffleActivityAccount.setActivityId(createOrderAggregate.getActivityId());
+        raffleActivityAccount.setTotalCount(createOrderAggregate.getTotalCount());
+        raffleActivityAccount.setTotalCountSurplus(createOrderAggregate.getTotalCount());
+        raffleActivityAccount.setDayCount(createOrderAggregate.getDayCount());
+        raffleActivityAccount.setDayCountSurplus(createOrderAggregate.getDayCount());
+        raffleActivityAccount.setMonthCount(createOrderAggregate.getMonthCount());
+        raffleActivityAccount.setMonthCountSurplus(createOrderAggregate.getMonthCount());
+        raffleActivityAccount.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        raffleActivityOrder.setUpdateTime(new Date());
+//        1,写入订单
+         raffleActivityOrderDao.insert(raffleActivityOrder);
+        // 2. 更新账户
+        int count = raffleActivityAccountDao.update(raffleActivityAccount);
+//        3,更新失败，新增账户
+        if (0 == count) {
+            raffleActivityAccountDao.insert(raffleActivityAccount);
+        }
     }
 
 

@@ -1,7 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
-import lombok.AllArgsConstructor;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,19 +13,7 @@ import java.util.Date;
 public class RaffleActivityAccount implements Serializable {
     private static final long serialVersionUID = 477136784289179456L;
 
-    public RaffleActivityAccount(String id, String userId, Long activityId, Integer totalCount, Integer totalCountSurplus, Integer dayCount, Integer dayCountSurplus, Integer monthCount, Integer monthCountSurplus, Date createTime, Date updateTime) {
-        this.id = id;
-        this.userId = userId;
-        this.activityId = activityId;
-        this.totalCount = totalCount;
-        this.totalCountSurplus = totalCountSurplus;
-        this.dayCount = dayCount;
-        this.dayCountSurplus = dayCountSurplus;
-        this.monthCount = monthCount;
-        this.monthCountSurplus = monthCountSurplus;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
+
 
     /**
      * 自增ID

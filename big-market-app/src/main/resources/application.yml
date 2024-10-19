@@ -1,70 +1,114 @@
-#management:
-#  health:
-#    db:
-#      enabled: false # 禁用默认的数据库健康检查
 spring:
+  main:
+    allow-bean-definition-overriding: true
   config:
     name: big-market-app
   profiles:
     active: dev
   shardingsphere:
-     datasource:
-       names: master,slave1,slave2
-       master:
-         type: com.zaxxer.hikari.HikariDataSource
-         driver-class-name: com.mysql.cj.jdbc.Driver
-         jdbc-url: jdbc:mysql://localhost:3308/big_market?useSSL=false&serverTimezone=UTC
-         username: root
-         password: 465700
-         maxPoolSize: 15
-         minPoolSize: 3
-       slave1:
-         type: com.zaxxer.hikari.HikariDataSource
-         driver-class-name: com.mysql.cj.jdbc.Driver
-         jdbc-url: jdbc:mysql://localhost:3308/big_market_01?useSSL=false&serverTimezone=UTC
-         username: root
-         password: 465700
-         maxPoolSize: 15
-         minPoolSize: 3
-       slave2:
-         type: com.zaxxer.hikari.HikariDataSource
-         driver-class-name: com.mysql.cj.jdbc.Driver
-         jdbc-url: jdbc:mysql://localhost:3308/big_market_02?useSSL=false&serverTimezone=UTC
-         username: root
-         password: 465700
-         maxPoolSize: 15
-         minPoolSize:  3
-     rules:
-       tables:
-         defaultDataSourceName: master
-         defaultTableStrategy: # 默认表分片策略
-           none: # 不分片
-         tables:
-           raffle_activity_order:
-             actualDataNodes: slave${0..1}.raffle_activity_order
-             tableStrategy: #表分片策略
-               standard:
-                 shardingColumn: user_id
-                 shardingAlgorithmName: raffle_activity_order_inline
-           raffle_activity_account:
-             actualDataNodes: slave${0..1}.raffle_activity_account
-             tableStrategy: #表分片策略
-               standard:
-                 shardingColumn: user_id
-                 shardingAlgorithmName: raffle_activity_account_inline
-           shardingAlgorithms:
-             raffle_activity_order_inline:
-               type: INLINE
-               props:
-                 algorithm-expression: raffle-activity-order_00$->{(user_id.hashCode()^(user_id.hashCode())>>>16)&(4-1)}
-             raffle_activity_account_inline:
-               type: INLINE
-               props:
-                 algorithm-expression: raffle_activity_account
-     props:
-       sql-show: true # 开启日志，默认级别info,
-       sql-simple: true # 打印简单风格的日志
-       kernel-executor-size: 5
-  datasource:
-    oracleucp:
-      sharding-mode: on
+#      data-sources:
+#        names: ds_0,ds_1,ds_2
+#        ds_0:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          jdbc-url: jdbc:mysql://localhost:3308/big_market?useSSL=false&serverTimezone=UTC
+#          username: root
+#          password: 465700
+#          maxPoolSize: 15
+#          minPoolSize: 3
+#        ds_1:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          jdbc-url: jdbc:mysql://localhost:3308/big_market_01?useSSL=false&serverTimezone=UTC
+#          username: root
+#          password: 465700
+#          maxPoolSize: 15
+#          minPoolSize: 3
+#        ds_2:
+#          type: com.zaxxer.hikari.HikariDataSource
+#          driver-class-name: com.mysql.cj.jdbc.Driver
+#          jdbc-url: jdbc:mysql://localhost:3308/big_market_02?useSSL=false&serverTimezone=UTC
+#          username: root
+#          password: 465700
+#          maxPoolSize: 15
+#          minPoolSize: 3
+      datasource:
+        names: ds_0,ds_1,ds_2
+        ds_0:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://localhost:3308/big_market?useSSL=false&serverTimezone=UTC
+          username: root
+          password: 465700
+          maxPoolSize: 15
+          minPoolSize: 3
+        ds_1:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://localhost:3308/big_market_01?useSSL=false&serverTimezone=UTC
+          username: root
+          password: 465700
+          maxPoolSize: 15
+          minPoolSize: 3
+        ds_2:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          jdbc-url: jdbc:mysql://localhost:3308/big_market_02?useSSL=false&serverTimezone=UTC
+          username: root
+          password: 465700
+          maxPoolSize: 15
+          minPoolSize:  3
+      rules:
+        sharding:
+          key-generators:
+            snowflake:
+              type: SNOWFLAKE
+          binding-tables: raffle_activity_account,raffle_activity_order
+          default-data-source-name: ds_0
+          default-table-strategy:
+            standard:
+              shardingColumn: id
+              shardingAlgorithmName: default_table
+          tables:
+            raffle_activity_order:
+              actualDataNodes: ds_${1..2}.raffle_activity_order_00${0..3}
+              tableStrategy: #表分片策略
+                standard:
+                  shardingColumn: userId
+                  shardingAlgorithmName: raffle_activity_order_inline
+              key-generate-strategy:
+                column: id
+                key-generator-name: alg_snowflake
+            raffle_activity_account:
+              actualDataNodes: ds_${1..2}.raffle_activity_account
+              tableStrategy: #表分片策略
+                standard:
+                  shardingColumn: userId
+                  shardingAlgorithmName: raffle_activity_account_inline
+              key-generate-strategy:
+                column: id
+                key-generator-name: snowflake
+          sharding-algorithms:
+            raffle_activity_order_inline:
+              type: INLINE
+              props:
+                algorithm-expression: raffle_activity_order_00$->{(userId.hashCode())%4}
+            raffle_activity_account_inline:
+              type: INLINE
+              props:
+                algorithm-expression: raffle_activity_account
+            default_table:
+              type: MOD
+              props:
+                sharding-count: 1
+            snowflake:
+              type: HASH_MOD
+              props:
+               sharding-count: 2
+      props:
+        sql-show: true # 开启日志，默认级别info,
+        sql-simple: true # 打印简单风格的日志
+        kernel-executor-size: 5
+
+
+

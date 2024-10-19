@@ -3,219 +3,36 @@
 <mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.RaffleActivityOrderDao">
 
     <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder" id="RaffleActivityOrderMap">
-        <result property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
-        <result property="sku" column="sku" jdbcType="INTEGER"/>
-        <result property="activityId" column="activity_id" jdbcType="INTEGER"/>
-        <result property="activityName" column="activity_name" jdbcType="VARCHAR"/>
-        <result property="strategyId" column="strategy_id" jdbcType="INTEGER"/>
-        <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
-        <result property="orderTime" column="order_time" jdbcType="TIMESTAMP"/>
-        <result property="totalCount" column="total_count" jdbcType="INTEGER"/>
-        <result property="dayCount" column="day_count" jdbcType="INTEGER"/>
-        <result property="monthCount" column="month_count" jdbcType="INTEGER"/>
-        <result property="state" column="state" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <id column="id" property="id"/>
+            <result column="user_id" property="userId"/>
+            <result column="sku" property="sku"/>
+            <result column="activity_id" property="activityId"/>
+            <result column="activity_name" property="activityName"/>
+            <result column="strategy_id" property="strategyId"/>
+            <result column="order_id" property="orderId"/>
+            <result column="order_time" property="orderTime"/>
+            <result column="total_count" property="totalCount"/>
+            <result column="day_count" property="dayCount"/>
+            <result column="month_count" property="monthCount"/>
+            <result column="state" property="state"/>
+            <result column="out_business_no" property="outBusinessNo"/>
+            <result column="create_time" property="createTime"/>
+            <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="RaffleActivityOrderMap">
-        select
-          id, user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time
-        from raffle_activity_order
-        where id = #{id}
-    </select>
-
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="RaffleActivityOrderMap">
-        select
-          id, user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time
-        from raffle_activity_order
-        <where>
-            <if test="id != null and id != ''">
-                and id = #{id}
-            </if>
-            <if test="userId != null and userId != ''">
-                and user_id = #{userId}
-            </if>
-            <if test="sku != null">
-                and sku = #{sku}
-            </if>
-            <if test="activityId != null">
-                and activity_id = #{activityId}
-            </if>
-            <if test="activityName != null and activityName != ''">
-                and activity_name = #{activityName}
-            </if>
-            <if test="strategyId != null">
-                and strategy_id = #{strategyId}
-            </if>
-            <if test="orderId != null and orderId != ''">
-                and order_id = #{orderId}
-            </if>
-            <if test="orderTime != null">
-                and order_time = #{orderTime}
-            </if>
-            <if test="totalCount != null">
-                and total_count = #{totalCount}
-            </if>
-            <if test="dayCount != null">
-                and day_count = #{dayCount}
-            </if>
-            <if test="monthCount != null">
-                and month_count = #{monthCount}
-            </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
-
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from raffle_activity_order
-        <where>
-            <if test="id != null and id != ''">
-                and id = #{id}
-            </if>
-            <if test="userId != null and userId != ''">
-                and user_id = #{userId}
-            </if>
-            <if test="sku != null">
-                and sku = #{sku}
-            </if>
-            <if test="activityId != null">
-                and activity_id = #{activityId}
-            </if>
-            <if test="activityName != null and activityName != ''">
-                and activity_name = #{activityName}
-            </if>
-            <if test="strategyId != null">
-                and strategy_id = #{strategyId}
-            </if>
-            <if test="orderId != null and orderId != ''">
-                and order_id = #{orderId}
-            </if>
-            <if test="orderTime != null">
-                and order_time = #{orderTime}
-            </if>
-            <if test="totalCount != null">
-                and total_count = #{totalCount}
-            </if>
-            <if test="dayCount != null">
-                and day_count = #{dayCount}
-            </if>
-            <if test="monthCount != null">
-                and month_count = #{monthCount}
-            </if>
-            <if test="state != null and state != ''">
-                and state = #{state}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-        </where>
-    </select>
-
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_order(user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time)
-        values (#{userId}, #{sku}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{totalCount}, #{dayCount}, #{monthCount}, #{state}, #{createTime}, #{updateTime})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_order(user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time)
+    <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder">
+        insert into raffle_activity_order
+        (user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, state, out_business_no, total_count, day_count, month_count,
+         create_time, update_time)
         values
-        <foreach collection="entities" item="entity" separator=",">
-        (#{entity.userId}, #{entity.sku}, #{entity.activityId}, #{entity.activityName}, #{entity.strategyId}, #{entity.orderId}, #{entity.orderTime}, #{entity.totalCount}, #{entity.dayCount}, #{entity.monthCount}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
-        </foreach>
+            (#{userId}, #{sku}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{state}, #{outBusinessNo}, #{totalCount}, #{dayCount}, #{monthCount},
+             #{createTime}, #{updateTime})
     </insert>
 
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_order(user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, total_count, day_count, month_count, state, create_time, update_time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.userId}, #{entity.sku}, #{entity.activityId}, #{entity.activityName}, #{entity.strategyId}, #{entity.orderId}, #{entity.orderTime}, #{entity.totalCount}, #{entity.dayCount}, #{entity.monthCount}, #{entity.state}, #{entity.createTime}, #{entity.updateTime})
-        </foreach>
-        on duplicate key update
-        user_id = values(user_id),
-        sku = values(sku),
-        activity_id = values(activity_id),
-        activity_name = values(activity_name),
-        strategy_id = values(strategy_id),
-        order_id = values(order_id),
-        order_time = values(order_time),
-        total_count = values(total_count),
-        day_count = values(day_count),
-        month_count = values(month_count),
-        state = values(state),
-        create_time = values(create_time),
-        update_time = values(update_time)
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update raffle_activity_order
-        <set>
-            <if test="userId != null and userId != ''">
-                user_id = #{userId},
-            </if>
-            <if test="sku != null">
-                sku = #{sku},
-            </if>
-            <if test="activityId != null">
-                activity_id = #{activityId},
-            </if>
-            <if test="activityName != null and activityName != ''">
-                activity_name = #{activityName},
-            </if>
-            <if test="strategyId != null">
-                strategy_id = #{strategyId},
-            </if>
-            <if test="orderId != null and orderId != ''">
-                order_id = #{orderId},
-            </if>
-            <if test="orderTime != null">
-                order_time = #{orderTime},
-            </if>
-            <if test="totalCount != null">
-                total_count = #{totalCount},
-            </if>
-            <if test="dayCount != null">
-                day_count = #{dayCount},
-            </if>
-            <if test="monthCount != null">
-                month_count = #{monthCount},
-            </if>
-            <if test="state != null and state != ''">
-                state = #{state},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from raffle_activity_order where id = #{id}
-    </delete>
-
+    <select id="queryRaffleActivityOrderByUserId" parameterType="java.lang.String" resultMap="RaffleActivityOrderMap">
+        select user_id, sku, activity_id, activity_name, strategy_id, order_id, order_time, state
+        from raffle_activity_order
+        where user_id = #{userId}
+    </select>
 </mapper>
 

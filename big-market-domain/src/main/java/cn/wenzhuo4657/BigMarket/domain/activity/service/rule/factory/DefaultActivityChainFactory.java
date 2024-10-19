@@ -24,6 +24,10 @@ public class DefaultActivityChainFactory {
         actionChain.appendNext(actionChainGroup.get(ActionModel.activity_sku_stock_action.getCode()));
     }
 
+    public IActionChain openActionChain(){
+        return  this.actionChain;
+    }
+
 
     /**
      *  @author:wenzhuo4657

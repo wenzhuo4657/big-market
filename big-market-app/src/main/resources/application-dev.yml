@@ -20,7 +20,18 @@ thread:
         keep-alive-time: 5000
         block-queue-size: 5000
         policy: CallerRunsPolicy
-
+# rabbitMQ配置
+spring:
+  rabbitmq:
+    addresses: 127.0.0.1
+    port: 5672
+    username: admin
+    password: admin
+    listener:
+      simple:
+        prefetch: 1
+    topic:
+      activity_sku_stock_zero: activity_sku_stock_zero
 # 数据库配置；启动时配置数据库资源信息
 #spring:
 #  datasource:

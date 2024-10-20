@@ -2,6 +2,10 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis;
 
 import org.redisson.api.*;
 
+import java.time.Duration;
+import java.time.temporal.TemporalUnit;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @className: IRedisService
  * @author: wenzhuo4657
@@ -268,5 +272,11 @@ public interface IRedisService {
         des: 设置锁.内部实现表示如果不存在指定key，则《k,"lock"》,实际上可以使用该键值实现消费的最终一致性。
     */
     Boolean setNx(String key);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 设置有时效的锁
+    */
+    Boolean setNx(String key, Duration duration);
 
 }

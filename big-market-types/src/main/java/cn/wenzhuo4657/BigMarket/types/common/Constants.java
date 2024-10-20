@@ -12,6 +12,17 @@ public  class Constants {
         public static String ACTIVITY_SKU_KEY = "big_market_activity_sku_key_";
         public static String ACTIVITY_COUNT_KEY = "big_market_activity_count_key_";
 
+        /**
+         *  @author:wenzhuo4657
+            des: 活动sku数量缓存前缀
+        */
+        public static String ACTIVITY_SKU_COUNT_QUERY_KEY = "activity_sku_count_query_key";
+
+        /**
+         *  @author:wenzhuo4657
+            des: 活动sku库存缓存前缀
+        */
+        public static String ACTIVITY_SKU_STOCK_COUNT_KEY = "activity_sku_stock_count_key_";
 
         /**
          *  @author:wenzhuo4657
@@ -26,10 +37,10 @@ public  class Constants {
            *  策略奖品实体的key的key前缀,注意：该字段不在表示某一策略的奖品列表，而是某一策略下的某一奖品实体。
              * */
         public static String STRATEGY_AWARD_KEY = "big_market_strategy_award_key_";
-/**
- *  @author:wenzhuo4657
-    des: 策略奖品列表key前缀
-*/
+        /**
+         *  @author:wenzhuo4657
+            des: 策略奖品列表key前缀
+        */
 
         public static String STRATEGY_AWARD_LIST_KEY = "big_market_strategy_award_list_key_";
 
@@ -61,6 +72,7 @@ public  class Constants {
             des:
         */
         public static String STRATEGY_AWARD_COUNT_QUERY_KEY = "strategy_award_count_query_key";
+
     }
 
 

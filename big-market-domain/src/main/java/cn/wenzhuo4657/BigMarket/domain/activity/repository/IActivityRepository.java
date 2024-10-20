@@ -4,6 +4,9 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggre
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
+
+import java.util.Date;
 
 /**
  * @author: wenzhuo4657
@@ -22,4 +25,22 @@ public interface IActivityRepository {
         des: 聚合事务，创建订单
     */
     void doSaveOrder(CreateOrderAggregate createOrderAggregate);
+
+    /**
+     *  @author:wenzhuo4657
+        des: redis缓存：如果不存在对应key，则缓存
+    */
+    void cacheActivitySkuStockCount(String cacheKey, Integer stockCount);
+
+    boolean subtractionActivitySkuStock(Long sku, String cacheKey, Date endDateTime);
+
+    void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO);
+
+    ActivitySkuStockKeyVO takeQueueValue();
+
+    void clearQueueValue();
+
+    void updateActivitySkuStock(Long sku);
+
+    void clearActivitySkuStock(Long sku);
 }

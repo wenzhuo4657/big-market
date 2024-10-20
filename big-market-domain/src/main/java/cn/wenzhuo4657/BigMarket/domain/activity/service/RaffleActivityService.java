@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.factory.DefaultActivityChainFactory;
@@ -16,7 +17,7 @@ import java.util.Date;
  * @description:
  */
 @Service
-public class RaffleActivityService extends AbstractRaffleActivity{
+public class RaffleActivityService extends AbstractRaffleActivity implements ISkuStock{
 
 
     public RaffleActivityService(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
@@ -52,7 +53,27 @@ public class RaffleActivityService extends AbstractRaffleActivity{
 
     @Override
     protected void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
-          //  wenzhuo TODO 2024/10/19 : 暂停使用
         activityRepository.doSaveOrder(createOrderAggregate);
+    }
+
+    @Override
+    public ActivitySkuStockKeyVO takeQueueValue() throws InterruptedException {
+
+        return null;
+    }
+
+    @Override
+    public void clearQueueValue() {
+
+    }
+
+    @Override
+    public void updateActivitySkuStock(Long sku) {
+
+    }
+
+    @Override
+    public void clearActivitySkuStock(Long sku) {
+
     }
 }

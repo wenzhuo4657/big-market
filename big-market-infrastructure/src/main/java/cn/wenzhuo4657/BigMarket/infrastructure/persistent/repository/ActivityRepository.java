@@ -1,13 +1,16 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
 import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
+import cn.wenzhuo4657.BigMarket.domain.activity.evnet.ActivitySkuStockZeroMessageEvent;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivityStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
+import cn.wenzhuo4657.BigMarket.infrastructure.event.EventPublisher;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
@@ -21,8 +24,11 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: wenzhuo4657
@@ -50,6 +56,10 @@ public class ActivityRepository implements IActivityRepository {
     private TransactionTemplate transactionTemplate;
     @Resource
     private IDBRouterStrategy dbRouter;
+    @Resource
+    private ActivitySkuStockZeroMessageEvent activitySkuStockZeroMessageEvent;
+    @Resource
+    private EventPublisher eventPublisher;
 
 
     @Override
@@ -170,7 +180,63 @@ public class ActivityRepository implements IActivityRepository {
 
     }
 
+    @Override
+    public void cacheActivitySkuStockCount(String cacheKey, Integer stockCount) {
+        if (redissonService.isExists(cacheKey)) return;
+        redissonService.setAtomicLong(cacheKey,stockCount);
+    }
+
+    //  wenzhuo TODO 2024/10/20 : 加锁是为了兜底，并没有自动恢复库存的方式，相当于备份消费记录。
+    @Override
+    public boolean subtractionActivitySkuStock(Long sku, String cacheKey, Date endDateTime) {
+        Long surplus=redissonService.decr(cacheKey);
+        if (surplus==0){
+            /**
+             *  @author:wenzhuo4657
+                des: 使用MQ推送消息，通知sku商品活动缓存中库存为0
+            */
+            eventPublisher.publish(activitySkuStockZeroMessageEvent.topic(),activitySkuStockZeroMessageEvent.buildEventMessage(sku));
+            return  false;
+        } else if (surplus<0) {
+            redissonService.setAtomicLong(cacheKey,0);
+            return  false;
+        }
+
+        String lockKey=cacheKey+Constants.UNDERLINE+surplus;
+        long expireMillis = endDateTime.getTime() - System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1);
+        Duration of = Duration.of(expireMillis, ChronoUnit.DAYS);
+        Boolean aBoolean = redissonService.setNx(lockKey, of);
+        if (!aBoolean){
+            log.info("活动sku库存加锁失败 {}", lockKey);
+        }
+        return true;
+    }
+
+    @Override
+    public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
+        String cacheKey=Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
 
 
 
+    }
+
+    @Override
+    public ActivitySkuStockKeyVO takeQueueValue() {
+        return null;
+    }
+
+    @Override
+    public void clearQueueValue() {
+
+    }
+
+    @Override
+    public void updateActivitySkuStock(Long sku) {
+
+    }
+
+    @Override
+    public void clearActivitySkuStock(Long sku) {
+
+    }
 }

@@ -81,5 +81,8 @@ public interface RaffleActivitySkuDao {
     int deleteById(String id);
 
     RaffleActivitySku queryBySku(Long sku);
+    void updateActivitySkuStock(Long sku);
+
+    void clearActivitySkuStock(Long sku);
 }
 

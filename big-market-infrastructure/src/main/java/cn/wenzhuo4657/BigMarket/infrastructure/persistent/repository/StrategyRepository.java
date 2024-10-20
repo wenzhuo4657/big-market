@@ -192,7 +192,8 @@ public class StrategyRepository implements IStrategyRepository {
 
     }
 
-      //  wenzhuo TODO 2024/10/8 : 此处设置了锁，但没有看到移除锁，也就是库存同步到数据库的代码，同时如何使用该锁保证最终一致性？
+
+      //  wenzhuo TODO 2024/10/20 : 加锁是为了兜底，并没有自动恢复库存的方式，相当于备份消费记录。
     @Override
     public Boolean subtractionAwardStock(String cacheKey) {
         long surplus=redissonService.decr(cacheKey);

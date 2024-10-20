@@ -16,6 +16,8 @@ import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
@@ -139,25 +141,28 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccount.setUpdateTime(new Date());
 
             dbRouter.doRouter(createOrderAggregate.getUserId());
-            transactionTemplate.execute(status -> {
-                        try {
-                            // 1. 写入订单
-                            raffleActivityOrderDao.insert(raffleActivityOrder);
-                            // 2. 更新账户
-                            int count = raffleActivityAccountDao.update(raffleActivityAccount);
-                            // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
-                            if (0 == count) {
-                                raffleActivityAccountDao.insert(raffleActivityAccount);
-                            }
-                            return 1;
-                        } catch (DuplicateKeyException e) {
-                            status.setRollbackOnly();
-                            log.error("写入订单记录，唯一索引冲突 userId: {} activityId: {} sku: {}", activityOrderEntity.getUserId(), activityOrderEntity.getActivityId(), activityOrderEntity.getSku(), e);
+            transactionTemplate.execute(new TransactionCallback<Integer>() {
+                                            @Override
+                                            public Integer doInTransaction(TransactionStatus status) {
+                                                try {
+                                                    // 1. 写入订单
+                                                    raffleActivityOrderDao.insert(raffleActivityOrder);
+                                                    // 2. 更新账户
+                                                    int count = raffleActivityAccountDao.update(raffleActivityAccount);
+                                                    // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
+                                                    if (0 == count) {
+                                                        raffleActivityAccountDao.insert(raffleActivityAccount);
+                                                    }
+                                                    return 1;
+                                                } catch (DuplicateKeyException e) {
+                                                    status.setRollbackOnly();
+                                                    log.error("写入订单记录，唯一索引冲突 userId: {} activityId: {} sku: {}", activityOrderEntity.getUserId(), activityOrderEntity.getActivityId(), activityOrderEntity.getSku(), e);
 //                    throw new AppException(ResponseCode.INDEX_DUP.getCode());
-                            throw  new RuntimeException();
-                        }
+                                                    throw new RuntimeException();
+                                                }
 
-                    }
+                                            }
+                                        }
             );
         }finally {
             dbRouter.clear();

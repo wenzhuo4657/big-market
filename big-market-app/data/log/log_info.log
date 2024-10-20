@@ -12447,3 +12447,51 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'x
 24-10-19.18:41:55.409 [SpringApplicationShutdownHook] INFO  QuartzScheduler        - Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
 24-10-19.18:41:55.409 [SpringApplicationShutdownHook] INFO  QuartzScheduler        - Scheduler quartzScheduler_$_NON_CLUSTERED paused.
 24-10-19.18:41:55.411 [SpringApplicationShutdownHook] INFO  QuartzScheduler        - Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+24-10-19.18:50:37.445 [main            ] INFO  RaffleOrderTest        - Starting RaffleOrderTest using Java 1.8.0_321 on 4657001021 with PID 30088 (started by 14783 in E:\code\java\idea\project\big-market-app)
+24-10-19.18:50:37.446 [main            ] INFO  RaffleOrderTest        - The following 1 profile is active: "dev"
+24-10-19.18:50:38.199 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-19.18:50:38.203 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-19.18:50:38.239 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
+24-10-19.18:50:39.579 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-19.18:50:40.166 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:50:40.181 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:50:42.992 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-19.18:50:43.041 [main            ] INFO  RaffleOrderTest        - Started RaffleOrderTest in 5.996 seconds (JVM running for 6.734)
+24-10-19.18:50:43.261 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:50:43.883 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-19.18:50:43.979 [main            ] INFO  ActivityBaseActionChain - 活动责任链-基础信息【有效期、状态】校验开始。
+24-10-19.18:50:43.979 [main            ] INFO  ActivitySkuStockActionChain - 活动责任链-商品库存处理【校验&扣减】开始。
+24-10-19.18:50:43.983 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:50:43.998 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-19.18:51:30.680 [main            ] INFO  RaffleOrderTest        - Starting RaffleOrderTest using Java 1.8.0_321 on 4657001021 with PID 18652 (started by 14783 in E:\code\java\idea\project\big-market-app)
+24-10-19.18:51:30.681 [main            ] INFO  RaffleOrderTest        - The following 1 profile is active: "dev"
+24-10-19.18:51:31.421 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-19.18:51:31.424 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-19.18:51:31.452 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+24-10-19.18:51:32.754 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-19.18:51:33.352 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:51:33.376 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:51:36.322 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-19.18:51:36.379 [main            ] INFO  RaffleOrderTest        - Started RaffleOrderTest in 6.073 seconds (JVM running for 6.85)
+24-10-19.18:51:36.618 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:51:37.304 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-19.18:51:37.414 [main            ] INFO  ActivityBaseActionChain - 活动责任链-基础信息【有效期、状态】校验开始。
+24-10-19.18:51:37.414 [main            ] INFO  ActivitySkuStockActionChain - 活动责任链-商品库存处理【校验&扣减】开始。
+24-10-19.18:51:37.417 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:51:37.436 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-19.18:52:11.803 [main            ] INFO  RaffleOrderTest        - Starting RaffleOrderTest using Java 1.8.0_321 on 4657001021 with PID 16124 (started by 14783 in E:\code\java\idea\project\big-market-app)
+24-10-19.18:52:11.804 [main            ] INFO  RaffleOrderTest        - The following 1 profile is active: "dev"
+24-10-19.18:52:12.571 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-19.18:52:12.574 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-19.18:52:12.605 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+24-10-19.18:52:13.918 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-19.18:52:14.502 [redisson-netty-2-4] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:52:14.521 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-19.18:52:17.202 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-19.18:52:17.257 [main            ] INFO  RaffleOrderTest        - Started RaffleOrderTest in 5.815 seconds (JVM running for 6.538)
+24-10-19.18:52:17.475 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:52:18.163 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-19.18:52:18.258 [main            ] INFO  ActivityBaseActionChain - 活动责任链-基础信息【有效期、状态】校验开始。
+24-10-19.18:52:18.258 [main            ] INFO  ActivitySkuStockActionChain - 活动责任链-商品库存处理【校验&扣减】开始。
+24-10-19.18:52:18.262 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-19.18:52:18.280 [main            ] INFO  HikariDataSource       - Retail_HikariCP - Start completed.

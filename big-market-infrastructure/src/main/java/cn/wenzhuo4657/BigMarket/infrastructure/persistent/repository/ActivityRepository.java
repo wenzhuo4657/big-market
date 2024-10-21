@@ -17,6 +17,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBlockingQueue;
+import org.redisson.api.RDelayedQueue;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionStatus;
@@ -211,32 +213,42 @@ public class ActivityRepository implements IActivityRepository {
         }
         return true;
     }
-
+  //  wenzhuo TODO 2024/10/21 :  redis队列
     @Override
     public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
         String cacheKey=Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
-
-
-
+        RBlockingQueue<Object> blockingQueue = redissonService.getBlockingQueue(cacheKey);
+        RDelayedQueue<Object> delayedQueue = redissonService.getDelayedQueue(blockingQueue);
+        delayedQueue.offer(activitySkuStockKeyVO,3,TimeUnit.SECONDS);
     }
 
     @Override
     public ActivitySkuStockKeyVO takeQueueValue() {
-        return null;
+        /**
+         *  @author:wenzhuo4657
+            des:
+         注意泛型的使用，此处泛型只能控制出，而不能管理进入，又或者说，获取该泛型时队列中已经存在不受控制的元素，
+         此处的泛型约束仅仅起到约束取出的作用。
+        */
+        String cacheKey=Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        RBlockingQueue<ActivitySkuStockKeyVO> blockingQueue = redissonService.getBlockingQueue(cacheKey);
+        return blockingQueue.poll();
     }
 
     @Override
     public void clearQueueValue() {
-
+        String cacheKey=Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        RBlockingQueue<Object> blockingQueue = redissonService.getBlockingQueue(cacheKey);
+        blockingQueue.clear();
     }
 
     @Override
     public void updateActivitySkuStock(Long sku) {
-
+        raffleActivitySkuDao.updateActivitySkuStock(sku);
     }
 
     @Override
     public void clearActivitySkuStock(Long sku) {
-
+        raffleActivitySkuDao.clearActivitySkuStock(sku);
     }
 }

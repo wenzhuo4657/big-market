@@ -11,6 +11,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
             <groupId>cn.wenzhuo4657.BigMarket.tigger.api</groupId>
             <artifactId>big-market-api</artifactId>
             <version>1.0-SNAPSHOT</version>

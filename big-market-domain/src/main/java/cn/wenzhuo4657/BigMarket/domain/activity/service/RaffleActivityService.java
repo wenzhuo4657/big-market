@@ -58,22 +58,21 @@ public class RaffleActivityService extends AbstractRaffleActivity implements ISk
 
     @Override
     public ActivitySkuStockKeyVO takeQueueValue() throws InterruptedException {
-
-        return null;
+        return activityRepository.takeQueueValue();
     }
 
     @Override
     public void clearQueueValue() {
-
+        activityRepository.clearQueueValue();
     }
 
     @Override
     public void updateActivitySkuStock(Long sku) {
-
+        activityRepository.updateActivitySkuStock(sku);
     }
 
     @Override
     public void clearActivitySkuStock(Long sku) {
-
+        activityRepository.clearActivitySkuStock(sku);
     }
 }

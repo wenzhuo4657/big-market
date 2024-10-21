@@ -32,15 +32,40 @@ public interface IActivityRepository {
     */
     void cacheActivitySkuStockCount(String cacheKey, Integer stockCount);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 扣减对应sku库存
+    */
+
     boolean subtractionActivitySkuStock(Long sku, String cacheKey, Date endDateTime);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 推送消费到redis延迟队列中，（该队列用于更新库存到mysql中）
+    */
     void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 获取消费队列头部，并使用泛型约束其取出的类型
+    */
     ActivitySkuStockKeyVO takeQueueValue();
 
+    /**
+     *  @author:wenzhuo4657
+        des: 清空redis中消费队列
+    */
     void clearQueueValue();
 
+    /**
+     *  @author:wenzhuo4657
+        des: 更新mysql库存，实际上时库存-1，并更新updata-time字段。
+    */
     void updateActivitySkuStock(Long sku);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 清空库存。
+    */
     void clearActivitySkuStock(Long sku);
 }

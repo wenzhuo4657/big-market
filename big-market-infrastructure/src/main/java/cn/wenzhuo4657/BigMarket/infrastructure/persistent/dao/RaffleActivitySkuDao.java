@@ -81,8 +81,17 @@ public interface RaffleActivitySkuDao {
     int deleteById(String id);
 
     RaffleActivitySku queryBySku(Long sku);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 库存-1，并更新updata-time字段。
+    */
     void updateActivitySkuStock(Long sku);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 清空库存
+    */
     void clearActivitySkuStock(Long sku);
 }
 

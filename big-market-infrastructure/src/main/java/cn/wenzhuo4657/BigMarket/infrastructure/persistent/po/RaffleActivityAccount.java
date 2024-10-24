@@ -1,5 +1,10 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,7 +14,10 @@ import java.util.Date;
  * @author makejava
  * @since 2024-10-17 09:11:48
  */
-
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class RaffleActivityAccount implements Serializable {
     private static final long serialVersionUID = 477136784289179456L;
 

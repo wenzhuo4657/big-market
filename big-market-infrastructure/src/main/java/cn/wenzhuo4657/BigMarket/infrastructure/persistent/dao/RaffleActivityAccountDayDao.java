@@ -10,8 +10,9 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccou
  */
 public interface RaffleActivityAccountDayDao {
 
-
+    void insert(RaffleActivityAccountDay raffleActivityAccountDay);
     RaffleActivityAccountDay queryActivityAccountDayByUserId(RaffleActivityAccountDay raffleActivityAccountDayReq);
 
+    int updateActivityAccountDaySubtractionQuota(RaffleActivityAccountDay build);
 }
 

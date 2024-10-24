@@ -1,9 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.entity.RaffleActivityAccountDay;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
-import java.util.List;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay;
 
 /**
  * 抽奖活动账户表-日次数(RaffleActivityAccountDay)表数据库访问层
@@ -13,7 +10,8 @@ import java.util.List;
  */
 public interface RaffleActivityAccountDayDao {
 
-  
+
+    RaffleActivityAccountDay queryActivityAccountDayByUserId(RaffleActivityAccountDay raffleActivityAccountDayReq);
 
 }
 

@@ -1,9 +1,8 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.repository;
 
-import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
-import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
-import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
-import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreatePartakeOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 import java.util.Date;
@@ -24,7 +23,7 @@ public interface IActivityRepository {
      *  @author:wenzhuo4657
         des: 聚合事务，创建订单
     */
-    void doSaveOrder(CreateOrderAggregate createOrderAggregate);
+    void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
 
     /**
      *  @author:wenzhuo4657
@@ -68,4 +67,21 @@ public interface IActivityRepository {
         des: 清空库存。
     */
     void clearActivitySkuStock(Long sku);
+
+
+    /**
+     *  @author:wenzhuo4657
+        des: 查询参与活动订单，
+     该订单实际上代表成功参加活动，如果有则可以继续向下执行，否则不可以。
+    */
+    UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
+
+    ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId);
+
+    ActivityAccountMonthEntity queryActivityAccountMonthByUserId(String userId, Long activityId, String month);
+
+    ActivityAccountDayEntity queryActivityAccountDayByUserId(String userId, Long activityId, String day);
+
+    void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
+
 }

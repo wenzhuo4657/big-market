@@ -2475,7 +2475,7 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
+Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.quota.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
 
 
 Action:
@@ -2594,7 +2594,7 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
+Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.quota.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
 
 
 Action:
@@ -2713,7 +2713,7 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
+Parameter 0 of constructor in cn.wenzhuo4657.BigMarket.domain.activity.service.quota.RaffleActivityService required a bean of type 'cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount' that could not be found.
 
 
 Action:

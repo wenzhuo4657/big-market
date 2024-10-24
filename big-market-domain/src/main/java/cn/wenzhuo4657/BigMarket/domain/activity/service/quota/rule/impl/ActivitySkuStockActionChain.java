@@ -1,11 +1,11 @@
-package cn.wenzhuo4657.BigMarket.domain.activity.service.rule.impl;
+package cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.impl;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityDispatch;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.AbstractActionChain;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.AbstractActionChain;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

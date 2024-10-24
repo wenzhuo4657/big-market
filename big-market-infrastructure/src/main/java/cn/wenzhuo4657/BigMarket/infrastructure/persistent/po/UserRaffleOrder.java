@@ -1,4 +1,4 @@
-package cn.wenzhuo4657.BigMarket.infrastructure.persistent.entity;
+package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-10-24 08:09:00
  */
-public class UserRaffleOrder000 implements Serializable {
+public class UserRaffleOrder implements Serializable {
     private static final long serialVersionUID = 544800030066910287L;
     
     private String id;

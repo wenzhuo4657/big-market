@@ -1,21 +1,21 @@
-package cn.wenzhuo4657.BigMarket.domain.activity.service;
+package cn.wenzhuo4657.BigMarket.domain.activity.service.quota;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/18
  * @description:
  */
-public class RaffleActivitySupport {
+public class RaffleActivityQuotaSupport {
     protected DefaultActivityChainFactory defaultActivityChainFactory;
     protected IActivityRepository activityRepository;
 
-    public RaffleActivitySupport(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
+    public RaffleActivityQuotaSupport(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
         this.defaultActivityChainFactory = defaultActivityChainFactory;
         this.activityRepository = activityRepository;
     }

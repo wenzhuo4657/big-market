@@ -1,6 +1,6 @@
 package cn.wenzhuo4657.BigMarket.test;
 
-import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository.ActivityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -24,7 +24,7 @@ public class ShardingTransactionTest {
 
     @Test
     public  void test(){
-        activityRepository.doSaveOrder(new CreateOrderAggregate());
+        activityRepository.doSaveOrder(new CreateQuotaOrderAggregate());
     }
 
 

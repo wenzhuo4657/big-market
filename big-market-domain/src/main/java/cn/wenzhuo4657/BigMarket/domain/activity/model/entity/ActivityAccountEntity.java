@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/17
- * @description: 活动账户实体
+ * @description: 用户活动（总）账户实体
  */
 @Data
 @Builder

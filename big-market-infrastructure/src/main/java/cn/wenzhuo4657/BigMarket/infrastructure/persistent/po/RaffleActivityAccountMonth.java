@@ -1,4 +1,4 @@
-package cn.wenzhuo4657.BigMarket.infrastructure.persistent.entity;
+package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
 import java.util.Date;
 import java.io.Serializable;

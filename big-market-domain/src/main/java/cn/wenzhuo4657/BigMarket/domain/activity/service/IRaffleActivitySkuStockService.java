@@ -5,9 +5,9 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKey
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/20
- * @description: 活动库存接口
+ * @description: 活动库存接口-sku层次管理活动抽奖次数
  */
-public interface ISkuStock {
+public interface IRaffleActivitySkuStockService {
     /**
      * 获取活动sku库存消耗队列
      *

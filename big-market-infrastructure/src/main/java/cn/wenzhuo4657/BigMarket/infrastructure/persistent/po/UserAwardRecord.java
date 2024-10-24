@@ -1,4 +1,4 @@
-package cn.wenzhuo4657.BigMarket.infrastructure.persistent.entity;
+package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-10-24 08:08:38
  */
-public class UserAwardRecord000 implements Serializable {
+public class UserAwardRecord implements Serializable {
     private static final long serialVersionUID = -33647000165884274L;
     /**
      * 自增ID

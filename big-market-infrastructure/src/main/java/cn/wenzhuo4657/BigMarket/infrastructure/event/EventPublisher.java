@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/20
- * @description:
+ * @description: rabbit事件
  */
 @Slf4j
 @Component

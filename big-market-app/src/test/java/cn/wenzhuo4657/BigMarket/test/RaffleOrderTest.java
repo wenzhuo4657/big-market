@@ -1,10 +1,7 @@
 package cn.wenzhuo4657.BigMarket.test;
 
-import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityOrderEntity;
-import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityShopCartEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleOrder;
-import com.alibaba.fastjson.JSON;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +21,7 @@ import javax.annotation.Resource;
 public class RaffleOrderTest {
 
     @Resource
-    private IRaffleOrder raffleOrder;
+    private IRaffleActivityAccountQuotaService raffleOrder;
 
     @Test
     public void test_createSkuRechargeOrder() {

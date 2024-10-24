@@ -5,9 +5,9 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/17
- * @description: 抽奖活动订单接口
+ * @description: 抽奖活动订单额度接口-用户维度管理抽奖次数
  */
-public interface IRaffleOrder {
+public interface IRaffleActivityAccountQuotaService {
     /**
      * 创建 sku 账户充值订单，给用户增加抽奖次数
      * <p>

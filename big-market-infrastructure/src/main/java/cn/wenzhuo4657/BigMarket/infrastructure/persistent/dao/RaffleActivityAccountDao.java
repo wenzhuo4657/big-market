@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -81,6 +82,7 @@ public interface RaffleActivityAccountDao {
      * @return 影响行数
      */
     int deleteById(String id);
-
+    @DBRouter
+    RaffleActivityAccount queryActivityAccountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 }
 

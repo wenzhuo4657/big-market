@@ -1,11 +1,12 @@
-package cn.wenzhuo4657.BigMarket.domain.activity.service;
+package cn.wenzhuo4657.BigMarket.domain.activity.service.quota;
 
-import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivitySkuStockService;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import java.util.Date;
  * @description:
  */
 @Service
-public class RaffleActivityService extends AbstractRaffleActivity implements ISkuStock{
+public class RaffleActivityService extends AbstractRaffleActivityQuota implements IRaffleActivitySkuStockService {
 
 
     public RaffleActivityService(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
@@ -25,7 +26,7 @@ public class RaffleActivityService extends AbstractRaffleActivity implements ISk
     }
 
     @Override
-    protected CreateOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity) {
+    protected CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity) {
         ActivityOrderEntity activityOrderEntity = new ActivityOrderEntity();
         activityOrderEntity.setUserId(skuRechargeEntity.getUserId());
         activityOrderEntity.setSku(String.valueOf(skuRechargeEntity.getSku()));
@@ -41,7 +42,7 @@ public class RaffleActivityService extends AbstractRaffleActivity implements ISk
         activityOrderEntity.setState(OrderStateVO.completed);
         activityOrderEntity.setOutBusinessNo(skuRechargeEntity.getOutBusinessNo());
 
-        return CreateOrderAggregate.builder()
+        return CreateQuotaOrderAggregate.builder()
                 .activityOrderEntity(activityOrderEntity)
                 .activityId(activityEntity.getActivityId())
                 .userId(skuRechargeEntity.getUserId())
@@ -52,7 +53,7 @@ public class RaffleActivityService extends AbstractRaffleActivity implements ISk
     }
 
     @Override
-    protected void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
+    protected void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate) {
         activityRepository.doSaveOrder(createOrderAggregate);
     }
 

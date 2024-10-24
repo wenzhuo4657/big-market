@@ -1,9 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.entity.RaffleActivityAccountMonth;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
-import java.util.List;
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth;
 
 /**
  * 抽奖活动账户表-月次数(RaffleActivityAccountMonth)表数据库访问层
@@ -13,7 +11,8 @@ import java.util.List;
  */
 public interface RaffleActivityAccountMonthDao {
 
-  
 
+    @DBRouter
+    RaffleActivityAccountMonth queryActivityAccountMonthByUserId(RaffleActivityAccountMonth raffleActivityAccountMonthReq);
 }
 

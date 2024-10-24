@@ -1,10 +1,12 @@
-package cn.wenzhuo4657.BigMarket.domain.activity.service;
+package cn.wenzhuo4657.BigMarket.domain.activity.service.quota;
 
-import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.IActionChain;
-import cn.wenzhuo4657.BigMarket.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
+
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.IActionChain;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
@@ -17,9 +19,9 @@ import org.apache.commons.lang3.StringUtils;
  * @description:
  */
 @Slf4j
-public abstract class AbstractRaffleActivity extends RaffleActivitySupport implements  IRaffleOrder {
+public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSupport implements IRaffleActivityAccountQuotaService {
 
-    public AbstractRaffleActivity(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
+    public AbstractRaffleActivityQuota(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
         super(defaultActivityChainFactory, activityRepository);
     }
 
@@ -53,7 +55,7 @@ public abstract class AbstractRaffleActivity extends RaffleActivitySupport imple
           //  wenzhuo TODO 2024/10/19 : 暂时不处理责任链结果
         IActionChain iActionChain = defaultActivityChainFactory.openActionChain();
         boolean res = iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
-        CreateOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
+        CreateQuotaOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
         doSaveOrder(createOrderAggregate);
         return createOrderAggregate.getActivityOrderEntity().getOrderId();
     }
@@ -62,11 +64,11 @@ public abstract class AbstractRaffleActivity extends RaffleActivitySupport imple
      *  @author:wenzhuo4657
         des: 创建订单
     */
-    protected abstract CreateOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity);
+    protected abstract CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity);
 
     /**
      *  @author:wenzhuo4657
         des: 消费订单
     */
-    protected abstract void doSaveOrder(CreateOrderAggregate createOrderAggregate);
+    protected abstract void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
 }

@@ -55,6 +55,7 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
           //  wenzhuo TODO 2024/10/19 : 暂时不处理责任链结果
         IActionChain iActionChain = defaultActivityChainFactory.openActionChain();
         boolean res = iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
+
         CreateQuotaOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
         doSaveOrder(createOrderAggregate);
         return createOrderAggregate.getActivityOrderEntity().getOrderId();

@@ -1,0 +1,12 @@
+package cn.wenzhuo4657.BigMarket.domain.award.service;
+
+import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
+
+/**
+ * @author: wenzhuo4657
+ * @date: 2024/10/28
+ * @description: 奖品符接口
+ */
+public interface IAwardService {
+    void saveUserAwardRecord(UserAwardRecordEntity userAwardRecordEntity);
+}

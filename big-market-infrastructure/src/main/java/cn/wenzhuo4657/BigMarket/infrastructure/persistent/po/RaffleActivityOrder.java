@@ -86,7 +86,6 @@ public class RaffleActivityOrder {
     /**
      * 创建时间
      */
-      //  wenzhuo TODO 2024/10/19 :  插入时读取不到该数据
     private Date createTime;
 
     /**

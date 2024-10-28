@@ -13,7 +13,7 @@ public interface IRaffleStock {
 
     /**
      *  @author:wenzhuo4657
-        des: 获取延迟队列
+        des: 获取延迟队列头部
     */
     StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
 

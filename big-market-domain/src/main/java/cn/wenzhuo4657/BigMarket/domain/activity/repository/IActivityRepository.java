@@ -58,7 +58,7 @@ public interface IActivityRepository {
 
     /**
      *  @author:wenzhuo4657
-        des: 更新mysql库存，实际上时库存-1，并更新updata-time字段。
+        des: 更新mysql库存，实际上是库存-1，并更新updata-time字段。
     */
     void updateActivitySkuStock(Long sku);
 

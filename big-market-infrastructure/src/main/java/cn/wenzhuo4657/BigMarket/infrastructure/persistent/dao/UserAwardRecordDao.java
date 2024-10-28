@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserAwardRecord;
+
 /**
  * 用户中奖记录表(UserAwardRecord000)表数据库访问层
  *
@@ -8,7 +10,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
  */
 public interface UserAwardRecordDao {
 
-  
 
+    void insert(UserAwardRecord userAwardRecord);
 }
 

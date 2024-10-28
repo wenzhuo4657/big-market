@@ -9,7 +9,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKey
  */
 public interface IRaffleActivitySkuStockService {
     /**
-     * 获取活动sku库存消耗队列
+     * 获取活动sku库存消耗队列头部
      *
      * @return 奖品库存Key信息
      * @throws InterruptedException 异常

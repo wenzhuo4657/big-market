@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay;
 
 /**
@@ -11,6 +12,7 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccou
 public interface RaffleActivityAccountDayDao {
 
     void insert(RaffleActivityAccountDay raffleActivityAccountDay);
+    @DBRouter
     RaffleActivityAccountDay queryActivityAccountDayByUserId(RaffleActivityAccountDay raffleActivityAccountDayReq);
 
     int updateActivityAccountDaySubtractionQuota(RaffleActivityAccountDay build);

@@ -12,6 +12,7 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
  */
 @DBRouterStrategy(splitTable = true)
 public interface UserRaffleOrderDao {
+
     void insert(UserRaffleOrder userRaffleOrder);
 
     @DBRouter

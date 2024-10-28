@@ -43,7 +43,7 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
 //            1,策略概率的装配
             List<StrategyAwardEntity> strategyAwardEntityList = strategyRepository.queryStrategyAwardList(strategyId);
             for (StrategyAwardEntity entity:strategyAwardEntityList){
-                    cacheStrategyAwardCount(strategyId,entity.getAwardId(),entity.getAwardCount());
+                    cacheStrategyAwardCount(strategyId,entity.getAwardId(),entity.getAwardCountSurplus());
             }
             assembleLotteryStrategy(String.valueOf(strategyId),strategyAwardEntityList);
 

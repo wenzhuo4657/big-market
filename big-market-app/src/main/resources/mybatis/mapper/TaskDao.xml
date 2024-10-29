@@ -34,7 +34,7 @@
         where user_id = #{userId} and message_id = #{messageId}
     </update>
 
-    <select id="queryNoSendMessageTaskList" resultMap="dataMap">
+    <select id="queryNoSendMessageTaskList" resultMap="TaskMap">
         select user_id, topic, message_id, message
         from task
         where state = 'fail' or (state = 'create' and now() - update_time > 6)

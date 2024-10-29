@@ -85,10 +85,31 @@ public interface RaffleActivityAccountDao {
     @DBRouter
     RaffleActivityAccount queryActivityAccountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 
+
     int updateActivityAccountSubtractionQuota(RaffleActivityAccount raffleActivityAccount);
+    /**
+     *  @author:wenzhuo4657
+        des:更新月镜像账户
+    */
+    int updateActivityAccountMonthSubtractionQuota(RaffleActivityAccount raffleActivityAccount);
+
+    /**
+     *  @author:wenzhuo4657
+        des:
+     更新日镜像账户
+    */
+    int updateActivityAccountDaySubtractionQuota(RaffleActivityAccount raffleActivityAccount);
+
+    /**
+     *  @author:wenzhuo4657
+        des: 更新总账户中的月额度
+    */
 
     void updateActivityAccountMonthSurplusImageQuota(RaffleActivityAccount raffleActivityAccount);
-
+    /**
+     *  @author:wenzhuo4657
+    des: 更新总账户中的日额度
+     */
     void updateActivityAccountDaySurplusImageQuota(RaffleActivityAccount raffleActivityAccount);
 }
 

@@ -74,6 +74,12 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
         }
     }
 
+    @Override
+    public boolean assembleLotteryStrategyByActivityId(Long activityId) {
+        Long strategyId = strategyRepository.queryStrategyIdByActivityId(activityId);
+        return assembleLotteryStrategy(strategyId);
+    }
+
     /**
      * @Author wenzhuo4657
      * @Param

@@ -2,19 +2,18 @@ package cn.wenzhuo4657.BigMarket.tigger.api;
 
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListRequestDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListResponseDTO;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleRequestDTO;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleResponseDTO;
+import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleStrategyRequestDTO;
+import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleStrategyResponseDTO;
 import cn.wenzhuo4657.BigMarket.types.models.Response;
-
 
 import java.util.List;
 
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/10
- * @description: 抽奖服务接口
+ * @description: 抽奖策略服务接口
  */
-public interface IRaffleService {
+public interface IRaffleStrategyService {
 
     /**
      * 策略装配接口
@@ -38,5 +37,5 @@ public interface IRaffleService {
      * @param requestDTO 请求参数
      * @return 抽奖结果
      */
-    Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO requestDTO);
+    Response<RaffleStrategyResponseDTO> randomRaffle(RaffleStrategyRequestDTO requestDTO);
 }

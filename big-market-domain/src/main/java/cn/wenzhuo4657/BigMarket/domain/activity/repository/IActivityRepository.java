@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: wenzhuo4657
@@ -84,4 +85,5 @@ public interface IActivityRepository {
 
     void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
 
+    List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
 }

@@ -179,5 +179,11 @@
         delete from raffle_activity where id = #{id}
     </delete>
 
+    <select id="queryStrategyIdByActivityId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select  strategy_id
+        from raffle_activity
+        where activity_id=#{activityId}
+    </select>
+
 </mapper>
 

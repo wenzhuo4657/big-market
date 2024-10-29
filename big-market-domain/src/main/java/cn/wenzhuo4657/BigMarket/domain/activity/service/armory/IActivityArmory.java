@@ -12,4 +12,7 @@ public interface IActivityArmory {
             1，缓存键值对到redis中
     */
     boolean assembleActivitySku(Long sku);
+
+
+    boolean assembleActivitySkuByActivityId(Long activityId);
 }

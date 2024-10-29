@@ -32,6 +32,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Repository
 public class StrategyRepository implements IStrategyRepository {
+    @Resource
+    private RaffleActivityDao raffleActivityDao;
 
     @Resource
     private IRedisService redissonService;
@@ -243,5 +245,10 @@ public class StrategyRepository implements IStrategyRepository {
                 .strategyId(strategyId).build());
         redissonService.setValue(cacheKey,strategyAwardEntity);
         return strategyAwardEntity;
+    }
+
+    @Override
+    public Long queryStrategyIdByActivityId(Long activityId) {
+        return raffleActivityDao.queryStrategyIdByActivityId(activityId);
     }
 }

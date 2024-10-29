@@ -169,5 +169,12 @@
         where  sku=#{sku}
     </update>
 
+    <select id="queryActivitySkuListByActivityId" resultType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivitySku" resultMap="RaffleActivitySkuMap">
+       select  sku, activity_count_id, stock_count, stock_count_surplus
+           from raffle_activity_sku
+        where  activity_id=#{activityId}
+
+    </select>
+
 </mapper>
 

@@ -81,5 +81,7 @@ public interface RaffleActivityDao {
     int deleteById(String id);
 
     RaffleActivity queryByActivityId(Long activityId);
+
+    Long queryStrategyIdByActivityId(Long activityId);
 }
 

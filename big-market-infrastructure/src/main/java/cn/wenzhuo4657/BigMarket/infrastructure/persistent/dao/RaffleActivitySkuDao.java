@@ -93,5 +93,7 @@ public interface RaffleActivitySkuDao {
         des: 清空库存
     */
     void clearActivitySkuStock(Long sku);
+
+    List<RaffleActivitySku> queryActivitySkuListByActivityId(Long activityId);
 }
 

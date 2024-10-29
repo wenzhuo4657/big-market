@@ -1,22 +1,29 @@
 package cn.wenzhuo4657.BigMarket.trigger.http;
 
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.UserRaffleOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityPartakeService;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityArmory;
+import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
+import cn.wenzhuo4657.BigMarket.domain.award.model.valobj.AwardStateVO;
 import cn.wenzhuo4657.BigMarket.domain.award.service.IAwardService;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyArmory;
 import cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.ActivityDrawRequestDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.ActivityDrawResponseDTO;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import cn.wenzhuo4657.BigMarket.types.models.Response;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author: wenzhuo4657
@@ -42,7 +49,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     private IStrategyArmory strategyArmory;
     @Override
     @RequestMapping(value = "armory", method = RequestMethod.GET)
-    public Response<Boolean> armory(Long activityId) {
+    public Response<Boolean> armory(@RequestParam Long activityId) {
         try {
             log.info("活动装配，数据预热，开始 activityId:{}", activityId);
             activityArmory.assembleActivitySkuByActivityId(activityId);
@@ -64,8 +71,55 @@ public class RaffleActivityController implements IRaffleActivityService {
     }
 
     @Override
-    public Response<ActivityDrawResponseDTO> draw(ActivityDrawRequestDTO request) {
+    @RequestMapping(value = "draw", method = RequestMethod.POST)
+    public Response<ActivityDrawResponseDTO> draw(@RequestBody  ActivityDrawRequestDTO request) {
+        try {
+            log.info("活动抽奖 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
+            if (StringUtils.isBlank(request.getUserId())|| Objects.isNull(request.getActivityId())){
+                throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
+            }
+            UserRaffleOrderEntity orderEntity = raffleActivityPartakeService.createOrder(request.getUserId(), request.getActivityId());
+            log.info("活动抽奖，创建订单 userId:{} activityId:{} orderId:{}", request.getUserId(), request.getActivityId(), orderEntity.getOrderId());
+            RaffleAwardEntity raffleAwardEntity = raffleStrategy.performRaffle(
+                    RaffleFactorEntity.builder()
+                            .userId(request.getUserId())
+                            .strategyId(orderEntity.getStrategyId())
+                            .build()
+            );
+            UserAwardRecordEntity userAwardRecord = UserAwardRecordEntity.builder()
+                    .userId(orderEntity.getUserId())
+                    .activityId(orderEntity.getActivityId())
+                    .strategyId(orderEntity.getStrategyId())
+                    .orderId(orderEntity.getOrderId())
+                    .awardId(raffleAwardEntity.getAwardId())
+                    .awardTitle(raffleAwardEntity.getAwardTitle())
+                    .awardTime(new Date())
+                    .awardState(AwardStateVO.create)
+                    .build();
+            awardService.saveUserAwardRecord(userAwardRecord);
+            return Response.<ActivityDrawResponseDTO>builder()
+                    .code(ResponseCode.SUCCESS.getCode())
+                    .info(ResponseCode.SUCCESS.getInfo())
+                    .data(ActivityDrawResponseDTO.builder()
+                            .awardId(raffleAwardEntity.getAwardId())
+                            .awardTitle(raffleAwardEntity.getAwardTitle())
+                            .awardIndex(raffleAwardEntity.getSort())
+                            .build())
+                    .build();
 
-        return null;
+        }catch (AppException e) {
+            log.error("活动抽奖失败 userId:{} activityId:{}", request.getUserId(), request.getActivityId(), e);
+            return Response.<ActivityDrawResponseDTO>builder()
+                    .code(e.getCode())
+                    .info(e.getInfo())
+                    .build();
+        } catch (Exception e) {
+            log.error("活动抽奖失败 userId:{} activityId:{}", request.getUserId(), request.getActivityId(), e);
+            return Response.<ActivityDrawResponseDTO>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import org.redisson.api.RedissonClient;
 import org.redisson.client.codec.BaseCodec;
 import org.redisson.client.protocol.Decoder;
 import org.redisson.client.protocol.Encoder;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.codec.Kryo5Codec;
 import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
@@ -33,8 +34,8 @@ public class RedisClientConfig {
                                 .setConnectionPoolSize(configProperties.getPoolSize())
                                         .setConnectionMinimumIdleSize(configProperties.getMinIdleSize());
 
-        config.setCodec(new Kryo5Codec());
-
+//        config.setCodec(new Kryo5Codec());
+        config.setCodec(JsonJacksonCodec.INSTANCE);
         return Redisson.create(config);
     }
 

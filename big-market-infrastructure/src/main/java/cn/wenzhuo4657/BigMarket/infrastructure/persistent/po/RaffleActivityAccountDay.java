@@ -6,8 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.checkerframework.checker.units.qual.N;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.Serializable;
+import java.util.logging.SimpleFormatter;
 
 /**
  * 抽奖活动账户表-日次数(RaffleActivityAccountDay)实体类
@@ -21,6 +23,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RaffleActivityAccountDay implements Serializable {
     private static final long serialVersionUID = -70970835227807304L;
+
+    private final SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 自增ID
      */
@@ -53,6 +57,10 @@ public class RaffleActivityAccountDay implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+
+    public String currentDay(){
+        return dateFormatDay.format(new Date());
+    }
 
 
     public String getId() {

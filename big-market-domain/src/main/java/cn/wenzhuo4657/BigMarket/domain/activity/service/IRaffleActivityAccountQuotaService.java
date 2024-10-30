@@ -19,4 +19,10 @@ public interface IRaffleActivityAccountQuotaService {
      */
     String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+             查询用户抽奖剩余日次数
+    */
+    Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
 }

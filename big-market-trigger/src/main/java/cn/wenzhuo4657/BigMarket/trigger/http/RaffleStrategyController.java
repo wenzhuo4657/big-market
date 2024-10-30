@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.trigger.http;
 
+import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
@@ -16,6 +17,7 @@ import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import cn.wenzhuo4657.BigMarket.types.models.Response;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -37,6 +39,12 @@ public class RaffleStrategyController implements IRaffleStrategyService {
     private IRaffleStrategy raffleStrategy;
     @Resource
     private IRaffleAward raffleAward;
+
+    @Resource
+    private IRaffleRule raffleRule;
+
+    @Resource
+    private IRaffleActivityAccountQuotaService raffleActivityAccountQuotaService;
 
     @Resource
     private IStrategyArmory strategyArmory;
@@ -64,15 +72,37 @@ public class RaffleStrategyController implements IRaffleStrategyService {
             return response;
         }
     }
+    /**
+     * 查询奖品列表
+     * <a href="http://localhost:8091/api/v1/raffle/strategy/query_raffle_award_list">/api/v1/raffle/query_raffle_award_list</a>
+     * 请求参数 raw json
+     *
+     * @param requestDTO {"activityId":100301,"userId":"xiaofuge"}
+     * @return 奖品列表
+     */
 
     @PostMapping("query_raffle_award_list")
     @Override
     public Response<List<RaffleAwardListResponseDTO>> queryRaffleAwardList(@RequestBody RaffleAwardListRequestDTO requestDTO) {
         try{
-            log.info("查询抽奖奖品列表配开始 strategyId：{}", requestDTO.getStrategyId());
-            List<StrategyAwardEntity> strategyAwardEntities = raffleAward.queryRaffleStrategyAwardList(requestDTO.getStrategyId());
+            log.info("查询抽奖奖品列表配开始 userId:{} activityId：{}", requestDTO.getUserId(), requestDTO.getActivityId());
+            String userId= requestDTO.getUserId();
+            Long activityId=requestDTO.getActivityId();
+            if (StringUtils.isBlank(userId) || null == activityId) {
+                throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
+            }
+            List<StrategyAwardEntity> strategyAwardEntities=raffleAward.queryRaffleStrategyAwardListByActivity(activityId);
+
+            String[] treeIds=strategyAwardEntities.stream()
+                    .map(StrategyAwardEntity::getRuleModels)
+                    .filter(ruleModel -> ruleModel != null && !ruleModel.isEmpty())
+                    .toArray(String[]::new);
+            Integer dayPartakeCount = raffleActivityAccountQuotaService.queryRaffleActivityAccountDayPartakeCount(activityId,userId);
+
+
             List<RaffleAwardListResponseDTO> responseDTOS=new ArrayList<>(strategyAwardEntities.size());
             for (StrategyAwardEntity entity:strategyAwardEntities){
+
                 responseDTOS.add(RaffleAwardListResponseDTO.builder()
                         .awardId(entity.getAwardId())
                         .awardSubtitle(entity.getAwardSubtitle())

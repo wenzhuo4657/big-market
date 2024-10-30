@@ -12,6 +12,8 @@ import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.rule.Rule;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
@@ -250,5 +252,18 @@ public class StrategyRepository implements IStrategyRepository {
     @Override
     public Long queryStrategyIdByActivityId(Long activityId) {
         return raffleActivityDao.queryStrategyIdByActivityId(activityId);
+    }
+
+    @Override
+    public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
+        if (Objects.isNull(treeIds)||treeIds.length==0) return new HashMap<>();
+        List<RuleTreeNode> ruleTreeNodes=ruleTreeNodeDao.queryRuleLocks(treeIds);
+        Map<String,Integer> resultMap=new HashMap<>();
+        for (RuleTreeNode node:ruleTreeNodes){
+            String treeId = node.getTreeId();
+            Integer ruleValue = Integer.valueOf(node.getRuleValue());
+            resultMap.put(treeId,ruleValue);
+        }
+        return resultMap;
     }
 }

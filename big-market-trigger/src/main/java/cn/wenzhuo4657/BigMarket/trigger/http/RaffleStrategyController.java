@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleAward;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleRule;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyArmory;
 import cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: wenzhuo4657
@@ -99,15 +101,23 @@ public class RaffleStrategyController implements IRaffleStrategyService {
                     .toArray(String[]::new);
             Integer dayPartakeCount = raffleActivityAccountQuotaService.queryRaffleActivityAccountDayPartakeCount(activityId,userId);
 
+            Map<String, Integer> ruleLockCountMap = raffleRule.queryAwardRuleLockCount(treeIds);
 
             List<RaffleAwardListResponseDTO> responseDTOS=new ArrayList<>(strategyAwardEntities.size());
             for (StrategyAwardEntity entity:strategyAwardEntities){
+                  //  wenzhuo TODO 2024/10/30 : ruleLockCountMap的key似乎和填充时不一样？而且这里假定从数据库中查询道的rulevalue都是单个数字表示抽奖解锁次数
+                Integer awardRuleLockCount = ruleLockCountMap.get(entity.getRuleModels());
 
                 responseDTOS.add(RaffleAwardListResponseDTO.builder()
                         .awardId(entity.getAwardId())
                         .awardSubtitle(entity.getAwardSubtitle())
                         .awardTitle(entity.getAwardTitle())
-                        .sort(entity.getSort()).build());
+                        .sort(entity.getSort())
+                        .awardRuleLockCount(awardRuleLockCount)
+                        .isAwardUnlock(null == awardRuleLockCount || dayPartakeCount >= awardRuleLockCount)
+                        .waitUnLockCount(null == awardRuleLockCount || awardRuleLockCount <= dayPartakeCount ? 0 : awardRuleLockCount - dayPartakeCount)
+                        .build()
+                );
             }
             Response<List<RaffleAwardListResponseDTO>> response = Response.<List<RaffleAwardListResponseDTO>>builder()
                     .info(ResponseCode.SUCCESS.getInfo())

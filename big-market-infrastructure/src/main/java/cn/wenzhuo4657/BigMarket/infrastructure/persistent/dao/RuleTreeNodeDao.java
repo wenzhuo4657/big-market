@@ -81,5 +81,6 @@ public interface RuleTreeNodeDao {
 
     List<RuleTreeNode> queryRuleTreeNodeListByTreeId(@Param("treeId") String treeId);
 
+    List<RuleTreeNode> queryRuleLocks(@Param("array") String[] treeIds);
 }
 

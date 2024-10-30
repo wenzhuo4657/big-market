@@ -7,6 +7,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockK
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.AbstractRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleAward;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleRule;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStock;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.ILogicChain;
@@ -18,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -29,7 +31,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Service
-public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRaffleStock, IRaffleAward {
+public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRaffleStock, IRaffleAward, IRaffleRule {
 
 
     public DefaultRaffleStrategy(IStrategyRepository strategyRepository, IStrategyDispatch strategyDispatch, DefaultChainFactory defaultChainFactory, DefaultTreeFactory defaultTreeFactory) {
@@ -88,5 +90,16 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
     public List<StrategyAwardEntity> queryRaffleStrategyAwardListByActivity(Long activityId) {
         Long strategyId = strategyRepository.queryStrategyIdByActivityId(activityId);
         return queryRaffleStrategyAwardList(strategyId);
+    }
+
+    @Override
+    public List<StrategyAwardEntity> queryRaffleStrategyAwardListByActivityId(Long activityId) {
+        Long strategyId = strategyRepository.queryStrategyIdByActivityId(activityId);
+        return queryRaffleStrategyAwardList(strategyId);
+    }
+
+    @Override
+    public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
+        return strategyRepository.queryAwardRuleLockCount(treeIds);
     }
 }

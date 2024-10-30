@@ -121,4 +121,7 @@ public interface IStrategyRepository {
     StrategyAwardEntity queryStrategyAwardEntity(Long strategyId, Integer awardId);
 
     Long queryStrategyIdByActivityId(Long activityId);
+
+    Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
+
 }

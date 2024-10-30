@@ -67,6 +67,14 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
 
     }
 
+    @Override
+    public UserRaffleOrderEntity createOrder(String userId, Long activityId) {
+        return createOrder(PartakeRaffleActivityEntity.builder()
+                .userId(userId)
+                .activityId(activityId)
+                .build());
+    }
+
     /**
      *  @author:wenzhuo4657
         des:  创建参与活动订单，

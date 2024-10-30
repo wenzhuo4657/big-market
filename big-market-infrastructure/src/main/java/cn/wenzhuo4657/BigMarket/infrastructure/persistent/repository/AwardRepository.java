@@ -8,10 +8,13 @@ import cn.wenzhuo4657.BigMarket.domain.award.repository.IAwardRepository;
 import cn.wenzhuo4657.BigMarket.infrastructure.event.EventPublisher;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.TaskDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserAwardRecordDao;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserRaffleOrderDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserAwardRecord;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
@@ -33,6 +36,9 @@ public class AwardRepository implements IAwardRepository {
     private TaskDao taskDao;
     @Resource
     private UserAwardRecordDao userAwardRecordDao;
+
+    @Resource
+    private UserRaffleOrderDao userRaffleOrderDao;
     @Resource
     private IDBRouterStrategy dbRouter;
     @Resource
@@ -48,17 +54,26 @@ public class AwardRepository implements IAwardRepository {
         Long activityId = userAwardRecordEntity.getActivityId();
         Integer awardId = userAwardRecordEntity.getAwardId();
 
-
         UserAwardRecord userAwardRecord = new UserAwardRecord();
-        Task task=new Task();
-        try {
-            BeanUtils.copyProperties(userAwardRecord,userAwardRecordEntity);
-            BeanUtils.copyProperties(task,taskEntity);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        }
+        userAwardRecord.setUserId(userAwardRecordEntity.getUserId());
+        userAwardRecord.setActivityId(userAwardRecordEntity.getActivityId());
+        userAwardRecord.setStrategyId(userAwardRecordEntity.getStrategyId());
+        userAwardRecord.setOrderId(userAwardRecordEntity.getOrderId());
+        userAwardRecord.setAwardId(userAwardRecordEntity.getAwardId());
+        userAwardRecord.setAwardTitle(userAwardRecordEntity.getAwardTitle());
+        userAwardRecord.setAwardTime(userAwardRecordEntity.getAwardTime());
+        userAwardRecord.setAwardState(userAwardRecordEntity.getAwardState().getCode());
+
+        Task task = new Task();
+        task.setUserId(taskEntity.getUserId());
+        task.setTopic(taskEntity.getTopic());
+        task.setMessageId(taskEntity.getMessageId());
+        task.setMessage(JSON.toJSONString(taskEntity.getMessage()));
+        task.setState(taskEntity.getState().getCode());
+
+        UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
+        userRaffleOrderReq.setUserId(userAwardRecordEntity.getUserId());
+        userRaffleOrderReq.setOrderId(userAwardRecordEntity.getOrderId());
 
 
         try {
@@ -69,6 +84,13 @@ public class AwardRepository implements IAwardRepository {
                     userAwardRecordDao.insert(userAwardRecord);
                     // 写入任务
                     taskDao.insert(task);
+//                    更新抽奖单
+                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
+                    if (1 != count) {
+                        status.setRollbackOnly();
+                        log.error("写入中奖记录，用户抽奖单已使用过，不可重复抽奖 userId: {} activityId: {} awardId: {}", userId, activityId, awardId);
+                        throw new AppException(ResponseCode.ACTIVITY_ORDER_ERROR.getCode(), ResponseCode.ACTIVITY_ORDER_ERROR.getInfo());
+                    }
                     return 1;
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();

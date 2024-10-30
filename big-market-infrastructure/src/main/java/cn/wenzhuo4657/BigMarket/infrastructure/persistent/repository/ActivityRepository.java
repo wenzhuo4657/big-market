@@ -207,7 +207,6 @@ public class ActivityRepository implements IActivityRepository {
                 des: 使用MQ推送消息，通知sku商品活动缓存中库存为0
             */
             eventPublisher.publish(activitySkuStockZeroMessageEvent.topic(),activitySkuStockZeroMessageEvent.buildEventMessage(sku));
-            return  false;
         } else if (surplus<0) {
             redissonService.setAtomicLong(cacheKey,0);
             return  false;

@@ -96,7 +96,10 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .awardTime(new Date())
                     .awardState(AwardStateVO.create)
                     .build();
+
+//            写入中奖记录和任务记录
             awardService.saveUserAwardRecord(userAwardRecord);
+
             return Response.<ActivityDrawResponseDTO>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())

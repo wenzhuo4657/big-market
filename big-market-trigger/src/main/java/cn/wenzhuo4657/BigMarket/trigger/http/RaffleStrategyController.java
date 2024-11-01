@@ -124,10 +124,10 @@ public class RaffleStrategyController implements IRaffleStrategyService {
                     .code(ResponseCode.SUCCESS.getCode())
                     .data(responseDTOS)
                     .build();
-            log.info("查询抽奖奖品列表配置完成 strategyId：{} response: {}", requestDTO.getStrategyId(), JSON.toJSONString(response));
+            log.info("查询抽奖奖品列表配置完成 userId:{} activityId：{}", userId, activityId);
             return  response;
         } catch (Exception e) {
-            log.error("查询抽奖奖品列表配置失败 strategyId：{}", requestDTO.getStrategyId(), e);
+            log.error("查询抽奖奖品列表配置失败  activityId：{}",requestDTO.getActivityId(), e);
             return Response.<List<RaffleAwardListResponseDTO>>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())

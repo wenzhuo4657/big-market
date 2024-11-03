@@ -22,6 +22,7 @@ public interface RaffleActivityAccountDayDao {
         des:
      查询指定日期，用户，活动的日账户记录的已参加活动次数。
     */
+    @DBRouter
     Integer queryRaffleActivityAccountDayPartakeCount(RaffleActivityAccountDay raffleActivityAccountDay);
 }
 

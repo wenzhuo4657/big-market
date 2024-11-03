@@ -23,7 +23,7 @@ thread:
 # rabbitMQ配置
 spring:
   rabbitmq:
-    addresses: 192.168.234.132
+    addresses: 127.0.0.1
     port: 5672
     username: admin
     password: admin

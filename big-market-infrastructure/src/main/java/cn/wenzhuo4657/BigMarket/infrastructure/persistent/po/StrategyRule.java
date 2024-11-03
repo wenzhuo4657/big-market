@@ -18,7 +18,7 @@ public class StrategyRule implements Serializable {
     /**
      * 抽奖策略ID
      */
-    private Integer strategyId;
+    private Long strategyId;
     /**
      * 抽奖奖品ID【规则类型为策略，则不需要奖品ID】
      */
@@ -59,11 +59,11 @@ public class StrategyRule implements Serializable {
         this.id = id;
     }
 
-    public Integer getStrategyId() {
+    public Long getStrategyId() {
         return strategyId;
     }
 
-    public void setStrategyId(Integer strategyId) {
+    public void setStrategyId(long strategyId) {
         this.strategyId = strategyId;
     }
 

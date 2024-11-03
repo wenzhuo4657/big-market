@@ -32,7 +32,7 @@ public class SendMessageTaskJob {
     private IDBRouterStrategy dbRouter;
 
     @Scheduled(cron = "0/5 * * * * ?")
-    public  void exec(){
+    public  void exec_db01(){
         try {
             int dbCount = dbRouter.dbCount();
             for (int dbIdx = 1; dbIdx <= dbCount; dbIdx++) {
@@ -62,8 +62,6 @@ public class SendMessageTaskJob {
 
         } catch (Exception e) {
             log.error("定时任务，扫描MQ任务表发送消息失败。", e);
-        }finally {
-            dbRouter.clear();
         }
     }
 }

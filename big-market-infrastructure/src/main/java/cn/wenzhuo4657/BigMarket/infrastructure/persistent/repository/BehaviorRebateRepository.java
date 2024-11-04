@@ -68,7 +68,6 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     @Override
     public void saveUserRebateRecord(String userId, List<BehaviorRebateAggregate> behaviorRebateAggregates) {
         try {
-  //  wenzhuo TODO 2024/11/4 : 该聚合根入账无法使用
             dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try {

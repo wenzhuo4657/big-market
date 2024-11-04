@@ -31,6 +31,11 @@ public class SendMessageTaskJob {
     @Resource
     private IDBRouterStrategy dbRouter;
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     任务详情，查找task表中任务状态为fail或者creat时间超过6小时的任务记录进行重新发送
+    */
     @Scheduled(cron = "0/5 * * * * ?")
     public  void exec_db01(){
         try {

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/3
- * @description: 每日行为返利类型
+ * @description: 每日行为返利值对象
  */
 @Getter
 @Builder

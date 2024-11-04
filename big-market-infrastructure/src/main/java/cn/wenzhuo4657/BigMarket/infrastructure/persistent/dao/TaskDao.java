@@ -21,6 +21,11 @@ public interface TaskDao {
     @DBRouter
     void updateTaskSendMessageFail(Task task);
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     查找任务状态为 1，fail(发送失败)2，creat经过1分钟的
+    */
     List<Task> queryNoSendMessageTaskList();
 }
 

@@ -1,7 +1,8 @@
 package cn.wenzhuo4657.BigMarket.domain.rebate.model.aggregate;
 
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.BehaviorRebateOrderEntity;
-import cn.wenzhuo4657.BigMarket.domain.task.model.entity.TaskEntity;
+
+import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.TaskEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserBehaviorRebateOrderDao">
+
+    <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder" id="UserBehaviorRebateOrder000Map">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
+        <result property="behaviorType" column="behavior_type" jdbcType="VARCHAR"/>
+        <result property="rebateDesc" column="rebate_desc" jdbcType="VARCHAR"/>
+        <result property="rebateType" column="rebate_type" jdbcType="VARCHAR"/>
+        <result property="rebateConfig" column="rebate_config" jdbcType="VARCHAR"/>
+        <result property="bizId" column="biz_id" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder" >
+        insert into user_behavior_rebate_order(
+            user_id, order_id, behavior_type, rebate_desc, rebate_type, rebate_config, biz_id, create_time, update_time
+        ) values(
+                    #{userId}, #{orderId}, #{behaviorType}, #{rebateDesc}, #{rebateType}, #{rebateConfig}, #{bizId}, now(), now()
+                )
+    </insert>
+
+
+</mapper>
+

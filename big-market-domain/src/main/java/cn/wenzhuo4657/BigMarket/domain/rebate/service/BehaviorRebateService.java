@@ -46,7 +46,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
 
         for(DailyBehaviorRebateVO vo:dailyBehaviorRebateVOS){
 //            业务ID；用户ID_返利类型_外部透彻业务ID
-            String bizid=behaviorEntity.getUserId()+ Constants.UNDERLINE+vo.getBehaviorType()+Constants.UNDERLINE+behaviorEntity.getOutBusinessNo();
+            String bizid=behaviorEntity.getUserId()+ Constants.UNDERLINE+vo.getRebateType()+Constants.UNDERLINE+behaviorEntity.getOutBusinessNo();
             BehaviorRebateOrderEntity behaviorRebateOrderEntity = BehaviorRebateOrderEntity.builder()
                     .userId(behaviorEntity.getUserId())
                       //  wenzhuo TODO 2024/11/4 : 随机生成订单id，实际场景应保证唯一

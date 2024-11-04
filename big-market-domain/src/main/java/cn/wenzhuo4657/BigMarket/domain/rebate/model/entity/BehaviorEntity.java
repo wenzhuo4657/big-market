@@ -26,6 +26,7 @@ public class BehaviorEntity {
     private BehaviorTypeVO behaviorTypeVO;
     /**
      * 业务ID；签到则是日期字符串，支付则是外部的业务ID
+     * 格式：yyyyMMss：年月秒
      */
     private String outBusinessNo;
 }

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author: wenzhuo4657
@@ -24,7 +25,7 @@ public class RaffleOrderTest {
     private IRaffleActivityAccountQuotaService raffleOrder;
 
     @Test
-    public void test_createSkuRechargeOrder() {
+    public void test_createSkuRechargeOrder() throws InterruptedException {
         SkuRechargeEntity skuRechargeEntity = new SkuRechargeEntity();
         skuRechargeEntity.setUserId("xiaofuge");
         skuRechargeEntity.setSku(9011L);
@@ -32,6 +33,7 @@ public class RaffleOrderTest {
         skuRechargeEntity.setOutBusinessNo("700091009111");
         String orderId = raffleOrder.createSkuRechargeOrder(skuRechargeEntity);
         log.info("测试结果：{}", orderId);
+
     }
 
 }

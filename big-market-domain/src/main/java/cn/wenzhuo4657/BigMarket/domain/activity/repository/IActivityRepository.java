@@ -22,7 +22,7 @@ public interface IActivityRepository {
 
     /**
      *  @author:wenzhuo4657
-        des: 聚合事务，创建订单
+        des: 订单聚合，目前聚合根为账户额度，用户增加sku活动账户充值。
     */
     void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
 

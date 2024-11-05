@@ -111,5 +111,11 @@ public interface RaffleActivityAccountDao {
     des: 更新总账户中的日额度
      */
     void updateActivityAccountDaySurplusImageQuota(RaffleActivityAccount raffleActivityAccount);
+
+    /**
+     *  @author:wenzhuo4657
+        des:更新账户额度。curren=total_count + #{totalCount}
+    */
+    int updateAccountQuota(RaffleActivityAccount raffleActivityAccount);
 }
 

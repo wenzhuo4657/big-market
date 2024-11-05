@@ -52,9 +52,9 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
         ActivityEntity activityEntity = queryRaffleActivityByActivityId(activitySkuEntity.getActivityId());
         ActivityCountEntity activityCountEntity = queryRaffleActivityCountByActivityCountId(activitySkuEntity.getActivityCountId());
 
-          //  wenzhuo TODO 2024/10/19 : 暂时不处理责任链结果
+  //  wenzhuo TODO 2024/11/5 :目前的账户充值并没有指定充值积分，而是从数据库中查询activityCountEntity，然后作为增量写入mysql中
         IActionChain iActionChain = defaultActivityChainFactory.openActionChain();
-        boolean res = iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
+        iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
 
         CreateQuotaOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
         doSaveOrder(createOrderAggregate);
@@ -69,7 +69,7 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
 
     /**
      *  @author:wenzhuo4657
-        des: 消费订单
+        des: 加载订单
     */
     protected abstract void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
 }

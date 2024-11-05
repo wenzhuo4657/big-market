@@ -26,7 +26,7 @@ public class ActivityOrderEntity {
     /**
      * sku
     * */
-    private String sku;
+    private Long sku;
 
     /**
      * 活动ID

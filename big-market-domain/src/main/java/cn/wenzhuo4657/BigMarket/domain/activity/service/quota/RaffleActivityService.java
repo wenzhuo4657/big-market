@@ -29,11 +29,15 @@ public class RaffleActivityService extends AbstractRaffleActivityQuota implement
     protected CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity) {
         ActivityOrderEntity activityOrderEntity = new ActivityOrderEntity();
         activityOrderEntity.setUserId(skuRechargeEntity.getUserId());
-        activityOrderEntity.setSku(String.valueOf(skuRechargeEntity.getSku()));
+        activityOrderEntity.setSku(skuRechargeEntity.getSku());
         activityOrderEntity.setActivityId(activityEntity.getActivityId());
         activityOrderEntity.setActivityName(activityEntity.getActivityName());
         activityOrderEntity.setStrategyId(activityEntity.getStrategyId());
-          //  wenzhuo TODO 2024/10/19 :订单编号目前仅仅是随机生成，业务场景中一般使用UUID等方式保证分布式场景下的唯一。
+
+        /**
+         *  @author:wenzhuo4657
+            des: 订单编号不需要唯一，幂等是通过outBusinessNo字段实现的。数据库中有相应的约束
+        */
         activityOrderEntity.setOrderId(RandomStringUtils.randomNumeric(12));
         activityOrderEntity.setOrderTime(new Date());
         activityOrderEntity.setTotalCount(activityCountEntity.getTotalCount());

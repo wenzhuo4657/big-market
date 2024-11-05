@@ -26,7 +26,7 @@
          create_time, update_time)
         values
             (#{userId}, #{sku}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{state}, #{outBusinessNo}, #{totalCount}, #{dayCount}, #{monthCount},
-             #{createTime}, #{updateTime})
+            now(), now())
     </insert>
 
     <select id="queryRaffleActivityOrderByUserId" parameterType="java.lang.String" resultMap="RaffleActivityOrderMap">

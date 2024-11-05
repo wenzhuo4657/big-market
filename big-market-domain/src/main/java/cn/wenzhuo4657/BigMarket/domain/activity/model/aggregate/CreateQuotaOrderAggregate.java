@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/24
- * @description: 创建账户额度订单-事务聚合根
+ * @description: 账户额度订单-事务聚合根
  */
 @Data
 @Builder

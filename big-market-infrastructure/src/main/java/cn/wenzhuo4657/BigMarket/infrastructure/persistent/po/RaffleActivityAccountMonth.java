@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.io.Serializable;
 
@@ -20,6 +21,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RaffleActivityAccountMonth implements Serializable {
     private static final long serialVersionUID = -91227961735669064L;
+    private final SimpleDateFormat dateFormatMonth = new SimpleDateFormat("yyyy-MM");
     /**
      * 自增ID
      */
@@ -52,6 +54,9 @@ public class RaffleActivityAccountMonth implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+    public String currentMonth() {
+        return dateFormatMonth.format(new Date());
+    }
 
 
     public String getId() {

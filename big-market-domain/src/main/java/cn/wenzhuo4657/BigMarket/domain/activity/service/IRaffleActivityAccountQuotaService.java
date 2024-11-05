@@ -14,9 +14,11 @@ public interface IRaffleActivityAccountQuotaService {
      * 1. 在【打卡、签到、分享、对话、积分兑换】等行为动作下，创建出活动订单，给用户的活动账户【日、月】充值可用的抽奖次数。
      * 2. 对于用户可获得的抽奖次数，比如首次进来就有一次，则是依赖于运营配置的动作，在前端页面上。用户点击后，可以获得一次抽奖次数。
      *
+     *
      * @param skuRechargeEntity 活动商品充值实体对象
      * @return 活动ID
      */
+      //  wenzhuo TODO 2024/11/5 : 充值次数方面。 该方法存在问题，
     String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
     /**
@@ -25,4 +27,5 @@ public interface IRaffleActivityAccountQuotaService {
              查询用户抽奖剩余日次数
     */
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
+
 }

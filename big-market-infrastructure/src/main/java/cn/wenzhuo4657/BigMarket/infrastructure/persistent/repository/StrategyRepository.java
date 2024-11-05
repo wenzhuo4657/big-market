@@ -273,4 +273,14 @@ public class StrategyRepository implements IStrategyRepository {
         }
         return resultMap;
     }
+
+    @Override
+    public List<RuleWeightVO> queryAwardRuleWeight(Long strategyId) {
+        String  cacheKey=Constants.RedisKey.STRATEGY_RULE_WEIGHT_KEY+strategyId;
+        List<RuleWeightVO> ruleWeightVOList=redissonService.getValue(cacheKey);
+        if (null!=ruleWeightVOList) return  ruleWeightVOList;
+        rule
+
+        return null;
+    }
 }

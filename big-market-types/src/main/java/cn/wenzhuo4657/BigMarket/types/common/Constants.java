@@ -73,6 +73,8 @@ public  class Constants {
         */
         public static String STRATEGY_AWARD_COUNT_QUERY_KEY = "strategy_award_count_query_key";
 
+        public static String STRATEGY_RULE_WEIGHT_KEY = "strategy_rule_weight_key_";
+
     }
 
 

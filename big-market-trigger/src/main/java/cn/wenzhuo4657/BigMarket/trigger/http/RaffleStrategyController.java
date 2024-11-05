@@ -4,15 +4,13 @@ import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQu
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleWeightVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleAward;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleRule;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyArmory;
 import cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListRequestDTO;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleAwardListResponseDTO;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleStrategyRequestDTO;
-import cn.wenzhuo4657.BigMarket.tigger.api.dto.RaffleStrategyResponseDTO;
+import cn.wenzhuo4657.BigMarket.tigger.api.dto.*;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import cn.wenzhuo4657.BigMarket.types.models.Response;
@@ -168,5 +166,32 @@ public class RaffleStrategyController implements IRaffleStrategyService {
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();
         }
+    }
+
+    /**
+     * @Author wenzhuo4657
+     * @param
+     * @return
+     * 查询奖品的抽奖范围，便于前端显示，
+     */
+    @RequestMapping(value = "query_raffle_strategy_rule_weight", method = RequestMethod.POST)
+    @Override
+    public Response<List<RaffleStrategyRuleWeightResponseDTO>> queryRaffleStrategyRuleWeight(RaffleStrategyRuleWeightRequestDTO request) {
+        try {
+            log.info("查询抽奖策略权重规则配置开始 userId:{} activityId：{}", request.getUserId(), request.getActivityId());
+            if (StringUtils.isBlank(request.getUserId())||null==request.getActivityId()){
+                throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
+            }
+//            用户已抽奖的总次数
+            Integer userActivityAccountTotalUseCount=raffleActivityAccountQuotaService.queryRaffleActivityAccountPartakeCount(request.getUserId(),request.getActivityId());
+
+//              规则查询
+            List<RaffleStrategyRuleWeightResponseDTO>  responseDTOS=new ArrayList<>();
+            List<RuleWeightVO> ruleWeightVOList=raffleRule.queryAwardRuleWeightByActivityId(request.getActivityId());
+
+
+        }
+
+        return null;
     }
 }

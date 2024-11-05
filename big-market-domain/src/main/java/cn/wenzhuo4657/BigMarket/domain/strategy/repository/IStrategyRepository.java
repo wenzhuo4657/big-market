@@ -4,6 +4,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleTreeVo;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleWeightVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
@@ -124,4 +125,5 @@ public interface IStrategyRepository {
 
     Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
 
+    List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
 }

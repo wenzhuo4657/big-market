@@ -28,4 +28,10 @@ public interface IRaffleActivityAccountQuotaService {
     */
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     查询用户抽奖剩余日额度
+    */
+    Integer queryRaffleActivityAccountPartakeCount(String userId, Long activityId);
 }

@@ -87,10 +87,8 @@ public interface IActivityRepository {
 
     List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
 
-    /**
-     *  @author:wenzhuo4657
-        des:
 
-    */
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
+
+    Integer queryRaffleActivityAccountPartakeCount(String userId, Long activityId);
 }

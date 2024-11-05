@@ -497,4 +497,13 @@ public class ActivityRepository implements IActivityRepository {
         Integer dayPartakeCount=raffleActivityAccountDayDao.queryRaffleActivityAccountDayPartakeCount(raffleActivityAccountDay);
         return null == dayPartakeCount ? 0 : dayPartakeCount;
     }
+
+    @Override
+    public Integer queryRaffleActivityAccountPartakeCount(String userId, Long activityId) {
+        RaffleActivityAccount raffleActivityAccount = raffleActivityAccountDao.queryActivityAccountByUserId(RaffleActivityAccount.builder()
+                .activityId(activityId)
+                .userId(userId)
+                .build());
+        return raffleActivityAccount.getTotalCount()-raffleActivityAccount.getTotalCountSurplus();
+    }
 }

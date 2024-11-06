@@ -1,7 +1,10 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
+
+import java.util.List;
 
 /**
  * 用户行为返利流水订单表(UserBehaviorRebateOrder)表数据库访问层
@@ -13,5 +16,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateO
 public interface UserBehaviorRebateOrderDao {
 
     void insert(UserBehaviorRebateOrder userBehaviorRebateOrder);
+
+    @DBRouter
+    List<UserBehaviorRebateOrder> queryOrderByOutBusinessNo(UserBehaviorRebateOrder userBehaviorRebateOrderReq);
 }
 

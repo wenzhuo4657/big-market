@@ -52,6 +52,16 @@ public class UserBehaviorRebateOrder implements Serializable {
      */
     private Date updateTime;
 
+    /** 业务仿重ID - 外部透传，方便查询使用 */
+    private String outBusinessNo;
+
+    public String getOutBusinessNo() {
+        return outBusinessNo;
+    }
+
+    public void setOutBusinessNo(String outBusinessNo) {
+        this.outBusinessNo = outBusinessNo;
+    }
 
     public String getId() {
         return id;

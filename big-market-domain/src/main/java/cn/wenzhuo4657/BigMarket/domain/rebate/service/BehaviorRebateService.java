@@ -49,12 +49,13 @@ public class BehaviorRebateService implements IBehaviorRebateService{
             String bizid=behaviorEntity.getUserId()+ Constants.UNDERLINE+vo.getRebateType()+Constants.UNDERLINE+behaviorEntity.getOutBusinessNo();
             BehaviorRebateOrderEntity behaviorRebateOrderEntity = BehaviorRebateOrderEntity.builder()
                     .userId(behaviorEntity.getUserId())
-                      //  wenzhuo TODO 2024/11/4 : 随机生成订单id，实际场景应保证唯一
+//                    id无需保证分布式一致
                     .orderId(RandomStringUtils.randomNumeric(12))
                     .behaviorType(vo.getBehaviorType())
                     .rebateDesc(vo.getRebateDesc())
                     .rebateType(vo.getRebateType())
                     .rebateConfig(vo.getRebateConfig())
+                    .outBusinessNo(behaviorEntity.getOutBusinessNo())
                     .bizId(bizid)
                     .build();
 
@@ -84,17 +85,12 @@ public class BehaviorRebateService implements IBehaviorRebateService{
                     .build();
             aggregates.add(rebateAggregate);
         }
-
-
-
-
-
-
-
-
         behaviorRebateRepository.saveUserRebateRecord(behaviorEntity.getUserId(),aggregates);
         return orderIds;
     }
 
-
+    @Override
+    public List<BehaviorRebateOrderEntity> queryOrderByOutBusinessNo(String userId, String outBusinessNo) {
+        return behaviorRebateRepository.queryOrderByOutBusinessNo(userId, outBusinessNo);
+    }
 }

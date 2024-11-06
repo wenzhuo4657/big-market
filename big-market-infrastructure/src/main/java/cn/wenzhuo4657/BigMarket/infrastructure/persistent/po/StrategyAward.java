@@ -1,6 +1,8 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.io.Serializable;
@@ -12,6 +14,8 @@ import java.io.Serializable;
  * @since 2024-09-18 20:55:24
  */
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class StrategyAward implements Serializable {
     private static final long serialVersionUID = -47354748976803586L;
     /**

@@ -91,4 +91,10 @@ public interface IActivityRepository {
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
 
     Integer queryRaffleActivityAccountPartakeCount(String userId, Long activityId);
+/**
+ *  @author:wenzhuo4657
+    des: 查询用户活动次数实体，且注意会先去查询活动账户，如果没有对应活动，则不会去查询个人账户，直接返回全为0的实体。
+ 着实际上和参入活动的流程是一样的，同样是先从活动账户扣减，然后再扣减个人账户
+*/
+    ActivityAccountEntity queryActivityAccountEntity(Long activityId, String userId);
 }

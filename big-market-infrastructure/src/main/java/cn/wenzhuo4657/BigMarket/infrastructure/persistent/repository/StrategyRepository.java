@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.*;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
+import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.*;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
@@ -44,6 +45,8 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Resource
     private StrategyDao strategyDao;
+
+
 
     @Resource
     private StrategyRuleDao strategyRuleDao;
@@ -279,8 +282,47 @@ public class StrategyRepository implements IStrategyRepository {
         String  cacheKey=Constants.RedisKey.STRATEGY_RULE_WEIGHT_KEY+strategyId;
         List<RuleWeightVO> ruleWeightVOList=redissonService.getValue(cacheKey);
         if (null!=ruleWeightVOList) return  ruleWeightVOList;
-        rule
+        ruleWeightVOList=new ArrayList<>();
+//        1，获取ruleValue
+        StrategyRule strategyRule=new StrategyRule();
+        strategyRule.setStrategyId(strategyId);
+        strategyRule.setRuleModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
 
-        return null;
+        String ruleValue=strategyRuleDao.queryStrategyRuleValue(strategyRule);
+
+//        2,解析ruleValue
+        StrategyRuleEntity strategyRuleEntity = new StrategyRuleEntity();
+        strategyRuleEntity.setRuleValue(ruleValue);
+        strategyRuleEntity.setRuleModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
+        Map<String, List<Integer>> ruleWeightValues = strategyRuleEntity.getRuleWeightValues();
+
+//        3，封装ruleWeightVOList
+        Set<String> ruleWeightKeys = ruleWeightValues.keySet();
+        for (String key:ruleWeightKeys){
+            List<Integer> awardIds = ruleWeightValues.get(key);
+            List<RuleWeightVO.Award>  awardList =new ArrayList<>();
+            for(Integer awardId:awardIds){
+                StrategyAwardEntity strategyAwardReq=new StrategyAwardEntity();
+                strategyAwardReq.setAwardId(awardId);
+                strategyAwardReq.setStrategyId(strategyId);
+                StrategyAward strategyAward = strategyAwardDao.queryStrategyAward(strategyAwardReq);
+                awardList.add(RuleWeightVO.Award.builder()
+                        .awardId(awardId)
+                        .awardTitle(strategyAward.getAwardTitle())
+                        .build());
+            }
+            ruleWeightVOList.add(RuleWeightVO.builder()
+                    .awardIds(awardIds)
+                    .awardList(awardList)
+                    .ruleValue(ruleValue)
+
+//                    注意key在解析时的格式时。4000:102,103,104,105
+                    .weight(Integer.valueOf(key.split(Constants.COLON)[0]))
+                    .build());
+
+        }
+        redissonService.setValue(cacheKey, ruleWeightVOList);
+
+        return ruleWeightVOList;
     }
 }

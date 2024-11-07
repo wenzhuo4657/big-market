@@ -9,4 +9,10 @@ import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.UserAwardRecordAggr
  */
 public interface IAwardRepository {
     void saveUserAwardRecord(UserAwardRecordAggregate userAwardRecordAggregate);
+
+    String queryAwardConfig(Integer awardId);
+
+    void saveGiveOutPrizesAggregate(GiveOutPrizesAggregate giveOutPrizesAggregate);
+
+    String queryAwardKey(Integer awardId);
 }

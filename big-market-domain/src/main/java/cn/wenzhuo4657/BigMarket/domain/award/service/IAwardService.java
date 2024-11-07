@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.award.service;
 
+import cn.wenzhuo4657.BigMarket.domain.award.model.entity.DistributeAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
 
 /**
@@ -9,4 +10,9 @@ import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
  */
 public interface IAwardService {
     void saveUserAwardRecord(UserAwardRecordEntity userAwardRecordEntity);
+
+    /**
+     * 配送发货奖品
+     */
+    void distributeAward(DistributeAwardEntity distributeAwardEntity);
 }

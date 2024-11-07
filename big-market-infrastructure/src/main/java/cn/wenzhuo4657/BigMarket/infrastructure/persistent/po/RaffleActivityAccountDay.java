@@ -24,7 +24,7 @@ import java.util.logging.SimpleFormatter;
 public class RaffleActivityAccountDay implements Serializable {
     private static final long serialVersionUID = -70970835227807304L;
 
-    private final SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
+    private final static SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyy-MM-dd");
     /**
      * 自增ID
      */
@@ -58,7 +58,7 @@ public class RaffleActivityAccountDay implements Serializable {
      */
     private Date updateTime;
 
-    public String currentDay(){
+    public static String currentDay() {
         return dateFormatDay.format(new Date());
     }
 

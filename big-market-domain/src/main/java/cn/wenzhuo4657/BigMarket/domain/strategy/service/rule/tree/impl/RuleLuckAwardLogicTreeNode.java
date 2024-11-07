@@ -1,11 +1,15 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.impl;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.RuleLogicCheckTypeVO;
+import cn.wenzhuo4657.BigMarket.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
+import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.ILogicTreeNode;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.tree.factory.DefaultTreeFactory;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @className: RuleLuckAwardLogicTreeNode
@@ -17,6 +21,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component("rule_luck_award")
 public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
+
+
+    @Resource
+    private IStrategyRepository strategyRepository;
     @Override
     public DefaultTreeFactory.TreeActionEntity logic(String userId, Long strategyId, Integer awardId, String ruleValue) {
         log.info("规则过滤-兜底奖品 userId:{} strategyId:{} awardId:{} ruleValue:{}", userId, strategyId, awardId, ruleValue);
@@ -27,6 +35,11 @@ public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
         }
         Integer luckAwardId = Integer.valueOf(split[0]);
         String awardRuleValue=split.length>1?split[1]:"";
+        // 写入延迟队列，延迟消费更新数据库记录。【在trigger的job；UpdateAwardStockJob 下消费队列，更新数据库记录】
+        strategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO.builder()
+                .strategyId(strategyId)
+                .awardId(awardId)
+                .build());
         /**
          *  @author:wenzhuo4657
             des:

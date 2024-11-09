@@ -48,6 +48,8 @@ public class BackListLogicChain extends AbstractLogicChain {
                 return DefaultChainFactory.StrategyAwardVO.builder()
                         .awardId(awardId)
                         .logicModel(DefaultChainFactory.LogicModel.RULE_BLACKLIST.getCode())
+  //  wenzhuo TODO 2024/11/9 : 该规则值可写入数据库，也可写代码中
+                        .awardRuleValue("0.01,1")
                         .build();
             }
         }

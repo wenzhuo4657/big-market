@@ -62,6 +62,10 @@ public class AwardService implements IAwardService{
             log.error("分发奖品，奖品ID不存在。awardKey:{}", awardKey);
             return;
         }
+        /**
+         *  @author:wenzhuo4657
+            des:根据awardKey选择奖品分发策略，
+        */
         IDistributeAward distributeAward = distributeAwardMap.get(awardKey);
         if (null==distributeAward){
             log.error("分发奖品，对应的服务不存在。awardKey:{}", awardKey);

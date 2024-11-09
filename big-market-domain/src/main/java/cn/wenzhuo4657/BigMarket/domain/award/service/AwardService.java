@@ -36,6 +36,8 @@ public class AwardService implements IAwardService{
         sendAwardMessage.setUserId(userAwardRecordEntity.getUserId());
         sendAwardMessage.setAwardId(userAwardRecordEntity.getAwardId());
         sendAwardMessage.setAwardTitle(userAwardRecordEntity.getAwardTitle());
+        sendAwardMessage.setOrderId(userAwardRecordEntity.getOrderId());
+        sendAwardMessage.setAwardConfig(userAwardRecordEntity.getAwardConfig());
         BaseEvent.EventMessage<SendAwardMessageEvent.SendAwardMessage> sendAwardMessageEventMessage = sendAwardMessageEvent.buildEventMessage(sendAwardMessage);
 
         TaskEntity taskEntity = new TaskEntity();
@@ -66,5 +68,6 @@ public class AwardService implements IAwardService{
             throw new RuntimeException("分发奖品，奖品" + awardKey + "对应的服务不存在");
         }
         distributeAward.giveOutPrizes(distributeAwardEntity);
+
     }
 }

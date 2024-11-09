@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.award.repository;
 
+import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.GiveOutPrizesAggregate;
 import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.UserAwardRecordAggregate;
 
 /**

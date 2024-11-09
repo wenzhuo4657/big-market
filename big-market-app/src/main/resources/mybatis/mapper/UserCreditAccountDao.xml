@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditAccountDao">
+
+    <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" id="UserCreditAccountMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="totalAmount" column="total_amount" jdbcType="NUMERIC"/>
+        <result property="availableAmount" column="available_amount" jdbcType="NUMERIC"/>
+        <result property="accountStatus" column="account_status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <update id="updateAddAmount" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" >
+    update user_credit_account set
+       total_amount = total_amount + #{totalAmount},
+       available_amount = available_amount + #{availableAmount}
+    where user_id = #{userId}
+    </update>
+
+
+    <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" >
+        insert into  user_credit_account(
+            user_id, total_amount, available_amount, account_status, create_time, update_time
+        ) values (
+            #{userId}, #{totalAmount}, #{availableAmount}, #{accountStatus}, now(), now()
+            )
+    </insert>
+
+</mapper>
+

@@ -35,18 +35,7 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
 
 
 
-    public ActivityOrderEntity createRaffleActivityOrder(ActivityShopCartEntity activityShopCartEntity) {
-        ActivitySkuEntity activitySkuEntity =
-                activityRepository.queryActivitySku(activityShopCartEntity.getSku());
-        ActivityEntity activityEntity =
-                activityRepository.queryRaffleActivityByActivityId(activitySkuEntity.getActivityId());
-        ActivityCountEntity activityCountEntity =
-                activityRepository.queryRaffleActivityCountByActivityCountId(activityEntity.getActivityId());
-        log.info("查询结果：{} {} {}", JSON.toJSONString(activitySkuEntity), JSON.toJSONString(activityEntity), JSON.toJSONString(activityCountEntity));
 
-          //  wenzhuo TODO 2024/10/17 : 这里并没有进行填充，
-        return ActivityOrderEntity.builder().build();
-    }
 
     @Override
     public String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity) {
@@ -68,7 +57,7 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
 
         CreateQuotaOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
 
-//        使用交易策略模块完成sku订单加载、扣减
+//        使用交易策略模块完成充值订单加载、扣减
         ITradePolicy tradePolicy = tradePolicyGroup.get(skuRechargeEntity.getOrderTradeType().getCode());
         tradePolicy.trade(createOrderAggregate);
         return createOrderAggregate.getActivityOrderEntity().getOrderId();

@@ -16,8 +16,16 @@ import java.util.List;
 public interface IActivityRepository {
     ActivitySkuEntity queryActivitySku(Long sku);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 保证活动的信息在redis中
+    */
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 保证活动的初始个人配置
+    */
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
 
 
@@ -94,6 +102,11 @@ public interface IActivityRepository {
 */
     ActivityAccountEntity queryActivityAccountEntity(Long activityId, String userId);
 
+
+    /**
+     *  @author:wenzhuo4657
+        des: 消费活动订单（注意和用户地参入订单区分），并更新账户额度
+    */
     void updateOrder(DeliveryOrderEntity deliveryOrderEntity);
 
     void doSaveNoPayOrder(CreateQuotaOrderAggregate createOrderAggregate);

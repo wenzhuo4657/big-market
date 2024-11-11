@@ -104,8 +104,5 @@ public class RaffleActivityService extends AbstractRaffleActivityQuota implement
     @Override
     public void updateOrder(DeliveryOrderEntity deliveryOrderEntity) {
         activityRepository.updateOrder(deliveryOrderEntity);
-
-
-
     }
 }

@@ -11,151 +11,14 @@
         <result property="stockCountSurplus" column="stock_count_surplus" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result column="product_amount" property="productAmount"/>
     </resultMap>
     <select id="queryBySku" resultMap="RaffleActivitySkuMap">
-        select
-            id, sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time
+        select sku, activity_id, activity_count_id, stock_count, stock_count_surplus, product_amount
         from raffle_activity_sku
         where sku = #{sku}
     </select>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="RaffleActivitySkuMap">
-        select
-          id, sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time
-        from raffle_activity_sku
-        where id = #{id}
-    </select>
-
-    <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="RaffleActivitySkuMap">
-        select
-          id, sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time
-        from raffle_activity_sku
-        <where>
-            <if test="id != null and id != ''">
-                and id = #{id}
-            </if>
-            <if test="sku != null">
-                and sku = #{sku}
-            </if>
-            <if test="activityId != null">
-                and activity_id = #{activityId}
-            </if>
-            <if test="activityCountId != null">
-                and activity_count_id = #{activityCountId}
-            </if>
-            <if test="stockCount != null">
-                and stock_count = #{stockCount}
-            </if>
-            <if test="stockCountSurplus != null">
-                and stock_count_surplus = #{stockCountSurplus}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-        </where>
-        limit #{pageable.offset}, #{pageable.pageSize}
-    </select>
-
-    <!--统计总行数-->
-    <select id="count" resultType="java.lang.Long">
-        select count(1)
-        from raffle_activity_sku
-        <where>
-            <if test="id != null and id != ''">
-                and id = #{id}
-            </if>
-            <if test="sku != null">
-                and sku = #{sku}
-            </if>
-            <if test="activityId != null">
-                and activity_id = #{activityId}
-            </if>
-            <if test="activityCountId != null">
-                and activity_count_id = #{activityCountId}
-            </if>
-            <if test="stockCount != null">
-                and stock_count = #{stockCount}
-            </if>
-            <if test="stockCountSurplus != null">
-                and stock_count_surplus = #{stockCountSurplus}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime}
-            </if>
-        </where>
-    </select>
-
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_sku(sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time)
-        values (#{sku}, #{activityId}, #{activityCountId}, #{stockCount}, #{stockCountSurplus}, #{createTime}, #{updateTime})
-    </insert>
-
-    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_sku(sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-        (#{entity.sku}, #{entity.activityId}, #{entity.activityCountId}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.createTime}, #{entity.updateTime})
-        </foreach>
-    </insert>
-
-    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into raffle_activity_sku(sku, activity_id, activity_count_id, stock_count, stock_count_surplus, create_time, update_time)
-        values
-        <foreach collection="entities" item="entity" separator=",">
-            (#{entity.sku}, #{entity.activityId}, #{entity.activityCountId}, #{entity.stockCount}, #{entity.stockCountSurplus}, #{entity.createTime}, #{entity.updateTime})
-        </foreach>
-        on duplicate key update
-        sku = values(sku),
-        activity_id = values(activity_id),
-        activity_count_id = values(activity_count_id),
-        stock_count = values(stock_count),
-        stock_count_surplus = values(stock_count_surplus),
-        create_time = values(create_time),
-        update_time = values(update_time)
-    </insert>
-
-    <!--通过主键修改数据-->
-    <update id="update">
-        update raffle_activity_sku
-        <set>
-            <if test="sku != null">
-                sku = #{sku},
-            </if>
-            <if test="activityId != null">
-                activity_id = #{activityId},
-            </if>
-            <if test="activityCountId != null">
-                activity_count_id = #{activityCountId},
-            </if>
-            <if test="stockCount != null">
-                stock_count = #{stockCount},
-            </if>
-            <if test="stockCountSurplus != null">
-                stock_count_surplus = #{stockCountSurplus},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime},
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
-    <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from raffle_activity_sku where id = #{id}
-    </delete>
 
     <update id="updateActivitySkuStock" parameterType="java.lang.Long">
         update raffle_activity_sku
@@ -170,10 +33,9 @@
     </update>
 
     <select id="queryActivitySkuListByActivityId" resultType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivitySku" resultMap="RaffleActivitySkuMap">
-       select  sku, activity_count_id, stock_count, stock_count_surplus
+        select sku, activity_count_id, stock_count, stock_count_surplus, product_amount
            from raffle_activity_sku
         where  activity_id=#{activityId}
-
     </select>
 
 </mapper>

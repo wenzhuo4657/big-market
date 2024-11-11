@@ -26,5 +26,6 @@ public interface RaffleActivityOrderDao {
     @DBRouter
     RaffleActivityOrder queryRaffleActivityOrder(RaffleActivityOrder raffleActivityOrderReq);
 
+    int updateOrderCompleted(RaffleActivityOrder raffleActivityOrderReq);
 }
 

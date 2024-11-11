@@ -655,13 +655,21 @@ public class ActivityRepository implements IActivityRepository {
             transactionTemplate.execute(status -> {
                 try {
 
+
                     int updateCount =raffleActivityOrderDao.updateOrderCompleted(raffleActivityOrderReq);
+
                     if (updateCount!=1){
                         status.setRollbackOnly();
                         return 1;
                     }
-
-
+                    int update = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
+                    if (update!=1){
+                        raffleActivityAccountDao.insert(raffleActivityAccount);
+                    }
+                    // 4. 更新账户 - 月
+                    raffleActivityAccountMonthDao.addAccountQuota(raffleActivityAccountMonth);
+                    // 5. 更新账户 - 日
+                    raffleActivityAccountDayDao.addAccountQuota(raffleActivityAccountDay);
                     return 1;
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();

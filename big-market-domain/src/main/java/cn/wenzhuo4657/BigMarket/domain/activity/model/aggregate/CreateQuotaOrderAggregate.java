@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityOrderEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderStateVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,5 +49,9 @@ public class CreateQuotaOrderAggregate {
      * 活动订单实体
      */
     private ActivityOrderEntity activityOrderEntity;
+
+    public void setOrderState(OrderStateVO orderState) {
+        this.activityOrderEntity.setState(orderState);
+    }
 
 }

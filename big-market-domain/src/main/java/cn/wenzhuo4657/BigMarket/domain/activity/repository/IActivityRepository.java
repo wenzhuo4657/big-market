@@ -20,11 +20,7 @@ public interface IActivityRepository {
 
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
 
-    /**
-     *  @author:wenzhuo4657
-        des: 订单聚合，目前聚合根为账户额度，用户增加sku活动账户充值。
-    */
-    void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
+
 
     /**
      *  @author:wenzhuo4657
@@ -97,4 +93,10 @@ public interface IActivityRepository {
  着实际上和参入活动的流程是一样的，同样是先从活动账户扣减，然后再扣减个人账户
 */
     ActivityAccountEntity queryActivityAccountEntity(Long activityId, String userId);
+
+    void updateOrder(DeliveryOrderEntity deliveryOrderEntity);
+
+    void doSaveNoPayOrder(CreateQuotaOrderAggregate createOrderAggregate);
+
+    void doSaveCreditPayOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate);
 }

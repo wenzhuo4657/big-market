@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -40,11 +41,23 @@ public class RaffleActivitySku implements Serializable {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 商品金额【积分】
+     */
+    private BigDecimal productAmount;
     /**
      * 更新时间
      */
     private Date updateTime;
 
+    public BigDecimal getProductAmount() {
+        return productAmount;
+    }
+
+    public void setProductAmount(BigDecimal productAmount) {
+        this.productAmount = productAmount;
+    }
 
     public String getId() {
         return id;

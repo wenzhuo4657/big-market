@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
 
+import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.policy.ITradePolicy;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.IActionChain;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -12,6 +13,8 @@ import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 /**
  * @author: wenzhuo4657
@@ -21,9 +24,15 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSupport implements IRaffleActivityAccountQuotaService {
 
-    public AbstractRaffleActivityQuota(DefaultActivityChainFactory defaultActivityChainFactory, IActivityRepository activityRepository) {
-        super(defaultActivityChainFactory, activityRepository);
+
+    private  Map<String, ITradePolicy> tradePolicyGroup;
+
+    public AbstractRaffleActivityQuota(IActivityRepository activityRepository, DefaultActivityChainFactory defaultActivityChainFactory, Map<String, ITradePolicy> tradePolicyGroup) {
+        super(defaultActivityChainFactory,activityRepository);
+        this.tradePolicyGroup = tradePolicyGroup;
     }
+
+
 
 
     public ActivityOrderEntity createRaffleActivityOrder(ActivityShopCartEntity activityShopCartEntity) {
@@ -53,11 +62,15 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
         ActivityCountEntity activityCountEntity = queryRaffleActivityCountByActivityCountId(activitySkuEntity.getActivityCountId());
 
   //  wenzhuo TODO 2024/11/5 :目前的账户充值并没有指定充值积分，而是从数据库中查询activityCountEntity，然后作为增量写入mysql中
+//        责任链，1，拦截报异常 2，未拦截扣减sku库存
         IActionChain iActionChain = defaultActivityChainFactory.openActionChain();
         iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
 
         CreateQuotaOrderAggregate createOrderAggregate = buildOrderAggregate(skuRechargeEntity, activitySkuEntity, activityEntity, activityCountEntity);
-        doSaveOrder(createOrderAggregate);
+
+//        使用交易策略模块完成sku订单加载、扣减
+        ITradePolicy tradePolicy = tradePolicyGroup.get(skuRechargeEntity.getOrderTradeType().getCode());
+        tradePolicy.trade(createOrderAggregate);
         return createOrderAggregate.getActivityOrderEntity().getOrderId();
     }
 
@@ -67,9 +80,4 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
     */
     protected abstract CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity);
 
-    /**
-     *  @author:wenzhuo4657
-        des: 加载订单
-    */
-    protected abstract void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate);
 }

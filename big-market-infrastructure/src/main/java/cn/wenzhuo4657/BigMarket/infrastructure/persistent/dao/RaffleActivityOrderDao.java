@@ -23,6 +23,8 @@ public interface RaffleActivityOrderDao {
     List<RaffleActivityOrder> queryRaffleActivityOrderByUserId(String userId);
 
 
+    @DBRouter
+    RaffleActivityOrder queryRaffleActivityOrder(RaffleActivityOrder raffleActivityOrderReq);
 
 }
 

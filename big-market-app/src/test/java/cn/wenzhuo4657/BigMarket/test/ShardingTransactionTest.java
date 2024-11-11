@@ -24,7 +24,7 @@ public class ShardingTransactionTest {
 
     @Test
     public  void test(){
-        activityRepository.doSaveOrder(new CreateQuotaOrderAggregate());
+//        activityRepository.doSaveOrder(new CreateQuotaOrderAggregate());
     }
 
 

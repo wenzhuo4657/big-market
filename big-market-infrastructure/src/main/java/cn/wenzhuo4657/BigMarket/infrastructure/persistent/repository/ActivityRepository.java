@@ -17,8 +17,10 @@ import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.bytecode.ConstantAttribute;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
+import org.redisson.api.RLock;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionStatus;
@@ -82,6 +84,7 @@ public class ActivityRepository implements IActivityRepository {
                 .activityCountId(raffleActivitySku.getActivityCountId())
                 .stockCount(raffleActivitySku.getStockCount())
                 .stockCountSurplus(raffleActivitySku.getStockCountSurplus())
+                .productAmount(raffleActivitySku.getProductAmount())
                 .build();
     }
 
@@ -125,7 +128,7 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public  void doSaveOrder(CreateQuotaOrderAggregate createOrderAggregate) {
+    public  void doSaveNoPayOrder(CreateQuotaOrderAggregate createOrderAggregate) {
         try {
             // 订单对象
             ActivityOrderEntity activityOrderEntity = createOrderAggregate.getActivityOrderEntity();
@@ -139,6 +142,7 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityOrder.setOrderTime(activityOrderEntity.getOrderTime());
             raffleActivityOrder.setTotalCount(activityOrderEntity.getTotalCount());
             raffleActivityOrder.setDayCount(activityOrderEntity.getDayCount());
+            raffleActivityOrder.setPayAmount(activityOrderEntity.getPayAmount());
             raffleActivityOrder.setMonthCount(activityOrderEntity.getMonthCount());
             raffleActivityOrder.setTotalCount(createOrderAggregate.getTotalCount());
             raffleActivityOrder.setDayCount(createOrderAggregate.getDayCount());
@@ -206,6 +210,51 @@ public class ActivityRepository implements IActivityRepository {
         }finally {
             dbRouter.clear();
         }
+
+    }
+
+
+
+    @Override
+    public void doSaveCreditPayOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate) {
+        try {
+            ActivityOrderEntity activityOrderEntity = createQuotaOrderAggregate.getActivityOrderEntity();
+            RaffleActivityOrder raffleActivityOrder = new RaffleActivityOrder();
+            raffleActivityOrder.setUserId(activityOrderEntity.getUserId());
+            raffleActivityOrder.setSku(activityOrderEntity.getSku());
+            raffleActivityOrder.setActivityId(activityOrderEntity.getActivityId());
+            raffleActivityOrder.setActivityName(activityOrderEntity.getActivityName());
+            raffleActivityOrder.setStrategyId(activityOrderEntity.getStrategyId());
+            raffleActivityOrder.setOrderId(activityOrderEntity.getOrderId());
+            raffleActivityOrder.setOrderTime(activityOrderEntity.getOrderTime());
+            raffleActivityOrder.setTotalCount(activityOrderEntity.getTotalCount());
+            raffleActivityOrder.setDayCount(activityOrderEntity.getDayCount());
+            raffleActivityOrder.setMonthCount(activityOrderEntity.getMonthCount());
+            raffleActivityOrder.setTotalCount(createQuotaOrderAggregate.getTotalCount());
+            raffleActivityOrder.setDayCount(createQuotaOrderAggregate.getDayCount());
+            raffleActivityOrder.setMonthCount(createQuotaOrderAggregate.getMonthCount());
+            raffleActivityOrder.setPayAmount(activityOrderEntity.getPayAmount());
+            raffleActivityOrder.setState(activityOrderEntity.getState().getCode());
+            raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
+
+
+            dbRouter.doRouter(createQuotaOrderAggregate.getUserId());
+            transactionTemplate.execute(status -> {
+                try{
+                    raffleActivityOrderDao.insert(raffleActivityOrder);
+                    return 1;
+                }catch (DuplicateKeyException e) {
+                    status.setRollbackOnly();
+                    log.error("写入订单记录，唯一索引冲突 userId: {} activityId: {} sku: {}", activityOrderEntity.getUserId(), activityOrderEntity.getActivityId(), activityOrderEntity.getSku(), e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                }
+            });
+
+        }finally {
+            dbRouter.clear();
+        }
+
+
 
     }
 
@@ -565,5 +614,66 @@ public class ActivityRepository implements IActivityRepository {
 
 
 
+    }
+
+    @Override
+    public void updateOrder(DeliveryOrderEntity deliveryOrderEntity) {
+        RLock lock = redissonService.getLock(Constants.RedisKey.ACTIVITY_ACCOUNT_UPDATE_LOCK + deliveryOrderEntity.getOutBusinessNo());
+        try {
+            lock.lock(3,TimeUnit.SECONDS);
+            RaffleActivityOrder raffleActivityOrderReq = new RaffleActivityOrder();
+            raffleActivityOrderReq.setUserId(deliveryOrderEntity.getUserId());
+            raffleActivityOrderReq.setOutBusinessNo(deliveryOrderEntity.getOutBusinessNo());
+            RaffleActivityOrder raffleActivityOrderRes = raffleActivityOrderDao.queryRaffleActivityOrder(raffleActivityOrderReq);
+
+            RaffleActivityAccount raffleActivityAccount=new RaffleActivityAccount();
+            raffleActivityAccount.setUserId(raffleActivityOrderRes.getUserId());
+            raffleActivityAccount.setActivityId(raffleActivityOrderRes.getActivityId());
+            raffleActivityAccount.setTotalCount(raffleActivityOrderRes.getTotalCount());
+            raffleActivityAccount.setTotalCountSurplus(raffleActivityOrderRes.getTotalCount());
+            raffleActivityAccount.setDayCount(raffleActivityOrderRes.getDayCount());
+            raffleActivityAccount.setDayCountSurplus(raffleActivityOrderRes.getDayCount());
+            raffleActivityAccount.setMonthCount(raffleActivityOrderRes.getMonthCount());
+            raffleActivityAccount.setMonthCountSurplus(raffleActivityOrderRes.getMonthCount());
+            // 账户对象 - 月
+            RaffleActivityAccountMonth raffleActivityAccountMonth = new RaffleActivityAccountMonth();
+            raffleActivityAccountMonth.setUserId(raffleActivityOrderRes.getUserId());
+            raffleActivityAccountMonth.setActivityId(raffleActivityOrderRes.getActivityId());
+            raffleActivityAccountMonth.setMonth(RaffleActivityAccountMonth.currentMonth());
+            raffleActivityAccountMonth.setMonthCount(raffleActivityOrderRes.getMonthCount());
+            raffleActivityAccountMonth.setMonthCountSurplus(raffleActivityOrderRes.getMonthCount());
+
+            // 账户对象 - 日
+            RaffleActivityAccountDay raffleActivityAccountDay = new RaffleActivityAccountDay();
+            raffleActivityAccountDay.setUserId(raffleActivityOrderRes.getUserId());
+            raffleActivityAccountDay.setActivityId(raffleActivityOrderRes.getActivityId());
+            raffleActivityAccountDay.setDay(RaffleActivityAccountDay.currentDay());
+            raffleActivityAccountDay.setDayCount(raffleActivityOrderRes.getDayCount());
+            raffleActivityAccountDay.setDayCountSurplus(raffleActivityOrderRes.getDayCount());
+
+            dbRouter.doRouter(deliveryOrderEntity.getUserId());
+            transactionTemplate.execute(status -> {
+                try {
+
+                    int updateCount =raffleActivityOrderDao.updateOrderCompleted(raffleActivityOrderReq);
+                    if (updateCount!=1){
+                        status.setRollbackOnly();
+                        return 1;
+                    }
+
+
+                    return 1;
+                } catch (DuplicateKeyException e) {
+                    status.setRollbackOnly();
+                    log.error("更新订单记录，完成态，唯一索引冲突 userId: {} outBusinessNo: {}", deliveryOrderEntity.getUserId(), deliveryOrderEntity.getOutBusinessNo(), e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                }
+
+            });
+
+
+        }finally {
+            dbRouter.clear();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.service;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityAccountEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.DeliveryOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
 
 /**
@@ -21,6 +22,12 @@ public interface IRaffleActivityAccountQuotaService {
      */
       //  wenzhuo TODO 2024/11/5 : 充值次数方面。 该方法存在问题，
     String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
+
+    /**
+     * 订单出货 - 积分充值
+     * @param deliveryOrderEntity 出货单实体对象
+     */
+    void updateOrder(DeliveryOrderEntity deliveryOrderEntity);
 
     /**
      *  @author:wenzhuo4657

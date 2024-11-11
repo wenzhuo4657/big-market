@@ -5,14 +5,15 @@ import lombok.Getter;
 
 /**
  * @author: wenzhuo4657
- * @date: 2024/10/17
- * @description: 订单状态值对象
+ * @date: 2024/11/11
+ * @description:
  */
 @Getter
 @AllArgsConstructor
-public enum OrderStateVO {
-    wait_pay("wait_pay","待支付"),
-    completed("completed", "完成"),
+public enum OrderTradeTypeVO {
+
+    credit_pay_trade("credit_pay_trade","积分兑换，需要支付类交易"),
+    rebate_no_pay_trade("rebate_no_pay_trade", "返利奖品，不需要支付类交易"),
     ;
 
     private final String code;

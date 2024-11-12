@@ -1,0 +1,394 @@
+24-10-28.10:47:58.958 [main            ] INFO  Application            - Starting Application using Java 1.8.0_321 on 4657001021 with PID 23632 (E:\code\java\idea\project\big-market-app\target\classes started by 14783 in E:\code\java\idea\project)
+24-10-28.10:47:58.960 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+24-10-28.10:48:00.121 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-28.10:48:00.124 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-28.10:48:00.165 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+24-10-28.10:48:01.693 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+24-10-28.10:48:01.705 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+24-10-28.10:48:01.706 [main            ] INFO  StandardService        - Starting service [Tomcat]
+24-10-28.10:48:01.706 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+24-10-28.10:48:01.885 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+24-10-28.10:48:01.885 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2877 ms
+24-10-28.10:48:02.336 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-28.10:48:03.215 [redisson-netty-2-5] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-28.10:48:03.241 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-28.10:48:06.796 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-28.10:48:06.914 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+24-10-28.10:48:06.928 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+24-10-28.10:48:06.932 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:08.967 [main            ] INFO  SimpleMessageListenerContainer - Broker not available; cannot force queue declarations during start: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:08.973 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:11.020 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueInfo(RabbitAdmin.java:463)
+	at org.springframework.amqp.rabbit.core.RabbitAdmin.getQueueProperties(RabbitAdmin.java:447)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.attemptDeclarations(AbstractMessageListenerContainer.java:1942)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.redeclareElementsIfNecessary(AbstractMessageListenerContainer.java:1915)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.initialize(SimpleMessageListenerContainer.java:1384)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1230)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
+	at java.net.Socket.connect(Socket.java:606)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 12 common frames omitted
+24-10-28.10:48:11.025 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:13.083 [main            ] INFO  Application            - Started Application in 14.65 seconds (JVM running for 15.925)
+24-10-28.10:48:13.464 [RMI TCP Connection(1)-172.23.80.1] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:14.627 [RMI TCP Connection(3)-172.23.80.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+24-10-28.10:48:14.627 [RMI TCP Connection(3)-172.23.80.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+24-10-28.10:48:14.628 [RMI TCP Connection(3)-172.23.80.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+24-10-28.10:48:15.005 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:15.521 [RMI TCP Connection(1)-172.23.80.1] WARN  RabbitHealthIndicator  - Rabbit health check failed
+org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:603)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:725)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:252)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2210)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2183)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2163)
+	at org.springframework.boot.actuate.amqp.RabbitHealthIndicator.getVersion(RabbitHealthIndicator.java:49)
+	at org.springframework.boot.actuate.amqp.RabbitHealthIndicator.doHealthCheck(RabbitHealthIndicator.java:44)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:94)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:88)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:78)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:282)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:124)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:819)
+	at com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:801)
+	at javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1468)
+	at javax.management.remote.rmi.RMIConnectionImpl.access$300(RMIConnectionImpl.java:76)
+	at javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1309)
+	at javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1401)
+	at javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:357)
+	at sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:573)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:834)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:688)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:687)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:750)
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:81)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:476)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:218)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:200)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:394)
+	at java.net.Socket.connect(Socket.java:606)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:60)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1223)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1173)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:641)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:616)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:566)
+	... 52 common frames omitted
+24-10-28.10:48:15.524 [RMI TCP Connection(1)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-28.10:48:15.790 [RMI TCP Connection(1)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-28.10:48:15.838 [RMI TCP Connection(1)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-28.10:48:15.874 [RMI TCP Connection(1)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-28.10:48:18.154 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:18.156 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] INFO  SimpleMessageListenerContainer - Restarting Consumer@35fac3ba: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:48:18.159 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:20.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:20.203 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:48:20.203 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:25.012 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:27.355 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:27.355 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Restarting Consumer@1cbe1e7: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:48:27.356 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:29.425 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:48:29.425 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:30.011 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:35.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:36.558 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:36.558 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-3] INFO  SimpleMessageListenerContainer - Restarting Consumer@4a2ec504: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:48:36.570 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:38.615 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:48:38.615 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:40.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:45.012 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:45.728 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:45.728 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-4] INFO  SimpleMessageListenerContainer - Restarting Consumer@22209f0e: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:48:45.729 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:47.765 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:48:47.765 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:50.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:54.890 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:48:54.890 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] INFO  SimpleMessageListenerContainer - Restarting Consumer@8ec16a6: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:48:54.892 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:48:55.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:48:56.930 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:48:56.930 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:00.012 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:04.055 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:04.055 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-6] INFO  SimpleMessageListenerContainer - Restarting Consumer@3c30befa: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:04.056 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:05.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:06.096 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:06.096 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:10.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:13.208 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:13.208 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-7] INFO  SimpleMessageListenerContainer - Restarting Consumer@36a85584: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:13.209 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:15.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:15.263 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:15.264 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:20.011 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:22.403 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:22.403 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] INFO  SimpleMessageListenerContainer - Restarting Consumer@7cd5941b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:22.405 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:24.452 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:24.452 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:25.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:30.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:31.600 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:31.600 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-9] INFO  SimpleMessageListenerContainer - Restarting Consumer@4c35a049: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:31.602 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:33.644 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:33.644 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:35.011 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:40.007 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:40.812 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:40.812 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-10] INFO  SimpleMessageListenerContainer - Restarting Consumer@6a8805f0: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:40.813 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:42.856 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:42.856 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:45.006 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:49.953 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:49.953 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-11] INFO  SimpleMessageListenerContainer - Restarting Consumer@21a4c585: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:49.954 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:50.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:52.004 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:49:52.004 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:49:55.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:49:59.152 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:49:59.152 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-12] INFO  SimpleMessageListenerContainer - Restarting Consumer@59ea06fe: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:49:59.153 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:00.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:01.192 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:01.192 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:05.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:08.312 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:08.312 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-13] INFO  SimpleMessageListenerContainer - Restarting Consumer@43d8c6f: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:08.313 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:10.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:10.357 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:10.357 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:15.007 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:17.500 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:17.500 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-14] INFO  SimpleMessageListenerContainer - Restarting Consumer@4ca6340b: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:17.502 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:19.535 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:19.535 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:20.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:25.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:26.663 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:26.663 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-15] INFO  SimpleMessageListenerContainer - Restarting Consumer@6e2720b5: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:26.664 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:28.710 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:28.710 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:30.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:35.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:35.852 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:35.852 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-16] INFO  SimpleMessageListenerContainer - Restarting Consumer@38f1de8f: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:35.853 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:37.911 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:37.911 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:40.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:45.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:45.019 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:45.019 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-17] INFO  SimpleMessageListenerContainer - Restarting Consumer@7fed026d: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:45.021 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:47.059 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:47.059 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:50.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:54.175 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:50:54.175 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-18] INFO  SimpleMessageListenerContainer - Restarting Consumer@2802b13e: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:50:54.176 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:50:55.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:50:56.224 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:50:56.224 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:00.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:03.379 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:03.379 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-19] INFO  SimpleMessageListenerContainer - Restarting Consumer@311d1c02: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:03.381 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:05.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:05.433 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:05.433 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:10.005 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:12.573 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:12.573 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-20] INFO  SimpleMessageListenerContainer - Restarting Consumer@20ab3eaa: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:12.574 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:14.630 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:14.630 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:15.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:20.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:21.742 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:21.742 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-21] INFO  SimpleMessageListenerContainer - Restarting Consumer@5c0d05a9: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:21.744 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:23.795 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:23.795 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:25.009 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:30.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:30.907 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:30.907 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-22] INFO  SimpleMessageListenerContainer - Restarting Consumer@30a2b0d2: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:30.909 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:32.935 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:32.935 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:35.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:40.015 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:40.062 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:40.062 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-23] INFO  SimpleMessageListenerContainer - Restarting Consumer@3bb6b140: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:40.063 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:42.113 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:42.113 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:45.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:49.210 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:49.210 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-24] INFO  SimpleMessageListenerContainer - Restarting Consumer@3a9f0771: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:49.212 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:50.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:51.259 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:51:51.259 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:51:55.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:51:58.398 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:51:58.398 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-25] INFO  SimpleMessageListenerContainer - Restarting Consumer@b79ae05: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:51:58.400 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:00.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:00.431 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:52:00.431 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:05.010 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:07.543 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:52:07.543 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-26] INFO  SimpleMessageListenerContainer - Restarting Consumer@6eeef6f1: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:52:07.544 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:09.598 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:52:09.598 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:10.006 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:15.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:16.727 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:52:16.727 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-27] INFO  SimpleMessageListenerContainer - Restarting Consumer@63689321: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:52:16.729 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:18.769 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:52:18.770 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:20.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:25.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:25.886 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:52:25.886 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-28] INFO  SimpleMessageListenerContainer - Restarting Consumer@3c029738: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:52:25.887 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:27.924 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:52:27.924 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:30.012 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:35.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:35.034 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:52:35.034 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-29] INFO  SimpleMessageListenerContainer - Restarting Consumer@2d7cea0a: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:52:35.035 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:37.090 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] ERROR SimpleMessageListenerContainer - Failed to check/redeclare auto-delete queue(s).
+24-10-28.10:52:37.090 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:40.006 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.10:52:44.174 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] WARN  SimpleMessageListenerContainer - Consumer raised exception, processing can restart if the connection factory supports it. Exception summary: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: connect
+24-10-28.10:52:44.174 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-30] INFO  SimpleMessageListenerContainer - Restarting Consumer@305d907f: tags=[[]], channel=null, acknowledgeMode=AUTO local queue size=0
+24-10-28.10:52:44.176 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-31] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.10:52:44.206 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-32] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.
+24-10-28.10:52:44.206 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-32] INFO  SimpleMessageListenerContainer - Successfully waited for workers to finish.
+24-10-28.11:02:39.126 [main            ] INFO  Application            - Starting Application using Java 1.8.0_321 on 4657001021 with PID 36404 (E:\code\java\idea\project\big-market-app\target\classes started by 14783 in E:\code\java\idea\project)
+24-10-28.11:02:39.128 [main            ] INFO  Application            - The following 1 profile is active: "dev"
+24-10-28.11:02:40.170 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+24-10-28.11:02:40.174 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+24-10-28.11:02:40.212 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+24-10-28.11:02:40.978 [main            ] INFO  TomcatWebServer        - Tomcat initialized with port(s): 8091 (http)
+24-10-28.11:02:40.987 [main            ] INFO  Http11NioProtocol      - Initializing ProtocolHandler ["http-nio-8091"]
+24-10-28.11:02:40.987 [main            ] INFO  StandardService        - Starting service [Tomcat]
+24-10-28.11:02:40.987 [main            ] INFO  StandardEngine         - Starting Servlet engine: [Apache Tomcat/9.0.75]
+24-10-28.11:02:41.150 [main            ] INFO  [/]                    - Initializing Spring embedded WebApplicationContext
+24-10-28.11:02:41.151 [main            ] INFO  ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1967 ms
+24-10-28.11:02:41.497 [main            ] INFO  Version                - Redisson 3.23.4
+24-10-28.11:02:42.314 [redisson-netty-2-5] INFO  MasterPubSubConnectionPool - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-28.11:02:42.333 [redisson-netty-2-23] INFO  MasterConnectionPool   - 10 connections initialized for 127.0.0.1/127.0.0.1:6379
+24-10-28.11:02:45.635 [main            ] INFO  EndpointLinksResolver  - Exposing 1 endpoint(s) beneath base path '/actuator'
+24-10-28.11:02:45.735 [main            ] INFO  Http11NioProtocol      - Starting ProtocolHandler ["http-nio-8091"]
+24-10-28.11:02:45.748 [main            ] INFO  TomcatWebServer        - Tomcat started on port(s): 8091 (http) with context path ''
+24-10-28.11:02:45.750 [main            ] INFO  CachingConnectionFactory - Attempting to connect to: [127.0.0.1:5672]
+24-10-28.11:02:45.788 [main            ] INFO  CachingConnectionFactory - Created new connection: rabbitConnectionFactory#cfacf0:0/SimpleConnection@3adbd038 [delegate=amqp://admin@127.0.0.1:5672/, localPort= 63656]
+24-10-28.11:02:45.867 [main            ] INFO  Application            - Started Application in 7.321 seconds (JVM running for 8.565)
+24-10-28.11:02:46.943 [RMI TCP Connection(3)-172.23.80.1] INFO  [/]                    - Initializing Spring DispatcherServlet 'dispatcherServlet'
+24-10-28.11:02:46.943 [RMI TCP Connection(3)-172.23.80.1] INFO  DispatcherServlet      - Initializing Servlet 'dispatcherServlet'
+24-10-28.11:02:46.944 [RMI TCP Connection(3)-172.23.80.1] INFO  DispatcherServlet      - Completed initialization in 1 ms
+24-10-28.11:02:46.945 [RMI TCP Connection(2)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-28.11:02:47.138 [RMI TCP Connection(2)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-28.11:02:47.155 [RMI TCP Connection(2)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Starting...
+24-10-28.11:02:47.172 [RMI TCP Connection(2)-172.23.80.1] INFO  HikariDataSource       - Retail_HikariCP - Start completed.
+24-10-28.11:02:50.009 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:02:55.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:00.015 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:05.007 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:10.005 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:15.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:20.010 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:25.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:30.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:35.007 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:40.008 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:45.000 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:50.013 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:03:55.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:00.009 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:05.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:10.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:15.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:20.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:25.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:30.009 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:35.001 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:40.002 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:45.014 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:50.003 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:04:55.004 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:05:00.007 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:05:05.010 [scheduling-1    ] INFO  UpdateAwardStockJob    - 定时任务，更新奖品消耗库存【延迟队列获取，降低对数据库的更新频次，不要产生竞争】
+24-10-28.11:05:16.758 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2] INFO  SimpleMessageListenerContainer - Waiting for workers to finish.

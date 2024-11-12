@@ -8,5 +8,6 @@ docker run \
 --name rabbitmq \
 -e RABBITMQ_DEFAULT_USER=admin   \
 -e RABBITMQ_DEFAULT_PASS=admin  \
+-net=host  \
 rabbitmq:3.12.9
 

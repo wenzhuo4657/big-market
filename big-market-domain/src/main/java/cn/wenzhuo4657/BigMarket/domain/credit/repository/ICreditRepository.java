@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.domain.credit.repository;
 
 import cn.wenzhuo4657.BigMarket.domain.credit.model.aggregate.TradeAggregate;
+import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 
 /**
  * @author: wenzhuo4657
@@ -9,4 +10,6 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.aggregate.TradeAggregate;
  */
 public interface ICreditRepository {
     void saveUserCreditTradeOrder(TradeAggregate tradeAggregate);
+
+    CreditAccountEntity queryUserCreditAccount(String userId);
 }

@@ -21,7 +21,7 @@ public class CreditAccountEntity {
 
     /** 用户ID */
     private String userId;
-    /** 可用积分，每次扣减的值 */
+    /** 可用积分， */
     private BigDecimal adjustAmount;
 
 }

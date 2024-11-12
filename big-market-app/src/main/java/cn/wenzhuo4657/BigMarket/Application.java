@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
 @SpringBootApplication
 @Configurable
 @MapperScan("cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao")

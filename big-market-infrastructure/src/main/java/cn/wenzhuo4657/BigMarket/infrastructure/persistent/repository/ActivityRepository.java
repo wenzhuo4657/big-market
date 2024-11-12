@@ -684,4 +684,43 @@ public class ActivityRepository implements IActivityRepository {
             dbRouter.clear();
         }
     }
+
+    @Override
+    public UnpaidActivityOrderEntity queryUnpaidActivityOrder(SkuRechargeEntity skuRechargeEntity) {
+        RaffleActivityOrder activityOrderReq=new RaffleActivityOrder();
+        activityOrderReq.setUserId(skuRechargeEntity.getUserId());
+        activityOrderReq.setSku(skuRechargeEntity.getSku());
+        RaffleActivityOrder activityOrderRes = raffleActivityOrderDao.queryUnpaidActivityOrder(activityOrderReq);
+        if (null==activityOrderRes)return null;
+        return UnpaidActivityOrderEntity.builder()
+                .userId(activityOrderRes.getUserId())
+                .orderId(activityOrderRes.getOrderId())
+                .outBusinessNo(activityOrderRes.getOutBusinessNo())
+                .payAmount(activityOrderRes.getPayAmount())
+                .build();
+    }
+
+    @Override
+    public List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId) {
+        List<RaffleActivitySku> raffleActivitySkus = raffleActivitySkuDao.queryActivitySkuListByActivityId(activityId);
+        List<SkuProductEntity> skuProductEntityList=new ArrayList<>(raffleActivitySkus.size());
+        for (RaffleActivitySku sku:raffleActivitySkus){
+            RaffleActivityCount raffleActivityCount = raffleActivityCountDao.queryRaffleActivityCountByActivityCountId(sku.getActivityCountId());
+            SkuProductEntity.ActivityCount activityCount=new SkuProductEntity.ActivityCount();
+            activityCount.setTotalCount(raffleActivityCount.getTotalCount());
+            activityCount.setMonthCount(raffleActivityCount.getMonthCount());
+            activityCount.setDayCount(raffleActivityCount.getDayCount());
+            skuProductEntityList.add(SkuProductEntity.builder()
+                    .sku(sku.getSku())
+                    .activityId(sku.getActivityId())
+                    .activityCountId(sku.getActivityCountId())
+                    .stockCount(sku.getStockCount())
+                    .stockCountSurplus(sku.getStockCountSurplus())
+                    .productAmount(sku.getProductAmount())
+                    .activityCount(activityCount)
+                    .build());
+
+        }
+        return skuProductEntityList;
+    }
 }

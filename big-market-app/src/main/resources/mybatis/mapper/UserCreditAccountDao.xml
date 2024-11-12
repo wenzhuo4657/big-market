@@ -28,5 +28,11 @@
             )
     </insert>
 
+    <select id="queryUserCreditAccount" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" resultMap="UserCreditAccountMap">
+        select  *
+        from user_credit_account
+        where  user_id=#{userId}
+    </select>
+
 </mapper>
 

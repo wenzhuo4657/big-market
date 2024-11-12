@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.DeliveryOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.UnpaidActivityOrderEntity;
 
 /**
  * @author: wenzhuo4657
@@ -11,13 +12,13 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
  */
 public interface IRaffleActivityAccountQuotaService {
     /**
-     * 创建 sku 账户充值订单，
+     * 创建 sku 账户充值订单，（并未涉及到支付，消费订单）
      *
      * @param skuRechargeEntity 活动商品充值实体对象
-     * @return 活动ID
+     * @return 未支付活动订单(会优先从数据库中查找)
      */
       //  wenzhuo TODO 2024/11/5 : 充值次数方面。 该方法存在问题，
-    String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
+    UnpaidActivityOrderEntity createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
     /**
      * 订单出货 - 积分充值

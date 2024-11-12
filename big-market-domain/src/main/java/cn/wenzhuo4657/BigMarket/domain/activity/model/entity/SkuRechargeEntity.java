@@ -1,7 +1,10 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.model.entity;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderTradeTypeVO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author: wenzhuo4657
@@ -9,6 +12,9 @@ import lombok.Data;
  * @description: 活动商品充值实体
  */
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SkuRechargeEntity {
     /** 用户ID */
     private String userId;

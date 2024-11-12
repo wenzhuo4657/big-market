@@ -112,4 +112,15 @@ public interface IActivityRepository {
     void doSaveNoPayOrder(CreateQuotaOrderAggregate createOrderAggregate);
 
     void doSaveCreditPayOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate);
+
+    /**
+     *  @author:wenzhuo4657
+        des:  查询未支付订单，
+    注意：
+    1，sql语句中没有进行排序而是使用where规定创建时间为一个月内，
+     2，使用limit 1分页返回第一条记录
+    */
+    UnpaidActivityOrderEntity queryUnpaidActivityOrder(SkuRechargeEntity skuRechargeEntity);
+
+    List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId);
 }

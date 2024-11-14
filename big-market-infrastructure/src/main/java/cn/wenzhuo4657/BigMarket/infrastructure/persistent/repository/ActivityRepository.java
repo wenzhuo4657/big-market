@@ -407,9 +407,12 @@ public class ActivityRepository implements IActivityRepository {
     public void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate) {
         String userId = createPartakeOrderAggregate.getUserId();
         Long activityId = createPartakeOrderAggregate.getActivityId();
+
         ActivityAccountEntity activityAccountEntity = createPartakeOrderAggregate.getActivityAccountEntity();
         ActivityAccountMonthEntity activityAccountMonthEntity = createPartakeOrderAggregate.getActivityAccountMonthEntity();
         ActivityAccountDayEntity activityAccountDayEntity = createPartakeOrderAggregate.getActivityAccountDayEntity();
+
+
         UserRaffleOrderEntity userRaffleOrderEntity = createPartakeOrderAggregate.getUserRaffleOrderEntity();
 
 

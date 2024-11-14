@@ -1,1 +1,0 @@
-24-11-09.10:06:02.373 [main            ] WARN  AwardRepository        - 更新中奖记录，重复更新拦截 userId:xiaofuge giveOutPrizesAggregate:{"userAwardRecordEntity":{"awardId":101,"awardState":"complete","orderId":"690124733440","userId":"xiaofuge"},"userCreditAwardEntity":{"creditAmount":0.799,"userId":"xiaofuge"},"userId":"xiaofuge"}

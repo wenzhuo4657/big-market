@@ -157,8 +157,8 @@ public class RaffleActivityController implements IRaffleActivityService {
     }
 
     @Override
-    @RequestMapping(value = "calendat_sign_rebate",method = RequestMethod.POST)
-    public Response<Boolean> calendarSignRebate(String userId) {
+    @RequestMapping(value = "calendar_sign_rebate",method = RequestMethod.POST)
+    public Response<Boolean> calendarSignRebate(@RequestParam String userId) {
         try {
             log.info("日历签到返利开始 userId:{}", userId);
             BehaviorEntity behaviorEntity = new BehaviorEntity();
@@ -216,7 +216,6 @@ public class RaffleActivityController implements IRaffleActivityService {
      *  @author:wenzhuo4657
         des:
      查询账户额度，
-     ps:会优先查看活动账户，如果不存在活动账户，则返回参数为0的实体
     */
 
     @RequestMapping(value = "query_user_activity_account", method = RequestMethod.POST)
@@ -224,10 +223,11 @@ public class RaffleActivityController implements IRaffleActivityService {
     public Response<UserActivityAccountResponseDTO> queryUserActivityAccount(@RequestBody UserActivityAccountRequestDTO request) {
         try{
             log.info("查询用户活动账户开始 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
-            if (StringUtils.isBlank(request.getUserId())||null==request.getActivityId()){
+            if (StringUtils.isBlank(request.getUserId()) || null==request.getActivityId()){
                 throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
             }
             ActivityAccountEntity activityAccountEntity=raffleActivityAccountQuotaService.queryActivityAccountEntity(request.getActivityId(), request.getUserId());
+
             UserActivityAccountResponseDTO userActivityAccountResponseDTO = UserActivityAccountResponseDTO.builder()
                     .totalCount(activityAccountEntity.getTotalCount())
                     .totalCountSurplus(activityAccountEntity.getTotalCountSurplus())
@@ -251,6 +251,8 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
     }
 
+
+    @RequestMapping(value = "query_sku_product_list_by_activity_id",method = RequestMethod.POST)
     @Override
     public Response<List<SkuProductResponseDTO>> querySkuProductListByActivityId(@RequestParam Long activityId) {
         try{
@@ -294,7 +296,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .build();
         }
     }
-
+    @RequestMapping(value = "query_user_credit_account", method = RequestMethod.POST)
     @Override
     public Response<BigDecimal> queryUserCreditAccount(String userId) {
         try {
@@ -316,7 +318,8 @@ public class RaffleActivityController implements IRaffleActivityService {
     }
 
     @Override
-    public Response<Boolean> creditPayExchangeSku(SkuProductShopCartRequestDTO request) {
+    @RequestMapping(value = "credit_pay_exchange_sku", method = RequestMethod.POST)
+    public Response<Boolean> creditPayExchangeSku(@RequestBody SkuProductShopCartRequestDTO request) {
         try{
             log.info("积分兑换商品开始 userId:{} sku:{}", request.getUserId(), request.getSku());
 

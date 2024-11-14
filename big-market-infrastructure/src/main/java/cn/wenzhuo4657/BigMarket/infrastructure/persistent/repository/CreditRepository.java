@@ -46,6 +46,8 @@ public class CreditRepository implements ICreditRepository {
         String userId = tradeAggregate.getUserId();
         CreditOrderEntity creditOrderEntity = tradeAggregate.getCreditOrderEntity();
         CreditAccountEntity creditAccountEntity = tradeAggregate.getCreditAccountEntity();
+  //  wenzhuo TODO 2024/11/13 :  待补全
+
 
 
 //        实体转化为po

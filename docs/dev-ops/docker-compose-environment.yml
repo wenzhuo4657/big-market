@@ -1,0 +1,105 @@
+# 创建并启动容器 docker-compose -f  --dry-run docker-compose-environment.yml up -d
+name: big-market-environment  #指定项目名称
+services:
+  mysql:
+    image: mysql:8.0.39
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password   # 指定身份验证插件，
+    restart: always
+    hostname: mysql
+    environment:
+      MYSQL_SQL_MODE:  ALLOW_INVALID_DATES
+      TZ: Asia/Shanghai
+      MYSQL_ROOT_PASSWORD: 465700
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/sql:/docker-entrypoint-initdb.d   # 该目录下的sql文件会在创建时自动执行
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
+    networks:
+      - big-market-network
+
+  redis:
+    image: redis:6.2
+    container_name: redis
+    restart:  always
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: redis  # 声明一个用于服务容器的自定义主机名
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+        - big-market-network
+
+  rabbitmq:
+    image: rabbitmq:3.12.9
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    command: rabbitmq-server
+    volumes:
+      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      - big-market-network
+
+
+## 管理工具
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    container_name: phpmyadmin
+    hostname: phpmyadmin
+    ports:
+      - 8899:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - MYSQL_ROOT_PASSWORD=465700
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - big-market-network
+
+  redis-admin:
+    image: spryker/redis-commander:0.8.0
+    container_name: redis-admin
+    hostname: redis-commander
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=admin
+      - LANG=C.UTF-8
+      - LANGUAGE=C.UTF-8
+      - LC_ALL=C.UTF-8
+    networks:
+      - big-market-network
+    depends_on:
+      redis:
+        condition: service_healthy
+
+
+networks:
+  big-market-network:
+    driver: bridge
+
+
+

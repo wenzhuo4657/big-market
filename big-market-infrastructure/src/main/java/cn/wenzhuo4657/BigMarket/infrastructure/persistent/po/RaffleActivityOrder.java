@@ -21,7 +21,6 @@ public class RaffleActivityOrder {
     /**
      * 自增ID
      */
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
@@ -73,6 +72,7 @@ public class RaffleActivityOrder {
      * 月次数
      */
     private Integer monthCount;
+
     /**
      * 支付金额【积分】
      */

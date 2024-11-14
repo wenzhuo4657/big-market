@@ -17,68 +17,57 @@ public interface IActivityRepository {
     ActivitySkuEntity queryActivitySku(Long sku);
 
     /**
-     *  @author:wenzhuo4657
-        des: 保证活动的信息在redis中
-    */
+     * @author:wenzhuo4657 des: 保证活动的信息在redis中
+     */
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
 
     /**
-     *  @author:wenzhuo4657
-        des: 保证活动的初始个人配置
-    */
+     * @author:wenzhuo4657 des: 保证活动的初始个人配置
+     */
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
 
 
-
     /**
-     *  @author:wenzhuo4657
-        des: redis缓存：如果不存在对应key，则缓存
-    */
+     * @author:wenzhuo4657 des: redis缓存：如果不存在对应key，则缓存
+     */
     void cacheActivitySkuStockCount(String cacheKey, Integer stockCount);
 
     /**
-     *  @author:wenzhuo4657
-        des: 扣减对应sku库存
-    */
+     * @author:wenzhuo4657 des: 扣减对应sku库存
+     */
 
     boolean subtractionActivitySkuStock(Long sku, String cacheKey, Date endDateTime);
 
     /**
-     *  @author:wenzhuo4657
-        des: 推送消费到redis延迟队列中，（该队列用于更新库存到mysql中）
-    */
+     * @author:wenzhuo4657 des: 推送消费到redis延迟队列中，（该队列用于更新库存到mysql中）
+     */
     void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO);
 
     /**
-     *  @author:wenzhuo4657
-        des: 获取消费队列头部，并使用泛型约束其取出的类型
-    */
+     * @author:wenzhuo4657 des: 获取消费队列头部，并使用泛型约束其取出的类型
+     */
     ActivitySkuStockKeyVO takeQueueValue();
 
     /**
-     *  @author:wenzhuo4657
-        des: 清空redis中消费队列
-    */
+     * @author:wenzhuo4657 des: 清空redis中消费队列
+     */
     void clearQueueValue();
 
     /**
-     *  @author:wenzhuo4657
-        des: 更新mysql库存，实际上是库存-1，并更新updata-time字段。
-    */
+     * @author:wenzhuo4657 des: 更新mysql库存，实际上是库存-1，并更新updata-time字段。
+     */
     void updateActivitySkuStock(Long sku);
 
     /**
-     *  @author:wenzhuo4657
-        des: 清空库存。
-    */
+     * @author:wenzhuo4657 des: 清空库存。
+     */
     void clearActivitySkuStock(Long sku);
 
 
     /**
-     *  @author:wenzhuo4657
-        des: 查询参与活动订单，
-     该订单实际上代表成功参加活动，如果有则可以继续向下执行，否则不可以。
-    */
+     * @author:wenzhuo4657 des: 查询参与活动订单，
+     * 该订单实际上代表成功参加活动，如果有则可以继续向下执行，否则不可以。
+     */
     UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
 
     ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId);
@@ -95,18 +84,16 @@ public interface IActivityRepository {
     Integer queryRaffleActivityAccountDayPartakeCount(Long activityId, String userId);
 
     Integer queryRaffleActivityAccountPartakeCount(String userId, Long activityId);
-/**
- *  @author:wenzhuo4657
-    des: 查询用户活动次数实体，且注意会先去查询活动账户，如果没有对应活动，则不会去查询个人账户，直接返回全为0的实体。
- 着实际上和参入活动的流程是一样的，同样是先从活动账户扣减，然后再扣减个人账户
-*/
+
+    /**
+     * @author:wenzhuo4657 des: 查询用户活动次数实体，且注意会先去查询总账户，如果没有，则直接返回全为0的实体。
+     */
     ActivityAccountEntity queryActivityAccountEntity(Long activityId, String userId);
 
 
     /**
-     *  @author:wenzhuo4657
-        des: 消费活动订单（注意和用户地参入订单区分），并更新账户额度
-    */
+     * @author:wenzhuo4657 des: 消费活动订单（注意和用户地参入订单区分），并更新账户额度
+     */
     void updateOrder(DeliveryOrderEntity deliveryOrderEntity);
 
     void doSaveNoPayOrder(CreateQuotaOrderAggregate createOrderAggregate);
@@ -114,12 +101,11 @@ public interface IActivityRepository {
     void doSaveCreditPayOrder(CreateQuotaOrderAggregate createQuotaOrderAggregate);
 
     /**
-     *  @author:wenzhuo4657
-        des:  查询未支付订单，
-    注意：
-    1，sql语句中没有进行排序而是使用where规定创建时间为一个月内，
-     2，使用limit 1分页返回第一条记录
-    */
+     * @author:wenzhuo4657 des:  查询未支付订单，
+     * 注意：
+     * 1，sql语句中没有进行排序而是使用where规定创建时间为一个月内，
+     * 2，使用limit 1分页返回第一条记录
+     */
     UnpaidActivityOrderEntity queryUnpaidActivityOrder(SkuRechargeEntity skuRechargeEntity);
 
     List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId);

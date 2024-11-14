@@ -1,4 +1,4 @@
-# 该文本用于将mysql、mq等其他服务使用docker单独安装，其配置与docker-compose.yml一直，只是使用docker run命令启动。‘
+# 该文本用于将mysql、mq等其他服务使用docker单独安装，其配置与docker-compose.yml一致，只是使用docker run命令启动。‘
 
 
 # rabbitmq,初始哈用户名密码均为admin

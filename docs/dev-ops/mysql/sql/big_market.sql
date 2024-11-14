@@ -11,11 +11,13 @@
  Target Server Version : 80039
  File Encoding         : 65001
 
- Date: 06/11/2024 13:27:37
+ Date: 14/11/2024 19:53:11
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+CREATE database if NOT EXISTS `big_market` default character set utf8mb4;
+use `big_market`;
 
 -- ----------------------------
 -- Table structure for award
@@ -29,7 +31,8 @@ CREATE TABLE `award`  (
   `award_desc` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '奖品内容描述',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uq_award_id`(`award_id` ASC) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '奖品表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -66,7 +69,7 @@ CREATE TABLE `daily_behavior_rebate`  (
 -- ----------------------------
 -- Records of daily_behavior_rebate
 -- ----------------------------
-INSERT INTO `daily_behavior_rebate` VALUES (1, 'sign', '签到返利-sku额度', 'sku', '9011', 'open', '2024-04-30 09:32:46', '2024-04-30 18:05:23');
+INSERT INTO `daily_behavior_rebate` VALUES (1, 'sign', '签到返利-sku额度', 'sku', '9011', 'close', '2024-04-30 09:32:46', '2024-06-01 14:00:42');
 INSERT INTO `daily_behavior_rebate` VALUES (2, 'sign', '签到返利-积分', 'integral', '10', 'open', '2024-04-30 09:32:46', '2024-04-30 18:05:27');
 
 -- ----------------------------
@@ -115,7 +118,7 @@ CREATE TABLE `raffle_activity_count`  (
 -- ----------------------------
 -- Records of raffle_activity_count
 -- ----------------------------
-INSERT INTO `raffle_activity_count` VALUES (1, 11101, 10, 10, 10, '2024-03-09 10:15:42', '2024-05-01 14:34:16');
+INSERT INTO `raffle_activity_count` VALUES (1, 11101, 100, 100, 100, '2024-03-09 10:15:42', '2024-05-04 13:06:45');
 
 -- ----------------------------
 -- Table structure for raffle_activity_sku
@@ -128,6 +131,7 @@ CREATE TABLE `raffle_activity_sku`  (
   `activity_count_id` bigint NOT NULL COMMENT '活动个人参与次数ID',
   `stock_count` int NOT NULL COMMENT '商品库存',
   `stock_count_surplus` int NOT NULL COMMENT '剩余库存',
+  `product_amount` decimal(10, 2) NOT NULL COMMENT '商品金额【积分】',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
@@ -138,7 +142,7 @@ CREATE TABLE `raffle_activity_sku`  (
 -- ----------------------------
 -- Records of raffle_activity_sku
 -- ----------------------------
-INSERT INTO `raffle_activity_sku` VALUES (1, 9011, 100301, 11101, 100000, 99927, '2024-03-16 11:41:09', '2024-05-03 13:28:50');
+INSERT INTO `raffle_activity_sku` VALUES (1, 9011, 100301, 11101, 100000, 99886, 1.68, '2024-03-16 11:41:09', '2024-11-13 18:25:55');
 
 -- ----------------------------
 -- Table structure for rule_tree
@@ -213,16 +217,16 @@ CREATE TABLE `rule_tree_node_line`  (
 -- ----------------------------
 -- Records of rule_tree_node_line
 -- ----------------------------
-INSERT INTO `rule_tree_node_line` VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-02-15 07:55:08');
-INSERT INTO `rule_tree_node_line` VALUES (2, 'tree_lock_1', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '0000-00-00 00:00:00', '2024-02-15 07:55:11');
-INSERT INTO `rule_tree_node_line` VALUES (3, 'tree_lock_1', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-02-15 07:55:13');
+INSERT INTO `rule_tree_node_line` VALUES (1, 'tree_lock_1', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:23');
+INSERT INTO `rule_tree_node_line` VALUES (2, 'tree_lock_1', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '2024-02-15 07:37:31', '2024-11-14 19:52:28');
+INSERT INTO `rule_tree_node_line` VALUES (3, 'tree_lock_1', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:30');
 INSERT INTO `rule_tree_node_line` VALUES (4, 'tree_luck_award', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-02-15 07:39:28');
-INSERT INTO `rule_tree_node_line` VALUES (5, 'tree_lock_2', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-02-15 07:55:08');
-INSERT INTO `rule_tree_node_line` VALUES (6, 'tree_lock_2', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '0000-00-00 00:00:00', '2024-02-15 07:55:11');
-INSERT INTO `rule_tree_node_line` VALUES (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-02-15 07:55:13');
-INSERT INTO `rule_tree_node_line` VALUES (8, 'tree_lock_3', 'rule_lock', 'rule_luck_award', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-04-27 13:07:39');
-INSERT INTO `rule_tree_node_line` VALUES (9, 'tree_lock_3', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '0000-00-00 00:00:00', '2024-02-15 07:55:11');
-INSERT INTO `rule_tree_node_line` VALUES (10, 'tree_lock_3', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '0000-00-00 00:00:00', '2024-02-15 07:55:13');
+INSERT INTO `rule_tree_node_line` VALUES (5, 'tree_lock_2', 'rule_lock', 'rule_stock', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:31');
+INSERT INTO `rule_tree_node_line` VALUES (6, 'tree_lock_2', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '2024-02-15 07:37:31', '2024-11-14 19:52:33');
+INSERT INTO `rule_tree_node_line` VALUES (7, 'tree_lock_2', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:35');
+INSERT INTO `rule_tree_node_line` VALUES (8, 'tree_lock_3', 'rule_lock', 'rule_luck_award', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:36');
+INSERT INTO `rule_tree_node_line` VALUES (9, 'tree_lock_3', 'rule_lock', 'rule_luck_award', 'EQUAL', 'TAKE_OVER', '2024-02-15 07:37:31', '2024-11-14 19:52:40');
+INSERT INTO `rule_tree_node_line` VALUES (10, 'tree_lock_3', 'rule_stock', 'rule_luck_award', 'EQUAL', 'ALLOW', '2024-02-15 07:37:31', '2024-11-14 19:52:42');
 
 -- ----------------------------
 -- Table structure for strategy
@@ -294,14 +298,14 @@ INSERT INTO `strategy_award` VALUES (18, 100005, 102, '随机积分', NULL, 8000
 INSERT INTO `strategy_award` VALUES (19, 100005, 103, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:50');
 INSERT INTO `strategy_award` VALUES (20, 100005, 104, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:51');
 INSERT INTO `strategy_award` VALUES (21, 100005, 105, '随机积分', NULL, 80000, 80000, 0.0010, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:52');
-INSERT INTO `strategy_award` VALUES (22, 100006, 101, '随机积分', NULL, 100, 61, 0.0200, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-04-27 13:38:05');
-INSERT INTO `strategy_award` VALUES (23, 100006, 102, 'OpenAI会员卡', NULL, 100, 19, 0.0300, 'tree_luck_award', 2, '2023-12-09 09:38:31', '2024-04-27 15:00:20');
-INSERT INTO `strategy_award` VALUES (24, 100006, 103, '支付优惠券', NULL, 100, 43, 0.0300, 'tree_luck_award', 3, '2023-12-09 09:38:31', '2024-04-27 13:29:35');
-INSERT INTO `strategy_award` VALUES (25, 100006, 104, '小米台灯', NULL, 100, 36, 0.0300, 'tree_luck_award', 4, '2023-12-09 09:38:31', '2024-04-27 15:00:30');
+INSERT INTO `strategy_award` VALUES (22, 100006, 101, '随机积分', NULL, 100, 57, 0.0200, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-05-04 15:37:00');
+INSERT INTO `strategy_award` VALUES (23, 100006, 102, 'OpenAI会员卡', NULL, 100, 17, 0.0300, 'tree_luck_award', 2, '2023-12-09 09:38:31', '2024-05-04 13:00:15');
+INSERT INTO `strategy_award` VALUES (24, 100006, 103, '支付优惠券', NULL, 100, 40, 0.0300, 'tree_luck_award', 3, '2023-12-09 09:38:31', '2024-05-04 15:36:15');
+INSERT INTO `strategy_award` VALUES (25, 100006, 104, '小米台灯', NULL, 100, 31, 0.0300, 'tree_luck_award', 4, '2023-12-09 09:38:31', '2024-05-04 15:36:45');
 INSERT INTO `strategy_award` VALUES (26, 100006, 105, '小米su7周体验', '抽奖3次后解锁', 100, 38, 0.0300, 'tree_lock_3', 5, '2023-12-09 09:38:31', '2024-04-27 13:08:16');
-INSERT INTO `strategy_award` VALUES (27, 100006, 106, '轻奢办公椅', '抽奖2次后解锁', 100, 25, 0.0300, 'tree_lock_2', 6, '2023-12-09 09:38:31', '2024-04-27 13:30:05');
-INSERT INTO `strategy_award` VALUES (28, 100006, 107, '小霸王游戏机', '抽奖1次后解锁', 100, 24, 0.0300, 'tree_lock_1', 7, '2023-12-09 09:38:31', '2024-04-27 13:36:35');
-INSERT INTO `strategy_award` VALUES (29, 100006, 108, '暴走玩偶', NULL, 100, 32, 0.0300, 'tree_luck_award', 8, '2023-12-09 09:38:31', '2024-05-01 14:59:35');
+INSERT INTO `strategy_award` VALUES (27, 100006, 106, '轻奢办公椅', '抽奖2次后解锁', 100, 23, 0.0300, 'tree_lock_2', 6, '2023-12-09 09:38:31', '2024-05-04 15:31:45');
+INSERT INTO `strategy_award` VALUES (28, 100006, 107, '小霸王游戏机', '抽奖1次后解锁', 100, 22, 0.0300, 'tree_lock_1', 7, '2023-12-09 09:38:31', '2024-05-04 15:31:55');
+INSERT INTO `strategy_award` VALUES (29, 100006, 108, '暴走玩偶', NULL, 100, 27, 0.0300, 'tree_luck_award', 8, '2023-12-09 09:38:31', '2024-05-04 15:37:05');
 
 -- ----------------------------
 -- Table structure for strategy_rule
@@ -325,9 +329,9 @@ CREATE TABLE `strategy_rule`  (
 -- ----------------------------
 -- Records of strategy_rule
 -- ----------------------------
-INSERT INTO `strategy_rule` VALUES (13, 100001, NULL, 1, 'rule_weight', '60:102 4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-03 10:38:24');
+INSERT INTO `strategy_rule` VALUES (13, 100001, NULL, 1, 'rule_weight', '60:102,103,104,105 200:106,107 1000:105', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-04 12:44:47');
 INSERT INTO `strategy_rule` VALUES (14, 100001, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底', '2023-12-09 12:59:45', '2024-02-14 18:16:20');
-INSERT INTO `strategy_rule` VALUES (15, 100006, NULL, 1, 'rule_weight', '60:102 4000:102,103,104,105 5000:102,103,104,105,106,107 6000:102,103,104,105,106,107,108', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-03 10:38:28');
+INSERT INTO `strategy_rule` VALUES (15, 100006, NULL, 1, 'rule_weight', '10:102,103 70:106,107 1000:104,105', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-04 15:41:16');
 INSERT INTO `strategy_rule` VALUES (16, 100006, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底', '2023-12-09 12:59:45', '2024-02-14 18:16:20');
 
 SET FOREIGN_KEY_CHECKS = 1;

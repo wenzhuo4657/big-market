@@ -18,6 +18,8 @@ public interface UserCreditAccountDao {
 
     int updateAddAmount(UserCreditAccount userCreditAccountReq);
 
+
+    @DBRouter
     UserCreditAccount queryUserCreditAccount(UserCreditAccount userCreditAccountReq);
 }
 

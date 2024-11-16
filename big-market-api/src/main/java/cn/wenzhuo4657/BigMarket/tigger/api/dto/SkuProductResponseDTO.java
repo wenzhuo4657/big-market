@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.tigger.api.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @description: sku商品响应对象，（用于查询积分商品返回值）
  */
 @Data
-public class SkuProductResponseDTO {
+public class SkuProductResponseDTO  implements Serializable {
     /**
      * 商品sku
      */

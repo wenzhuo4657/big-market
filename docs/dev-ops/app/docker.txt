@@ -11,3 +11,25 @@ docker run \
 -net=host  \
 rabbitmq:3.12.9
 
+
+## nacos  本地环境
+docker run -d \
+  --name nacos \
+  --restart always \
+  -p 8848:8848 \
+  -p 9848:9848 \
+  -p 3308:3308  \
+  -e PREFER_HOST_MODE=hostname \
+  -e MODE=standalone \
+  -e SPRING_DATASOURCE_PLATFORM=mysql \
+  -e MYSQL_SERVICE_HOST=mysql \
+  -e MYSQL_SERVICE_DB_NAME=nacos_config \
+  -e MYSQL_SERVICE_PORT=3308 \
+  -e MYSQL_SERVICE_USER=root \
+  -e MYSQL_SERVICE_PASSWORD=465700 \
+  -e MYSQL_SERVICE_DB_PARAM="characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useSSL=false&allowPublicKeyRetrieval=true" \
+  -e NACOS_AUTH_IDENTITY_KEY=2222 \
+  -e NACOS_AUTH_IDENTITY_VALUE=2xxx \
+  -e NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789 \
+  nacos/nacos-server:v2.4.3
+

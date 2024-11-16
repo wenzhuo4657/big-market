@@ -124,6 +124,19 @@ redis:
       pool-size: 64
       minIdleSize: 10
       password: 465700
+dubbo:
+  application:
+    name: big-market
+    version: 1.0
+  registry:
+    id: nacos-registry
+    address: nacos://127.0.0.1:8848
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: cn.wenzhuo4657.trigger.api
+
 
 
 
@@ -132,4 +145,6 @@ logging:
   level:
     root: info
   config: classpath:logback-spring.xml
+
+
 

@@ -2057,3 +2057,514 @@ Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '�
 	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:426)
 	... 74 common frames omitted
 24-11-16.14:26:04.050 [Retail_HikariCP housekeeper] WARN  HikariPool             - Retail_HikariCP - Thread starvation or clock leap detected (housekeeper delta=1h42m3s516ms942µs499ns).
+24-11-16.17:50:55.850 [main            ] WARN  ServiceAnnotationPostProcessor -  [DUBBO] No class annotated by Dubbo @Service was found under package [cn.wenzhuo4657.trigger.api], ignore re-scanned classes: 0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:51:09.155 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:51:09.155 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:51:13.592 [main            ] WARN  ServiceConfig          -  [DUBBO] Use random available port(20880) for protocol dubbo, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:51:29.195 [Thread-12       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Start destroying common HttpClient
+24-11-16.17:51:29.195 [Thread-18       ] WARN  NotifyCenter           - [NotifyCenter] Start destroying Publisher
+24-11-16.17:51:29.195 [Thread-18       ] WARN  NotifyCenter           - [NotifyCenter] Destruction of the end
+24-11-16.17:51:29.195 [Thread-12       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Destruction of the end
+24-11-16.17:52:17.980 [main            ] WARN  ServiceAnnotationPostProcessor -  [DUBBO] No class annotated by Dubbo @Service was found under package [cn.wenzhuo4657.trigger.api], ignore re-scanned classes: 0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:30.095 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:30.095 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:34.407 [main            ] WARN  ServiceConfig          -  [DUBBO] Use random available port(20880) for protocol dubbo, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:54.298 [main            ] ERROR DefaultModuleDeployer  -  [DUBBO] Dubbo Module[1.1.1] start failed: java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: , dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:217)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.register(ListenerRegistryWrapper.java:59)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:211)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:248)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServiceInternal(DefaultModuleDeployer.java:341)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServices(DefaultModuleDeployer.java:313)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:145)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:186)
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:204)
+	... 35 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:180)
+	... 36 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 42 common frames omitted
+24-11-16.17:52:54.300 [main            ] ERROR DefaultApplicationDeployer -  [DUBBO] Dubbo Application[1.1](big-market) found failed module: Dubbo Module[1.1.1], dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:217)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.register(ListenerRegistryWrapper.java:59)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:211)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:248)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServiceInternal(DefaultModuleDeployer.java:341)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServices(DefaultModuleDeployer.java:313)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:145)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:186)
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:204)
+	... 35 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:180)
+	... 36 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 42 common frames omitted
+24-11-16.17:52:54.300 [main            ] ERROR DefaultApplicationDeployer -  [DUBBO] Dubbo Application[1.1](big-market) found failed module: Dubbo Module[1.1.1], dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:217)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.register(ListenerRegistryWrapper.java:59)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:211)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:248)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServiceInternal(DefaultModuleDeployer.java:341)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServices(DefaultModuleDeployer.java:313)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:145)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:186)
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:204)
+	... 35 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:180)
+	... 36 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 42 common frames omitted
+24-11-16.17:52:56.291 [main            ] ERROR NacosRegistry          -  [DUBBO] Failed to subscribe provider://169.254.81.35:20880/org.apache.dubbo.metadata.MetadataService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&connections=1&corethreads=2&delay=0&deprecated=false&dubbo=2.0.2&dynamic=true&executes=100&generic=false&getAndListenInstanceMetadata.1.callback=true&getAndListenInstanceMetadata.return=true&getAndListenInstanceMetadata.sent=true&group=big-market&interface=org.apache.dubbo.metadata.MetadataService&methods=getMetadataURL,isMetadataService,getAndListenInstanceMetadata,getExportedURLs,serviceName,version,getSubscribedURLs,exportInstanceMetadata,getExportedServiceURLs,getMetadataInfo,toSortedStrings,getMetadataInfos,getServiceDefinition,getInstanceMetadataChangedListenerMap&pid=16344&qos.enable=false&register=false&release=3.0.9&revision=3.0.9&service-name-mapping=true&side=provider&threadpool=cached&threads=100&timestamp=1731750774641&version=1.0.0, waiting for retry, cause: Failed to subscribe provider://169.254.81.35:20880/org.apache.dubbo.metadata.MetadataService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&connections=1&corethreads=2&delay=0&deprecated=false&dubbo=2.0.2&dynamic=true&executes=100&generic=false&getAndListenInstanceMetadata.1.callback=true&getAndListenInstanceMetadata.return=true&getAndListenInstanceMetadata.sent=true&group=big-market&interface=org.apache.dubbo.metadata.MetadataService&methods=getMetadataURL,isMetadataService,getAndListenInstanceMetadata,getExportedURLs,serviceName,version,getSubscribedURLs,exportInstanceMetadata,getExportedServiceURLs,getMetadataInfo,toSortedStrings,getMetadataInfos,getServiceDefinition,getInstanceMetadataChangedListenerMap&pid=16344&qos.enable=false&register=false&release=3.0.9&revision=3.0.9&service-name-mapping=true&side=provider&threadpool=cached&threads=100&timestamp=1731750774641&version=1.0.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: , dubbo version: 3.0.9, current host: 169.254.81.35
+org.apache.dubbo.rpc.RpcException: Failed to subscribe provider://169.254.81.35:20880/org.apache.dubbo.metadata.MetadataService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&connections=1&corethreads=2&delay=0&deprecated=false&dubbo=2.0.2&dynamic=true&executes=100&generic=false&getAndListenInstanceMetadata.1.callback=true&getAndListenInstanceMetadata.return=true&getAndListenInstanceMetadata.sent=true&group=big-market&interface=org.apache.dubbo.metadata.MetadataService&methods=getMetadataURL,isMetadataService,getAndListenInstanceMetadata,getExportedURLs,serviceName,version,getSubscribedURLs,exportInstanceMetadata,getExportedServiceURLs,getMetadataInfo,toSortedStrings,getMetadataInfos,getServiceDefinition,getInstanceMetadataChangedListenerMap&pid=16344&qos.enable=false&register=false&release=3.0.9&revision=3.0.9&service-name-mapping=true&side=provider&threadpool=cached&threads=100&timestamp=1731750774641&version=1.0.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doSubscribe(NacosRegistry.java:259)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doSubscribe(NacosRegistry.java:215)
+	at org.apache.dubbo.registry.support.FailbackRegistry.subscribe(FailbackRegistry.java:297)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.subscribe(ListenerRegistryWrapper.java:111)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:260)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.metadata.ConfigurableMetadataServiceExporter.export(ConfigurableMetadataServiceExporter.java:70)
+	at org.apache.dubbo.config.metadata.ExporterDeployListener.onModuleStarted(ExporterDeployListener.java:70)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.exportMetadataService(DefaultApplicationDeployer.java:923)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.prepareApplicationInstance(DefaultApplicationDeployer.java:613)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.checkState(DefaultApplicationDeployer.java:824)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.notifyModuleChanged(DefaultApplicationDeployer.java:812)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.onModuleFailed(DefaultModuleDeployer.java:267)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:174)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doSubscribe(NamingGrpcClientProxy.java:229)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.subscribe(NamingGrpcClientProxy.java:214)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.subscribe(NamingClientProxyDelegate.java:147)
+	at com.alibaba.nacos.client.naming.NacosNamingService.getAllInstances(NacosNamingService.java:229)
+	at com.alibaba.nacos.client.naming.NacosNamingService.getAllInstances(NacosNamingService.java:212)
+	at com.alibaba.nacos.client.naming.NacosNamingService.getAllInstances(NacosNamingService.java:190)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.getAllInstances(NacosNamingServiceWrapper.java:55)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doSubscribe(NacosRegistry.java:233)
+	... 41 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 49 common frames omitted
+24-11-16.17:52:56.651 [main            ] ERROR DefaultApplicationDeployer -  [DUBBO] Register instance error, dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.RuntimeException: Request nacos server failed: 
+	at org.apache.dubbo.common.function.ThrowableConsumer.execute(ThrowableConsumer.java:51)
+	at org.apache.dubbo.common.function.ThrowableConsumer.execute(ThrowableConsumer.java:64)
+	at org.apache.dubbo.registry.nacos.NacosServiceDiscovery.doRegister(NacosServiceDiscovery.java:70)
+	at org.apache.dubbo.registry.client.AbstractServiceDiscovery.register(AbstractServiceDiscovery.java:100)
+	at java.util.ArrayList.forEach(ArrayList.java:1259)
+	at org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataUtils.registerMetadataAndInstance(ServiceInstanceMetadataUtils.java:200)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.registerServiceInstance(DefaultApplicationDeployer.java:723)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.prepareApplicationInstance(DefaultApplicationDeployer.java:616)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.checkState(DefaultApplicationDeployer.java:824)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.notifyModuleChanged(DefaultApplicationDeployer.java:812)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.onModuleFailed(DefaultModuleDeployer.java:267)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:174)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosServiceDiscovery.lambda$doRegister$0(NacosServiceDiscovery.java:75)
+	at org.apache.dubbo.common.function.ThrowableConsumer.execute(ThrowableConsumer.java:49)
+	... 28 common frames omitted
+24-11-16.17:52:56.652 [main            ] ERROR DefaultApplicationDeployer -  [DUBBO] Dubbo Application[1.1](big-market) found failed module: Dubbo Module[1.1.1], dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:217)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.register(ListenerRegistryWrapper.java:59)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:211)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:248)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServiceInternal(DefaultModuleDeployer.java:341)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServices(DefaultModuleDeployer.java:313)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:145)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:186)
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:204)
+	... 35 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:180)
+	... 36 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 42 common frames omitted
+24-11-16.17:52:56.945 [main            ] ERROR SpringApplication      - Application run failed
+java.lang.IllegalStateException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:217)
+	at org.apache.dubbo.registry.ListenerRegistryWrapper.register(ListenerRegistryWrapper.java:59)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.register(RegistryProtocol.java:211)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.export(RegistryProtocol.java:248)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.export(ProtocolListenerWrapper.java:64)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.export(QosProtocolWrapper.java:74)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.export(ProtocolFilterWrapper.java:58)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.export(ProtocolSerializationWrapper.java:47)
+	at org.apache.dubbo.rpc.Protocol$Adaptive.export(Protocol$Adaptive.java)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrl(ServiceConfig.java:641)
+	at org.apache.dubbo.config.ServiceConfig.exportRemote(ServiceConfig.java:619)
+	at org.apache.dubbo.config.ServiceConfig.exportUrl(ServiceConfig.java:578)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrlsFor1Protocol(ServiceConfig.java:410)
+	at org.apache.dubbo.config.ServiceConfig.doExportUrls(ServiceConfig.java:396)
+	at org.apache.dubbo.config.ServiceConfig.doExport(ServiceConfig.java:361)
+	at org.apache.dubbo.config.ServiceConfig.export(ServiceConfig.java:233)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServiceInternal(DefaultModuleDeployer.java:341)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.exportServices(DefaultModuleDeployer.java:313)
+	at org.apache.dubbo.config.deploy.DefaultModuleDeployer.start(DefaultModuleDeployer.java:145)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextRefreshedEvent(DubboDeployApplicationListener.java:111)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:100)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:940)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:586)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to register dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:186)
+	at org.apache.dubbo.registry.support.FailbackRegistry.register(FailbackRegistry.java:204)
+	... 35 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doRegisterService(NamingGrpcClientProxy.java:128)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.registerService(NamingGrpcClientProxy.java:114)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.registerService(NamingClientProxyDelegate.java:94)
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:145)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.registerInstance(NacosNamingServiceWrapper.java:59)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doRegister(NacosRegistry.java:180)
+	... 36 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 42 common frames omitted
+24-11-16.17:52:57.275 [main            ] WARN  NacosRegistry          -  [DUBBO] Failed to unregister url dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9 on destroy, cause: Failed to unregister dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to unregister dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: , dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.IllegalStateException: Failed to unregister dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to registry 192.168.1.108:8848, cause: Failed to unregister dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.support.FailbackRegistry.unregister(FailbackRegistry.java:266)
+	at org.apache.dubbo.registry.support.AbstractRegistry.destroy(AbstractRegistry.java:522)
+	at org.apache.dubbo.registry.support.FailbackRegistry.destroy(FailbackRegistry.java:407)
+	at org.apache.dubbo.registry.support.RegistryManager.destroyAll(RegistryManager.java:105)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.destroyRegistries(DefaultApplicationDeployer.java:1019)
+	at org.apache.dubbo.config.deploy.DefaultApplicationDeployer.preDestroy(DefaultApplicationDeployer.java:767)
+	at org.apache.dubbo.rpc.model.ApplicationModel.onDestroy(ApplicationModel.java:244)
+	at org.apache.dubbo.rpc.model.ScopeModel.destroy(ScopeModel.java:110)
+	at org.apache.dubbo.rpc.model.ApplicationModel.tryDestroy(ApplicationModel.java:355)
+	at org.apache.dubbo.rpc.model.ModuleModel.onDestroy(ModuleModel.java:131)
+	at org.apache.dubbo.rpc.model.ScopeModel.destroy(ScopeModel.java:110)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextClosedEvent(DubboDeployApplicationListener.java:130)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:102)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1060)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1023)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:317)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+Caused by: org.apache.dubbo.rpc.RpcException: Failed to unregister dubbo://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=16344&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750754403&version=1.0 to nacos nacos://192.168.1.108:8848/org.apache.dubbo.registry.RegistryService?REGISTRY_CLUSTER=nacos-registry&application=big-market&application.version=1.0&dubbo=2.0.2&interface=org.apache.dubbo.registry.RegistryService&pid=16344&qos.enable=false&release=3.0.9, cause: Request nacos server failed: 
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doUnregister(NacosRegistry.java:200)
+	at org.apache.dubbo.registry.support.FailbackRegistry.unregister(FailbackRegistry.java:253)
+	... 26 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Request nacos server failed: 
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:288)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.doDeregisterService(NamingGrpcClientProxy.java:152)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.deregisterService(NamingGrpcClientProxy.java:138)
+	at com.alibaba.nacos.client.naming.remote.NamingClientProxyDelegate.deregisterService(NamingClientProxyDelegate.java:99)
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:180)
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:170)
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:155)
+	at org.apache.dubbo.registry.nacos.NacosNamingServiceWrapper.deregisterInstance(NacosNamingServiceWrapper.java:63)
+	at org.apache.dubbo.registry.nacos.NacosRegistry.doUnregister(NacosRegistry.java:195)
+	... 27 common frames omitted
+Caused by: com.alibaba.nacos.api.exception.NacosException: Client not connected, current status:STARTING
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:651)
+	at com.alibaba.nacos.common.remote.client.RpcClient.request(RpcClient.java:631)
+	at com.alibaba.nacos.client.naming.remote.gprc.NamingGrpcClientProxy.requestToServer(NamingGrpcClientProxy.java:278)
+	... 35 common frames omitted
+24-11-16.17:52:59.347 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.347 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] WARN  FrameworkModelCleaner  -  [DUBBO] null, dubbo version: 3.0.9, current host: 169.254.81.35
+java.lang.NullPointerException: null
+	at org.apache.dubbo.registry.integration.RegistryProtocol$ExporterChangeableWrapper.unexport(RegistryProtocol.java:924)
+	at org.apache.dubbo.registry.integration.RegistryProtocol.destroy(RegistryProtocol.java:637)
+	at org.apache.dubbo.rpc.protocol.ProtocolListenerWrapper.destroy(ProtocolListenerWrapper.java:89)
+	at org.apache.dubbo.qos.protocol.QosProtocolWrapper.destroy(QosProtocolWrapper.java:90)
+	at org.apache.dubbo.rpc.cluster.filter.ProtocolFilterWrapper.destroy(ProtocolFilterWrapper.java:79)
+	at org.apache.dubbo.rpc.protocol.ProtocolSerializationWrapper.destroy(ProtocolSerializationWrapper.java:57)
+	at org.apache.dubbo.config.deploy.FrameworkModelCleaner.destroyProtocols(FrameworkModelCleaner.java:65)
+	at org.apache.dubbo.config.deploy.FrameworkModelCleaner.destroyFrameworkResources(FrameworkModelCleaner.java:52)
+	at org.apache.dubbo.config.deploy.FrameworkModelCleaner.onDestroy(FrameworkModelCleaner.java:44)
+	at org.apache.dubbo.config.deploy.FrameworkModelCleaner.onDestroy(FrameworkModelCleaner.java:31)
+	at org.apache.dubbo.rpc.model.ScopeModel.notifyProtocolDestroy(ScopeModel.java:140)
+	at org.apache.dubbo.rpc.model.FrameworkModel.tryDestroyProtocols(FrameworkModel.java:262)
+	at org.apache.dubbo.rpc.model.ApplicationModel.onDestroy(ApplicationModel.java:248)
+	at org.apache.dubbo.rpc.model.ScopeModel.destroy(ScopeModel.java:110)
+	at org.apache.dubbo.rpc.model.ApplicationModel.tryDestroy(ApplicationModel.java:355)
+	at org.apache.dubbo.rpc.model.ModuleModel.onDestroy(ModuleModel.java:131)
+	at org.apache.dubbo.rpc.model.ScopeModel.destroy(ScopeModel.java:110)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onContextClosedEvent(DubboDeployApplicationListener.java:130)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:102)
+	at org.apache.dubbo.config.spring.context.DubboDeployApplicationListener.onApplicationEvent(DubboDeployApplicationListener.java:45)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:176)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:169)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:143)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:421)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:378)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1060)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.doClose(ServletWebServerApplicationContext.java:174)
+	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:1023)
+	at org.springframework.boot.SpringApplication.handleRunFailure(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:317)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292)
+	at cn.wenzhuo4657.BigMarket.Application.main(Application.java:25)
+24-11-16.17:52:59.348 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] ERROR CompositeConfiguration -  [DUBBO] Error when trying to get value for key dubbo.service.shutdown.wait from null, will continue to try the next one., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] ERROR CompositeConfiguration -  [DUBBO] Error when trying to get value for key dubbo.service.shutdown.wait.seconds from null, will continue to try the next one., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:52:59.348 [main            ] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:53:00.310 [Thread-16       ] WARN  NotifyCenter           - [NotifyCenter] Start destroying Publisher
+24-11-16.17:53:00.310 [Thread-11       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Start destroying common HttpClient
+24-11-16.17:53:00.310 [Thread-16       ] WARN  NotifyCenter           - [NotifyCenter] Destruction of the end
+24-11-16.17:53:00.310 [Thread-11       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Destruction of the end
+24-11-16.17:54:46.726 [main            ] WARN  ServiceAnnotationPostProcessor -  [DUBBO] No class annotated by Dubbo @Service was found under package [cn.wenzhuo4657.trigger.api], ignore re-scanned classes: 0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:49.995 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:49.995 [main            ] WARN  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:53.545 [main            ] WARN  ServiceConfig          -  [DUBBO] Use random available port(20880) for protocol dubbo, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:54.052 [main            ] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750893540&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:54.463 [main            ] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService&methods=randomRaffle,strategyArmory,queryRaffleAwardList,queryRaffleStrategyRuleWeight&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750894235&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:54:54.988 [main            ] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/org.apache.dubbo.metadata.MetadataService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&connections=1&corethreads=2&delay=0&deprecated=false&dubbo=2.0.2&dynamic=true&executes=100&generic=false&getAndListenInstanceMetadata.1.callback=true&getAndListenInstanceMetadata.return=true&getAndListenInstanceMetadata.sent=true&group=big-market&interface=org.apache.dubbo.metadata.MetadataService&methods=getMetadataURL,isMetadataService,getAndListenInstanceMetadata,getExportedURLs,serviceName,version,getSubscribedURLs,getExportedServiceURLs,exportInstanceMetadata,getMetadataInfo,toSortedStrings,getMetadataInfos,getServiceDefinition,getInstanceMetadataChangedListenerMap&pid=28388&qos.enable=false&register=false&release=3.0.9&revision=3.0.9&service-name-mapping=true&side=provider&threadpool=cached&threads=100&timestamp=1731750894493&version=1.0.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:57:38.604 [Dubbo-framework-registry-notification-0-thread-1] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750893540&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:57:39.037 [Dubbo-framework-registry-notification-2-thread-1] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService&methods=randomRaffle,strategyArmory,queryRaffleAwardList,queryRaffleStrategyRuleWeight&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750894235&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:57:39.809 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#3-1] ERROR AwardService           - 分发奖品，对应的服务不存在。awardKey:openai_model
+24-11-16.17:57:40.348 [Dubbo-framework-registry-notification-2-thread-1] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleStrategyService&methods=randomRaffle,strategyArmory,queryRaffleAwardList,queryRaffleStrategyRuleWeight&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750894235&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.17:57:40.354 [Dubbo-framework-registry-notification-0-thread-1] WARN  NacosRegistry          -  [DUBBO] Ignore empty notify urls for subscribe url provider://169.254.81.35:20880/cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService?anyhost=true&application=big-market&application.version=1.0&background=false&bind.ip=169.254.81.35&bind.port=20880&category=configurators&check=false&deprecated=false&dubbo=2.0.2&dynamic=true&generic=false&interface=cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService&methods=queryUserActivityAccount,creditPayExchangeSku,querySkuProductListByActivityId,queryUserCreditAccount,armory,calendarSignRebate,draw,isCalendarSignRebate&pid=28388&qos.enable=false&release=3.0.9&revision=1.0&service-name-mapping=true&side=provider&timestamp=1731750893540&version=1.0, dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.18:00:18.484 [Thread-11       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Start destroying common HttpClient
+24-11-16.18:00:18.484 [Thread-16       ] WARN  NotifyCenter           - [NotifyCenter] Start destroying Publisher
+24-11-16.18:00:18.484 [Thread-16       ] WARN  NotifyCenter           - [NotifyCenter] Destruction of the end
+24-11-16.18:00:18.484 [Thread-11       ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Destruction of the end
+24-11-16.18:00:18.487 [SpringApplicationShutdownHook] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.18:00:18.488 [SpringApplicationShutdownHook] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.18:00:18.488 [SpringApplicationShutdownHook] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35
+24-11-16.18:00:18.488 [SpringApplicationShutdownHook] WARN  RegistryManager        -  [DUBBO] All registry instances have been destroyed, failed to fetch any instance. Usually, this means no need to try to do unnecessary redundant resource clearance, all registries has been taken care of., dubbo version: 3.0.9, current host: 169.254.81.35

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/12
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SkuProductShopCartRequestDTO {
+public class SkuProductShopCartRequestDTO  implements Serializable {
     /**
      * 用户ID
      */

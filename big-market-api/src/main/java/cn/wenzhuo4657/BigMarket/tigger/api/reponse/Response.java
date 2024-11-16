@@ -1,4 +1,4 @@
-package cn.wenzhuo4657.BigMarket.types.models;
+package cn.wenzhuo4657.BigMarket.tigger.api.reponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

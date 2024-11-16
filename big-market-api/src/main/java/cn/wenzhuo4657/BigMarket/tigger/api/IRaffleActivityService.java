@@ -1,7 +1,7 @@
 package cn.wenzhuo4657.BigMarket.tigger.api;
 
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.*;
-import cn.wenzhuo4657.BigMarket.types.models.Response;
+import cn.wenzhuo4657.BigMarket.tigger.api.reponse.Response;
 
 import java.math.BigDecimal;
 import java.util.List;

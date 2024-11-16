@@ -3,7 +3,7 @@ package cn.wenzhuo4657.BigMarket.test;
 import cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.ActivityDrawRequestDTO;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.ActivityDrawResponseDTO;
-import cn.wenzhuo4657.BigMarket.types.models.Response;
+import cn.wenzhuo4657.BigMarket.tigger.api.reponse.Response;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;

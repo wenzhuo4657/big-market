@@ -26,7 +26,7 @@ import java.math.BigDecimal;
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/4
- * @description: 返利消息监听---》奖品消息接收并入库,目前仅仅是抽奖额度
+ * @description: 返利消息监听
  */
 @Slf4j
 @Component

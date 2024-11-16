@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/21
- * @description: 消费者监听-活动库存耗尽
+ * @description: 消费者监听-sku商品库存耗尽
  */
 
 @Slf4j

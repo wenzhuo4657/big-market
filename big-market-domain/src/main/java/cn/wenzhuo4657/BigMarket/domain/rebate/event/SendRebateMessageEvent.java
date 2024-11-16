@@ -24,7 +24,10 @@ public class SendRebateMessageEvent extends BaseEvent<SendRebateMessageEvent.Reb
     @Override
     public EventMessage<RebateMessage> buildEventMessage(RebateMessage data) {
         return EventMessage.<RebateMessage>builder()
-                  //  wenzhuo TODO 2024/11/3 : 事件id随机生成，真实场景中应保证唯一
+                /**
+                 *  @author:wenzhuo4657
+                    des:  此处订单id无需唯一， 保证分布式一致性的字段是其他字段。
+                */
                 .id(RandomStringUtils.randomNumeric(11))
                 .timestamp(new Date())
                 .data(data)

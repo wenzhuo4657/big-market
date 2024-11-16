@@ -92,7 +92,7 @@ public interface IActivityRepository {
 
 
     /**
-     * @author:wenzhuo4657 des: 消费活动订单（注意和用户地参入订单区分），并更新账户额度
+     * @author:wenzhuo4657 des: 消费活动订单（注意和用户参入订单区分），并更新账户额度
      */
     void updateOrder(DeliveryOrderEntity deliveryOrderEntity);
 

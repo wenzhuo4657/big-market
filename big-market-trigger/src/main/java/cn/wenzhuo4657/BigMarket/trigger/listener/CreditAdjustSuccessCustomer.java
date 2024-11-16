@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/11
- * @description: 积分调整成功消息监听消费
+ * @description: 积分调整成功消息监听消费---》商品发货
  */
 @Component
 @Slf4j

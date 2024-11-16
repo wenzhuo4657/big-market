@@ -46,7 +46,11 @@ public class CreditAdjustService implements ICreditAdjustService {
 
         BaseEvent.EventMessage<CreditAdjustSuccessMessageEvent.CreditAdjustSuccessMessage> creditAdjustSuccessMessageEventMessage = creditAdjustSuccessMessageEvent.buildEventMessage(creditAdjustSuccessMessage);
 
-        TaskEntity taskEntity = TradeAggregate.createTaskEntity(tradeEntity.getUserId(), creditAdjustSuccessMessageEvent.topic(), creditAdjustSuccessMessageEventMessage.getId(), creditAdjustSuccessMessageEventMessage);
+        TaskEntity taskEntity = TradeAggregate.createTaskEntity
+                (tradeEntity.getUserId(),
+                        creditAdjustSuccessMessageEvent.topic(),
+                        creditAdjustSuccessMessageEventMessage.getId(),
+                        creditAdjustSuccessMessageEventMessage);
 
         TradeAggregate tradeAggregate = TradeAggregate.builder()
                 .userId(tradeEntity.getUserId())

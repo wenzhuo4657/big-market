@@ -13,11 +13,10 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.UnpaidActivityOrder
 public interface IRaffleActivityAccountQuotaService {
     /**
      * 创建 sku 账户充值订单，（并未涉及到支付，消费订单）
-     *
+     * ps:内部实际上是创建一个奖品订单，奖品为sku活动商品
      * @param skuRechargeEntity 活动商品充值实体对象
      * @return 未支付活动订单(会优先从数据库中查找)
      */
-      //  wenzhuo TODO 2024/11/5 : 充值次数方面。 该方法存在问题，
     UnpaidActivityOrderEntity createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
     /**

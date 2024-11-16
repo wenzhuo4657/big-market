@@ -55,8 +55,8 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
         ActivityEntity activityEntity = queryRaffleActivityByActivityId(activitySkuEntity.getActivityId());
         ActivityCountEntity activityCountEntity = queryRaffleActivityCountByActivityCountId(activitySkuEntity.getActivityCountId());
 
-  //  wenzhuo TODO 2024/11/5 :目前的账户充值并没有指定充值积分，而是从数据库中查询activityCountEntity，然后作为增量写入mysql中
-//        责任链，1，拦截报异常 2，未拦截扣减sku库存
+
+//        责任链，1，拦截报异常 2，未拦截则会在库存节点中扣减sku商品库存
         IActionChain iActionChain = defaultActivityChainFactory.openActionChain();
         iActionChain.action(activitySkuEntity, activityEntity, activityCountEntity);
 

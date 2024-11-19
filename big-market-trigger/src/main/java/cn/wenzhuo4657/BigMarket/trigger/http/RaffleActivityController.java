@@ -24,10 +24,13 @@ import cn.wenzhuo4657.BigMarket.domain.strategy.service.IRaffleStrategy;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyArmory;
 import cn.wenzhuo4657.BigMarket.tigger.api.IRaffleActivityService;
 import cn.wenzhuo4657.BigMarket.tigger.api.dto.*;
+import cn.wenzhuo4657.BigMarket.types.annotations.DCCValue;
+import cn.wenzhuo4657.BigMarket.types.annotations.RateLimiterAccessInterceptor;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import cn.wenzhuo4657.BigMarket.tigger.api.reponse.Response;
 import com.alibaba.fastjson.JSON;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -41,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
  * @author: wenzhuo4657
@@ -77,6 +81,11 @@ public class RaffleActivityController implements IRaffleActivityService {
 
     @Resource
     private ICreditAdjustService creditAdjustService;
+
+
+    @DCCValue("degradeSwitch:close")
+    private String degradeSwitch;
+
     @Override
     @RequestMapping(value = "armory", method = RequestMethod.GET)
     public Response<Boolean> armory(@RequestParam Long activityId) {
@@ -101,6 +110,10 @@ public class RaffleActivityController implements IRaffleActivityService {
     }
 
     @Override
+    @HystrixCommand(commandProperties = {
+            @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value = "150")
+    }, fallbackMethod = "drawHystrixError")
+    @RateLimiterAccessInterceptor(key = "userId",fallbackMethod = "drawRateLimiterError", permitsPerSecond = 1.0d, blacklistCount = 1)
     @RequestMapping(value = "draw", method = RequestMethod.POST)
     public Response<ActivityDrawResponseDTO> draw(@RequestBody  ActivityDrawRequestDTO request) {
         try {
@@ -156,6 +169,21 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .build();
         }
 
+    }
+    private Response<ActivityDrawResponseDTO> drawRateLimiterError(@RequestBody ActivityDrawRequestDTO request) {
+        log.info("活动抽奖限流 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
+        return Response.<ActivityDrawResponseDTO>builder()
+                .code(ResponseCode.RATE_LIMITER.getCode())
+                .info(ResponseCode.RATE_LIMITER.getInfo())
+                .build();
+    }
+
+    private Response<ActivityDrawResponseDTO> drawHystrixError(@RequestBody ActivityDrawRequestDTO request) {
+        log.info("活动抽奖熔断 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
+        return Response.<ActivityDrawResponseDTO>builder()
+                .code(ResponseCode.HYSTRIX.getCode())
+                .info(ResponseCode.HYSTRIX.getInfo())
+                .build();
     }
 
     @Override

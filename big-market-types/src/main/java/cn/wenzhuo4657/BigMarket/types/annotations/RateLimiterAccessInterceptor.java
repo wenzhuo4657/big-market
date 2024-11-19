@@ -15,13 +15,12 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Documented
 public @interface RateLimiterAccessInterceptor {
+
     /**
-     * 用哪个字段作为拦截标识，未配置则默认走全部,
-     * 可配置字段实际上为：
-     * all、permitsPerSecond和blacklistCount，其中all和
-     * 目前aop实现，blacklistCount依赖于限流permitsPerSecond，
-     * permitsPerSecond记录超频次数，blacklistCount根据超频次数将其加入黑名单
-     */
+     *  @author:wenzhuo4657
+        des:
+     all表示没有配置，该键实际上表示器限流器的key,用于区分不同请求。
+    */
     String key() default "all";
 
     /**

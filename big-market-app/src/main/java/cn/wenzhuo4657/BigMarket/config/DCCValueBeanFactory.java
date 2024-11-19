@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Configuration;
@@ -52,7 +54,12 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     Object objBean = dccObjGroup.get(dccValuePath);
                     if (null == objBean) return;
                     try {
-                        Field field = objBean.getClass().getDeclaredField(dccValuePath.substring(dccValuePath.lastIndexOf("/") + 1));
+                        Class<?> objBeanClass=objBean.getClass();
+                        if (AopUtils.isAopProxy(objBean)){
+                            objBeanClass = AopUtils.getTargetClass(objBean);
+                        }
+
+                        Field field = objBeanClass.getDeclaredField(dccValuePath.substring(dccValuePath.lastIndexOf("/") + 1));
                         field.setAccessible(true);
                         field.set(objBean, new String(data.getData()));
                         field.setAccessible(false);
@@ -75,9 +82,16 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        Class<?> beanClass = bean.getClass();
-        Field[] declaredFields = beanClass.getDeclaredFields();
+          //  wenzhuo TODO 2024/11/19 : 代做示意图，关于代理bean注入容器。
+        // 注意；增加 AOP 代理后，获得类的方式要通过 AopProxyUtils.getTargetClass(bean); 不能直接 bean.class 因为代理后类的结构发生变化，这样不能获得到自己的自定义注解了。
+        Class<?> targetBeanClass = bean.getClass();
+        Object targetBeanObject = bean;
+        if (AopUtils.isAopProxy(bean)) {
+            targetBeanClass = AopUtils.getTargetClass(bean);
+            targetBeanObject = AopProxyUtils.getSingletonTarget(bean);
+        }
 
+        Field[] declaredFields = targetBeanClass.getDeclaredFields();
         for (Field field : declaredFields) {
             if (!field.isAnnotationPresent(DCCValue.class)) {
                 continue;
@@ -106,7 +120,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     String configValue = new String(client.getData().forPath(keyPath));
                     if (StringUtils.isNotBlank(configValue)) {
                         field.setAccessible(true);
-                        field.set(bean, configValue);
+                        field.set(targetBeanObject, configValue);
                         field.setAccessible(false);
                         log.info("DCC 节点监听 设置配置 {} {} {}", keyPath, field.getName(), configValue);
                     }
@@ -116,7 +130,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                 throw new RuntimeException(e);
             }
 
-            dccObjGroup.put(BASE_CONFIG_PATH_CONFIG.concat("/").concat(key), bean);
+            dccObjGroup.put(BASE_CONFIG_PATH_CONFIG.concat("/").concat(key), targetBeanObject);
         }
 
 

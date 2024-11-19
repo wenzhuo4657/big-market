@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @Configurable
 @MapperScan("cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao")
 @EnableScheduling
 @EnableDubbo
+@EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Application {
     @Autowired
     private IStrategyArmory strategyArmory;

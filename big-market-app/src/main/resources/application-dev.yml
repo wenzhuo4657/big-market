@@ -137,6 +137,14 @@ dubbo:
   scan:
     base-packages: cn.wenzhuo4657.trigger.api
 
+zookeeper:
+  sdk:
+    config:
+      connect-string: 127.0.0.1:2181    # 远程地址
+      base-sleep-time-ms: 1000  # 重试之间的等待时间
+      max-retries: 3 # 重试最大次数
+      session-timeout-ms: 18000  # 会话超时时间
+      connection-timeout-ms: 30000  #连接超时时间
 
 
 

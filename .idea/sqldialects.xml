@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market_01.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market_02.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/docs/dev-ops/mysql/sql/init.sql" dialect="MySQL" />
   </component>
 </project>

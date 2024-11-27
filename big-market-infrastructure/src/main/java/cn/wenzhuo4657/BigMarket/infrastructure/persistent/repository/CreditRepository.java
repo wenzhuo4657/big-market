@@ -88,6 +88,7 @@ public class CreditRepository implements ICreditRepository {
                     if (0==updatedAddAmount) {
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
+  //  wenzhuo TODO 2024/11/27 : 唯一索引总是57831754296，重复创建？
 //                    2，写入积分订单记录
                     userCreditOrderDao.insert(userCreditOrderReq);
 
@@ -105,6 +106,7 @@ public class CreditRepository implements ICreditRepository {
 
         }finally {
             dbRouter.clear();;
+              //  wenzhuo TODO 2024/11/27 : 这里释放锁总是报错
             lock.unlock();
         }
     }

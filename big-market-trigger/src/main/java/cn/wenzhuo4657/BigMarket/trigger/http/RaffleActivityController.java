@@ -357,7 +357,7 @@ public class RaffleActivityController implements IRaffleActivityService {
             UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(SkuRechargeEntity.builder().
                     sku(request.getSku())
                     .userId(request.getUserId())
-                    .outBusinessNo(RandomStringUtils.random(11))
+                    .outBusinessNo(RandomStringUtils.randomNumeric(11))
                     .orderTradeType(OrderTradeTypeVO.credit_pay_trade).build());
             log.info("积分兑换商品，创建订单完成 userId:{} sku:{} outBusinessNo:{}", request.getUserId(), request.getSku(), skuRechargeOrder.getOutBusinessNo());
             String orderId = creditAdjustService.createOrder(TradeEntity.builder()

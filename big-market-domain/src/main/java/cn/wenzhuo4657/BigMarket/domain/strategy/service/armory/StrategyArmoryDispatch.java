@@ -150,6 +150,5 @@ public class StrategyArmoryDispatch implements IStrategyArmory,IStrategyDispatch
     public  void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount){
         String cacheKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY + strategyId + Constants.UNDERLINE + awardId;
         strategyRepository.cacheStrategyAwardCount(cacheKey,awardCount);
-
     }
 }

@@ -126,4 +126,6 @@ public interface IStrategyRepository {
     Map<String, Integer> queryAwardRuleLockCount(String[] treeIds);
 
     List<RuleWeightVO> queryAwardRuleWeight(Long strategyId);
+
+    Long queryUserDepleteAmonunt(String userId);
 }

@@ -8,7 +8,7 @@ services:
     container_name: nacos
     restart: always
     ports:
-      - "8848:8848"
+      - "8848:8848"0.
       - "9848:9848"
     environment:
       - PREFER_HOST_MODE=hostname
@@ -84,47 +84,22 @@ services:
       - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
     networks:
       - big-market-network
-
-  canal-server:
-      image: canal/canal-server:v1.1.7
-      container_name: canal-server
-      restart: unless-stopped
-      ports:
-        - "11111:11111"
-      volumes:
-        - ./canal/instance.properties:/home/admin/canal-server/conf/example/instance.properties
-      depends_on:
-        - mysql
-      networks:
-        - big-market-network
-  canal-adapter:
-    image: coopersoft/canal-adapter:v1.1.6
-    container_name: canal-adapter
-    restart: unless-stopped
+  zookeeper:
+    image: zookeeper:3.9.0
+    container_name: zookeeper
+    restart: always
+    hostname: zoo1
     ports:
-      - "8082:8081"
-    volumes:
-      - ./canal-adapter/application.yml:/opt/canal-adapter/conf/application.yml
-      - ./canal-adapter/es7:/opt/canal-adapter/conf/es7
-    depends_on:
-      - canal-server
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper:2888:3888;2181
     networks:
       - big-market-network
 
-  elasticsearch:
-      image: elasticsearch:7.17.14
-      ports:
-        - '9200:9200'
-        - '9300:9300'
-      container_name: elasticsearch
-      restart: always
-      environment:
-        - 'cluster.name=elasticsearch' # 设置集群名称为elasticsearch
-        - 'discovery.type=single-node' # 以单一节点模式启动
-        - "cluster.name=docker-cluster" # 设置名称
-        - 'ES_JAVA_OPTS=-Xms512m -Xmx512m' # 设置使用jvm内存大小
-      networks:
-        - big-market-network
+
+
+
 
 
 
@@ -165,26 +140,23 @@ services:
       redis:
         condition: service_healthy
 
-  kibana:
-    image: kibana:7.17.14
-    container_name: kibana
+  xxl-job-admin:
+    image: xuxueli/xxl-job-admin:2.4.1
+    container_name: xxl-job-admin
     restart: always
-    volumes:
-      - /etc/localtime:/etc/localtime
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - mysql
     ports:
-      - '5601:5601'
+      - "9090:9090"
     links:
-      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+      - mysql
     environment:
-      - ELASTICSEARCH_URL=http://elasticsearch:9200 #设置访问elasticsearch的地址
-      - 'elasticsearch.hosts=http://es:9200' #设置访问elasticsearch的地址
-      - I18N_LOCALE=zh-CN
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/xxl_job?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=465700
+      - SERVER_PORT=9090
     networks:
       - big-market-network
-    depends_on:
-      - elasticsearch
-
 
 networks:
   big-market-network:

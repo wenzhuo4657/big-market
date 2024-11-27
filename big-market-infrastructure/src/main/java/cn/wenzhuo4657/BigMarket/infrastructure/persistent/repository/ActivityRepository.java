@@ -366,6 +366,13 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
+    public Long queryActivityAccountByUserId(String userId) {
+        RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
+        raffleActivityAccountReq.setUserId(userId);
+        return  raffleActivityAccountDao.queryDepleteCountByUserId(raffleActivityAccountReq);
+    }
+
+    @Override
     public ActivityAccountMonthEntity queryActivityAccountMonthByUserId(String userId, Long activityId, String month) {
         RaffleActivityAccountMonth raffleActivityAccountMonthReq = new RaffleActivityAccountMonth();
         raffleActivityAccountMonthReq.setUserId(userId);

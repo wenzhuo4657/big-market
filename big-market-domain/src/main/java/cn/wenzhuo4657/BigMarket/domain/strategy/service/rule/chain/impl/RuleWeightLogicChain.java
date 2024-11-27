@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.impl;
 
+import cn.wenzhuo4657.BigMarket.domain.credit.repository.ICreditRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.repository.IStrategyRepository;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.armory.IStrategyDispatch;
 import cn.wenzhuo4657.BigMarket.domain.strategy.service.rule.chain.AbstractLogicChain;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 /**
@@ -26,8 +28,8 @@ import java.util.*;
 public class RuleWeightLogicChain extends AbstractLogicChain {
     private IStrategyRepository repository;
 
-  //  wenzhuo TODO 2024/9/28 :  该变量表示用户消耗积分，由于没有实现查询，暂时写死在此处，
-    public  Long userScore=4500L;
+
+    public  Long userScore=0L;
 
 
     protected IStrategyDispatch strategyDispatch;
@@ -59,6 +61,7 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         ArrayList<Long> keys = new ArrayList<>(group.keySet());
         Collections.sort(keys);
 
+        userScore=repository.queryUserDepleteAmonunt(userId);
         Long nextValue = keys.stream()
                 .sorted(Comparator.reverseOrder())
                 .filter(analyticalSortedKeyValue -> userScore >= analyticalSortedKeyValue)

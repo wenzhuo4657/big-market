@@ -23,6 +23,11 @@
         from raffle_activity_account
         where user_id = #{userId} and activity_id = #{activityId}
     </select>
+    <select id="queryDepleteCountByUserId" parameterType="java.lang.Long" resultMap="RaffleActivityAccountMap">
+        select  SUM(total_count-total_count_surplus)
+        from raffle_activity_account
+        where user_id = #{userId}
+    </select>
 
     <update id="updateActivityAccountSubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount">
         update raffle_activity_account

@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
+import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
+import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
@@ -23,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -37,6 +40,11 @@ import java.util.concurrent.TimeUnit;
 public class StrategyRepository implements IStrategyRepository {
     @Resource
     private RaffleActivityDao raffleActivityDao;
+
+    @Resource
+    private UserCreditAccountDao userCreditAccountDao;
+    @Resource
+    private IDBRouterStrategy dbRouter;
 
     @Resource
     private IRedisService redissonService;
@@ -327,5 +335,19 @@ public class StrategyRepository implements IStrategyRepository {
         redissonService.setValue(cacheKey, ruleWeightVOList);
 
         return ruleWeightVOList;
+    }
+
+    @Override
+    public Long queryUserDepleteAmonunt(String userId) {
+        UserCreditAccount userCreditAccountReq=new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        try{
+            dbRouter.clear();
+            UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+            return userCreditAccount.getTotalAmount().subtract(userCreditAccount.getAvailableAmount()).longValue();
+        }finally {
+            dbRouter.clear();
+        }
+
     }
 }

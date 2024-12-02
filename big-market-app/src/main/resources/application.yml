@@ -3,6 +3,8 @@ spring:
     name: big-market-app
   profiles:
     active: dev
+  application:
+    name: big-market-app
 
 
 

@@ -283,6 +283,12 @@ public class RaffleActivityController implements IRaffleActivityService {
     }
 
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     curl -X POST  "activityId=100301" http://localhost:8091/api/v1/raffle/activity/query_sku_product_list_by_activity_id
+
+    */
     @RequestMapping(value = "query_sku_product_list_by_activity_id",method = RequestMethod.POST)
     @Override
     public Response<List<SkuProductResponseDTO>> querySkuProductListByActivityId(@RequestParam Long activityId) {

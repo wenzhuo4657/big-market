@@ -1,1 +1,0 @@
-package cn.wenzhuo4657.BigMarket.infrastructure.gateway.adapter;

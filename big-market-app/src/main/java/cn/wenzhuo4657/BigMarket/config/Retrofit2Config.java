@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.config;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.gateway.IOpenAIAccountService;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +22,8 @@ public class Retrofit2Config {
                 .addConverterFactory(JacksonConverterFactory.create()).build();
     }
 
-//    @Bean
-//    public
+    @Bean
+    public IOpenAIAccountService weixinApiService(Retrofit retrofit){
+        return retrofit.create(IOpenAIAccountService.class);
+    }
 }

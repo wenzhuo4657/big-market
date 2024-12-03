@@ -164,7 +164,7 @@ gateway:
   config:
     # 状态；true = 开启、false 关闭
     enable: true
-    apiHost: http://127.0.0.1:8091
+    apiHost: http://101.42.176.102:8081
     # big-market 大营销接口调用配置
     big-market-appId: big-market
     big-market-appToken: 6ec604541f8b1ce4a

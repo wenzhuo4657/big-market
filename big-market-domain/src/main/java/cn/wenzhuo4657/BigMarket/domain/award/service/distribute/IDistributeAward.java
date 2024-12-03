@@ -12,5 +12,5 @@ public interface IDistributeAward {
      *  @author:wenzhuo4657
         des: 发送奖品
     */
-    void giveOutPrizes(DistributeAwardEntity distributeAwardEntity);
+    void giveOutPrizes(DistributeAwardEntity distributeAwardEntity) throws Exception;
 }

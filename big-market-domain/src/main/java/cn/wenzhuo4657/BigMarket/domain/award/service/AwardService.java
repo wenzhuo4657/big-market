@@ -56,7 +56,7 @@ public class AwardService implements IAwardService{
     }
 
     @Override
-    public void distributeAward(DistributeAwardEntity distributeAwardEntity) {
+    public void distributeAward(DistributeAwardEntity distributeAwardEntity) throws Exception {
         String awardKey=awardRepository.queryAwardKey(distributeAwardEntity.getAwardId());
         if (null==awardKey){
             log.error("分发奖品，奖品ID不存在。awardKey:{}", awardKey);

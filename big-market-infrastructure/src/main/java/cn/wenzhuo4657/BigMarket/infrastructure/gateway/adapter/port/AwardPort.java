@@ -2,9 +2,16 @@ package cn.wenzhuo4657.BigMarket.infrastructure.gateway.adapter.port;
 
 import cn.wenzhuo4657.BigMarket.domain.award.adapter.port.IAwardPort;
 import cn.wenzhuo4657.BigMarket.infrastructure.gateway.IOpenAIAccountService;
+import cn.wenzhuo4657.BigMarket.infrastructure.gateway.dto.AdjustQuotaRequestDTO;
+import cn.wenzhuo4657.BigMarket.infrastructure.gateway.dto.AdjustQuotaResponseDTO;
+import cn.wenzhuo4657.BigMarket.infrastructure.gateway.reponse.Response;
+import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
+import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import retrofit2.Call;
 
 import javax.annotation.Resource;
 
@@ -26,6 +33,25 @@ public class AwardPort implements IAwardPort {
     private IOpenAIAccountService openAIAccountService;
     @Override
     public void adjustAmount(String userId, Integer increaseQuota) throws Exception {
+
+        try{
+            AdjustQuotaRequestDTO requestDTO = AdjustQuotaRequestDTO.builder()
+                    .appId(BIG_MARKET_APPID)
+                    .appToken(BIG_MARKET_APPTOKEN)
+                    .openid(userId)
+                    .increaseQuota(increaseQuota)
+                    .build();
+            Call<Response<AdjustQuotaResponseDTO>> responseCall = openAIAccountService.adjustQuota(requestDTO);
+            Response<AdjustQuotaResponseDTO> body = responseCall.execute().body();
+
+            log.info("请求OpenAI应用账户调额接口完成 userId:{} increaseQuota:{} response:{}", userId, increaseQuota, JSON.toJSONString(body));
+            if (null==body||null ==body.getCode()||!"0000".equals(body.getCode())){
+                throw new AppException(ResponseCode.GATEWAY_ERROR.getCode(), ResponseCode.GATEWAY_ERROR.getInfo());
+            }
+        } catch (Exception e) {
+            log.error("请求OpenAI应用账户调额接口失败 userId:{} increaseQuota:{}", userId, increaseQuota, e);
+            throw e;
+        }
 
     }
 }

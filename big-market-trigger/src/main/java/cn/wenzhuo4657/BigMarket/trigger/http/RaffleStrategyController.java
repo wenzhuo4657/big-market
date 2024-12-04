@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.trigger.http;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
+import cn.wenzhuo4657.BigMarket.domain.auth.service.IAuthService;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
@@ -51,6 +52,9 @@ public class RaffleStrategyController implements IRaffleStrategyService {
     @Resource
     private IStrategyArmory strategyArmory;
 
+    @Resource
+    private IAuthService authService;
+
 
     @GetMapping(value = "strategy_armory")
     @Override
@@ -74,6 +78,35 @@ public class RaffleStrategyController implements IRaffleStrategyService {
             return response;
         }
     }
+
+    @Override
+    @PostMapping("query_raffle_award_list_by_token")
+    public Response<List<RaffleAwardListResponseDTO>>  queryRaffleAwardListByToken(@RequestHeader("Authorization") String token, @RequestBody RaffleAwardListRequestDTO request) {
+
+
+        try {
+            boolean success = authService.checkToken(token);
+
+            if (!success) {
+                return Response.<List<RaffleAwardListResponseDTO>>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+            String openid = authService.openid(token);
+            log.info("查询抽奖奖品开始 - 解析用户ID userId:{}", openid);
+
+            request.setUserId(openid);
+            return queryRaffleAwardList(request);
+        }catch (Exception e){
+            log.error("查询抽奖奖品失败 userId:{} activityId:{}", request.getUserId(), request.getActivityId(), e);
+            return Response.<List<RaffleAwardListResponseDTO>>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
     /**
      * 查询奖品列表
      * <a href="http://localhost:8091/api/v1/raffle/strategy/query_raffle_award_list">/api/v1/raffle/query_raffle_award_list</a>
@@ -225,4 +258,6 @@ public class RaffleStrategyController implements IRaffleStrategyService {
         }
 
     }
+
+
 }

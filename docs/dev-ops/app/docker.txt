@@ -33,3 +33,10 @@ docker run -d \
   -e NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789 \
   nacos/nacos-server:v2.4.3
 
+
+docker run -d \
+-v ./data:~/bigmarket/log \
+--name bigmarket \
+-p 8091:8091 \
+jacka7732/bigmarket:1.0
+

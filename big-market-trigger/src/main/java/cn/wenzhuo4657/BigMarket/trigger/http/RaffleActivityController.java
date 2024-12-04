@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQu
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityPartakeService;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivitySkuProductService;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityArmory;
+import cn.wenzhuo4657.BigMarket.domain.auth.service.IAuthService;
 import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
 import cn.wenzhuo4657.BigMarket.domain.award.model.valobj.AwardStateVO;
 import cn.wenzhuo4657.BigMarket.domain.award.service.IAwardService;
@@ -81,6 +82,9 @@ public class RaffleActivityController implements IRaffleActivityService {
 
     @Resource
     private ICreditAdjustService creditAdjustService;
+
+    @Resource
+    private IAuthService authService;
 
 
     @DCCValue("degradeSwitch:close")
@@ -387,6 +391,176 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .code(ResponseCode.UN_ERROR.getCode())
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .data(false)
+                    .build();
+        }
+    }
+
+
+//    ==============================token封装=========================================
+
+
+    @Override
+    @RequestMapping(value = "draw_by_token", method = RequestMethod.POST)
+    public Response<ActivityDrawResponseDTO> draw(@RequestHeader("Authorization") String token,@RequestBody ActivityDrawRequestDTO request) {
+        try {
+
+
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<ActivityDrawResponseDTO>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("活动抽奖开始 - 解析用户ID userId:{}", openid);
+            request.setUserId(openid);
+            return draw(request);
+        }catch (Exception e){
+            log.error("活动抽奖失败 userId:{} activityId:{}", request.getUserId(), request.getActivityId(), e);
+            return Response.<ActivityDrawResponseDTO>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "calendar_sign_rebate_by_token",method = RequestMethod.POST)
+    public Response<Boolean> calendarSignRebateByToken(@RequestHeader("Authorization")String token) {
+        try {
+
+
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<Boolean>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("执行签到开始 - 解析用户ID userId:{}", openid);
+            return calendarSignRebate(openid);
+        }catch (Exception e){
+            log.error("执行签到失败", e);
+            return Response.<Boolean>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "is_calendar_sign_rebate_by_token", method = RequestMethod.POST)
+    public Response<Boolean> isCalendarSignRebateByToken(@RequestHeader("Authorization")String token) {
+        try {
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<Boolean>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("执行判断签到开始 - 解析用户ID userId:{}", openid);
+            return isCalendarSignRebate(openid);
+        }catch (Exception e){
+            log.error("执行判断签到失败", e);
+            return Response.<Boolean>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "query_user_activity_account_by_token", method = RequestMethod.POST)
+    public Response<UserActivityAccountResponseDTO> queryUserActivityAccount(@RequestHeader("Authorization") String token, @RequestBody UserActivityAccountRequestDTO request) {
+        try {
+            // 1. Token 校验
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<UserActivityAccountResponseDTO>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+
+            // 2. Token 解析
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("查询用户活动账户开始 - 解析用户ID userId:{}", openid);
+            request.setUserId(openid);
+
+            // 3. 执行签到
+            return queryUserActivityAccount(request);
+              //  wenzhuo TODO 2024/12/4 :  在非token的http接口封装中通常使用catch捕获了Exception级别的报错，在这里似乎不能正常捕捉到错误，或者说，如果在方法内部查询失败时不能正确捕捉错误。
+        } catch (Exception e) {
+            log.error("查询用户活动账户失败", e);
+            return Response.<UserActivityAccountResponseDTO>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "query_user_credit_account_by_token", method = RequestMethod.POST)
+    public Response<BigDecimal> queryUserCreditAccountByToken(@RequestHeader("Authorization") String token) {
+        try {
+            // 1. Token 校验
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<BigDecimal>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+
+            // 2. Token 解析
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("查询用户积分值开始 - 解析用户ID userId:{}", openid);
+
+
+            return queryUserCreditAccount(openid);
+        } catch (Exception e) {
+            log.error("查询用户积分值失败", e);
+            return Response.<BigDecimal>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
+                    .build();
+        }
+    }
+
+    @Override
+    @RequestMapping(value = "credit_pay_exchange_sku_by_token", method = RequestMethod.POST)
+    public Response<Boolean> creditPayExchangeSku(@RequestHeader("Authorization") String token, @RequestBody SkuProductShopCartRequestDTO request) {
+        try {
+            // 1. Token 校验
+            boolean success = authService.checkToken(token);
+            if (!success) {
+                return Response.<Boolean>builder()
+                        .code(ResponseCode.Login.TOKEN_ERROR.getCode())
+                        .info(ResponseCode.Login.TOKEN_ERROR.getInfo())
+                        .build();
+            }
+
+            // 2. Token 解析
+            String openid = authService.openid(token);
+            assert null != openid;
+            log.info("积分兑换商品开始 - 解析用户ID userId:{}", openid);
+            request.setUserId(openid);
+
+            return creditPayExchangeSku(request);
+        } catch (Exception e) {
+            log.error("积分兑换商品失败", e);
+            return Response.<Boolean>builder()
+                    .code(ResponseCode.UN_ERROR.getCode())
+                    .info(ResponseCode.UN_ERROR.getInfo())
                     .build();
         }
     }

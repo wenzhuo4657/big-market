@@ -91,8 +91,8 @@ public class RebateServiceRPC implements IRebateService {
 
             UserCreditAccount userCreditAccountReq=new UserCreditAccount();
             userCreditAccountReq.setUserId(request.getData().getOpenID());
-            userCreditAccountReq.setTotalAmount(BigDecimal.valueOf(Integer.valueOf(request.getData().getQuota())));
-            userCreditAccountReq.setAvailableAmount(BigDecimal.valueOf(Integer.valueOf(request.getData().getQuota())));
+            userCreditAccountReq.setTotalAmount(new BigDecimal(request.getData().getQuota()));
+            userCreditAccountReq.setAvailableAmount(new BigDecimal(request.getData().getQuota()));
             userCreditAccountDao.updateAddAmount(userCreditAccountReq);
             log.info("积分矢量操作-成功：userid: {} quota:{}",request.getData().getOpenID(),request.getData().getQuota());
             return Response.<Boolean>builder()

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @author: wenzhuo4657
  * @date: 2024/12/8
@@ -14,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Builder
-public class PayCreditRequestDTO {
+public class PayCreditRequestDTO implements Serializable {
 
 /**
  *  唯一凭证

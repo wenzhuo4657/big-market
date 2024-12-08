@@ -14,8 +14,10 @@ import java.util.List;
  */
 public interface UserCreditAccountDao {
 
+    @DBRouter
     void insert(UserCreditAccount userCreditAccountReq);
 
+    @DBRouter
     int updateAddAmount(UserCreditAccount userCreditAccountReq);
 
 

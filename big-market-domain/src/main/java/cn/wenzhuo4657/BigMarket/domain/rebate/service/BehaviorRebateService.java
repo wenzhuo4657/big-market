@@ -86,6 +86,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
             aggregates.add(rebateAggregate);
         }
         behaviorRebateRepository.saveUserRebateRecord(behaviorEntity.getUserId(),aggregates);
+
         return orderIds;
     }
 

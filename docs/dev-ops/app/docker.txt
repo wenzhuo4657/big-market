@@ -35,8 +35,10 @@ docker run -d \
 
 
 docker run -d \
--v ./data:~/bigmarket/log \
+-v ~/bigmarket/log:/data \
 --name bigmarket \
 -p 8091:8091 \
+-e DUBBO_PROTOCOL_HOST=47.92.150.10 \     
+-e DUBBO_PROTOCOL_PORT=20880  \
 jacka7732/bigmarket:1.0
 

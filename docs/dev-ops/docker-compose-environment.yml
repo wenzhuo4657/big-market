@@ -8,7 +8,7 @@ services:
     container_name: nacos
     restart: always
     ports:
-      - "8848:8848"0.
+      - "8848:8848"
       - "9848:9848"
     environment:
       - PREFER_HOST_MODE=hostname
@@ -144,19 +144,20 @@ services:
     image: xuxueli/xxl-job-admin:2.4.1
     container_name: xxl-job-admin
     restart: always
-    depends_on:
-      - mysql
+#    depends_on:
+#      - mysql
     ports:
       - "9090:9090"
-    links:
-      - mysql
+#    links:
+#      - mysql
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/xxl_job?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
+      - SPRING_DATASOURCE_URL=jdbc:mysql://117.72.36.124:3306/xxl_job?serverTimezone=UTC&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Shanghai
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=465700
       - SERVER_PORT=9090
     networks:
       - big-market-network
+
 
 networks:
   big-market-network:

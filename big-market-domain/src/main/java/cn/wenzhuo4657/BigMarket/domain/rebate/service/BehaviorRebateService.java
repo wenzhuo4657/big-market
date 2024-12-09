@@ -86,7 +86,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
             aggregates.add(rebateAggregate);
         }
         behaviorRebateRepository.saveUserRebateRecord(behaviorEntity.getUserId(),aggregates);
-
+  //  wenzhuo TODO 2024/12/9 :  订单id通过随机数生成，并不保证唯一，此处将其返回的作用？
         return orderIds;
     }
 

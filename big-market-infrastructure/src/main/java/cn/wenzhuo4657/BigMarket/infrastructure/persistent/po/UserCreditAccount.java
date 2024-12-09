@@ -1,5 +1,9 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.io.Serializable;
@@ -10,6 +14,9 @@ import java.io.Serializable;
  * @author makejava
  * @since 2024-11-09 09:22:12
  */
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserCreditAccount implements Serializable {
     private static final long serialVersionUID = -10410681505434122L;
     /**

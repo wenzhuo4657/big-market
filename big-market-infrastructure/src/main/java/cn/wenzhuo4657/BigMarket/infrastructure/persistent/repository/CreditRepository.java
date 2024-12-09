@@ -23,6 +23,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import javax.annotation.Signed;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -118,8 +121,20 @@ public class CreditRepository implements ICreditRepository {
         try{
             dbRouter.clear();
             UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+            if (Objects.isNull(userCreditAccount)){
+                userCreditAccount=UserCreditAccount.builder()
+                        .userId(userId)
+                        .accountStatus("open")
+                        .availableAmount(new BigDecimal(0))
+                        .totalAmount(new BigDecimal(0))
+                        .build();
+                userCreditAccountDao.insert(userCreditAccount);
+            }
             return CreditAccountEntity.builder().userId(userId).adjustAmount(userCreditAccount.getAvailableAmount()).build();
-        }finally {
+        }catch (Exception e){
+            log.error("查询用户积分账户出错，userId:{} e:{}",userId,e);
+            return CreditAccountEntity.builder().userId(userId).adjustAmount(new BigDecimal(-1)).build();
+        } finally{
             dbRouter.clear();
         }
 

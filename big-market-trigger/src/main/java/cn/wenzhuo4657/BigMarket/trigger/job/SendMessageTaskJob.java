@@ -68,6 +68,12 @@ public class SendMessageTaskJob {
                                     taskService.sendMessage(taskEntity);
                                     taskService.updateTaskSendMessageCompleted(taskEntity.getUserId(), taskEntity.getMessageId());
                                 } catch (Exception e) {
+                                    /**
+                                     *  @author:wenzhuo4657
+                                        des:
+                                     注意，对于任务补发机制而言，重要是是保证消息的成功发送，而并非消息的正确消费。
+                                     且对于本系统中各种错误通过catch捕捉处理，实际上消息的正确消费，等价于不发生catch,且就是说肯能会存在捕捉了某种catch，导致任务补发完成，但任务并为成功消费。
+                                    */
                                     log.error("定时任务，发送MQ消息失败 userId: {} topic: {}", taskEntity.getUserId(), taskEntity.getTopic());
                                     taskService.updateTaskSendMessageFail(taskEntity.getUserId(), taskEntity.getMessageId());
                                 }

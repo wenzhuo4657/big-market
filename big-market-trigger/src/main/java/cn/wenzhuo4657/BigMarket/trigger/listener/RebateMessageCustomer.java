@@ -8,7 +8,7 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeNameVO;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.credit.service.ICreditAdjustService;
 import cn.wenzhuo4657.BigMarket.domain.rebate.event.SendRebateMessageEvent;
-import cn.wenzhuo4657.BigMarket.domain.rebate.model.valobj.RebateTypeVO;
+import cn.wenzhuo4657.BigMarket.domain.task.service.ITaskService;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
@@ -39,6 +39,8 @@ public class RebateMessageCustomer {
 
     @Resource
     private ICreditAdjustService creditAdjustService;
+    @Resource
+    private ITaskService taskService;
 
     @RabbitListener(queuesToDeclare = @Queue(value = "${spring.rabbitmq.topic.send_rebate}"))
     public void listener(String message){
@@ -72,6 +74,7 @@ public class RebateMessageCustomer {
         } catch (AppException e) {
             if (ResponseCode.INDEX_DUP.getCode().equals(e.getCode())) {
                 log.warn("监听用户行为返利消息，消费重复 topic: {} message: {}", topic, message, e);
+
                 return;
             }
             throw e;

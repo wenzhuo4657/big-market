@@ -7,12 +7,14 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service.armory;
  */
 public interface IActivityArmory {
 
-    /**
-     *  @author:wenzhuo4657
-            1，缓存键值对到redis中
-    */
+
     boolean assembleActivitySku(Long sku);
 
 
+    /**
+     * @Author wenzhuo4657
+     * @param  活动id
+     * @return  缓存sku商品列表以及对应活动账户次数
+     */
     boolean assembleActivitySkuByActivityId(Long activityId);
 }

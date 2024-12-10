@@ -18,11 +18,13 @@ public interface IActivityRepository {
 
     /**
      * @author:wenzhuo4657 des: 保证活动的信息在redis中
+     * 对应raffleActivity表
      */
     ActivityEntity queryRaffleActivityByActivityId(Long activityId);
 
     /**
-     * @author:wenzhuo4657 des: 保证活动的初始个人配置
+     * @author:wenzhuo4657 des: 保证抽奖活动配置（这里与个人配置区分，并提示，可能会存在抽奖次数>活动配置次数，又或者说二者并无直接关联）
+     * 对应RaffleActivityCount表
      */
     ActivityCountEntity queryRaffleActivityCountByActivityCountId(Long activityCountId);
 

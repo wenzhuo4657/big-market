@@ -12,23 +12,25 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@Slf4j
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ApiTest {
+import java.math.BigDecimal;
 
-    @DubboReference(interfaceClass = IRaffleActivityService.class, version = "1.0")
-    private IRaffleActivityService raffleActivityService;
+@Slf4j
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+public class ApiTest {
 
     @Test
     public void test_rpc() {
-        ActivityDrawRequestDTO request = new ActivityDrawRequestDTO();
-        request.setActivityId(100301L);
-        request.setUserId("xiaofuge");
-        Response<ActivityDrawResponseDTO> response = raffleActivityService.draw(request);
+        BigDecimal bigDecimal = new BigDecimal("0.1");
+        System.out.println(bigDecimal);
+        double f=0.1;
+        bigDecimal=new BigDecimal(f);
+        System.out.println(bigDecimal);
+        float a=0.1f;
+        bigDecimal=new BigDecimal(a);
+        System.out.println(bigDecimal);
 
-        log.info("请求参数：{}", JSON.toJSONString(request));
-        log.info("测试结果：{}", JSON.toJSONString(response));
+
     }
 
 }

@@ -40,3 +40,6 @@ build/
 
 ## 日志
 /data/log
+/data/applogs/xxl-job/jobhandler/**
+/data/applogs/
+/data/

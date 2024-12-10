@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TaskEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.repository.ICreditRepository;
+import cn.wenzhuo4657.BigMarket.infrastructure.event.EventPublisher;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.TaskDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditAccountDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditOrderDao;
@@ -48,7 +49,8 @@ public class CreditRepository implements ICreditRepository {
     private IDBRouterStrategy dbRouter;
     @Resource
     private TransactionTemplate transactionTemplate;
-
+    @Resource
+    private EventPublisher eventPublisher;
     @Resource
     private TaskDao taskDao;
     @Override
@@ -101,7 +103,7 @@ public class CreditRepository implements ICreditRepository {
                     taskDao.insert(task);
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
-                    log.error("调整账户积分额度异常，唯一索引冲突 userId:{} orderId:{}", userId, creditOrderEntity.getOrderId(), e);
+                    log.error("调整账户积分额度异常，唯一索引冲突 userId:{} out_business_no:{}", userId, creditOrderEntity.getOutBusinessNo(), e);
                 } catch (Exception e) {
                     status.setRollbackOnly();
                     log.error("调整账户积分额度失败 userId:{} orderId:{}", userId, creditOrderEntity.getOrderId(), e);
@@ -111,8 +113,18 @@ public class CreditRepository implements ICreditRepository {
 
         }finally {
             dbRouter.clear();;
-              //  wenzhuo TODO 2024/11/27 : 这里释放锁总是报错
             lock.unlock();
+        }
+
+        try {
+            // 发送消息【在事务外执行，如果失败还有任务补偿】
+            eventPublisher.publish(task.getTopic(), task.getMessage());
+            // 更新数据库记录，task 任务表
+            taskDao.updateTaskSendMessageCompleted(task);
+            log.info("调整账户积分记录，发送MQ消息完成 userId: {} orderId:{} topic: {}", userId, creditOrderEntity.getOrderId(), task.getTopic());
+        } catch (Exception e) {
+            log.error("调整账户积分记录，发送MQ消息失败 userId: {} topic: {}", userId, task.getTopic());
+            taskDao.updateTaskSendMessageFail(task);
         }
     }
 

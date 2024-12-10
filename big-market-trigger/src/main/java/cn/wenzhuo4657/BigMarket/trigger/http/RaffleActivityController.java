@@ -60,6 +60,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @DubboService(version = "1.0")
 public class RaffleActivityController implements IRaffleActivityService {
     private final SimpleDateFormat dateFormatDay=new SimpleDateFormat("yyyyMMdd");
+    private final SimpleDateFormat dateFormat=new SimpleDateFormat("yyyyMMddHHmmss");
 
     @Resource
     private IRaffleActivityPartakeService raffleActivityPartakeService;
@@ -367,7 +368,7 @@ public class RaffleActivityController implements IRaffleActivityService {
             UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(SkuRechargeEntity.builder().
                     sku(request.getSku())
                     .userId(request.getUserId())
-                    .outBusinessNo(RandomStringUtils.randomNumeric(11))
+                    .outBusinessNo(request.getUserId()+dateFormat.format(new Date()))
                     .orderTradeType(OrderTradeTypeVO.credit_pay_trade).build());
             log.info("积分兑换商品，创建订单完成 userId:{} sku:{} outBusinessNo:{}", request.getUserId(), request.getSku(), skuRechargeOrder.getOutBusinessNo());
             String orderId = creditAdjustService.createOrder(TradeEntity.builder()

@@ -18,6 +18,7 @@ import javax.annotation.Resource;
  * @author: wenzhuo4657
  * @date: 2024/10/28
  * @description: 奖品消费者
+ *
  */
 
 @Slf4j
@@ -30,7 +31,7 @@ public class SendAwardCustomer {
     private IAwardService awardService;
 
     @RabbitListener(queuesToDeclare = @Queue(value = "${spring.rabbitmq.topic.send_award}"))
-    public void listener(String message){
+    public void listener(String message) throws Exception {
         try {
 
             log.info("监听用户奖品发送消息 topic: {} message: {}", topic, message);
@@ -47,7 +48,7 @@ public class SendAwardCustomer {
 
         } catch (Exception e) {
             log.error("监听用户奖品发送消息，消费失败 topic: {} message: {}", topic, message);
-//            throw e;
+            throw e;
         }
 
     }

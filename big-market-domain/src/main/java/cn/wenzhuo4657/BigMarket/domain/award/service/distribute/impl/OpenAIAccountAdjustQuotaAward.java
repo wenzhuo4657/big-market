@@ -29,7 +29,6 @@ public class OpenAIAccountAdjustQuotaAward implements IDistributeAward {
         if (StringUtils.isBlank(awardConfig)) {
             awardConfig = repository.queryAwardConfig(awardId);
         }
-  //  wenzhuo TODO 2024/12/3 : 注意，对于openAi奖品，awardConfig只能配置为数字字符串，  "Integer.valueOf(awardConfig)"
         port.adjustAmount(distributeAwardEntity.getUserId(), Integer.valueOf(awardConfig));
     }
 }

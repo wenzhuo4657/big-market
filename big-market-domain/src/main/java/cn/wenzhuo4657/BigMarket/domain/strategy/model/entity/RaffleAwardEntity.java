@@ -26,4 +26,5 @@ public class RaffleAwardEntity {
     /** 奖品顺序号 */
     private Integer sort;
 
+
 }

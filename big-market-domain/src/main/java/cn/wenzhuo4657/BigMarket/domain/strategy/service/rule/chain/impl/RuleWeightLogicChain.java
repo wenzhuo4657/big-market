@@ -69,11 +69,11 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         Long nextValue = keys.stream().sorted(Comparator.reverseOrder()).filter(analyticalSortedKeyValue -> userScore >= analyticalSortedKeyValue).findFirst().orElse(null);//找到适用的权重规则
         if (null != nextValue) {
             Integer awardId = strategyDispatch.getRandomAwardId(strategyId, group.get(nextValue));
-            boolean res = subAwardStock(userId, strategyId, awardId);
-            if (res) {
+//            boolean res = subAwardStock(userId, strategyId, awardId);
+//            if (res) {
                 log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), awardId);
                 return DefaultChainFactory.StrategyAwardVO.builder().awardId(awardId).logicModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode()).build();
-            }
+//            }
         }
         log.info("抽奖责任链-权重放行 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
         return next().logic(userId, strategyId);
@@ -99,22 +99,22 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         }
         return ruleMap;
     }
-
-    /**
-     * @author:wenzhuo4657 des:
-     * 扣减奖品库存
-     */
-    private boolean subAwardStock(String userId, Long strategyId, Integer awardId) {
-
-        log.info("权重责任链-库存扣减 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
-        Boolean aBoolean = strategyDispatch.subtractionAwardStock(strategyId, awardId);
-        if (aBoolean) {
-            log.info("规则过滤-库存扣减-成功 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
-            strategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO.builder().awardId(awardId).strategyId(strategyId).build());
-            return true;
-        } else {
-            return false;
-        }
-
-    }
+//
+//    /**
+//     * @author:wenzhuo4657 des:
+//     * 扣减奖品库存
+//     */
+//    private boolean subAwardStock(String userId, Long strategyId, Integer awardId) {
+//
+//        log.info("权重责任链-库存扣减 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
+//        Boolean aBoolean = strategyDispatch.subtractionAwardStock(strategyId, awardId);
+//        if (aBoolean) {
+//            log.info("规则过滤-库存扣减-成功 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
+//            strategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO.builder().awardId(awardId).strategyId(strategyId).build());
+//            return true;
+//        } else {
+//            return false;
+//        }
+//
+//    }
 }

@@ -27,7 +27,8 @@ public interface IStrategyDispatch {
 
     /**
      * @Author wenzhuo4657
-     * @param  key:redis中的key，表示某一策略的缓存，形如 strategyId + _ + ruleWeightValue；
+     * @param  key:策略概率表的后缀，实质上对应装配方法storeStrategyAwardSearchRateTable，
+     *            该方法提出的本意在于，可能存在一种情况（抽奖策略不知道该调取权重策略抽奖还是默认抽奖，仅仅知道该key表示策略概率表的后缀）
      * @return 执行该策略的随机结果，即奖品id
      */
     Integer getRandomAwardId(String key);

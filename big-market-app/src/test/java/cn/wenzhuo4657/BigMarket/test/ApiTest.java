@@ -21,13 +21,10 @@ public class ApiTest {
 
     @Test
     public void test_rpc() {
-        BigDecimal bigDecimal = new BigDecimal("0.1");
-        System.out.println(bigDecimal);
-        double f=0.1;
-        bigDecimal=new BigDecimal(f);
-        System.out.println(bigDecimal);
-        float a=0.1f;
-        bigDecimal=new BigDecimal(a);
+        Double dd=0.1-0.2;
+        BigDecimal bigDecimal1 = new BigDecimal(dd);
+        System.out.println(bigDecimal1);
+        BigDecimal bigDecimal = new BigDecimal(String.valueOf(dd));
         System.out.println(bigDecimal);
 
 

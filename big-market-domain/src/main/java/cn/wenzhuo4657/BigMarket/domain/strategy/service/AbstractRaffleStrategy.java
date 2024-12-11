@@ -81,7 +81,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
 
     /**
      *  @author:wenzhuo4657
-        des:规则树抽奖
+        des:规则树过滤
     */
     public abstract DefaultTreeFactory.StrategyAwardVO raffleLogicTree(String userId, Long strategyId, Integer awardId);
 }

@@ -112,5 +112,9 @@ public interface IActivityRepository {
 
     List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId);
 
+    /**
+     *  @author:wenzhuo4657
+        des: 查询活动账户（总）消耗抽奖次数
+    */
     Long queryActivityAccountByUserId(String userId);
 }

@@ -15,6 +15,7 @@ import javax.annotation.Resource;
  * @date: 2024/10/4
  * @Version: 1.0
  * @description: 次数锁节点
+ *
  */
 @Slf4j
 @Component("rule_lock")
@@ -37,7 +38,7 @@ public class RuleLockLogicTreeNode implements ILogicTreeNode {
 
         }
         userRaffleCount=activityRepository.queryActivityAccountByUserId(userId);
-        if (userRaffleCount>=RaffleCount){
+        if (userRaffleCount<RaffleCount){
             return  DefaultTreeFactory.TreeActionEntity.builder()
                     .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
                     .build();

@@ -44,8 +44,7 @@ public class RuleLuckAwardLogicTreeNode implements ILogicTreeNode {
          *  @author:wenzhuo4657
             des:
          数据库中字段解释为：
-             1,100 兜底奖品100以内随机积分
-         这里猜测100以内随机积分为消耗积分，这里并没有处理随机积分，仅仅是返回兜底奖品。
+             20,100 兜底奖品20，100以内随机积分
         */
         log.info("规则过滤-兜底奖品 userId:{} strategyId:{} awardId:{} awardRuleValue:{}", userId, strategyId, luckAwardId, awardRuleValue);
         return DefaultTreeFactory.TreeActionEntity.builder()

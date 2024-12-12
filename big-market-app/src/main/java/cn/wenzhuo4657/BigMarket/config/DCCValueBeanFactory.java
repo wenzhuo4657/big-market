@@ -19,7 +19,8 @@ import java.util.Map;
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/19
- * @description: BeanPostProcessor（bean创建后的处理器）：该接口是springboot提供的钩子函数，参入容器的启动，用于对bean进行统一约束。
+ * @description:
+ * BeanPostProcessor（bean创建后的处理器）：该接口是springboot提供的钩子函数，参入容器的启动，用于对bean进行统一约束。
  * 依赖于单例模式对spring容器内的bean的属性进行（运行时）动态配置
  */
 
@@ -82,7 +83,6 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-          //  wenzhuo TODO 2024/11/19 : 代做示意图，关于代理bean注入容器。
         // 注意；增加 AOP 代理后，获得类的方式要通过 AopProxyUtils.getTargetClass(bean); 不能直接 bean.class 因为代理后类的结构发生变化，这样不能获得到自己的自定义注解了。
         Class<?> targetBeanClass = bean.getClass();
         Object targetBeanObject = bean;
@@ -106,6 +106,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
             String key = splits[0];
             String defaultValue = splits.length == 2 ? splits[1] : null;
 
+              //  wenzhuo TODO 2024/12/12 :失效
             try {
                 String keyPath = BASE_CONFIG_PATH_CONFIG.concat("/").concat(key);
                 if (null == client.checkExists().forPath(keyPath)) {

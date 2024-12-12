@@ -33,9 +33,8 @@ public class RateLimiterAOP {
 
 
     @DCCValue("rateLimiterSwitch:close")
-    private String rateLimiterSwitch;
+    private String rateLimiterSwitch;//总开关
 
-      //  wenzhuo TODO 2024/11/19 : 待做流程图
 
     //      个人限频一分钟
     private final Cache<String, RateLimiter> loginRecord = CacheBuilder.newBuilder()
@@ -63,7 +62,9 @@ public class RateLimiterAOP {
             throw new RuntimeException("annotation RateLimiter uId is null！");
         }
 //        找到拦截器路由值
-          //  wenzhuo TODO 2024/11/19 : 不是很理解这个路由属性到底是啥
+        /**
+         *   des: 该路由属性attrValue相当于请求的唯一标识，
+        */
         String attrValue = getAttrValue(key, jp.getArgs());
         log.info("aop attr {}", attrValue);
 

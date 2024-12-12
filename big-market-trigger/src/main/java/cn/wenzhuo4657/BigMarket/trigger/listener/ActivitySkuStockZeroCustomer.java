@@ -42,10 +42,7 @@ public class ActivitySkuStockZeroCustomer {
 
             Long sku = eventMessage.getData();
 
-            /**
-             *  @author:wenzhuo4657
-                des: 库存耗尽MQ消息由redis缓存消费失败发出，
-            */
+
               //  wenzhuo TODO 2024/10/21 : 待做消费流程图
             skuStock.clearActivitySkuStock(sku);
             skuStock.clearQueueValue();

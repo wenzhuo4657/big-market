@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.config;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,5 +28,11 @@ public class ZooKeeperClientConfig {
                 .build();
         client.start();
         return  client;
+    }
+
+    @Bean(name = "dccValueBeanFactory")
+    @ConditionalOnProperty(value = "zookeeper.sdk.config.enable", havingValue = "true", matchIfMissing = false)
+    public DCCValueBeanFactory dccValueBeanFactory(CuratorFramework zookeeperClient) throws Exception {
+        return new DCCValueBeanFactory(zookeeperClient);
     }
 }

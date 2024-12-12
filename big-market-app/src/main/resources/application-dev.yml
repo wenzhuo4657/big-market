@@ -126,6 +126,7 @@ dubbo:
 zookeeper:
   sdk:
     config:
+      enable: true
       connect-string: 117.72.36.124:2181    # 远程地址
       base-sleep-time-ms: 1000  # 重试之间的等待时间
       max-retries: 3 # 重试最大次数

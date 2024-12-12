@@ -10,7 +10,6 @@ import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.Configuration;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -25,7 +24,6 @@ import java.util.Map;
  */
 
 @Slf4j
-@Configuration
 public class DCCValueBeanFactory implements BeanPostProcessor {
     private static final String BASE_CONFIG_PATH = "/big-market-dcc";
     private static final String BASE_CONFIG_PATH_CONFIG = BASE_CONFIG_PATH + "/config";
@@ -49,9 +47,10 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
         因此，该配置的前提是spring容器的单例模式，如果是原型就不可以。
          */
         curatorCache.listenable().addListener((type, oldData, data) -> {
+            log.info("DCC监听生效，{}节点发生变化，",data.getPath());
             switch (type) {
                 case NODE_CHANGED:
-                    java.lang.String dccValuePath = data.getPath();
+                    String dccValuePath = data.getPath();
                     Object objBean = dccObjGroup.get(dccValuePath);
                     if (null == objBean) return;
                     try {
@@ -71,6 +70,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     break;
             }
         });
+        curatorCache.start();
     }
 
     /**
@@ -106,11 +106,10 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
             String key = splits[0];
             String defaultValue = splits.length == 2 ? splits[1] : null;
 
-              //  wenzhuo TODO 2024/12/12 :失效
             try {
                 String keyPath = BASE_CONFIG_PATH_CONFIG.concat("/").concat(key);
                 if (null == client.checkExists().forPath(keyPath)) {
-                    client.create().creatingParentsIfNeeded().forPath(keyPath);
+                    client.create().creatingParentsIfNeeded().forPath(keyPath,defaultValue.getBytes());
                     if (StringUtils.isNotBlank(defaultValue)) {
                         field.setAccessible(true);
                         field.set(bean, defaultValue);

@@ -17,7 +17,6 @@ import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.javassist.bytecode.ConstantAttribute;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RLock;
@@ -366,10 +365,15 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public Long queryActivityAccountByUserId(String userId) {
+    public long queryActivityAccountByUserId(String userId) {
         RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
         raffleActivityAccountReq.setUserId(userId);
-        return  raffleActivityAccountDao.queryDepleteCountByUserId(raffleActivityAccountReq);
+        List<RaffleActivityAccount> raffleActivityAccounts = raffleActivityAccountDao.queryDepleteCountByUserId(raffleActivityAccountReq);
+        long count=0;
+        for (RaffleActivityAccount raffleActivityAccount:raffleActivityAccounts){
+            count+=raffleActivityAccount.getTotalCount()-raffleActivityAccount.getTotalCountSurplus();
+        }
+        return count;
     }
 
     @Override

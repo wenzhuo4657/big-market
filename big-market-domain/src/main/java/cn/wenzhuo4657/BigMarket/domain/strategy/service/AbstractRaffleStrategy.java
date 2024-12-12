@@ -48,7 +48,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
          *  @author:wenzhuo4657
             des:非默认抽奖直接返回结果，
         */
-        if (!DefaultChainFactory.LogicModel.RULE_DEFAULT.getCode().equals(equals(chainStrategyAwardVO.getLogicModel()))){
+        if (!DefaultChainFactory.LogicModel.RULE_DEFAULT.getCode().equals(chainStrategyAwardVO.getLogicModel())){
             return buildRaffleAwardEntity(strategyId, chainStrategyAwardVO.getAwardId(), chainStrategyAwardVO.getAwardRuleValue());
         }
         Integer awardId = chainStrategyAwardVO.getAwardId();

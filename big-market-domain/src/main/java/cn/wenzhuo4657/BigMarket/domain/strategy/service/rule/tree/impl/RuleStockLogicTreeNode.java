@@ -35,7 +35,7 @@ public class RuleStockLogicTreeNode implements ILogicTreeNode {
             log.info("规则过滤-库存扣减-成功 userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
             strategyRepository.awardStockConsumeSendQueue(StrategyAwardStockKeyVO.builder().awardId(awardId).strategyId(strategyId).build());
             return DefaultTreeFactory.TreeActionEntity.builder()
-                    .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
+                    .ruleLogicCheckType(RuleLogicCheckTypeVO.ALLOW)
                     .strategyAwardData(DefaultTreeFactory.StrategyAwardVO.builder()
                             .awardId(awardId)
                             .awardRuleValue(ruleValue)
@@ -44,7 +44,7 @@ public class RuleStockLogicTreeNode implements ILogicTreeNode {
         }
         log.warn("规则过滤-库存扣减-告警，库存不足。userId:{} strategyId:{} awardId:{}", userId, strategyId, awardId);
         return DefaultTreeFactory.TreeActionEntity.builder()
-                .ruleLogicCheckType(RuleLogicCheckTypeVO.ALLOW)
+                .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)
                 .build();
     }
 }

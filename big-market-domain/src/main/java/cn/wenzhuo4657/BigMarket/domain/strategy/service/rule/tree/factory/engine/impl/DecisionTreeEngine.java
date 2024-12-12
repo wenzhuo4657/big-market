@@ -59,7 +59,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
                     return nodeLineVo.getRuleNodeTo();
                 }
         }
-        throw new RuntimeException("决策树引擎，nextNode 计算失败，未找到可执行节点！");
+        return null;
     }
 
     /**

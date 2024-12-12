@@ -37,7 +37,7 @@ public class RuleLockLogicTreeNode implements ILogicTreeNode {
             throw new RuntimeException("规则过滤-次数锁异常：ruleValue "+ruleValue+"配置不正确");
 
         }
-        userRaffleCount=activityRepository.queryActivityAccountByUserId(userId);
+        userRaffleCount = activityRepository.queryActivityAccountByUserId(userId);
         if (userRaffleCount<RaffleCount){
             return  DefaultTreeFactory.TreeActionEntity.builder()
                     .ruleLogicCheckType(RuleLogicCheckTypeVO.TAKE_OVER)

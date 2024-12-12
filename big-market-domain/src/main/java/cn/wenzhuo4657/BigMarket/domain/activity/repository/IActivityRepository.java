@@ -4,10 +4,8 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreatePartakeOrd
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.*;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
-
 import java.util.Date;
 import java.util.List;
-
 /**
  * @author: wenzhuo4657
  * @date: 2024/10/17
@@ -116,5 +114,5 @@ public interface IActivityRepository {
      *  @author:wenzhuo4657
         des: 查询活动账户（总）消耗抽奖次数
     */
-    Long queryActivityAccountByUserId(String userId);
+    long queryActivityAccountByUserId(String userId);
 }

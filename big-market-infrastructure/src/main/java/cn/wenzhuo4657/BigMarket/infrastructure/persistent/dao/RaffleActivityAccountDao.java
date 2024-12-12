@@ -19,13 +19,11 @@ public interface RaffleActivityAccountDao {
 
 
 
-
-
     @DBRouter
     RaffleActivityAccount queryActivityAccountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 
     @DBRouter
-    Long queryDepleteCountByUserId(RaffleActivityAccount raffleActivityAccountReq);
+    List<RaffleActivityAccount> queryDepleteCountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 
     int updateActivityAccountSubtractionQuota(RaffleActivityAccount raffleActivityAccount);
     /**

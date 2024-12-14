@@ -25,4 +25,5 @@ public interface ICreditAdjustService {
      */
     CreditAccountEntity queryUserCreditAccount(String userId);
 
+    void saveIntegralRebateOrder(TradeEntity tradeEntity);
 }

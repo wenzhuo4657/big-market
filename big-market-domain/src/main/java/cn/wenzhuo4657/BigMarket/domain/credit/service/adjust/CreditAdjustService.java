@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TaskEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TradeEntity;
+import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.credit.repository.ICreditRepository;
 import cn.wenzhuo4657.BigMarket.domain.credit.service.ICreditAdjustService;
 import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * @author: wenzhuo4657
@@ -30,7 +32,7 @@ public class CreditAdjustService implements ICreditAdjustService {
 
     @Override
     public String createOrder(TradeEntity tradeEntity) {
-        log.info("增加账户积分额度开始 userId:{} tradeName:{} amount:{}", tradeEntity.getUserId(), tradeEntity.getTradeName(), tradeEntity.getAmount());
+        log.info("sku商品交易开始 userId:{} tradeName:{} amount:{}", tradeEntity.getUserId(), tradeEntity.getTradeName(), tradeEntity.getAmount());
         CreditOrderEntity creditOrderEntity =
                 TradeAggregate.createCreditOrderEntity(tradeEntity.getUserId()
                         , tradeEntity.getTradeName(), tradeEntity.getTradeType(), tradeEntity.getAmount(), tradeEntity.getOutBusinessNo());
@@ -61,6 +63,21 @@ public class CreditAdjustService implements ICreditAdjustService {
         creditRepository.saveUserCreditTradeOrder(tradeAggregate);
         log.info("增加账户积分额度完成 userId:{} orderId:{}", tradeEntity.getUserId(), creditOrderEntity.getOrderId());
         return creditOrderEntity.getOrderId();
+    }
+
+    @Override
+    public void saveIntegralRebateOrder(TradeEntity tradeEntity) {
+        log.info("积分订单交易开始 userId:{} tradeName:{} amount:{}", tradeEntity.getUserId(), tradeEntity.getTradeName());
+
+        BigDecimal amount = tradeEntity.getAmount();
+        BigDecimal multiply;
+        if (TradeTypeVO.REVERSE.getCode().equals(tradeEntity.getTradeType().getCode())){
+            multiply=amount.multiply(new BigDecimal("-1"));
+        }else {
+            multiply=amount;
+        }
+        creditRepository.updateCreditAccount(multiply,tradeEntity.getUserId());
+
     }
 
     @Override

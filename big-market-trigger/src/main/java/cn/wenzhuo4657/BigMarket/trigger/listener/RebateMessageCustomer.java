@@ -66,7 +66,8 @@ public class RebateMessageCustomer {
                     tradeEntity.setTradeType(TradeTypeVO.FORWARD);
                     tradeEntity.setAmount(new BigDecimal(messageData.getRebateConfig()));
                     tradeEntity.setOutBusinessNo(messageData.getBizId());
-                    creditAdjustService.createOrder(tradeEntity);
+                      //  wenzhuo TODO 2024/12/14 : 如果想要将返利流程融入，则需要将返利作为奖品写入，将其视为商品订单，
+                    creditAdjustService.saveIntegralRebateOrder(tradeEntity);
                 };break;
             }
 
@@ -74,10 +75,8 @@ public class RebateMessageCustomer {
         } catch (AppException e) {
             if (ResponseCode.INDEX_DUP.getCode().equals(e.getCode())) {
                 log.warn("监听用户行为返利消息，消费重复 topic: {} message: {}", topic, message, e);
-
                 return;
             }
-            throw e;
         } catch (Exception e) {
             log.error("监听用户行为返利消息，消费失败 topic: {} message: {}", topic, message, e);
             throw e;

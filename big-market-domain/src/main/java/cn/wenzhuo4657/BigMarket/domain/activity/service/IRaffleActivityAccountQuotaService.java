@@ -16,6 +16,7 @@ public interface IRaffleActivityAccountQuotaService {
      * ps:内部实际上是创建一个奖品订单，奖品为sku活动商品
      * @param skuRechargeEntity 活动商品充值实体对象
      * @return 未支付活动订单(会优先从数据库中查找)
+     * ps:内部会通过trade贸易模块判断是否需要支付订单，但是请注意，无论如何该方法最后的终点是sku商品的发放
      */
     UnpaidActivityOrderEntity createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 

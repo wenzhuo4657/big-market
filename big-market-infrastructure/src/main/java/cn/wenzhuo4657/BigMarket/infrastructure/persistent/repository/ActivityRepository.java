@@ -678,10 +678,8 @@ public class ActivityRepository implements IActivityRepository {
 
                     if (updateCount != 1) {
                         status.setRollbackOnly();
-                        return 1;
                     }
 
-                      //  wenzhuo TODO 2024/12/14 : 插入账户失败，消息消费成功
                     int update = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                     if (update != 1) {
                         raffleActivityAccountDao.insert(raffleActivityAccount);

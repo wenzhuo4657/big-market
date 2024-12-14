@@ -93,7 +93,6 @@ public class CreditRepository implements ICreditRepository {
                     if (0==updatedAddAmount) {
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
-      //  wenzhuo TODO 2024/12/9 : insert无法路由到表， 此处手动设置了，该修正
 
 
 //                    2，写入积分订单记录
@@ -126,6 +125,15 @@ public class CreditRepository implements ICreditRepository {
             log.error("调整账户积分记录，发送MQ消息失败 userId: {} topic: {}", userId, task.getTopic());
             taskDao.updateTaskSendMessageFail(task);
         }
+    }
+
+    @Override
+    public void updateCreditAccount(BigDecimal multiply, String userId) {
+        UserCreditAccount userCreditAccountReq=new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        userCreditAccountReq.setAvailableAmount(multiply);
+        userCreditAccountReq.setTotalAmount(multiply);
+        userCreditAccountDao.updateAddAmount(userCreditAccountReq);
     }
 
     @Override

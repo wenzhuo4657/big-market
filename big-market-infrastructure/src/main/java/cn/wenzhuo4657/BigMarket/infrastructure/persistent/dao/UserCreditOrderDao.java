@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder;
 
@@ -12,6 +13,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder;
  */
 @DBRouterStrategy(splitTable = true)
 public interface UserCreditOrderDao {
+
+    @DBRouter
     void insert(UserCreditOrder userCreditOrderReq);
 }
 

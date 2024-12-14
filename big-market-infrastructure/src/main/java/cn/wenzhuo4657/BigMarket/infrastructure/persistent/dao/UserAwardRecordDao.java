@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserAwardRecord;
 
@@ -15,6 +16,8 @@ public interface UserAwardRecordDao {
 
     void insert(UserAwardRecord userAwardRecord);
 
+
+    @DBRouter
     int updateAwardRecordCompletedState(UserAwardRecord userAwardRecordReq);
 }
 

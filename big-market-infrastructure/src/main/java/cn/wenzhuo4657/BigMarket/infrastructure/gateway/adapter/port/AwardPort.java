@@ -45,6 +45,8 @@ public class AwardPort implements IAwardPort {
             Response<AdjustQuotaResponseDTO> body = responseCall.execute().body();
 
             log.info("请求OpenAI应用账户调额接口完成 userId:{} increaseQuota:{} response:{}", userId, increaseQuota, JSON.toJSONString(body));
+
+
             if (null==body||null ==body.getCode()||!"0000".equals(body.getCode())){
                 throw new AppException(ResponseCode.GATEWAY_ERROR.getCode(), ResponseCode.GATEWAY_ERROR.getInfo());
             }

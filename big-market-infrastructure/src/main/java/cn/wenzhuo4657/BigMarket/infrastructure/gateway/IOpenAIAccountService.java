@@ -16,6 +16,6 @@ public interface IOpenAIAccountService {
 
 
 
-    @POST("/api/v1/account/adjust_quota")
+    @POST("/api/v1/openai/account/adjust_quota")
     Call<Response<AdjustQuotaResponseDTO>> adjustQuota(@Body AdjustQuotaRequestDTO requestDTO);
 }

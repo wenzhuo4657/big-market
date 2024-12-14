@@ -177,6 +177,38 @@ public class AwardRepository implements IAwardRepository {
     }
 
     @Override
+    public void saveGiveOutPrizesAggregate(UserAwardRecordEntity userAwardRecord) {
+
+        String userId = userAwardRecord.getUserId();
+        UserAwardRecord userAwardRecordReq = new UserAwardRecord();
+        userAwardRecordReq.setUserId(userId);
+        userAwardRecordReq.setOrderId(userAwardRecord.getOrderId());
+        userAwardRecordReq.setAwardState(userAwardRecord.getAwardState().getCode());
+        try {
+            dbRouter.doRouter(userAwardRecord.getUserId());
+            transactionTemplate.execute(status -> {
+                try{
+
+                    int updateAwardCount = userAwardRecordDao.updateAwardRecordCompletedState(userAwardRecordReq);
+                    if (updateAwardCount==0){
+                        log.warn("更新中奖记录，重复更新拦截 userId:{} giveOutPrizesAggregate:{}", userId, JSON.toJSONString(userAwardRecord));
+                        status.setRollbackOnly();
+                    }
+
+                    return  1;
+
+                }catch (DuplicateKeyException e) {
+                    status.setRollbackOnly();
+                    log.error("更新中奖记录，唯一索引冲突 userId: {} ", userId, e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                }
+            });
+        }finally {
+            dbRouter.clear();
+        }
+    }
+
+    @Override
     public String queryAwardKey(Integer awardId) {
         return awardDao.queryAwardKeyByAwardId(awardId);
     }

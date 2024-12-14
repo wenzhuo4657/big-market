@@ -1,7 +1,11 @@
 package cn.wenzhuo4657.BigMarket.domain.award.service.distribute.impl;
 
 import cn.wenzhuo4657.BigMarket.domain.award.adapter.port.IAwardPort;
+import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.GiveOutPrizesAggregate;
 import cn.wenzhuo4657.BigMarket.domain.award.model.entity.DistributeAwardEntity;
+import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserAwardRecordEntity;
+import cn.wenzhuo4657.BigMarket.domain.award.model.entity.UserCreditAwardEntity;
+import cn.wenzhuo4657.BigMarket.domain.award.model.valobj.AwardStateVO;
 import cn.wenzhuo4657.BigMarket.domain.award.repository.IAwardRepository;
 import cn.wenzhuo4657.BigMarket.domain.award.service.distribute.IDistributeAward;
 import org.apache.commons.lang3.StringUtils;
@@ -30,5 +34,13 @@ public class OpenAIAccountAdjustQuotaAward implements IDistributeAward {
             awardConfig = repository.queryAwardConfig(awardId);
         }
         port.adjustAmount(distributeAwardEntity.getUserId(), Integer.valueOf(awardConfig));
+        UserAwardRecordEntity userAwardRecordEntity= GiveOutPrizesAggregate.buildDistributeUserAwardRecordEntity(
+                distributeAwardEntity.getUserId(),
+                distributeAwardEntity.getOrderId(),
+                awardId,
+                AwardStateVO.complete
+        );
+
+        repository.saveGiveOutPrizesAggregate(userAwardRecordEntity);
     }
 }

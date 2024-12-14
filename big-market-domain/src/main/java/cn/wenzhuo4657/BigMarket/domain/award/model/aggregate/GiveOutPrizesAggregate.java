@@ -24,7 +24,7 @@ public class GiveOutPrizesAggregate {
     private String userId;
     /** 用户发奖记录 */
     private UserAwardRecordEntity userAwardRecordEntity;
-    /** 用户积分奖品 */
+    /** 用户奖品 */
     private UserCreditAwardEntity userCreditAwardEntity;
 
     public static UserAwardRecordEntity buildDistributeUserAwardRecordEntity(String userId, String orderId, Integer awardId, AwardStateVO awardState){

@@ -119,9 +119,9 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
+    group: big-market
   scan:
     base-packages: cn.wenzhuo4657.trigger.api
-
 
 zookeeper:
   sdk:

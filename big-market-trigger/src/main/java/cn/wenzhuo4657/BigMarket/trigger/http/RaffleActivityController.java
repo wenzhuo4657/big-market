@@ -96,6 +96,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     public Response<Boolean> armory(@RequestParam Long activityId) {
         try {
             log.info("活动装配，数据预热，开始 activityId:{}", activityId);
+              //  wenzhuo TODO 2024/12/14   : 在未装配场景下，购买商品等操作会写入一个默认键值对，在装配时没有将其覆盖，
             activityArmory.assembleActivitySkuByActivityId(activityId);
             strategyArmory.assembleLotteryStrategyByActivityId(activityId);
             Response<Boolean> response = Response.<Boolean>builder()

@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
+import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityArmory;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityDispatch;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.AbstractActionChain;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -25,10 +26,13 @@ public class ActivitySkuStockActionChain extends AbstractActionChain {
     @Resource
     private IActivityDispatch activityDispatch;
     @Resource
+    private IActivityArmory activityArmory;
+    @Resource
     private IActivityRepository activityRepository;
     @Override
     public boolean action(ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity) {
         log.info("活动责任链-商品库存处理【有效期、状态、库存(sku)】开始。sku:{} activityId:{}", activitySkuEntity.getSku(), activityEntity.getActivityId());
+        activityArmory.assembleActivitySku(activitySkuEntity.getSku());
         boolean status = activityDispatch.subtractionActivitySkuStock(activitySkuEntity.getSku(), activityEntity.getEndDateTime());
 
         if (status){

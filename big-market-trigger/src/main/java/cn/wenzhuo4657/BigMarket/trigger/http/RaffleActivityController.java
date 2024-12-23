@@ -96,7 +96,6 @@ public class RaffleActivityController implements IRaffleActivityService {
     public Response<Boolean> armory(@RequestParam Long activityId) {
         try {
             log.info("活动装配，数据预热，开始 activityId:{}", activityId);
-              //  wenzhuo TODO 2024/12/14   : 在未装配场景下，购买商品等操作会写入一个默认键值对，在装配时没有将其覆盖，
             activityArmory.assembleActivitySkuByActivityId(activityId);
             strategyArmory.assembleLotteryStrategyByActivityId(activityId);
             Response<Boolean> response = Response.<Boolean>builder()
@@ -113,9 +112,9 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .info(ResponseCode.UN_ERROR.getInfo())
                     .build();
         }
-    }
-      //  wenzhuo TODO 2024/11/19 :  查询得知hystrix基于线程池或者信号量实现资源隔离，待优化，或者更换组件，
 
+}
+    //  wenzhuo TODO 2024/11/19 :  查询得知hystrix基于线程池或者信号量实现资源隔离，待优化，或者更换组件，
     @Override
     @HystrixCommand(commandProperties = {
             @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value = "150")
@@ -237,7 +236,10 @@ public class RaffleActivityController implements IRaffleActivityService {
             return  Response.<Boolean>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())
-                      //  wenzhuo TODO 2024/11/6 : 由于目前行为返利只有签到行为，所以只要不为空就判定已经签到完成了
+                    /**
+                     *  @author:wenzhuo4657
+                        des:由于目前行为返利只有签到行为，所以只要不为空就判定已经签到完成了
+                    */
                     .data(!behaviorRebateOrderEntities.isEmpty())
                     .build();
         } catch (Exception e) {
@@ -499,7 +501,6 @@ public class RaffleActivityController implements IRaffleActivityService {
 
             // 3. 执行签到
             return queryUserActivityAccount(request);
-              //  wenzhuo TODO 2024/12/4 :  在非token的http接口封装中通常使用catch捕获了Exception级别的报错，在这里似乎不能正常捕捉到错误，或者说，如果在方法内部查询失败时不能正确捕捉错误。
         } catch (Exception e) {
             log.error("查询用户活动账户失败", e);
             return Response.<UserActivityAccountResponseDTO>builder()

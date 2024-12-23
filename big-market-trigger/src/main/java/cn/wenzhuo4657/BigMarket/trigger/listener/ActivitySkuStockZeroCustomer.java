@@ -41,9 +41,6 @@ public class ActivitySkuStockZeroCustomer {
             }.getType());
 
             Long sku = eventMessage.getData();
-
-
-              //  wenzhuo TODO 2024/10/21 : 待做消费流程图
             skuStock.clearActivitySkuStock(sku);
             skuStock.clearQueueValue();
         } catch (Exception e) {

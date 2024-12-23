@@ -5,6 +5,7 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.aggregate.TradeAggregate;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TaskEntity;
+import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.credit.repository.ICreditRepository;
 import cn.wenzhuo4657.BigMarket.infrastructure.event.EventPublisher;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.TaskDao;
@@ -15,6 +16,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
+import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -63,8 +66,16 @@ public class CreditRepository implements ICreditRepository {
 //        实体转化为po
         UserCreditAccount userCreditAccountReq = new UserCreditAccount();
         userCreditAccountReq.setUserId(userId);
-        userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount());
-        userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount());
+        if (creditOrderEntity.getTradeType().getCode().equals(TradeTypeVO.FORWARD.getCode())){
+            userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount());
+            userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount());
+        }else if (creditOrderEntity.getTradeType().getCode().equals(TradeTypeVO.REVERSE.getCode())){
+            userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount().multiply(new BigDecimal("-1")));
+            userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount().multiply(new BigDecimal("-1")));
+        }else {
+            throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
+        }
+
 
         UserCreditOrder userCreditOrderReq = new UserCreditOrder();
         userCreditOrderReq.setUserId(creditOrderEntity.getUserId());

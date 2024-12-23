@@ -138,7 +138,6 @@ public class RaffleStrategyController implements IRaffleStrategyService {
 
             List<RaffleAwardListResponseDTO> responseDTOS=new ArrayList<>(strategyAwardEntities.size());
             for (StrategyAwardEntity entity:strategyAwardEntities){
-                  //  wenzhuo TODO 2024/10/30 : ruleLockCountMap的key似乎和填充时不一样？而且这里假定从数据库中查询道的rulevalue都是单个数字表示抽奖解锁次数
                 Integer awardRuleLockCount = ruleLockCountMap.get(entity.getRuleModels());
 
                 responseDTOS.add(RaffleAwardListResponseDTO.builder()

@@ -1,4 +1,6 @@
 spring:
+  apptoken:
+    chatgpt-data: 89iu7o8732ijd9114
   config:
     name: big-market-app
   profiles:

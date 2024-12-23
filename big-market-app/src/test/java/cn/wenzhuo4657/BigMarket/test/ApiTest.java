@@ -21,10 +21,9 @@ public class ApiTest {
 
     @Test
     public void test_rpc() {
-        int a=0;
-        System.out.println(-1*a);
-
-
+        String tr="fjal fajl  afsjl  ";
+        String[] split = tr.split(" ");
+        System.out.println(split.toString());
     }
 
 }

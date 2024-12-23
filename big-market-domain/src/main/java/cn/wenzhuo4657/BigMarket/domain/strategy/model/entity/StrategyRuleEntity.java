@@ -60,7 +60,11 @@ public class StrategyRuleEntity {
 
         for (String ruleValue :ruleValueGroups){
             if (StringUtils.isEmpty(ruleValue)){
-                  //  wenzhuo TODO 2024/9/25 : 即便这里的分割符号为空格，出现空值难道不报错吗?
+                /**
+                 *  @author:wenzhuo4657
+                    des:
+                 单空格分割字符串，连续空格会出现”“，直接返回的含义暂且理解为配置错误或者传输过程中的前后多余的空格。
+                */
                 return resultMap;
             }
             String[] parts = ruleValue.split(Constants.COLON);

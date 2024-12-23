@@ -288,7 +288,7 @@ public class ActivityRepository implements IActivityRepository {
         return true;
     }
 
-    //  wenzhuo TODO 2024/10/21 :  redis队列
+    //  wenzhuo TODO 2024/10/21 :  redisson队列
     @Override
     public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
         String cacheKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;

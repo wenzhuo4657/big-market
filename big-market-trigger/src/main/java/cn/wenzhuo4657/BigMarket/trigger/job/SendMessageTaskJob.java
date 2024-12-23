@@ -1,18 +1,12 @@
 package cn.wenzhuo4657.BigMarket.trigger.job;
 
+import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.task.model.entity.TaskEntity;
 import cn.wenzhuo4657.BigMarket.domain.task.service.ITaskService;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
-import java.util.concurrent.ThreadPoolExecutor;
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

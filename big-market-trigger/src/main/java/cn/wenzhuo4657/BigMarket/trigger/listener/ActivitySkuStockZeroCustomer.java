@@ -5,8 +5,8 @@ import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -20,23 +20,26 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-public class ActivitySkuStockZeroCustomer {
-    @Value("${spring.rabbitmq.topic.activity_sku_stock_zero}")
-    private String topic;
+@RocketMQMessageListener(
+        consumerGroup = "big-market-app",
+        topic ="activity_sku_stock_zero" )
+public class ActivitySkuStockZeroCustomer implements RocketMQListener<String> {
+
+    private String topic="activity_sku_stock_zero";
     @Resource
     private IRaffleActivitySkuStockService skuStock;
 
-    @RabbitListener(queuesToDeclare = @Queue(value = "${spring.rabbitmq.topic.activity_sku_stock_zero}"))
-    public void listener(String message){
+    @Override
+    public void onMessage(String message) {
         try {
             log.info("监听活动sku库存消耗为0消息 topic: {} message: {}", topic, message);
             /**
              *  @author:wenzhuo4657
-                des:
+            des:
             new TypeReference<BaseEvent.EventMessage<Long>>() {
             }.getType()
             强制 Client 端创建此类的子类，即使在运行时也可以检索类型信息。
-            */
+             */
             BaseEvent.EventMessage<Long> eventMessage = JSON.parseObject(message, new TypeReference<BaseEvent.EventMessage<Long>>() {
             }.getType());
 
@@ -48,5 +51,7 @@ public class ActivitySkuStockZeroCustomer {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

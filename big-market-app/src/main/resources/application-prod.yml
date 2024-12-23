@@ -25,20 +25,30 @@ thread:
         block-queue-size: 5000
         policy: CallerRunsPolicy
 # rabbitMQ配置
-spring:
-  rabbitmq:
-    addresses: 127.0.0.1
-    port: 5672
-    username: admin
-    password: admin
-    listener:
-      simple:
-        prefetch: 1
-    topic:
-      activity_sku_stock_zero: activity_sku_stock_zero
-      send_award: send_award
-      send_rebate: send_rebate
-      credit_adjust_success:   credit_adjust_success
+#spring:
+#  rabbitmq:
+#    addresses: 127.0.0.1
+#    port: 5672
+#    username: admin
+#    password: admin
+#    listener:
+#      simple:
+#        prefetch: 1
+#    topic:
+#      activity_sku_stock_zero: activity_sku_stock_zero
+#      send_award: send_award
+#      send_rebate: send_rebate
+#      credit_adjust_success:   credit_adjust_success
+
+rocketmq:
+  name-server: 172.168.253.101:9876
+  producer:
+    group: big-market-app
+  topic:
+    activity_sku_stock_zero: activity_sku_stock_zero
+    send_award: send_award
+    send_rebate: send_rebate
+    credit_adjust_success: credit_adjust_success
 # 数据库配置；启动时配置数据库资源信息
 #spring:
 #  datasource:

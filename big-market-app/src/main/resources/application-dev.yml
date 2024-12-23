@@ -32,20 +32,28 @@ redis:
       minIdleSize: 10
       password: 465700
 # rabbitMQ配置
-spring:
-  rabbitmq:
-    addresses: 117.72.36.124
-    port: 5672
-    username: admin
-    password: admin
-    listener:
-      simple:
-        prefetch: 1
-    topic:
-      activity_sku_stock_zero: activity_sku_stock_zero
-      send_award: send_award
-      send_rebate: send_rebate
-      credit_adjust_success: credit_adjust_success
+#spring:
+#  rabbitmq:
+#    addresses: 117.72.36.124
+#    port: 5672
+#    username: admin
+#    password: admin
+#    listener:
+#      simple:
+#        prefetch: 1
+#    topic:
+#      activity_sku_stock_zero: activity_sku_stock_zero
+#      send_award: send_award
+#      send_rebate: send_rebate
+#      credit_adjust_success: credit_adjust_success
+rocketmq:
+  producer:
+    group: big-market-app
+    send-message-timeout: 5000
+    retry-times-when-send-failed: 2
+    retryTimesWhenSendAsyncFailed: 2
+  name-server: 117.72.36.124:9876
+
 
 mini-db-router:
   jdbc:

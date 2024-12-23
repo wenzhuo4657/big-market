@@ -3,8 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.event;
 import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class EventPublisher {
 
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private RocketMQTemplate rocketMQTemplate;
 
     /**
      *  @author:wenzhuo4657
@@ -27,9 +26,10 @@ public class EventPublisher {
     public void publish(String topic, BaseEvent.EventMessage<?> eventMessage){
         try{
             String messageJson= JSON.toJSONString(eventMessage);
-            rabbitTemplate.convertAndSend(topic,messageJson);
+            rocketMQTemplate.convertAndSend(topic,messageJson);
             log.info("发送MQ消息，topic:{} message:{}",topic,messageJson);
-        } catch (AmqpException e) {
+
+        } catch (Exception e) {
             log.info("发送MQ消息失败，topic:{} message:{}",topic,JSON.toJSONString(eventMessage));
             throw new RuntimeException(e);
         }
@@ -38,7 +38,7 @@ public class EventPublisher {
 
     public  void publish(String topic,String eventMessageJSON){
         try {
-            rabbitTemplate.convertAndSend(topic,eventMessageJSON);
+            rocketMQTemplate.convertAndSend(topic,eventMessageJSON);
             log.info("发送MQ消息 topic:{} message:{}", topic, eventMessageJSON);
         }catch (Exception e) {
             log.error("发送MQ消息失败 topic:{} message:{}", topic, eventMessageJSON, e);

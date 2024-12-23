@@ -43,8 +43,8 @@ public class CreditAdjustSuccessMessageEvent extends BaseEvent<CreditAdjustSucce
         private String outBusinessNo;
     }
 
-    @Value("${spring.rabbitmq.topic.credit_adjust_success}")
-    private String topic;
+
+    private String topic="credit_adjust_success";
 
     @Override
     public EventMessage<CreditAdjustSuccessMessage> buildEventMessage(CreditAdjustSuccessMessage data) {

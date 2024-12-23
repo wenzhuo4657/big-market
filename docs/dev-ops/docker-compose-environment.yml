@@ -69,21 +69,48 @@ services:
     networks:
         - big-market-network
 
-  rabbitmq:
-    image: rabbitmq:3.12.9
-    container_name: rabbitmq
-    restart: always
+#  rabbitmq:
+#    image: rabbitmq:3.12.9
+#    container_name: rabbitmq
+#    restart: always
+#    ports:
+#      - "5672:5672"
+#      - "15672:15672"
+#    environment:
+#      RABBITMQ_DEFAULT_USER: admin
+#      RABBITMQ_DEFAULT_PASS: admin
+#    command: rabbitmq-server
+#    volumes:
+#      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+#    networks:
+#      - big-market-network
+
+  namesrv:
+    image: apache/rocketmq:4.9.6
+    container_name: rmqnamesrv
     ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-    command: rabbitmq-server
-    volumes:
-      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - 9876:9876
     networks:
       - big-market-network
+    command: sh mqnamesrv
+  broker:
+      image: apache/rocketmq:4.9.6
+      container_name: rmqbroker
+      ports:
+        - 10909:10909
+        - 10911:10911
+        - 10912:10912
+      environment:
+        - NAMESRV_ADDR=rmqnamesrv:9876
+      volumes:
+        - ./rocketmq/broker.conf:/home/rocketmq/rocketmq-4.9.6/conf/broker.conf
+      depends_on:
+        namesrv:
+          condition: service_healthy
+      networks:
+        - big-market-network
+      command: sh mqbroker -c /home/rocketmq/rocketmq-4.9.6/conf/broker.conf
+
   zookeeper:
     image: zookeeper:3.9.0
     container_name: zookeeper
@@ -104,41 +131,57 @@ services:
 
 
 ## 管理工具
-  phpmyadmin:
-    image: phpmyadmin:5.2.1
-    container_name: phpmyadmin
-    hostname: phpmyadmin
-    ports:
-      - 8899:80
+#  phpmyadmin:
+#    image: phpmyadmin:5.2.1
+#    container_name: phpmyadmin
+#    hostname: phpmyadmin
+#    ports:
+#      - 8899:80
+#    environment:
+#      - PMA_HOST=mysql
+#      - PMA_PORT=3306
+#      - MYSQL_ROOT_PASSWORD=465700
+#    depends_on:
+#      mysql:
+#        condition: service_healthy
+#    networks:
+#      - big-market-network
+
+  rocketmqdashboard:
+    container_name: rocketmq-dashboard
+    image: apacherocketmq/rocketmq-dashboard:latest
+    hostname: rocketmq-dashboard
     environment:
-      - PMA_HOST=mysql
-      - PMA_PORT=3306
-      - MYSQL_ROOT_PASSWORD=465700
+      - "JAVA_OPTS=-Drocketmq.namesrv.addr=http://117.72.36.124:9876"
+    ports:
+       - 8080:8080
     depends_on:
-      mysql:
+      namesrv:
         condition: service_healthy
     networks:
       - big-market-network
 
-  redis-admin:
-    image: spryker/redis-commander:0.8.0
-    container_name: redis-admin
-    hostname: redis-commander
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      - REDIS_HOSTS=local:redis:6379
-      - HTTP_USER=admin
-      - HTTP_PASSWORD=admin
-      - LANG=C.UTF-8
-      - LANGUAGE=C.UTF-8
-      - LC_ALL=C.UTF-8
-    networks:
-      - big-market-network
-    depends_on:
-      redis:
-        condition: service_healthy
+
+
+#  redis-admin:
+#    image: spryker/redis-commander:0.8.0
+#    container_name: redis-admin
+#    hostname: redis-commander
+#    restart: always
+#    ports:
+#      - 8081:8081
+#    environment:
+#      - REDIS_HOSTS=local:redis:6379
+#      - HTTP_USER=admin
+#      - HTTP_PASSWORD=admin
+#      - LANG=C.UTF-8
+#      - LANGUAGE=C.UTF-8
+#      - LC_ALL=C.UTF-8
+#    networks:
+#      - big-market-network
+#    depends_on:
+#      redis:
+#        condition: service_healthy
 
   xxl-job-admin:
     image: xuxueli/xxl-job-admin:2.4.1

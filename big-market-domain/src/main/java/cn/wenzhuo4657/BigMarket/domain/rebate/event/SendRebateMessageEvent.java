@@ -19,8 +19,8 @@ import java.util.Date;
 @Component
 public class SendRebateMessageEvent extends BaseEvent<SendRebateMessageEvent.RebateMessage> {
 
-    @Value("${spring.rabbitmq.topic.send_rebate}")
-    private String topic;
+
+    private String topic="send_rebate";
     @Override
     public EventMessage<RebateMessage> buildEventMessage(RebateMessage data) {
         return EventMessage.<RebateMessage>builder()

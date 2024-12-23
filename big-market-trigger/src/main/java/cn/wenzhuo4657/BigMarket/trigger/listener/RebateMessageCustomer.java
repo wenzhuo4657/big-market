@@ -15,8 +15,8 @@ import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +30,11 @@ import java.math.BigDecimal;
  */
 @Slf4j
 @Component
-public class RebateMessageCustomer {
-    @Value("${spring.rabbitmq.topic.send_rebate}")
-    private String topic;
+@RocketMQMessageListener(consumerGroup = "big-market-app",
+        topic ="send_rebate")
+public class RebateMessageCustomer implements RocketMQListener<String> {
+
+    private String topic="send_rebate";
 
     @Resource
     private IRaffleActivityAccountQuotaService raffleActivityAccountQuotaService;
@@ -42,8 +44,8 @@ public class RebateMessageCustomer {
     @Resource
     private ITaskService taskService;
 
-    @RabbitListener(queuesToDeclare = @Queue(value = "${spring.rabbitmq.topic.send_rebate}"))
-    public void listener(String message){
+    @Override
+    public void onMessage(String message) {
         try {
             log.info("监听用户行为返利消息 topic: {} message: {}", topic, message);
             BaseEvent.EventMessage<SendRebateMessageEvent.RebateMessage>   eventMessage =
@@ -66,7 +68,7 @@ public class RebateMessageCustomer {
                     tradeEntity.setTradeType(TradeTypeVO.FORWARD);
                     tradeEntity.setAmount(new BigDecimal(messageData.getRebateConfig()));
                     tradeEntity.setOutBusinessNo(messageData.getBizId());
-                      //  wenzhuo TODO 2024/12/14 : 如果想要将返利流程融入，则需要将返利作为奖品写入，将其视为商品订单，
+                    //  wenzhuo TODO 2024/12/14 : 如果想要将返利流程融入，则需要将返利作为奖品写入，将其视为商品订单，
                     creditAdjustService.saveIntegralRebateOrder(tradeEntity);
                 };break;
             }
@@ -81,7 +83,7 @@ public class RebateMessageCustomer {
             log.error("监听用户行为返利消息，消费失败 topic: {} message: {}", topic, message, e);
             throw e;
         }
-
     }
+
 
 }

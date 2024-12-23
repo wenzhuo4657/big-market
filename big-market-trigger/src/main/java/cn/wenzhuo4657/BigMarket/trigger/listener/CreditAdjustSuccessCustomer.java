@@ -9,8 +9,8 @@ import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.TypeReference;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,16 +23,18 @@ import javax.annotation.Resource;
  */
 @Component
 @Slf4j
-public class CreditAdjustSuccessCustomer {
+@RocketMQMessageListener(consumerGroup = "big-market-app",
+        topic ="credit_adjust_success")
+public class CreditAdjustSuccessCustomer implements RocketMQListener<String> {
 
-    @Value("${spring.rabbitmq.topic.credit_adjust_success}")
-    private String topic;
+    private String topic="credit_adjust_success";
     @Resource
     private IRaffleActivityAccountQuotaService raffleActivityAccountQuotaService;
 
-    @RabbitListener(queuesToDeclare = @Queue(value = "${spring.rabbitmq.topic.credit_adjust_success}"))
-    public void listener(String message) {
-          //  wenzhuo TODO 2024/12/10 : 待更改为rocketmq,且注意对于推拉模式
+
+    @Override
+    public void onMessage(String message) {
+        //  wenzhuo TODO 2024/12/10 : 待更改为rocketmq,且注意对于推拉模式
         try {
             log.info("监听积分账户调整成功消息，进行交易商品发货 topic: {} message: {}", topic, message);
             BaseEvent.EventMessage<CreditAdjustSuccessMessageEvent.CreditAdjustSuccessMessage> eventMessage = JSON.parseObject(message, new TypeReference<BaseEvent.EventMessage<CreditAdjustSuccessMessageEvent.CreditAdjustSuccessMessage>>() {
@@ -52,6 +54,7 @@ public class CreditAdjustSuccessCustomer {
             log.error("监听积分账户调整成功消息，进行交易商品发货失败 topic: {} message: {}", topic, message, e);
             throw e;
         }
-
     }
+
+
 }

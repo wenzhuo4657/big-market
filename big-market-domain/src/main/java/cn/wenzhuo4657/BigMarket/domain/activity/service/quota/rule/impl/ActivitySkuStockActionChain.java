@@ -47,6 +47,5 @@ public class ActivitySkuStockActionChain extends AbstractActionChain {
         throw new AppException(ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getCode(), ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getInfo());
     }
 
-  //  wenzhuo TODO 2024/12/15 : 积分购买流程中，关于积分的正负扣减流程
   //  wenzhuo TODO 2024/12/15 : 在前端中增加预热活动按钮
 }

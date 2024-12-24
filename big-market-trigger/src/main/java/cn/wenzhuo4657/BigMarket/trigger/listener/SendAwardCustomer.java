@@ -35,7 +35,6 @@ public class SendAwardCustomer implements RocketMQListener<String> {
     @Resource
     private IAwardService awardService;
 
-    @SneakyThrows
     @Override
     public void onMessage(String message) {
         try {
@@ -44,17 +43,15 @@ public class SendAwardCustomer implements RocketMQListener<String> {
             BaseEvent.EventMessage<SendAwardMessageEvent.SendAwardMessage> eventMessage = JSON.parseObject(message, new TypeReference<BaseEvent.EventMessage<SendAwardMessageEvent.SendAwardMessage>>() {
             }.getType());
             SendAwardMessageEvent.SendAwardMessage data = eventMessage.getData();
-
             DistributeAwardEntity distributeAwardEntity=new DistributeAwardEntity();
             distributeAwardEntity.setUserId(data.getUserId());
             distributeAwardEntity.setOrderId(data.getOrderId());
             distributeAwardEntity.setAwardId(data.getAwardId());
             distributeAwardEntity.setAwardConfig(data.getAwardConfig());
             awardService.distributeAward(distributeAwardEntity);
-
         } catch (Exception e) {
             log.error("监听用户奖品发送消息，消费失败 topic: {} message: {}", topic, message);
-            throw e;
+            throw new RuntimeException(e);
         }
     }
 

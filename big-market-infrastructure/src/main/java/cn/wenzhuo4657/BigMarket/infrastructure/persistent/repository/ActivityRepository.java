@@ -288,10 +288,16 @@ public class ActivityRepository implements IActivityRepository {
         return true;
     }
 
-    //  wenzhuo TODO 2024/10/21 :  redisson队列
+
     @Override
     public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
         String cacheKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        /**
+         *  @author:wenzhuo4657
+            des:
+        block队列保证存取操作的正确性。
+        //delayed队列将消费延时，便于处理消息。
+        */
         RBlockingQueue<Object> blockingQueue = redissonService.getBlockingQueue(cacheKey);
         RDelayedQueue<Object> delayedQueue = redissonService.getDelayedQueue(blockingQueue);
         delayedQueue.offer(activitySkuStockKeyVO, 3, TimeUnit.SECONDS);

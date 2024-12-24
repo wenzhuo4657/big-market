@@ -12,7 +12,6 @@ import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Resource;
 
 /**
@@ -47,5 +46,4 @@ public class ActivitySkuStockActionChain extends AbstractActionChain {
         throw new AppException(ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getCode(), ResponseCode.ACTIVITY_SKU_STOCK_ERROR.getInfo());
     }
 
-  //  wenzhuo TODO 2024/12/15 : 在前端中增加预热活动按钮
 }

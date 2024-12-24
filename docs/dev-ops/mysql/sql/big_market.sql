@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : mysql3308
+ Source Server         : 京东云3306
  Source Server Type    : MySQL
  Source Server Version : 80039
- Source Host           : localhost:3308
+ Source Host           : 117.72.36.124:3306
  Source Schema         : big_market
 
  Target Server Type    : MySQL
  Target Server Version : 80039
  File Encoding         : 65001
 
- Date: 14/11/2024 19:53:11
+ Date: 24/12/2024 15:43:48
 */
 
 SET NAMES utf8mb4;
@@ -33,21 +33,21 @@ CREATE TABLE `award`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uq_award_id`(`award_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '奖品表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '奖品表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of award
 -- ----------------------------
-INSERT INTO `award` VALUES (1, 101, 'user_credit_random', '1,100', '用户积分【优先透彻规则范围，如果没有则走配置】', '2023-12-09 11:07:06', '2023-12-09 11:21:31');
+INSERT INTO `award` VALUES (1, 101, 'user_credit_random', '1,100', '用户积分', '2023-12-09 11:07:06', '2024-12-24 13:26:45');
 INSERT INTO `award` VALUES (2, 102, 'openai_use_count', '5', 'OpenAI 增加使用次数', '2023-12-09 11:07:06', '2023-12-09 11:12:59');
 INSERT INTO `award` VALUES (3, 103, 'openai_use_count', '10', 'OpenAI 增加使用次数', '2023-12-09 11:07:06', '2023-12-09 11:12:59');
 INSERT INTO `award` VALUES (4, 104, 'openai_use_count', '20', 'OpenAI 增加使用次数', '2023-12-09 11:07:06', '2023-12-09 11:12:58');
-INSERT INTO `award` VALUES (5, 105, 'openai_model', 'gpt-4', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2023-12-09 11:12:01');
-INSERT INTO `award` VALUES (6, 106, 'openai_model', 'dall-e-2', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2023-12-09 11:12:08');
-INSERT INTO `award` VALUES (7, 107, 'openai_model', 'dall-e-3', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2023-12-09 11:12:10');
-INSERT INTO `award` VALUES (8, 108, 'openai_use_count', '100', 'OpenAI 增加使用次数', '2023-12-09 11:07:06', '2023-12-09 11:12:55');
-INSERT INTO `award` VALUES (9, 109, 'openai_model', 'gpt-4,dall-e-2,dall-e-3', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2023-12-09 11:12:39');
-INSERT INTO `award` VALUES (10, 100, 'user_credit_blacklist', '1', '黑名单积分', '2024-01-06 12:30:40', '2024-01-06 12:30:46');
+INSERT INTO `award` VALUES (5, 105, 'openai_use_count', '10', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2024-12-24 13:27:11');
+INSERT INTO `award` VALUES (6, 106, 'openai_use_count', '20', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2024-12-24 13:27:13');
+INSERT INTO `award` VALUES (7, 107, 'openai_use_count', '20', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2024-12-24 13:27:16');
+INSERT INTO `award` VALUES (8, 108, 'openai_use_count', '20', 'OpenAI 增加使用次数', '2023-12-09 11:07:06', '2024-12-24 13:27:19');
+INSERT INTO `award` VALUES (9, 109, 'openai_use_count', '15', 'OpenAI 增加模型', '2023-12-09 11:07:06', '2024-12-24 13:27:23');
+INSERT INTO `award` VALUES (10, 100, 'openai_use_count', '1', '黑名单积分', '2024-01-06 12:30:40', '2024-12-24 13:27:06');
 
 -- ----------------------------
 -- Table structure for daily_behavior_rebate
@@ -64,7 +64,7 @@ CREATE TABLE `daily_behavior_rebate`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_behavior_type`(`behavior_type` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日常行为返利活动配置' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '日常行为返利活动配置' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of daily_behavior_rebate
@@ -92,12 +92,12 @@ CREATE TABLE `raffle_activity`  (
   UNIQUE INDEX `uq_strategy_id`(`strategy_id` ASC) USING BTREE,
   INDEX `idx_begin_date_time`(`begin_date_time` ASC) USING BTREE,
   INDEX `idx_end_date_time`(`end_date_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖活动表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖活动表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of raffle_activity
 -- ----------------------------
-INSERT INTO `raffle_activity` VALUES (1, 100301, '测试活动', '测试活动', '2024-03-09 10:15:10', '2034-03-09 10:15:10', 100006, 'open', '2024-03-09 10:15:10', '2024-03-30 12:07:36');
+INSERT INTO `raffle_activity` VALUES (1, 100401, '测试活动', '测试活动', '2024-03-09 10:15:10', '2034-03-09 10:15:10', 100006, 'open', '2024-03-09 10:15:10', '2024-12-24 13:27:51');
 
 -- ----------------------------
 -- Table structure for raffle_activity_count
@@ -113,7 +113,7 @@ CREATE TABLE `raffle_activity_count`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uq_activity_count_id`(`activity_count_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖活动次数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖活动次数配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of raffle_activity_count
@@ -137,12 +137,12 @@ CREATE TABLE `raffle_activity_sku`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uq_sku`(`sku` ASC) USING BTREE,
   INDEX `idx_activity_id_activity_count_id`(`activity_id` ASC, `activity_count_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of raffle_activity_sku
 -- ----------------------------
-INSERT INTO `raffle_activity_sku` VALUES (1, 9011, 100301, 11101, 100000, 99886, 1.68, '2024-03-16 11:41:09', '2024-11-13 18:25:55');
+INSERT INTO `raffle_activity_sku` VALUES (1, 9012, 100401, 11101, 100000, 99883, 1.68, '2024-03-16 11:41:09', '2024-12-24 14:23:20');
 
 -- ----------------------------
 -- Table structure for rule_tree
@@ -158,7 +158,7 @@ CREATE TABLE `rule_tree`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uq_tree_id`(`tree_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rule_tree
@@ -181,7 +181,7 @@ CREATE TABLE `rule_tree_node`  (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树节点' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树节点' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rule_tree_node
@@ -212,7 +212,7 @@ CREATE TABLE `rule_tree_node_line`  (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树节点连线' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '规则表-树节点连线' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of rule_tree_node_line
@@ -241,16 +241,11 @@ CREATE TABLE `strategy`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_strategy_id`(`strategy_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of strategy
 -- ----------------------------
-INSERT INTO `strategy` VALUES (1, 100001, '抽奖策略', 'rule_blacklist,rule_weight', '2023-12-09 09:37:19', '2024-01-20 11:39:23');
-INSERT INTO `strategy` VALUES (2, 100003, '抽奖策略-验证lock', NULL, '2024-01-13 10:34:06', '2024-04-03 16:03:21');
-INSERT INTO `strategy` VALUES (3, 100002, '抽奖策略-非完整1概率', NULL, '2023-12-09 09:37:19', '2024-02-03 10:14:17');
-INSERT INTO `strategy` VALUES (4, 100004, '抽奖策略-随机抽奖', NULL, '2023-12-09 09:37:19', '2024-01-20 19:21:03');
-INSERT INTO `strategy` VALUES (5, 100005, '抽奖策略-测试概率计算', NULL, '2023-12-09 09:37:19', '2024-01-21 21:54:58');
 INSERT INTO `strategy` VALUES (6, 100006, '抽奖策略-规则树', 'rule_blacklist,rule_weight', '2024-02-03 09:53:40', '2024-05-03 09:02:38');
 
 -- ----------------------------
@@ -272,40 +267,19 @@ CREATE TABLE `strategy_award`  (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_strategy_id_award_id`(`strategy_id` ASC, `award_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略奖品概率' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略奖品概率' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of strategy_award
 -- ----------------------------
-INSERT INTO `strategy_award` VALUES (1, 100001, 101, '随机积分', NULL, 80000, 79998, 0.3000, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-25 22:40:50');
-INSERT INTO `strategy_award` VALUES (2, 100001, 102, '5次使用', NULL, 10000, 9999, 0.2000, 'tree_luck_award', 2, '2023-12-09 09:39:18', '2024-02-25 22:40:55');
-INSERT INTO `strategy_award` VALUES (3, 100001, 103, '10次使用', NULL, 5000, 4998, 0.2000, 'tree_luck_award', 3, '2023-12-09 09:42:36', '2024-02-25 22:40:45');
-INSERT INTO `strategy_award` VALUES (4, 100001, 104, '20次使用', NULL, 4000, 3999, 0.1000, 'tree_luck_award', 4, '2023-12-09 09:43:15', '2024-02-25 22:40:00');
-INSERT INTO `strategy_award` VALUES (5, 100001, 105, '增加gpt-4对话模型', NULL, 600, 600, 0.1000, 'tree_luck_award', 5, '2023-12-09 09:43:47', '2024-02-15 07:42:13');
-INSERT INTO `strategy_award` VALUES (6, 100001, 106, '增加dall-e-2画图模型', NULL, 200, 200, 0.0500, 'tree_luck_award', 6, '2023-12-09 09:44:20', '2024-02-15 07:42:14');
-INSERT INTO `strategy_award` VALUES (7, 100001, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'tree_luck_award', 7, '2023-12-09 09:45:38', '2024-02-15 07:42:17');
-INSERT INTO `strategy_award` VALUES (8, 100001, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'tree_luck_award', 8, '2023-12-09 09:46:02', '2024-02-15 07:42:21');
-INSERT INTO `strategy_award` VALUES (9, 100001, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'tree_luck_award', 9, '2023-12-09 09:46:39', '2024-02-15 07:42:26');
-INSERT INTO `strategy_award` VALUES (10, 100002, 101, '随机积分', NULL, 1, 1, 0.5000, 'tree_luck_award', 1, '2023-12-09 09:46:39', '2024-02-15 07:42:29');
-INSERT INTO `strategy_award` VALUES (11, 100002, 102, '5次使用', NULL, 1, 1, 0.1000, 'tree_luck_award', 2, '2023-12-09 09:46:39', '2024-02-15 07:42:32');
-INSERT INTO `strategy_award` VALUES (12, 100002, 106, '增加dall-e-2画图模型', NULL, 1, 1, 0.0100, 'tree_luck_award', 3, '2023-12-09 09:46:39', '2024-02-15 07:42:35');
-INSERT INTO `strategy_award` VALUES (13, 100003, 107, '增加dall-e-3画图模型', '抽奖1次后解锁', 200, 200, 0.0400, 'tree_luck_award', 7, '2023-12-09 09:45:38', '2024-02-15 07:42:38');
-INSERT INTO `strategy_award` VALUES (14, 100003, 108, '增加100次使用', '抽奖2次后解锁', 199, 199, 0.0099, 'tree_luck_award', 8, '2023-12-09 09:46:02', '2024-02-15 07:42:41');
-INSERT INTO `strategy_award` VALUES (15, 100003, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 0.0001, 'tree_luck_award', 9, '2023-12-09 09:46:39', '2024-02-15 07:42:44');
-INSERT INTO `strategy_award` VALUES (16, 100004, 109, '解锁全部模型', '抽奖6次后解锁', 1, 1, 1.0000, 'tree_luck_award', 9, '2023-12-09 09:46:39', '2024-02-15 07:42:46');
-INSERT INTO `strategy_award` VALUES (17, 100005, 101, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:47');
-INSERT INTO `strategy_award` VALUES (18, 100005, 102, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:48');
-INSERT INTO `strategy_award` VALUES (19, 100005, 103, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:50');
-INSERT INTO `strategy_award` VALUES (20, 100005, 104, '随机积分', NULL, 80000, 80000, 0.0300, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:51');
-INSERT INTO `strategy_award` VALUES (21, 100005, 105, '随机积分', NULL, 80000, 80000, 0.0010, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-02-15 07:42:52');
 INSERT INTO `strategy_award` VALUES (22, 100006, 101, '随机积分', NULL, 100, 57, 0.0200, 'tree_luck_award', 1, '2023-12-09 09:38:31', '2024-05-04 15:37:00');
-INSERT INTO `strategy_award` VALUES (23, 100006, 102, 'OpenAI会员卡', NULL, 100, 17, 0.0300, 'tree_luck_award', 2, '2023-12-09 09:38:31', '2024-05-04 13:00:15');
-INSERT INTO `strategy_award` VALUES (24, 100006, 103, '支付优惠券', NULL, 100, 40, 0.0300, 'tree_luck_award', 3, '2023-12-09 09:38:31', '2024-05-04 15:36:15');
-INSERT INTO `strategy_award` VALUES (25, 100006, 104, '小米台灯', NULL, 100, 31, 0.0300, 'tree_luck_award', 4, '2023-12-09 09:38:31', '2024-05-04 15:36:45');
-INSERT INTO `strategy_award` VALUES (26, 100006, 105, '小米su7周体验', '抽奖3次后解锁', 100, 38, 0.0300, 'tree_lock_3', 5, '2023-12-09 09:38:31', '2024-04-27 13:08:16');
-INSERT INTO `strategy_award` VALUES (27, 100006, 106, '轻奢办公椅', '抽奖2次后解锁', 100, 23, 0.0300, 'tree_lock_2', 6, '2023-12-09 09:38:31', '2024-05-04 15:31:45');
-INSERT INTO `strategy_award` VALUES (28, 100006, 107, '小霸王游戏机', '抽奖1次后解锁', 100, 22, 0.0300, 'tree_lock_1', 7, '2023-12-09 09:38:31', '2024-05-04 15:31:55');
-INSERT INTO `strategy_award` VALUES (29, 100006, 108, '暴走玩偶', NULL, 100, 27, 0.0300, 'tree_luck_award', 8, '2023-12-09 09:38:31', '2024-05-04 15:37:05');
+INSERT INTO `strategy_award` VALUES (23, 100006, 102, 'OpenAI随机额度', NULL, 100, 13, 0.0300, 'tree_luck_award', 2, '2023-12-09 09:38:31', '2024-12-24 14:39:50');
+INSERT INTO `strategy_award` VALUES (24, 100006, 103, 'OpenAI随机额度', NULL, 100, 40, 0.0300, 'tree_luck_award', 3, '2023-12-09 09:38:31', '2024-12-24 13:29:41');
+INSERT INTO `strategy_award` VALUES (25, 100006, 104, 'OpenAI随机额度', NULL, 100, 27, 0.0300, 'tree_luck_award', 4, '2023-12-09 09:38:31', '2024-12-24 14:55:00');
+INSERT INTO `strategy_award` VALUES (26, 100006, 105, 'OpenAI随机额度', '抽奖3次后解锁', 100, 35, 0.0300, 'tree_lock_3', 5, '2023-12-09 09:38:31', '2024-12-24 14:53:45');
+INSERT INTO `strategy_award` VALUES (27, 100006, 106, 'OpenAI随机额度', '抽奖2次后解锁', 100, 21, 0.0300, 'tree_lock_2', 6, '2023-12-09 09:38:31', '2024-12-24 14:40:50');
+INSERT INTO `strategy_award` VALUES (28, 100006, 107, 'OpenAI随机额度', '抽奖1次后解锁', 100, 20, 0.0300, 'tree_lock_1', 7, '2023-12-09 09:38:31', '2024-12-24 14:54:50');
+INSERT INTO `strategy_award` VALUES (29, 100006, 108, 'OpenAI随机额度', NULL, 100, 25, 0.0300, 'tree_luck_award', 8, '2023-12-09 09:38:31', '2024-12-24 14:54:40');
 
 -- ----------------------------
 -- Table structure for strategy_rule
@@ -324,13 +298,11 @@ CREATE TABLE `strategy_rule`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uq_strategy_id_rule_model`(`strategy_id` ASC, `rule_model` ASC) USING BTREE,
   INDEX `idx_strategy_id_award_id`(`strategy_id` ASC, `award_id` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略规则' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '抽奖策略规则' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of strategy_rule
 -- ----------------------------
-INSERT INTO `strategy_rule` VALUES (13, 100001, NULL, 1, 'rule_weight', '60:102,103,104,105 200:106,107 1000:105', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-04 12:44:47');
-INSERT INTO `strategy_rule` VALUES (14, 100001, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底', '2023-12-09 12:59:45', '2024-02-14 18:16:20');
 INSERT INTO `strategy_rule` VALUES (15, 100006, NULL, 1, 'rule_weight', '10:102,103 70:106,107 1000:104,105', '消耗6000分，必中奖范围', '2023-12-09 10:30:43', '2024-05-04 15:41:16');
 INSERT INTO `strategy_rule` VALUES (16, 100006, NULL, 1, 'rule_blacklist', '101:user001,user002,user003', '黑名单抽奖，积分兜底', '2023-12-09 12:59:45', '2024-02-14 18:16:20');
 

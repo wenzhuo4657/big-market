@@ -19,7 +19,8 @@ import java.math.BigDecimal;
 /**
  * @author: wenzhuo4657
  * @date: 2024/11/9
- * @description: 积分聚合对象
+ * @description: 通用积分聚合对象
+ * 对所有积分交易业务进行了收束操作，并将调整成功的操作结果作为任务taskEntity实体。
  */
 @Data
 @Builder

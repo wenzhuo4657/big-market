@@ -76,7 +76,7 @@ public class CreditRepository implements ICreditRepository {
             throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 
-        if (creditAccountEntity.getAdjustAmount().longValue()-userCreditAccountReq.getTotalAmount().longValue()<0){
+        if (creditAccountEntity.getAdjustAmount().add(userCreditAccountReq.getTotalAmount()).compareTo(BigDecimal.ZERO)==-1){
             throw new AppException(ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getCode(),ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getInfo());
         }
 

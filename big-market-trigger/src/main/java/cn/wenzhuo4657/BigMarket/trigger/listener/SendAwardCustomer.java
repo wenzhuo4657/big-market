@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 
 @Slf4j
 @Component
-@RocketMQMessageListener(consumerGroup = "big-market-app",
+@RocketMQMessageListener(consumerGroup = "big-market-app-Customer-send_award",
         topic ="send_award")
 public class SendAwardCustomer implements RocketMQListener<String> {
 

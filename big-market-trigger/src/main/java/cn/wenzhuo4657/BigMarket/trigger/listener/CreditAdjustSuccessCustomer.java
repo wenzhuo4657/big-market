@@ -23,7 +23,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Slf4j
-@RocketMQMessageListener(consumerGroup = "big-market-app",
+@RocketMQMessageListener(consumerGroup = "big-market-app-Customer-credit_adjust_success",
         topic ="credit_adjust_success")
 public class CreditAdjustSuccessCustomer implements RocketMQListener<String> {
 

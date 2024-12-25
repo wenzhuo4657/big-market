@@ -25,4 +25,9 @@ public class SkuProductShopCartRequestDTO  implements Serializable {
      * sku 商品
      */
     private Long sku;
+
+    /**
+     * 业务防重，保证业务唯一。
+    * */
+    private String outBussion;
 }

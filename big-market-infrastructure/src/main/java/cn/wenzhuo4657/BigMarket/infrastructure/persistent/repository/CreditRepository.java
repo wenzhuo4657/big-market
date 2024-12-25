@@ -76,6 +76,10 @@ public class CreditRepository implements ICreditRepository {
             throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 
+        if (creditAccountEntity.getAdjustAmount().subtract(userCreditAccountReq.getTotalAmount()).longValue()<0){
+            throw new AppException(ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getCode(),ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getInfo());
+        }
+
 
         UserCreditOrder userCreditOrderReq = new UserCreditOrder();
         userCreditOrderReq.setUserId(creditOrderEntity.getUserId());
@@ -114,9 +118,12 @@ public class CreditRepository implements ICreditRepository {
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("调整账户积分额度异常，唯一索引冲突 userId:{} out_business_no:{}", userId, creditOrderEntity.getOutBusinessNo(), e);
+                    throw e;
+
                 } catch (Exception e) {
                     status.setRollbackOnly();
                     log.error("调整账户积分额度失败 userId:{} orderId:{}", userId, creditOrderEntity.getOrderId(), e);
+                    throw e;
                 }
                 return 1;
             });

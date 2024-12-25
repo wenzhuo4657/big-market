@@ -7,7 +7,6 @@ import com.alibaba.fastjson.TypeReference;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
 @Slf4j
 @Component
 @RocketMQMessageListener(
-        consumerGroup = "big-market-app",
+        consumerGroup = "big-market-app-Customer-activity_sku_stock_zero",
         topic ="activity_sku_stock_zero" )
 public class ActivitySkuStockZeroCustomer implements RocketMQListener<String> {
 

@@ -41,10 +41,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 /**
@@ -362,17 +360,31 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
     }
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     此处增加限流限频的主要原因是为了避免业务防重失效，即便是uuid也是根据系统时间计算得出。
+    */
     @Override
+    @HystrixCommand(commandProperties = {
+            @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value = "150")
+    }, fallbackMethod = "drawHystrixError")
+    @RateLimiterAccessInterceptor(key = "userId",fallbackMethod = "drawRateLimiterError", permitsPerSecond = 1.0d, blacklistCount = 1)
     @RequestMapping(value = "credit_pay_exchange_sku", method = RequestMethod.POST)
     public Response<Boolean> creditPayExchangeSku(@RequestBody SkuProductShopCartRequestDTO request) {
         try{
             log.info("积分兑换商品开始 userId:{} sku:{}", request.getUserId(), request.getSku());
-
-            UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(SkuRechargeEntity.builder().
+            SkuRechargeEntity build = SkuRechargeEntity.builder().
                     sku(request.getSku())
                     .userId(request.getUserId())
-                    .outBusinessNo(request.getUserId()+dateFormat.format(new Date()))
-                    .orderTradeType(OrderTradeTypeVO.credit_pay_trade).build());
+                    .outBusinessNo(request.getUserId() + UUID.randomUUID().toString())
+                    .orderTradeType(OrderTradeTypeVO.credit_pay_trade).build();
+
+            if (StringUtils.isNotBlank(request.getOutBussion())){
+                build.setOutBusinessNo(request.getOutBussion().trim());
+            }
+
+            UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(build);
             log.info("积分兑换商品，创建订单完成 userId:{} sku:{} outBusinessNo:{}", request.getUserId(), request.getSku(), skuRechargeOrder.getOutBusinessNo());
             String orderId = creditAdjustService.createOrder(TradeEntity.builder()
                     .userId(skuRechargeOrder.getUserId())
@@ -539,6 +551,9 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
     }
 
+
+
+
     @Override
     @RequestMapping(value = "credit_pay_exchange_sku_by_token", method = RequestMethod.POST)
     public Response<Boolean> creditPayExchangeSku(@RequestHeader("Authorization") String token, @RequestBody SkuProductShopCartRequestDTO request) {
@@ -558,6 +573,13 @@ public class RaffleActivityController implements IRaffleActivityService {
             log.info("积分兑换商品开始 - 解析用户ID userId:{}", openid);
             request.setUserId(openid);
 
+            /**
+             *  @author:wenzhuo4657
+                des:   需要外部透传业务唯一id,否则由于消息重试机制无法保证业务唯一。
+            */
+            if (StringUtils.isBlank(request.getOutBussion())){
+                throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
+            }
             return creditPayExchangeSku(request);
         } catch (Exception e) {
             log.error("积分兑换商品失败", e);

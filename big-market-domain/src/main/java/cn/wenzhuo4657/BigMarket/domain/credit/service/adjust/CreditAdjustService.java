@@ -36,8 +36,7 @@ public class CreditAdjustService implements ICreditAdjustService {
         CreditOrderEntity creditOrderEntity =
                 TradeAggregate.createCreditOrderEntity(tradeEntity.getUserId()
                         , tradeEntity.getTradeName(), tradeEntity.getTradeType(), tradeEntity.getAmount(), tradeEntity.getOutBusinessNo());
-        CreditAccountEntity creditAccountEntity = TradeAggregate.createCreditAccountEntity(tradeEntity.getUserId()
-                , tradeEntity.getAmount());
+        CreditAccountEntity creditAccountEntity = creditRepository.queryUserCreditAccount(tradeEntity.getUserId());
 
 
         CreditAdjustSuccessMessageEvent.CreditAdjustSuccessMessage creditAdjustSuccessMessage = new CreditAdjustSuccessMessageEvent.CreditAdjustSuccessMessage();

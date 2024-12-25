@@ -63,24 +63,25 @@ public class CreditRepository implements ICreditRepository {
         CreditAccountEntity creditAccountEntity = tradeAggregate.getCreditAccountEntity();
         TaskEntity taskEntity = tradeAggregate.getTaskEntity();
 
-//        实体转化为po
+//       1， 积分扣减校验
         UserCreditAccount userCreditAccountReq = new UserCreditAccount();
         userCreditAccountReq.setUserId(userId);
         if (creditOrderEntity.getTradeType().getCode().equals(TradeTypeVO.FORWARD.getCode())){
-            userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount());
-            userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount());
+            userCreditAccountReq.setTotalAmount(creditOrderEntity.getTradeAmount());
+            userCreditAccountReq.setAvailableAmount(creditOrderEntity.getTradeAmount());
         }else if (creditOrderEntity.getTradeType().getCode().equals(TradeTypeVO.REVERSE.getCode())){
-            userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount().multiply(new BigDecimal("-1")));
-            userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount().multiply(new BigDecimal("-1")));
+            userCreditAccountReq.setTotalAmount(creditOrderEntity.getTradeAmount().multiply(new BigDecimal("-1")));
+            userCreditAccountReq.setAvailableAmount(creditOrderEntity.getTradeAmount().multiply(new BigDecimal("-1")));
         }else {
             throw  new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(),ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 
-        if (creditAccountEntity.getAdjustAmount().subtract(userCreditAccountReq.getTotalAmount()).longValue()<0){
+        if (creditAccountEntity.getAdjustAmount().longValue()-userCreditAccountReq.getTotalAmount().longValue()<0){
             throw new AppException(ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getCode(),ResponseCode.CREDIT_ACCOUNT_QUOTA_ERROR.getInfo());
         }
 
 
+//       2 订单记录填充
         UserCreditOrder userCreditOrderReq = new UserCreditOrder();
         userCreditOrderReq.setUserId(creditOrderEntity.getUserId());
         userCreditOrderReq.setOrderId(creditOrderEntity.getOrderId());
@@ -96,8 +97,8 @@ public class CreditRepository implements ICreditRepository {
         task.setMessage(JSON.toJSONString(taskEntity.getMessage()));
         task.setState(taskEntity.getState().getCode());
 
+//        3，写入数据库
         RLock lock = redisService.getLock(Constants.RedisKey.USER_CREDIT_ACCOUNT_LOCK + userId + Constants.UNDERLINE + creditOrderEntity.getOutBusinessNo());
-
         try {
             lock.lock(3, TimeUnit.SECONDS);
             dbRouter.doRouter(userId);
@@ -133,6 +134,7 @@ public class CreditRepository implements ICreditRepository {
             lock.unlock();
         }
 
+//        4，mq发送
         try {
             // 发送消息【在事务外执行，如果失败还有任务补偿】
             eventPublisher.publish(task.getTopic(), task.getMessage());

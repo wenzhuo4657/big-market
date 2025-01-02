@@ -38,6 +38,9 @@ public class ThreadPoolConfig {
                 break;
         }
         // 创建线程池
+//        核心线程取较小值
+        int corepoolesize=Runtime.getRuntime().availableProcessors()<=properties.getCorePoolSize()? Runtime.getRuntime().availableProcessors():properties.getCorePoolSize();
+        log.info("CPU核数{},手动配置：{}，最终选择：{}",Runtime.getRuntime().availableProcessors(),properties.getCorePoolSize(),corepoolesize);
         return new ThreadPoolExecutor(properties.getCorePoolSize(),
                 properties.getMaxPoolSize(),
                 properties.getKeepAliveTime(),

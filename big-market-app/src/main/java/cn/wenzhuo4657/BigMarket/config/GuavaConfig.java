@@ -1,5 +1,5 @@
 package cn.wenzhuo4657.BigMarket.config;
-
+import org.apache.dubbo.config.ApplicationConfig;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import org.springframework.beans.factory.annotation.Value;

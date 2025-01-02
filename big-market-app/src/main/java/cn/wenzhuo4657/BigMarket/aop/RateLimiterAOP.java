@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.aop;
 
+import cn.wenzhuo4657.BigMarket.tigger.api.dto.ActivityDrawRequestDTO;
 import cn.wenzhuo4657.BigMarket.types.annotations.DCCValue;
 import cn.wenzhuo4657.BigMarket.types.annotations.RateLimiterAccessInterceptor;
 import com.alibaba.nacos.shaded.com.google.common.util.concurrent.RateLimiter;
@@ -102,8 +103,12 @@ public class RateLimiterAOP {
         Signature signature = jp.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
 //        从方法调用处（类）获取用户配置的拦截方法并执行。
-        Method method = jp.getTarget().getClass().getMethod(fallbackMethod, methodSignature.getParameterTypes());
-        return method.invoke(jp.getThis(), jp.getArgs());
+//        getDeclaredMethod可以找到所有访问权限的方法，
+        Method method = jp.getTarget().getClass().getDeclaredMethod(fallbackMethod, ActivityDrawRequestDTO.class);
+        method.setAccessible(true);
+        Object obj = method.invoke(jp.getThis(), jp.getArgs());
+        method.setAccessible(false);
+        return  obj;
     }
 
     /**

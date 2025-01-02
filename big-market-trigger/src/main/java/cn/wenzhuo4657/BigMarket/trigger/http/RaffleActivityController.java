@@ -174,7 +174,7 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
 
     }
-    private Response<ActivityDrawResponseDTO> drawRateLimiterError(@RequestBody ActivityDrawRequestDTO request) {
+    private Response<ActivityDrawResponseDTO> drawRateLimiterError( ActivityDrawRequestDTO request) {
         log.info("活动抽奖限流 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
         return Response.<ActivityDrawResponseDTO>builder()
                 .code(ResponseCode.RATE_LIMITER.getCode())
@@ -182,7 +182,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                 .build();
     }
 
-    private Response<ActivityDrawResponseDTO> drawHystrixError(@RequestBody ActivityDrawRequestDTO request) {
+    private Response<ActivityDrawResponseDTO> drawHystrixError( ActivityDrawRequestDTO request) {
         log.info("活动抽奖熔断 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
         return Response.<ActivityDrawResponseDTO>builder()
                 .code(ResponseCode.HYSTRIX.getCode())

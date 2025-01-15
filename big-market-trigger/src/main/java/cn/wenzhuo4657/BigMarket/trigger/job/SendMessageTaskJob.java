@@ -7,6 +7,7 @@ import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -41,6 +42,8 @@ public class SendMessageTaskJob {
 
     @XxlJob("SendMessageTaskJob_DB1")
     public  void exec_db01(){
+
+
 
         RLock lock=redissonClient.getLock("SendMessageTaskJob_DB1");
         boolean isLocked=false;

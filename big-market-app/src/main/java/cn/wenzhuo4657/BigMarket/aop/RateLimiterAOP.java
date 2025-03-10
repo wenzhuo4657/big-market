@@ -69,7 +69,7 @@ public class RateLimiterAOP {
         String attrValue = getAttrValue(key, jp.getArgs());
         log.info("aop attr {}", attrValue);
 
-
+// all代表拦截所有，
         if (!"all".equals(attrValue) && rateLimiterAccessInterceptor.blacklistCount() != 0 &&null !=blacklist.getIfPresent(attrValue)&&blacklist.getIfPresent(attrValue) > rateLimiterAccessInterceptor.blacklistCount()){
             log.info("限流-黑名单拦截(24h)：{}", attrValue);
             return fallbackMethodResult(jp, rateLimiterAccessInterceptor.fallbackMethod());

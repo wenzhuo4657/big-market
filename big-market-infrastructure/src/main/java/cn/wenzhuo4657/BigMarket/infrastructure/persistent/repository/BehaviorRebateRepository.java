@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.aggregate.BehaviorRebateAggregate;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.BehaviorRebateOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.TaskEntity;
@@ -20,11 +19,9 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +40,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     private UserBehaviorRebateOrderDao userBehaviorRebateOrderDao;
     @Resource
     private TaskDao taskDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
@@ -68,7 +64,6 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     @Override
     public void saveUserRebateRecord(String userId, List<BehaviorRebateAggregate> behaviorRebateAggregates) {
         try {
-            dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try {
                     for (BehaviorRebateAggregate behaviorRebateAggregate : behaviorRebateAggregates) {
@@ -103,7 +98,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
             });
 
         } finally {
-            dbRouter.clear();
+
         }
 
         for (BehaviorRebateAggregate aggregate:behaviorRebateAggregates){

@@ -1,7 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
-import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyEntity;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
@@ -15,17 +13,12 @@ import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.dom4j.rule.Rule;
 import org.redisson.api.RBlockingQueue;
 import org.redisson.api.RDelayedQueue;
 import org.redisson.api.RMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -43,8 +36,7 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Resource
     private UserCreditAccountDao userCreditAccountDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
 
     @Resource
     private IRedisService redissonService;
@@ -342,11 +334,9 @@ public class StrategyRepository implements IStrategyRepository {
         UserCreditAccount userCreditAccountReq=new UserCreditAccount();
         userCreditAccountReq.setUserId(userId);
         try{
-            dbRouter.clear();
             UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
             return userCreditAccount.getTotalAmount().subtract(userCreditAccount.getAvailableAmount()).longValue();
         }finally {
-            dbRouter.clear();
         }
 
     }

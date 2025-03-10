@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.aggregate.TradeAggregate;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditOrderEntity;
@@ -26,9 +25,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import javax.annotation.Signed;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -48,8 +45,7 @@ public class CreditRepository implements ICreditRepository {
     private UserCreditAccountDao userCreditAccountDao;
     @Resource
     private UserCreditOrderDao userCreditOrderDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
@@ -101,7 +97,6 @@ public class CreditRepository implements ICreditRepository {
         RLock lock = redisService.getLock(Constants.RedisKey.USER_CREDIT_ACCOUNT_LOCK + userId + Constants.UNDERLINE + creditOrderEntity.getOutBusinessNo());
         try {
             lock.lock(3, TimeUnit.SECONDS);
-            dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try{
 //                    1,更新账户
@@ -130,7 +125,6 @@ public class CreditRepository implements ICreditRepository {
             });
 
         }finally {
-            dbRouter.clear();;
             lock.unlock();
         }
 
@@ -161,7 +155,6 @@ public class CreditRepository implements ICreditRepository {
         UserCreditAccount userCreditAccountReq=new UserCreditAccount();
         userCreditAccountReq.setUserId(userId);
         try{
-            dbRouter.clear();
             UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
             if (Objects.isNull(userCreditAccount)){
                 userCreditAccount=UserCreditAccount.builder()
@@ -177,7 +170,6 @@ public class CreditRepository implements ICreditRepository {
             log.error("查询用户积分账户出错，userId:{} e:{}",userId,e);
             return CreditAccountEntity.builder().userId(userId).adjustAmount(new BigDecimal(-1)).build();
         } finally{
-            dbRouter.clear();
         }
 
     }

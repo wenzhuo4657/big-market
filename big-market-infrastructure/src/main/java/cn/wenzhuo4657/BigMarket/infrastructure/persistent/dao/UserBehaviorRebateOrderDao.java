@@ -1,7 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
-import cn.bugstack.middleware.db.router.annotation.DBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
 
 import java.util.List;
@@ -12,12 +10,12 @@ import java.util.List;
  * @author makejava
  * @since 2024-11-04 15:13:31
  */
-@DBRouterStrategy(splitTable = true)
+
 public interface UserBehaviorRebateOrderDao {
 
     void insert(UserBehaviorRebateOrder userBehaviorRebateOrder);
 
-    @DBRouter
+
     List<UserBehaviorRebateOrder> queryOrderByOutBusinessNo(UserBehaviorRebateOrder userBehaviorRebateOrderReq);
 }
 

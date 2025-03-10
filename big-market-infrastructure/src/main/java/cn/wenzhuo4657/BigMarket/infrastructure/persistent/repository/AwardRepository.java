@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.GiveOutPrizesAggregate;
 import cn.wenzhuo4657.BigMarket.domain.award.model.aggregate.UserAwardRecordAggregate;
 import cn.wenzhuo4657.BigMarket.domain.award.model.entity.TaskEntity;
@@ -18,13 +17,11 @@ import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author: wenzhuo4657
@@ -44,8 +41,7 @@ public class AwardRepository implements IAwardRepository {
 
     @Resource
     private UserRaffleOrderDao userRaffleOrderDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
@@ -85,7 +81,7 @@ public class AwardRepository implements IAwardRepository {
 
 
         try {
-            dbRouter.doRouter(userId);
+
             transactionTemplate.execute(status -> {
                 try {
                     // 写入记录
@@ -108,8 +104,10 @@ public class AwardRepository implements IAwardRepository {
 
             });
         }finally {
-            dbRouter.clear();
+
         }
+
+          //  wenzhuo TODO 2025/1/23 : 待优化，使用rocketmq的事务消息，保证消息零丢失、实时性、最终一致性
 
         try {
             eventPublisher.publish(task.getTopic(),task.getMessage());
@@ -149,7 +147,6 @@ public class AwardRepository implements IAwardRepository {
 
 
         try {
-            dbRouter.doRouter(giveOutPrizesAggregate.getUserId());
             transactionTemplate.execute(status -> {
                 try{
                     int updateAccountCount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
@@ -171,7 +168,6 @@ public class AwardRepository implements IAwardRepository {
                 }
             });
         }finally {
-            dbRouter.clear();
         }
 
     }
@@ -185,7 +181,6 @@ public class AwardRepository implements IAwardRepository {
         userAwardRecordReq.setOrderId(userAwardRecord.getOrderId());
         userAwardRecordReq.setAwardState(userAwardRecord.getAwardState().getCode());
         try {
-            dbRouter.doRouter(userAwardRecord.getUserId());
             transactionTemplate.execute(status -> {
                 try{
 
@@ -204,7 +199,7 @@ public class AwardRepository implements IAwardRepository {
                 }
             });
         }finally {
-            dbRouter.clear();
+
         }
     }
 

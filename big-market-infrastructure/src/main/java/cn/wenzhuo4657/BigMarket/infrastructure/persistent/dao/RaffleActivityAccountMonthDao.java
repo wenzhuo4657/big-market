@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth;
 
 /**
@@ -12,7 +11,7 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccou
 public interface RaffleActivityAccountMonthDao {
 
 
-    @DBRouter
+
     RaffleActivityAccountMonth queryActivityAccountMonthByUserId(RaffleActivityAccountMonth raffleActivityAccountMonthReq);
 
     int updateActivityAccountMonthSubtractionQuota(RaffleActivityAccountMonth build);

@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 
 import java.util.List;
@@ -15,10 +14,10 @@ public interface TaskDao {
 
     void insert(Task task);
 
-    @DBRouter
+
     void updateTaskSendMessageCompleted(Task task);
 
-    @DBRouter
+
     void updateTaskSendMessageFail(Task task);
 
     /**

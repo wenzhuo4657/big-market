@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.activity.evnet.ActivitySkuStockZeroMessageEvent;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreatePartakeOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
@@ -66,8 +65,7 @@ public class ActivityRepository implements IActivityRepository {
     private UserRaffleOrderDao userRaffleOrderDao;
     @Resource
     private TransactionTemplate transactionTemplate;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private ActivitySkuStockZeroMessageEvent activitySkuStockZeroMessageEvent;
     @Resource
@@ -176,8 +174,7 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccountDay.setDayCount(createOrderAggregate.getDayCount());
             raffleActivityAccountDay.setDayCountSurplus(createOrderAggregate.getDayCount());
 
-//            设置路由id,用户计算分库分表路由，
-            dbRouter.doRouter(createOrderAggregate.getUserId());
+
             transactionTemplate.execute(new TransactionCallback<Integer>() {
                                             @Override
                                             public Integer doInTransaction(TransactionStatus status) {
@@ -207,7 +204,7 @@ public class ActivityRepository implements IActivityRepository {
                                         }
             );
         } finally {
-            dbRouter.clear();
+
         }
 
     }
@@ -236,7 +233,7 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
 
 
-            dbRouter.doRouter(createQuotaOrderAggregate.getUserId());
+
             transactionTemplate.execute(status -> {
                 try {
                     raffleActivityOrderDao.insert(raffleActivityOrder);
@@ -249,7 +246,7 @@ public class ActivityRepository implements IActivityRepository {
             });
 
         } finally {
-            dbRouter.clear();
+
         }
 
 
@@ -434,7 +431,7 @@ public class ActivityRepository implements IActivityRepository {
             UserRaffleOrderEntity userRaffleOrderEntity = createPartakeOrderAggregate.getUserRaffleOrderEntity();
 
 
-            dbRouter.doRouter(userId);
+
             transactionTemplate.execute(status -> {
                 try {
                     int totalCount = raffleActivityAccountDao.updateActivityAccountSubtractionQuota(
@@ -542,7 +539,7 @@ public class ActivityRepository implements IActivityRepository {
              *  @author:wenzhuo4657 des: 修复由于路由键没有清理引发的理由错误
              */
         } finally {
-            dbRouter.clear();
+
         }
     }
 
@@ -675,7 +672,6 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccountDay.setDayCount(raffleActivityOrderRes.getDayCount());
             raffleActivityAccountDay.setDayCountSurplus(raffleActivityOrderRes.getDayCount());
 
-            dbRouter.doRouter(deliveryOrderEntity.getUserId());
             transactionTemplate.execute(status -> {
                 try {
 
@@ -705,7 +701,7 @@ public class ActivityRepository implements IActivityRepository {
 
 
         } finally {
-            dbRouter.clear();
+
         }
     }
 

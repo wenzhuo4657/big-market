@@ -13,6 +13,8 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserBehaviorRebate
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.DailyBehaviorRebate;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.RedissonService;
+import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
@@ -46,6 +48,9 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     @Resource
     private EventPublisher eventPublisher;
 
+    @Resource
+    private RedissonService redissonService;
+
     @Override
     public List<DailyBehaviorRebateVO> queryDailyBehaviorRebateConfig(BehaviorTypeVO behaviorTypeVO) {
         List<DailyBehaviorRebate> dailyBehaviorRebates = dailyBehaviorRebateDao.queryDailyBehaviorRebateByBehaviorType(behaviorTypeVO.getCode().toLowerCase());
@@ -70,6 +75,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
                         BehaviorRebateOrderEntity behaviorRebateOrderEntity = behaviorRebateAggregate.getBehaviorRebateOrderEntity();
                         // 用户行为返利订单对象
                         UserBehaviorRebateOrder userBehaviorRebateOrder = new UserBehaviorRebateOrder();
+                        userBehaviorRebateOrder.setId(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_behavior_rebate_order_id));
                         userBehaviorRebateOrder.setUserId(behaviorRebateOrderEntity.getUserId());
                         userBehaviorRebateOrder.setOrderId(behaviorRebateOrderEntity.getOrderId());
                         userBehaviorRebateOrder.setBehaviorType(behaviorRebateOrderEntity.getBehaviorType());

@@ -16,9 +16,9 @@
 
     <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">
         insert into raffle_activity_account_day(
-            user_id, activity_id, day, day_count, day_count_surplus, create_time, update_time)
+            id,user_id, activity_id, day, day_count, day_count_surplus, create_time, update_time)
         values
-            (#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus}, now(), now())
+            (#{id},#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus}, now(), now())
     </insert>
 
     <update id="updateActivityAccountDaySubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">

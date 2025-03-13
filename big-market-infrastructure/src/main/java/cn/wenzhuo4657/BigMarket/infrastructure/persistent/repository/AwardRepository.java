@@ -13,10 +13,13 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserAwardRecord;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.RedissonService;
+import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -49,6 +52,9 @@ public class AwardRepository implements IAwardRepository {
 
     @Resource
     private UserCreditAccountDao userCreditAccountDao;
+
+    @Resource
+    private RedissonService redissonService;
 
     @Override
     public void saveUserAwardRecord(UserAwardRecordAggregate userAwardRecordAggregate) {
@@ -84,9 +90,13 @@ public class AwardRepository implements IAwardRepository {
 
             transactionTemplate.execute(status -> {
                 try {
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_award_record_id);
                     // 写入记录
+                    userAwardRecord.setId(incr);
                     userAwardRecordDao.insert(userAwardRecord);
                     // 写入任务
+                    incr=redissonService.incr(Constants.RedisKey.RedisKey_ID.task_id);
+                    task.setId(incr);
                     taskDao.insert(task);
 //                    更新抽奖单
                     int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
@@ -151,6 +161,8 @@ public class AwardRepository implements IAwardRepository {
                 try{
                     int updateAccountCount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
                     if (0==updateAccountCount){
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id);
+                        userCreditAccountReq.setId(incr);
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
                     int updateAwardCount = userAwardRecordDao.updateAwardRecordCompletedState(userAwardRecord);

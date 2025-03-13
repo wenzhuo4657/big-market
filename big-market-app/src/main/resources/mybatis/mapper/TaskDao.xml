@@ -15,9 +15,9 @@
 
     <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task">
         insert into task(
-            user_id, topic, message_id, message, state, create_time, update_time
+            id,user_id, topic, message_id, message, state, create_time, update_time
         )values (
-            #{userId},#{topic},#{messageId},#{message},#{state},now(),now()
+            #{id},#{userId},#{topic},#{messageId},#{message},#{state},now(),now()
             )
     </insert>
     

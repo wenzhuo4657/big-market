@@ -124,58 +124,113 @@ spring:
             actual-data-nodes: db00.award
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name:  default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
 
           daily_behavior_rebate:
             actual-data-nodes: db00.daily_behavior_rebate
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           raffle_activity:
             actual-data-nodes: db00.raffle_activity
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           raffle_activity_count:
               actual-data-nodes: db00.raffle_activity_count
               database-strategy:
                 standard:
+                  sharding-column: id
                   sharding-algorithm-name: default-database-strategy
+              table-strategy:
+                standard:
+                  sharding-column: id
+                  sharding-algorithm-name: default-database-strategy_table
           raffle_activity_sku:
             actual-data-nodes: db00.raffle_activity_sku
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           rule_tree:
             actual-data-nodes: db00.rule_tree
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           rule_tree_node:
             actual-data-nodes: db00.rule_tree_node
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           rule_tree_node_line:
             actual-data-nodes: db00.rule_tree_node_line
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           strategy:
             actual-data-nodes: db00.strategy
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           strategy_award:
             actual-data-nodes: db00.strategy_award
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
           strategy_rule:
             actual-data-nodes: db00.strategy_rule
             database-strategy:
               standard:
+                sharding-column: id
                 sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
 
           ## 分库分表，
           raffle_activity_order:
@@ -264,7 +319,7 @@ spring:
           alg_inline_userid:
               type: INLINE
               props:
-                algorithm-expression: db0$->{id % 4}
+                algorithm-expression: db0$->{id % 2+1}
           alg_inline_userid_table:
               type: HASH_MOD
               props:

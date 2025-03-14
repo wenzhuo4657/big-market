@@ -40,7 +40,10 @@
         where state = 'fail' or (state = 'create' and now() - update_time > 60)
             limit 10
     </select>
-
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from task
+    </select>
 
 
 </mapper>

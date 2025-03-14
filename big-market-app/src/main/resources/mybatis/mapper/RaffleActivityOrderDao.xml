@@ -53,5 +53,9 @@
         where user_id=#{userId} and state = 'wait_pay' and order_time >= NOW() - INTERVAL 1 MONTH
         limit 1
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_order
+    </select>
 </mapper>
 

@@ -29,6 +29,10 @@
         from user_behavior_rebate_order
         where user_id = #{userId} and out_business_no = #{outBusinessNo}
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from user_behavior_rebate_order
+    </select>
 
 
 </mapper>

@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityOrder;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @since 2024-10-17 09:12:07
  */
 
-public interface RaffleActivityOrderDao {
+public interface RaffleActivityOrderDao extends BugleCaller {
 
 
 
@@ -29,5 +30,8 @@ public interface RaffleActivityOrderDao {
 
 
     RaffleActivityOrder queryUnpaidActivityOrder(RaffleActivityOrder activityOrderReq);
+
+    @Override
+    List<Long> getId();
 }
 

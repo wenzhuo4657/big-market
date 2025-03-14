@@ -33,6 +33,10 @@
         from user_credit_account
         where  user_id=#{userId}
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from user_credit_account
+    </select>
 
 </mapper>
 

@@ -29,6 +29,10 @@
         set award_state = 'completed'
         where user_id = #{userId} and order_id = #{orderId} and award_state = 'create'
     </update>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from user_award_record
+    </select>
 
 
 </mapper>

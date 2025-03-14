@@ -3,7 +3,7 @@
 <mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditOrderDao">
 
     <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder" id="UserCreditOrderMap">
-        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
         <result property="tradeName" column="trade_name" jdbcType="VARCHAR"/>
@@ -20,7 +20,10 @@
                   #{id},#{userId},#{orderId},#{tradeName},#{tradeType},#{tradeAmount},#{outBusinessNo},now(),now()
               )
     </insert>
-
+    <select id="getId" resultType="java.lang.Long">
+        select  MAX(id)
+        from user_credit_order
+    </select>
 
 
 </mapper>

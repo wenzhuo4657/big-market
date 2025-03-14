@@ -29,6 +29,10 @@
         from user_raffle_order
         where user_id = #{userId} and activity_id = #{activityId} and order_state = 'create'
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from user_raffle_order
+    </select>
 
     <update id="updateUserRaffleOrderStateUsed" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder">
         update user_raffle_order

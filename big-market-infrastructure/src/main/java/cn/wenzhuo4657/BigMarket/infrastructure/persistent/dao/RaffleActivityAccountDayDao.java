@@ -1,6 +1,9 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay;
+
+import java.util.List;
 
 /**
  * 抽奖活动账户表-日次数(RaffleActivityAccountDay)表数据库访问层
@@ -8,7 +11,7 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccou
  * @author makejava
  * @since 2024-10-24 08:06:12
  */
-public interface RaffleActivityAccountDayDao {
+public interface RaffleActivityAccountDayDao  extends BugleCaller {
 
     void insert(RaffleActivityAccountDay raffleActivityAccountDay);
 
@@ -25,5 +28,8 @@ public interface RaffleActivityAccountDayDao {
     Integer queryRaffleActivityAccountDayPartakeCount(RaffleActivityAccountDay raffleActivityAccountDay);
 
     void addAccountQuota(RaffleActivityAccountDay raffleActivityAccountDay);
+
+    @Override
+    List<Long> getId();
 }
 

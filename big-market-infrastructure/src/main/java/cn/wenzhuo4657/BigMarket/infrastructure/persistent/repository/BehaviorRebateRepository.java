@@ -75,7 +75,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
                         BehaviorRebateOrderEntity behaviorRebateOrderEntity = behaviorRebateAggregate.getBehaviorRebateOrderEntity();
                         // 用户行为返利订单对象
                         UserBehaviorRebateOrder userBehaviorRebateOrder = new UserBehaviorRebateOrder();
-                        userBehaviorRebateOrder.setId(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_behavior_rebate_order_id));
+                        userBehaviorRebateOrder.setId(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_behavior_rebate_order_id,userBehaviorRebateOrderDao));
                         userBehaviorRebateOrder.setUserId(behaviorRebateOrderEntity.getUserId());
                         userBehaviorRebateOrder.setOrderId(behaviorRebateOrderEntity.getOrderId());
                         userBehaviorRebateOrder.setBehaviorType(behaviorRebateOrderEntity.getBehaviorType());

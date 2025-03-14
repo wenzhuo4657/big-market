@@ -180,14 +180,14 @@ public class ActivityRepository implements IActivityRepository {
                                             public Integer doInTransaction(TransactionStatus status) {
                                                 try {
                                                     // 1. 写入订单
-                                                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id);
+                                                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
                                                     raffleActivityOrder.setId(incr);
                                                     raffleActivityOrderDao.insert(raffleActivityOrder);
                                                     // 2. 更新账户
                                                     int count = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                                                     // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
                                                     if (0 == count) {
-                                                        incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id);
+                                                        incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
                                                         raffleActivityAccount.setId(incr);
                                                         raffleActivityAccountDao.insert(raffleActivityAccount);
                                                     }
@@ -239,7 +239,7 @@ public class ActivityRepository implements IActivityRepository {
 
             transactionTemplate.execute(status -> {
                 try {
-                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id);
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
                     raffleActivityOrder.setId(incr);
                     raffleActivityOrderDao.insert(raffleActivityOrder);
                     return 1;
@@ -508,7 +508,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountDayDao.insert(RaffleActivityAccountDay.builder()
-                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_day_id))
+                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_day_id,raffleActivityAccountDayDao))
                                 .userId(activityAccountDayEntity.getUserId())
                                 .activityId(activityAccountDayEntity.getActivityId())
                                 .day(activityAccountDayEntity.getDay())
@@ -524,7 +524,7 @@ public class ActivityRepository implements IActivityRepository {
                     }
 
                     userRaffleOrderDao.insert(UserRaffleOrder.builder()
-                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id))
+                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id,userRaffleOrderDao))
                             .userId(userRaffleOrderEntity.getUserId())
                             .activityId(userRaffleOrderEntity.getActivityId())
                             .activityName(userRaffleOrderEntity.getActivityName())
@@ -690,7 +690,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     int update = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                     if (update != 1) {
-                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id);
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
                         raffleActivityAccount.setId(incr);
                         raffleActivityAccountDao.insert(raffleActivityAccount);
                     }

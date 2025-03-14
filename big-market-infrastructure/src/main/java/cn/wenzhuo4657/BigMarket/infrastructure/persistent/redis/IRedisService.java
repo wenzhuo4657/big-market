@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import org.redisson.api.*;
 
 import java.time.Duration;
@@ -88,7 +89,7 @@ public interface IRedisService {
      * @param key 键
      * @return 自增后的值
      */
-    long incr(String key);
+    long incr(String key, BugleCaller dao);
 
     /**
      * 指定值，自增 Key 的值；1、2、3、4

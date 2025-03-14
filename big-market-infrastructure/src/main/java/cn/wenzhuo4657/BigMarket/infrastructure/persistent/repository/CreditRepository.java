@@ -105,14 +105,14 @@ public class CreditRepository implements ICreditRepository {
 //                    1,更新账户
                     int updatedAddAmount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
                     if (0==updatedAddAmount) {
-                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id);
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
                         userCreditAccountReq.setId(incr);
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
 
 
 //                    2，写入积分订单记录
-                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_order_id);
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_order_id,userCreditOrderDao);
                     userCreditOrderReq.setId(incr);
                     userCreditOrderDao.insert(userCreditOrderReq);
 
@@ -170,7 +170,7 @@ public class CreditRepository implements ICreditRepository {
                         .availableAmount(new BigDecimal(0))
                         .totalAmount(new BigDecimal(0))
                         .build();
-                long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id);
+                long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
                 userCreditAccount.setId(incr);
                 userCreditAccountDao.insert(userCreditAccount);
             }

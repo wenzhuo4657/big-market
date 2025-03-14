@@ -37,6 +37,10 @@
         from raffle_activity_account
         where user_id = #{userId}
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_account
+    </select>
 
     <update id="updateActivityAccountSubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount">
         update raffle_activity_account

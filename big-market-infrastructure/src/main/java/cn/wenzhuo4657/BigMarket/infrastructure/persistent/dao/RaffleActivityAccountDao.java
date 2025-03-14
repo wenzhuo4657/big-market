@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * @since 2024-10-17 09:11:48
  */
 
-public interface RaffleActivityAccountDao {
+public interface RaffleActivityAccountDao  extends BugleCaller {
 
 
 
@@ -55,5 +56,9 @@ public interface RaffleActivityAccountDao {
     int updateAccountQuota(RaffleActivityAccount raffleActivityAccount);
 
     void insert(RaffleActivityAccount raffleActivityAccount);
+
+
+    @Override
+    List<Long> getId();
 }
 

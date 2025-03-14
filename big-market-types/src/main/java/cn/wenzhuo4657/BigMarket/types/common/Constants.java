@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.types.common;
 
+import java.util.HashMap;
+
 public  class Constants {
 
     public final static String SPLIT = ",";

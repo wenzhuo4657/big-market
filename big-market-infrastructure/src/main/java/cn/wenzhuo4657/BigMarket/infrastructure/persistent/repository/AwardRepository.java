@@ -90,12 +90,12 @@ public class AwardRepository implements IAwardRepository {
 
             transactionTemplate.execute(status -> {
                 try {
-                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_award_record_id);
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_award_record_id,userAwardRecordDao);
                     // 写入记录
                     userAwardRecord.setId(incr);
                     userAwardRecordDao.insert(userAwardRecord);
                     // 写入任务
-                    incr=redissonService.incr(Constants.RedisKey.RedisKey_ID.task_id);
+                    incr=redissonService.incr(Constants.RedisKey.RedisKey_ID.task_id,taskDao);
                     task.setId(incr);
                     taskDao.insert(task);
 //                    更新抽奖单
@@ -161,7 +161,7 @@ public class AwardRepository implements IAwardRepository {
                 try{
                     int updateAccountCount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
                     if (0==updateAccountCount){
-                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id);
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
                         userCreditAccountReq.setId(incr);
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }

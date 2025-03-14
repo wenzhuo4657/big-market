@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
 
 import java.util.List;
@@ -11,11 +12,14 @@ import java.util.List;
  * @since 2024-11-04 15:13:31
  */
 
-public interface UserBehaviorRebateOrderDao {
+public interface UserBehaviorRebateOrderDao extends BugleCaller {
 
     void insert(UserBehaviorRebateOrder userBehaviorRebateOrder);
 
 
     List<UserBehaviorRebateOrder> queryOrderByOutBusinessNo(UserBehaviorRebateOrder userBehaviorRebateOrderReq);
+
+    @Override
+    List<Long> getId();
 }
 

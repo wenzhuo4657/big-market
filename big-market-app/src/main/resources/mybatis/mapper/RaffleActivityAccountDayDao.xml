@@ -38,6 +38,11 @@
         from raffle_activity_account_day
         where user_id=#{userId} and activity_id = #{activityId} and day = #{day}
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_account_day
+    </select>
+
 
     <update id="addAccountQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">
         update raffle_activity_account_day

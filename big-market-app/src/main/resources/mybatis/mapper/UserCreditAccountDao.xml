@@ -22,7 +22,7 @@
 
     <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" >
         insert into  user_credit_account(
-            user_id, total_amount, available_amount, account_status, create_time, update_time
+            id,user_id, total_amount, available_amount, account_status, create_time, update_time
         ) values (
             #{userId}, #{totalAmount}, #{availableAmount}, #{accountStatus}, now(), now()
             )
@@ -32,6 +32,10 @@
         select  *
         from user_credit_account
         where  user_id=#{userId}
+    </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from user_credit_account
     </select>
 
 </mapper>

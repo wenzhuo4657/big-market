@@ -1,6 +1,6 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 
 import java.util.List;
@@ -11,14 +11,14 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-24 08:08:15
  */
-public interface TaskDao {
+public interface TaskDao  extends BugleCaller {
 
     void insert(Task task);
 
-    @DBRouter
+
     void updateTaskSendMessageCompleted(Task task);
 
-    @DBRouter
+
     void updateTaskSendMessageFail(Task task);
 
     /**
@@ -27,5 +27,8 @@ public interface TaskDao {
      查找任务状态为 1，fail(发送失败)2，creat经过1分钟的
     */
     List<Task> queryNoSendMessageTaskList();
+
+    @Override
+    List<Long> getId();
 }
 

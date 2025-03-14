@@ -11,10 +11,19 @@ import java.io.Serializable;
  */
 public class UserBehaviorRebateOrder implements Serializable {
     private static final long serialVersionUID = 570943284147312907L;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     /**
      * 自增ID
      */
-    private String id;
+    private long id;
     /**
      * 用户ID
      */
@@ -63,13 +72,7 @@ public class UserBehaviorRebateOrder implements Serializable {
         this.outBusinessNo = outBusinessNo;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserId() {
         return userId;

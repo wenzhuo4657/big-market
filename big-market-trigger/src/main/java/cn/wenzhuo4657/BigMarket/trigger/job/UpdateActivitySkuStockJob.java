@@ -26,7 +26,9 @@ public class UpdateActivitySkuStockJob {
         RLock lock = redissonClient.getLock("big-market-UpdateActivitySkuStockJob");
         boolean isLocked = false;
         try {
+            lock.lock();
             isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
+
             if (!isLocked) return;
             ActivitySkuStockKeyVO activitySkuStockKeyVO = skuStock.takeQueueValue();
             if (null == activitySkuStockKeyVO) return;

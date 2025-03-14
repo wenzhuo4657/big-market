@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis;
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
+import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import org.redisson.api.*;
 import org.springframework.stereotype.Service;
 
@@ -7,6 +9,7 @@ import javax.annotation.Resource;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,10 +53,35 @@ public class RedissonService implements IRedisService{
         return redissonClient.getDelayedQueue(rBlockingQueue);
     }
 
+      //  wenzhuo TODO 2025/3/14 : 分布式id 发号器解决，等待优化
+      //  wenzhuo TODO 2025/3/14 :  由于此处并未有其他调用，均为数据库id的分布式自增，所以暂时不设置判断，默认加锁
     @Override
-    public long incr(String key) {
-        return redissonClient.getAtomicLong(key).incrementAndGet();
+    public long incr(String key, BugleCaller dao) {
+//          1,检测键存不存在，2，如果不存在且属于数据库表的id ，则尝试初始化，3，设置锁机制避免并发问题。
+        RLock lock = redissonClient.getLock(key + "lock");
+
+        try {
+            lock.tryLock(3,TimeUnit.SECONDS);
+            RAtomicLong bucket = redissonClient.getAtomicLong(key);
+            if (!bucket.isExists()){//尝试初始化
+                List<Long> id1 = dao.getId();
+                long max=0;
+                for(int i=0;i<id1.size();i++){
+                    max=Math.max(max,id1.get(i));
+                }
+                bucket.set(max);
+            }
+            return redissonClient.getAtomicLong(key).incrementAndGet();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }finally {
+            lock.unlock();
+        }
+
+
     }
+
+
 
     @Override
     public long incrBy(String key, long delta) {

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class Task implements Serializable {
     private static final long serialVersionUID = 844609451630171813L;
     /** 自增ID */
-    private String id;
+    private long id;
     /** 活动ID */
     private String userId;
     /** 消息主题 */
@@ -44,11 +44,12 @@ public class Task implements Serializable {
         this.messageId = messageId;
     }
 
-    public String getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

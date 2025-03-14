@@ -1,9 +1,8 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 /**
@@ -12,16 +11,18 @@ import java.util.List;
  * @author makejava
  * @since 2024-11-09 09:22:11
  */
-public interface UserCreditAccountDao {
+public interface UserCreditAccountDao extends BugleCaller {
 
-    @DBRouter
+
     void insert(UserCreditAccount userCreditAccountReq);
 
-    @DBRouter
+
     int updateAddAmount(UserCreditAccount userCreditAccountReq);
 
 
-    @DBRouter
     UserCreditAccount queryUserCreditAccount(UserCreditAccount userCreditAccountReq);
+
+    @Override
+    List<Long> getId();
 }
 

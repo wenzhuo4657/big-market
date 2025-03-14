@@ -1,6 +1,6 @@
 package cn.wenzhuo4657.BigMarket.trigger.job;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
+
 import cn.wenzhuo4657.BigMarket.domain.task.model.entity.TaskEntity;
 import cn.wenzhuo4657.BigMarket.domain.task.service.ITaskService;
 import com.xxl.job.core.handler.annotation.XxlJob;
@@ -28,8 +28,7 @@ public class SendMessageTaskJob {
     private ITaskService taskService;
     @Resource
     private ThreadPoolExecutor executor;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
 
     @Resource
     private RedissonClient redissonClient;
@@ -50,13 +49,10 @@ public class SendMessageTaskJob {
         try {
             isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
             if (!isLocked) return;
-            int dbCount = dbRouter.dbCount();
-            for (int dbIdx = 1; dbIdx <= dbCount; dbIdx++) {
-                int finalDbIdx = dbIdx;
+
                 executor.execute(()->{
                     try {
-                        dbRouter.setDBKey(finalDbIdx);
-                        dbRouter.setTBKey(0);
+
                         List<TaskEntity> taskEntities = taskService.queryNoSendMessageTaskList();
                         if (taskEntities.isEmpty()) return;
                         for (TaskEntity taskEntity : taskEntities) {
@@ -77,10 +73,10 @@ public class SendMessageTaskJob {
                             });
                         }
                     }finally {
-                        dbRouter.clear();
+
                     }
                 });
-            }
+
 
         } catch (Exception e) {
             log.error("定时任务，扫描MQ任务表发送消息失败。", e);

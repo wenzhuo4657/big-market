@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.aggregate.BehaviorRebateAggregate;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.BehaviorRebateOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.rebate.model.entity.TaskEntity;
@@ -14,17 +13,17 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserBehaviorRebate
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.DailyBehaviorRebate;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.RedissonService;
+import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +42,14 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     private UserBehaviorRebateOrderDao userBehaviorRebateOrderDao;
     @Resource
     private TaskDao taskDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
     private EventPublisher eventPublisher;
+
+    @Resource
+    private RedissonService redissonService;
 
     @Override
     public List<DailyBehaviorRebateVO> queryDailyBehaviorRebateConfig(BehaviorTypeVO behaviorTypeVO) {
@@ -68,13 +69,13 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
     @Override
     public void saveUserRebateRecord(String userId, List<BehaviorRebateAggregate> behaviorRebateAggregates) {
         try {
-            dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try {
                     for (BehaviorRebateAggregate behaviorRebateAggregate : behaviorRebateAggregates) {
                         BehaviorRebateOrderEntity behaviorRebateOrderEntity = behaviorRebateAggregate.getBehaviorRebateOrderEntity();
                         // 用户行为返利订单对象
                         UserBehaviorRebateOrder userBehaviorRebateOrder = new UserBehaviorRebateOrder();
+                        userBehaviorRebateOrder.setId(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_behavior_rebate_order_id,userBehaviorRebateOrderDao));
                         userBehaviorRebateOrder.setUserId(behaviorRebateOrderEntity.getUserId());
                         userBehaviorRebateOrder.setOrderId(behaviorRebateOrderEntity.getOrderId());
                         userBehaviorRebateOrder.setBehaviorType(behaviorRebateOrderEntity.getBehaviorType());
@@ -103,7 +104,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
             });
 
         } finally {
-            dbRouter.clear();
+
         }
 
         for (BehaviorRebateAggregate aggregate:behaviorRebateAggregates){

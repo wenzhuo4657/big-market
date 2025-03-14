@@ -3,7 +3,7 @@
 <mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditOrderDao">
 
     <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder" id="UserCreditOrderMap">
-        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="id" column="id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="orderId" column="order_id" jdbcType="VARCHAR"/>
         <result property="tradeName" column="trade_name" jdbcType="VARCHAR"/>
@@ -15,12 +15,15 @@
     </resultMap>
 
     <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder">
-        insert into user_credit_order   (user_id, order_id, trade_name, trade_type, trade_amount, out_business_no, create_time, update_time)
+        insert into user_credit_order   (id,user_id, order_id, trade_name, trade_type, trade_amount, out_business_no, create_time, update_time)
         values(
-                  #{userId},#{orderId},#{tradeName},#{tradeType},#{tradeAmount},#{outBusinessNo},now(),now()
+                  #{id},#{userId},#{orderId},#{tradeName},#{tradeType},#{tradeAmount},#{outBusinessNo},now(),now()
               )
     </insert>
-
+    <select id="getId" resultType="java.lang.Long">
+        select  MAX(id)
+        from user_credit_order
+    </select>
 
 
 </mapper>

@@ -2,7 +2,6 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Award;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 

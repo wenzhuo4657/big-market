@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.aggregate.TradeAggregate;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditOrderEntity;
@@ -15,6 +14,7 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditOrder;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.IRedisService;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.redis.RedissonService;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
@@ -26,9 +26,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
-import javax.annotation.Signed;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -48,14 +46,15 @@ public class CreditRepository implements ICreditRepository {
     private UserCreditAccountDao userCreditAccountDao;
     @Resource
     private UserCreditOrderDao userCreditOrderDao;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
     private EventPublisher eventPublisher;
     @Resource
     private TaskDao taskDao;
+    @Resource
+    private RedissonService redissonService;
     @Override
     public void saveUserCreditTradeOrder(TradeAggregate tradeAggregate) {
         String userId = tradeAggregate.getUserId();
@@ -101,17 +100,20 @@ public class CreditRepository implements ICreditRepository {
         RLock lock = redisService.getLock(Constants.RedisKey.USER_CREDIT_ACCOUNT_LOCK + userId + Constants.UNDERLINE + creditOrderEntity.getOutBusinessNo());
         try {
             lock.lock(3, TimeUnit.SECONDS);
-            dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try{
 //                    1,更新账户
                     int updatedAddAmount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
                     if (0==updatedAddAmount) {
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
+                        userCreditAccountReq.setId(incr);
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
 
 
 //                    2，写入积分订单记录
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_order_id,userCreditOrderDao);
+                    userCreditOrderReq.setId(incr);
                     userCreditOrderDao.insert(userCreditOrderReq);
 
 //                    3，写入任务
@@ -130,7 +132,6 @@ public class CreditRepository implements ICreditRepository {
             });
 
         }finally {
-            dbRouter.clear();;
             lock.unlock();
         }
 
@@ -161,7 +162,6 @@ public class CreditRepository implements ICreditRepository {
         UserCreditAccount userCreditAccountReq=new UserCreditAccount();
         userCreditAccountReq.setUserId(userId);
         try{
-            dbRouter.clear();
             UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
             if (Objects.isNull(userCreditAccount)){
                 userCreditAccount=UserCreditAccount.builder()
@@ -170,6 +170,8 @@ public class CreditRepository implements ICreditRepository {
                         .availableAmount(new BigDecimal(0))
                         .totalAmount(new BigDecimal(0))
                         .build();
+                long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
+                userCreditAccount.setId(incr);
                 userCreditAccountDao.insert(userCreditAccount);
             }
             return CreditAccountEntity.builder().userId(userId).adjustAmount(userCreditAccount.getAvailableAmount()).build();
@@ -177,7 +179,6 @@ public class CreditRepository implements ICreditRepository {
             log.error("查询用户积分账户出错，userId:{} e:{}",userId,e);
             return CreditAccountEntity.builder().userId(userId).adjustAmount(new BigDecimal(-1)).build();
         } finally{
-            dbRouter.clear();
         }
 
     }

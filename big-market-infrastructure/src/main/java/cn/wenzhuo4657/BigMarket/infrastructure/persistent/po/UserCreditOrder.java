@@ -15,7 +15,7 @@ public class UserCreditOrder implements Serializable {
     /**
      * 自增ID
      */
-    private String id;
+    private long id;
     /**
      * 用户ID
      */
@@ -50,11 +50,11 @@ public class UserCreditOrder implements Serializable {
     private Date updateTime;
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

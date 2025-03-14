@@ -1,10 +1,8 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
+
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -15,14 +13,14 @@ import java.util.List;
  * @since 2024-10-17 09:11:48
  */
 
-public interface RaffleActivityAccountDao {
+public interface RaffleActivityAccountDao  extends BugleCaller {
 
 
 
-    @DBRouter
+
     RaffleActivityAccount queryActivityAccountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 
-    @DBRouter
+
     List<RaffleActivityAccount> queryDepleteCountByUserId(RaffleActivityAccount raffleActivityAccountReq);
 
     int updateActivityAccountSubtractionQuota(RaffleActivityAccount raffleActivityAccount);
@@ -58,5 +56,9 @@ public interface RaffleActivityAccountDao {
     int updateAccountQuota(RaffleActivityAccount raffleActivityAccount);
 
     void insert(RaffleActivityAccount raffleActivityAccount);
+
+
+    @Override
+    List<Long> getId();
 }
 

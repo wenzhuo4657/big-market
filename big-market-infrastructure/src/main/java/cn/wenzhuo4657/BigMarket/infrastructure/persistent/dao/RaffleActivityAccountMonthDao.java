@@ -1,7 +1,9 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth;
+
+import java.util.List;
 
 /**
  * 抽奖活动账户表-月次数(RaffleActivityAccountMonth)表数据库访问层
@@ -9,10 +11,10 @@ import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccou
  * @author makejava
  * @since 2024-10-24 08:07:43
  */
-public interface RaffleActivityAccountMonthDao {
+public interface RaffleActivityAccountMonthDao extends BugleCaller {
 
 
-    @DBRouter
+
     RaffleActivityAccountMonth queryActivityAccountMonthByUserId(RaffleActivityAccountMonth raffleActivityAccountMonthReq);
 
     int updateActivityAccountMonthSubtractionQuota(RaffleActivityAccountMonth build);
@@ -20,5 +22,8 @@ public interface RaffleActivityAccountMonthDao {
     void insertActivityAccountMonth(RaffleActivityAccountMonth build);
 
     void addAccountQuota(RaffleActivityAccountMonth raffleActivityAccountMonth);
+
+    @Override
+    List<Long> getId();
 }
 

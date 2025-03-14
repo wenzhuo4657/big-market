@@ -16,9 +16,9 @@
 
     <insert id="insert" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">
         insert into raffle_activity_account_day(
-            user_id, activity_id, day, day_count, day_count_surplus, create_time, update_time)
+            id,user_id, activity_id, day, day_count, day_count_surplus, create_time, update_time)
         values
-            (#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus}, now(), now())
+            (#{id},#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus}, now(), now())
     </insert>
 
     <update id="updateActivityAccountDaySubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">
@@ -38,6 +38,11 @@
         from raffle_activity_account_day
         where user_id=#{userId} and activity_id = #{activityId} and day = #{day}
     </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_account_day
+    </select>
+
 
     <update id="addAccountQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountDay">
         update raffle_activity_account_day

@@ -1,10 +1,8 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 
-import cn.bugstack.middleware.db.router.annotation.DBRouter;
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.StrategyRule;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**

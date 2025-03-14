@@ -13,6 +13,13 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.xuxueli</groupId>
             <artifactId>xxl-job-core</artifactId>
         </dependency>
@@ -120,16 +127,12 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
+
         <dependency>
-            <groupId>cn.wenzhuo4657.lus</groupId>
-            <artifactId>dynamic-thread-pool-springboot-admin</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.example</groupId>
+            <artifactId>dynamic-thread-pool-springboot-starter</artifactId>
+            <version>2.0-SNAPSHOT</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.example</groupId>-->
-<!--            <artifactId>dynamic-thread-pool-springboot-starter</artifactId>-->
-<!--            <version>1.2-SNAPSHOT</version>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

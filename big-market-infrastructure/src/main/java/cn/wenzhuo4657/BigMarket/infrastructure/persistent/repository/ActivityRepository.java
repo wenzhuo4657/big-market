@@ -1,6 +1,5 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.repository;
 
-import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.wenzhuo4657.BigMarket.domain.activity.evnet.ActivitySkuStockZeroMessageEvent;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreatePartakeOrderAggregate;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
@@ -66,8 +65,7 @@ public class ActivityRepository implements IActivityRepository {
     private UserRaffleOrderDao userRaffleOrderDao;
     @Resource
     private TransactionTemplate transactionTemplate;
-    @Resource
-    private IDBRouterStrategy dbRouter;
+
     @Resource
     private ActivitySkuStockZeroMessageEvent activitySkuStockZeroMessageEvent;
     @Resource
@@ -176,18 +174,21 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccountDay.setDayCount(createOrderAggregate.getDayCount());
             raffleActivityAccountDay.setDayCountSurplus(createOrderAggregate.getDayCount());
 
-//            设置路由id,用户计算分库分表路由，
-            dbRouter.doRouter(createOrderAggregate.getUserId());
+
             transactionTemplate.execute(new TransactionCallback<Integer>() {
                                             @Override
                                             public Integer doInTransaction(TransactionStatus status) {
                                                 try {
                                                     // 1. 写入订单
+                                                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
+                                                    raffleActivityOrder.setId(incr);
                                                     raffleActivityOrderDao.insert(raffleActivityOrder);
                                                     // 2. 更新账户
                                                     int count = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                                                     // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
                                                     if (0 == count) {
+                                                        incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
+                                                        raffleActivityAccount.setId(incr);
                                                         raffleActivityAccountDao.insert(raffleActivityAccount);
                                                     }
 
@@ -207,7 +208,7 @@ public class ActivityRepository implements IActivityRepository {
                                         }
             );
         } finally {
-            dbRouter.clear();
+
         }
 
     }
@@ -236,9 +237,10 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
 
 
-            dbRouter.doRouter(createQuotaOrderAggregate.getUserId());
             transactionTemplate.execute(status -> {
                 try {
+                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
+                    raffleActivityOrder.setId(incr);
                     raffleActivityOrderDao.insert(raffleActivityOrder);
                     return 1;
                 } catch (DuplicateKeyException e) {
@@ -249,7 +251,7 @@ public class ActivityRepository implements IActivityRepository {
             });
 
         } finally {
-            dbRouter.clear();
+
         }
 
 
@@ -293,11 +295,10 @@ public class ActivityRepository implements IActivityRepository {
     public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
         String cacheKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
         /**
-         *  @author:wenzhuo4657
-            des:
+         *  @author:wenzhuo4657 des:
         block队列保证存取操作的正确性。
         //delayed队列将消费延时，便于处理消息。
-        */
+         */
         RBlockingQueue<Object> blockingQueue = redissonService.getBlockingQueue(cacheKey);
         RDelayedQueue<Object> delayedQueue = redissonService.getDelayedQueue(blockingQueue);
         delayedQueue.offer(activitySkuStockKeyVO, 3, TimeUnit.SECONDS);
@@ -375,9 +376,9 @@ public class ActivityRepository implements IActivityRepository {
         RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
         raffleActivityAccountReq.setUserId(userId);
         List<RaffleActivityAccount> raffleActivityAccounts = raffleActivityAccountDao.queryDepleteCountByUserId(raffleActivityAccountReq);
-        long count=0;
-        for (RaffleActivityAccount raffleActivityAccount:raffleActivityAccounts){
-            count+=raffleActivityAccount.getTotalCount()-raffleActivityAccount.getTotalCountSurplus();
+        long count = 0;
+        for (RaffleActivityAccount raffleActivityAccount : raffleActivityAccounts) {
+            count += raffleActivityAccount.getTotalCount() - raffleActivityAccount.getTotalCountSurplus();
         }
         return count;
     }
@@ -434,7 +435,6 @@ public class ActivityRepository implements IActivityRepository {
             UserRaffleOrderEntity userRaffleOrderEntity = createPartakeOrderAggregate.getUserRaffleOrderEntity();
 
 
-            dbRouter.doRouter(userId);
             transactionTemplate.execute(status -> {
                 try {
                     int totalCount = raffleActivityAccountDao.updateActivityAccountSubtractionQuota(
@@ -473,6 +473,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountMonthDao.insertActivityAccountMonth(RaffleActivityAccountMonth.builder()
+                                .id(Constants.RedisKey.RedisKey_ID.raffle_activity_account_month_id)
                                 .userId(activityAccountMonthEntity.getUserId())
                                 .activityId(activityAccountMonthEntity.getActivityId())
                                 .month(activityAccountMonthEntity.getMonth())
@@ -507,6 +508,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountDayDao.insert(RaffleActivityAccountDay.builder()
+                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_day_id,raffleActivityAccountDayDao))
                                 .userId(activityAccountDayEntity.getUserId())
                                 .activityId(activityAccountDayEntity.getActivityId())
                                 .day(activityAccountDayEntity.getDay())
@@ -522,6 +524,7 @@ public class ActivityRepository implements IActivityRepository {
                     }
 
                     userRaffleOrderDao.insert(UserRaffleOrder.builder()
+                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id,userRaffleOrderDao))
                             .userId(userRaffleOrderEntity.getUserId())
                             .activityId(userRaffleOrderEntity.getActivityId())
                             .activityName(userRaffleOrderEntity.getActivityName())
@@ -542,7 +545,7 @@ public class ActivityRepository implements IActivityRepository {
              *  @author:wenzhuo4657 des: 修复由于路由键没有清理引发的理由错误
              */
         } finally {
-            dbRouter.clear();
+
         }
     }
 
@@ -675,7 +678,6 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccountDay.setDayCount(raffleActivityOrderRes.getDayCount());
             raffleActivityAccountDay.setDayCountSurplus(raffleActivityOrderRes.getDayCount());
 
-            dbRouter.doRouter(deliveryOrderEntity.getUserId());
             transactionTemplate.execute(status -> {
                 try {
 
@@ -688,6 +690,8 @@ public class ActivityRepository implements IActivityRepository {
 
                     int update = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                     if (update != 1) {
+                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
+                        raffleActivityAccount.setId(incr);
                         raffleActivityAccountDao.insert(raffleActivityAccount);
                     }
                     // 4. 更新账户 - 月
@@ -705,7 +709,7 @@ public class ActivityRepository implements IActivityRepository {
 
 
         } finally {
-            dbRouter.clear();
+
         }
     }
 

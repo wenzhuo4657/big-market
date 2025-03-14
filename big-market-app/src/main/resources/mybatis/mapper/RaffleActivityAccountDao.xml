@@ -17,10 +17,10 @@
     </resultMap>
     <insert id="insert">
         insert into raffle_activity_account
-        (user_id, activity_id, total_count, total_count_surplus, day_count,
+        (id,user_id, activity_id, total_count, total_count_surplus, day_count,
          day_count_surplus, month_count, month_count_surplus, create_time, update_time)
         values
-            (#{userId}, #{activityId}, #{totalCount}, #{totalCountSurplus}, #{dayCount},
+            (#{id},#{userId}, #{activityId}, #{totalCount}, #{totalCountSurplus}, #{dayCount},
              #{dayCountSurplus}, #{monthCount}, #{monthCountSurplus}, now(), now())
     </insert>
 
@@ -36,6 +36,10 @@
                 day_count_surplus, month_count, month_count_surplus
         from raffle_activity_account
         where user_id = #{userId}
+    </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_account
     </select>
 
     <update id="updateActivityAccountSubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount">

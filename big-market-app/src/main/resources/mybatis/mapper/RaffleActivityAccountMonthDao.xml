@@ -15,15 +15,19 @@
 
     <insert id="insertActivityAccountMonth" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth">
         insert into raffle_activity_account_month(
-            user_id, activity_id, month, month_count, month_count_surplus, create_time, update_time)
+            id,user_id, activity_id, month, month_count, month_count_surplus, create_time, update_time)
         values (
-                   #{userId}, #{activityId}, #{month}, #{monthCount}, #{monthCountSurplus}, now(), now())
+                   #{id},#{userId}, #{activityId}, #{month}, #{monthCount}, #{monthCountSurplus}, now(), now())
     </insert>
 
     <select id="queryActivityAccountMonthByUserId" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth" resultMap="RaffleActivityAccountMonthMap">
         select user_id, activity_id, month, month_count, month_count_surplus
         from raffle_activity_account_month
         where user_id = #{userId} and activity_id = #{activityId} and month = #{month}
+    </select>
+    <select id="getId" resultType="java.lang.Long">
+        select  IFNULL(MAX(id), 0)
+        from raffle_activity_account_month
     </select>
 
     <update id="updateActivityAccountMonthSubtractionQuota" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccountMonth">

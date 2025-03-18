@@ -25,7 +25,7 @@ public class RaffleActivityAccountMonth implements Serializable {
     /**
      * 自增ID
      */
-    private String id;
+    private long id;
     /**
      * 用户ID
      */
@@ -60,11 +60,11 @@ public class RaffleActivityAccountMonth implements Serializable {
     }
 
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

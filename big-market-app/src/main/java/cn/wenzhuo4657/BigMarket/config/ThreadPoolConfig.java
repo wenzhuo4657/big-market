@@ -15,6 +15,11 @@ import java.util.concurrent.*;
 @EnableConfigurationProperties(ThreadPoolConfigProperties.class)
 public class ThreadPoolConfig {
 
+    /**
+     *  @author:wenzhuo4657
+        des:
+     该线程目池前仅仅用处任务补偿，核心线程数量不能超过当前机器cpu核心的一半
+    */
     @Bean
     @ConditionalOnMissingBean(ThreadPoolExecutor.class)
     public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties properties) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
@@ -39,7 +44,7 @@ public class ThreadPoolConfig {
         }
         // 创建线程池
 //        核心线程取较小值
-        int corepoolesize=Runtime.getRuntime().availableProcessors()<=properties.getCorePoolSize()? Runtime.getRuntime().availableProcessors():properties.getCorePoolSize();
+        int corepoolesize=Runtime.getRuntime().availableProcessors()/2<=properties.getCorePoolSize()? Runtime.getRuntime().availableProcessors()/2:properties.getCorePoolSize();
         log.info("CPU核数{},手动配置：{}，最终选择：{}",Runtime.getRuntime().availableProcessors(),properties.getCorePoolSize(),corepoolesize);
         return new ThreadPoolExecutor(properties.getCorePoolSize(),
                 properties.getMaxPoolSize(),

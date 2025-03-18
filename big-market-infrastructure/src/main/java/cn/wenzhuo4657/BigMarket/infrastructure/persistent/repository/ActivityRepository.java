@@ -473,7 +473,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountMonthDao.insertActivityAccountMonth(RaffleActivityAccountMonth.builder()
-                                .id(Constants.RedisKey.RedisKey_ID.raffle_activity_account_month_id)
+                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_month_id,raffleActivityAccountMonthDao))
                                 .userId(activityAccountMonthEntity.getUserId())
                                 .activityId(activityAccountMonthEntity.getActivityId())
                                 .month(activityAccountMonthEntity.getMonth())

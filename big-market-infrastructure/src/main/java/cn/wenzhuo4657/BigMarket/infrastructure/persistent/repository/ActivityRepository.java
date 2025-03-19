@@ -522,9 +522,14 @@ public class ActivityRepository implements IActivityRepository {
                                 .dayCountSurplus(activityAccountEntity.getDayCountSurplus())
                                 .build());
                     }
-
-                    userRaffleOrderDao.insert(UserRaffleOrder.builder()
-                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id,userRaffleOrderDao))
+/**
+ *  @author:wenzhuo4657
+    des:
+并发场景下，多个线程可能都锁定“不存在”，多个事务可能同时检测到无数据并尝试插入，如何保证唯一？
+ 使用for update锁定记录，并且注意，但他使用唯一索引时，会使用行级锁，而非表级别锁，
+*/
+                    UserRaffleOrder userRaffleOrder = UserRaffleOrder.builder()
+                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id, userRaffleOrderDao))
                             .userId(userRaffleOrderEntity.getUserId())
                             .activityId(userRaffleOrderEntity.getActivityId())
                             .activityName(userRaffleOrderEntity.getActivityName())
@@ -532,7 +537,12 @@ public class ActivityRepository implements IActivityRepository {
                             .orderId(userRaffleOrderEntity.getOrderId())
                             .orderTime(userRaffleOrderEntity.getOrderTime())
                             .orderState(userRaffleOrderEntity.getOrderState().getCode())
-                            .build());
+                            .build();
+                    UserRaffleOrder userRaffleOrder1 = userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrder);
+                    if (userRaffleOrder1!=null){
+                        throw new AppException("并发写入抽奖订单，紧紧回滚");
+                    }
+                    userRaffleOrderDao.insert(userRaffleOrder);
 
                     return 1;
                 } catch (DuplicateKeyException e) {

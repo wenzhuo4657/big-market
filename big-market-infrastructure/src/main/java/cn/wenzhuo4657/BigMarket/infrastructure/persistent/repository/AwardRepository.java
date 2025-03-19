@@ -99,6 +99,7 @@ public class AwardRepository implements IAwardRepository {
                     task.setId(incr);
                     taskDao.insert(task);
 //                    更新抽奖单
+                      //  wenzhuo TODO 2025/3/19 : 回滚失败，需要重新构建sharding-jdbc的回滚策略
                     int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
                     if (1 != count) {
                         status.setRollbackOnly();

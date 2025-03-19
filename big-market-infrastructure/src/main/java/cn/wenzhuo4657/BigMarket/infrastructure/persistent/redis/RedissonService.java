@@ -69,7 +69,7 @@ public class RedissonService implements IRedisService{
                 for(int i=0;i<id1.size();i++){
                     max=Math.max(max,id1.get(i));
                 }
-                bucket.set(max);
+                bucket.set(max+1);
             }
             return redissonClient.getAtomicLong(key).incrementAndGet();
         } catch (Exception e) {

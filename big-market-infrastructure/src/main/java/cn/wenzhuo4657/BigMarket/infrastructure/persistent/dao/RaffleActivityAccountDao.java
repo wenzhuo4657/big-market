@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivityAccount;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-17 09:11:48
  */
-
+@Mapper
 public interface RaffleActivityAccountDao  extends BugleCaller {
 
 

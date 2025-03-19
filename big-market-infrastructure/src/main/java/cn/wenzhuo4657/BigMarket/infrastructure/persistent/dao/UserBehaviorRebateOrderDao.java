@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserBehaviorRebateOrder;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-11-04 15:13:31
  */
-
+@Mapper
 public interface UserBehaviorRebateOrderDao extends BugleCaller {
 
     void insert(UserBehaviorRebateOrder userBehaviorRebateOrder);

@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserAwardRecord;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-24 08:08:38
  */
-
+@Mapper
 public interface UserAwardRecordDao extends BugleCaller {
 
 

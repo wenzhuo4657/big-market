@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RuleTreeNode;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-05 15:44:36
  */
+@Mapper
 public interface RuleTreeNodeDao {
 
     /**

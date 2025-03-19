@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.StrategyAward;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @since 2024-09-18 20:55:24
  */
 
+@Mapper
 public interface StrategyAwardDao {
 
 

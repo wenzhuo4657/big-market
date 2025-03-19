@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2024-09-18 20:51:37
  */
 
+@Mapper
 public interface StrategyDao {
 
 

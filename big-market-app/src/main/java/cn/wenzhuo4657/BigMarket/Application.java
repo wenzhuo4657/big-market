@@ -9,7 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @Configurable
-@MapperScan("cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao")
 @EnableScheduling
 @EnableDubbo
 @EnableAspectJAutoProxy(proxyTargetClass = true)

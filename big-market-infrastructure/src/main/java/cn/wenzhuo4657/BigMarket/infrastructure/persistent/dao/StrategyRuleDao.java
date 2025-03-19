@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.StrategyRule;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -11,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * @author makejava
  * @since 2024-09-18 20:55:40
  */
+@Mapper
 public interface StrategyRuleDao {
 
 

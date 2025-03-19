@@ -1,9 +1,11 @@
 package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.RaffleActivity;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.domain.Pageable;
 
+import javax.annotation.ManagedBean;
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
  * @author makejava
  * @since 2024-10-17 08:42:32
  */
+@Mapper
 public interface RaffleActivityDao {
 
     /**

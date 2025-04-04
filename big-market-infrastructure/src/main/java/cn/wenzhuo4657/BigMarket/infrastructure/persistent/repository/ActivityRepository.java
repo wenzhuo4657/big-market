@@ -338,9 +338,11 @@ public class ActivityRepository implements IActivityRepository {
         UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
         userRaffleOrderReq.setUserId(partakeRaffleActivityEntity.getUserId());
         userRaffleOrderReq.setActivityId(partakeRaffleActivityEntity.getActivityId());
+
         UserRaffleOrder userRaffleOrderRes = userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrderReq);
         if (null == userRaffleOrderRes) return null;
         UserRaffleOrderEntity userRaffleOrderEntity = new UserRaffleOrderEntity();
+        userRaffleOrderEntity.setId(userRaffleOrderRes.getId());
         userRaffleOrderEntity.setUserId(userRaffleOrderRes.getUserId());
         userRaffleOrderEntity.setActivityId(userRaffleOrderRes.getActivityId());
         userRaffleOrderEntity.setActivityName(userRaffleOrderRes.getActivityName());
@@ -422,8 +424,7 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate) {
-        try {
+    public long saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate) {
             String userId = createPartakeOrderAggregate.getUserId();
             Long activityId = createPartakeOrderAggregate.getActivityId();
 
@@ -434,8 +435,13 @@ public class ActivityRepository implements IActivityRepository {
 
             UserRaffleOrderEntity userRaffleOrderEntity = createPartakeOrderAggregate.getUserRaffleOrderEntity();
 
+            /**
+             *  @author:wenzhuo4657
+                des: 获取分布式id
+            */
+        long id = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id, userRaffleOrderDao);
 
-            transactionTemplate.execute(status -> {
+        transactionTemplate.execute(status -> {
                 try {
                     int totalCount = raffleActivityAccountDao.updateActivityAccountSubtractionQuota(
                             RaffleActivityAccount.builder()
@@ -473,7 +479,7 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountMonthDao.insertActivityAccountMonth(RaffleActivityAccountMonth.builder()
-                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_month_id,raffleActivityAccountMonthDao))
+                                .id(id)
                                 .userId(activityAccountMonthEntity.getUserId())
                                 .activityId(activityAccountMonthEntity.getActivityId())
                                 .month(activityAccountMonthEntity.getMonth())
@@ -525,8 +531,7 @@ public class ActivityRepository implements IActivityRepository {
 /**
  *  @author:wenzhuo4657
     des:
-并发场景下，多个线程可能都锁定“不存在”，多个事务可能同时检测到无数据并尝试插入，如何保证唯一？
- 使用for update锁定记录，并且注意，但他使用唯一索引时，会使用行级锁，而非表级别锁，
+    使用分布式id区分并发订单
 */
                     UserRaffleOrder userRaffleOrder = UserRaffleOrder.builder()
                             .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id, userRaffleOrderDao))
@@ -538,10 +543,6 @@ public class ActivityRepository implements IActivityRepository {
                             .orderTime(userRaffleOrderEntity.getOrderTime())
                             .orderState(userRaffleOrderEntity.getOrderState().getCode())
                             .build();
-                    UserRaffleOrder userRaffleOrder1 = userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrder);
-                    if (userRaffleOrder1!=null){
-                        throw new AppException("并发写入抽奖订单，紧紧回滚");
-                    }
                     userRaffleOrderDao.insert(userRaffleOrder);
 
                     return 1;
@@ -551,12 +552,10 @@ public class ActivityRepository implements IActivityRepository {
                     throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
                 }
             });
-            /**
-             *  @author:wenzhuo4657 des: 修复由于路由键没有清理引发的理由错误
-             */
-        } finally {
 
-        }
+
+        return id;
+
     }
 
     @Override

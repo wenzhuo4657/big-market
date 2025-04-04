@@ -33,13 +33,21 @@ public class BehaviorRebateService implements IBehaviorRebateService{
     @Override
     public List<String> createOrder(BehaviorEntity behaviorEntity) {
         /**
-         *  @author:wenzhuo4657
-            des:
-         这里的返利类型更像是返利的子任务类型，该行为类型下，每一个返利类型都需要生成聚合订单，然后进行mq发送消息等正常消费流程。
+         *  1，空配置查询
         */
         List<DailyBehaviorRebateVO> dailyBehaviorRebateVOS =
                 behaviorRebateRepository.queryDailyBehaviorRebateConfig(behaviorEntity.getBehaviorTypeVO());
         if (null ==dailyBehaviorRebateVOS ||dailyBehaviorRebateVOS.isEmpty()) return null;
+
+
+        /**
+         *  2，是否已签到查询
+        */
+        List<BehaviorRebateOrderEntity> behaviorRebateOrderEntities = queryOrderByOutBusinessNo(behaviorEntity.getUserId(), behaviorEntity.getOutBusinessNo());
+        if (behaviorRebateOrderEntities.size()!=0){
+            return  null;
+        }
+
 
         List<String> orderIds=new ArrayList<>();
         List<BehaviorRebateAggregate> aggregates=new ArrayList<>();

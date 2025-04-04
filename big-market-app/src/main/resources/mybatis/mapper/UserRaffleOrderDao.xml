@@ -25,7 +25,7 @@
     </insert>
 
     <select id="queryNoUsedRaffleOrder" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder" resultMap="UserRaffleOrderMap">
-        select user_id, activity_id, activity_name, strategy_id, order_id, order_time, order_state
+        select id,user_id, activity_id, activity_name, strategy_id, order_id, order_time, order_state
         from user_raffle_order
         where user_id = #{userId} and activity_id = #{activityId} and order_state = 'create'
         for update
@@ -38,7 +38,7 @@
     <update id="updateUserRaffleOrderStateUsed" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder">
         update user_raffle_order
         set order_state = 'used', update_time = now()
-        where user_id = #{userId} and order_id = #{orderId} and order_state = 'create'
+        where user_id = #{userId} and order_id = #{orderId} and id =#{id} and order_state = 'create'
     </update>
 
 

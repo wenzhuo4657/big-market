@@ -82,6 +82,7 @@ public class AwardRepository implements IAwardRepository {
         task.setState(taskEntity.getState().getCode());
 
         UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
+        userRaffleOrderReq.setId(userAwardRecordEntity.getId());
         userRaffleOrderReq.setUserId(userAwardRecordEntity.getUserId());
         userRaffleOrderReq.setOrderId(userAwardRecordEntity.getOrderId());
 
@@ -99,7 +100,11 @@ public class AwardRepository implements IAwardRepository {
                     task.setId(incr);
                     taskDao.insert(task);
 //                    更新抽奖单
-                      //  wenzhuo TODO 2025/3/19 : 回滚失败，需要重新构建sharding-jdbc的回滚策略
+                      //  wenzhuo TODO 2025/3/19 : 回滚失败，需要重新构建sharding-jdbc的回滚策略,
+                    /**
+                     *  @author:wenzhuo4657
+                        des: 使用分布式id区分同一用户同一活动下的订单
+                    */
                     int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
                     if (1 != count) {
                         status.setRollbackOnly();

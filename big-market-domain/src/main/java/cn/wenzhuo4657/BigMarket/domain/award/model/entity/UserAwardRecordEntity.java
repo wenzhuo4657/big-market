@@ -18,6 +18,9 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserAwardRecordEntity {
+
+    /** 分布式id:用于辨识同一用户的同一活动下的不同抽奖订单， */
+    private  long id;
     /** 用户ID */
     private String userId;
     /** 活动ID */

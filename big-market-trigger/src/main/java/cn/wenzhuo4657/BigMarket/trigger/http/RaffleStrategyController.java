@@ -138,7 +138,7 @@ public class RaffleStrategyController implements IRaffleStrategyService {
 
             List<RaffleAwardListResponseDTO> responseDTOS=new ArrayList<>(strategyAwardEntities.size());
             for (StrategyAwardEntity entity:strategyAwardEntities){
-                Integer awardRuleLockCount = ruleLockCountMap.get(entity.getRuleModels());
+                Integer awardRuleLockCount = ruleLockCountMap.getOrDefault(entity.getRuleModels(),0);
 
                 responseDTOS.add(RaffleAwardListResponseDTO.builder()
                         .awardId(entity.getAwardId())

@@ -76,7 +76,7 @@ public interface IActivityRepository {
 
     ActivityAccountDayEntity queryActivityAccountDayByUserId(String userId, Long activityId, String day);
 
-    void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
+    long saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
 
     List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
 

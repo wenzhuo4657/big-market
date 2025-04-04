@@ -135,6 +135,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                             .build()
             );
             UserAwardRecordEntity userAwardRecord = UserAwardRecordEntity.builder()
+                    .id(orderEntity.getId())
                     .userId(orderEntity.getUserId())
                     .activityId(orderEntity.getActivityId())
                     .strategyId(orderEntity.getStrategyId())
@@ -190,6 +191,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                 .build();
     }
 
+      //  wenzhuo TODO 2025/4/4 :  目前无账户状态下，需要先签到，再发奖时会判断积分账户是否存在。
     @Override
     @RequestMapping(value = "calendar_sign_rebate",method = RequestMethod.POST)
     public Response<Boolean> calendarSignRebate(@RequestParam String userId) {

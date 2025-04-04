@@ -61,7 +61,8 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
 
         createPartakeOrderAggregate.setUserRaffleOrderEntity(userRaffleOrder);
 
-        activityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
+        long id = activityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
+        userRaffleOrder.setId(id);
         return userRaffleOrder;
 
 

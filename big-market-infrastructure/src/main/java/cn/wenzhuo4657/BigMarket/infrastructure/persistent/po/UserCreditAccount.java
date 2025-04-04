@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.po;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,7 +18,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCreditAccount implements Serializable {
+public class UserCreditAccount implements Serializable,Comparable<UserCreditAccount> {
     private static final long serialVersionUID = -10410681505434122L;
 
     public long getId() {
@@ -28,10 +29,15 @@ public class UserCreditAccount implements Serializable {
         this.id = id;
     }
 
+    @Override
+    public int compareTo(@NotNull UserCreditAccount o) {
+        return this.id.compareTo(o.id);
+    }
+
     /**
      * 自增ID
      */
-    private long  id;
+    private Long  id;
     /**
      * 用户ID
      */

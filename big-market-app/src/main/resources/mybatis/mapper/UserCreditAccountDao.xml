@@ -3,13 +3,13 @@
 <mapper namespace="cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserCreditAccountDao">
 
     <resultMap type="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" id="UserCreditAccountMap">
-        <result property="id" column="id" jdbcType="VARCHAR"/>
-        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
-        <result property="totalAmount" column="total_amount" jdbcType="NUMERIC"/>
-        <result property="availableAmount" column="available_amount" jdbcType="NUMERIC"/>
-        <result property="accountStatus" column="account_status" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="id" column="id" />
+        <result property="userId" column="user_id"/>
+        <result property="totalAmount" column="total_amount" />
+        <result property="availableAmount" column="available_amount" />
+        <result property="accountStatus" column="account_status" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
     </resultMap>
 
     <update id="updateAddAmount" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserCreditAccount" >
@@ -24,7 +24,7 @@
         insert into  user_credit_account(
             id,user_id, total_amount, available_amount, account_status, create_time, update_time
         ) values (
-            #{userId}, #{totalAmount}, #{availableAmount}, #{accountStatus}, now(), now()
+            #{id},#{userId}, #{totalAmount}, #{availableAmount}, #{accountStatus}, now(), now()
             )
     </insert>
 

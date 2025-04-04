@@ -21,7 +21,7 @@
               )
     </insert>
     <select id="getId" resultType="java.lang.Long">
-        select  MAX(id)
+        select  IFNULL(MAX(id),0)
         from user_credit_order
     </select>
 

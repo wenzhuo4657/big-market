@@ -58,7 +58,7 @@ public class RedissonService implements IRedisService{
     @Override
     public long incr(String key, BugleCaller dao) {
 //          1,检测键存不存在，2，如果不存在且属于数据库表的id ，则尝试初始化，3，设置锁机制避免并发问题。
-        RLock lock = redissonClient.getLock(key + "lock");
+        RLock lock = redissonClient.getLock(key + "_lock");
 
         try {
             lock.tryLock(3,TimeUnit.SECONDS);

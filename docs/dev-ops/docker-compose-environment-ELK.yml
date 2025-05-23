@@ -1,0 +1,61 @@
+
+# 该配置的mysql地址依赖于docker-compose-environment.yml中的mysql服务，等待修正，目标为统一配置，例如环境变量动态修改
+services:
+  canal-server:
+    image: canal/canal-server:v1.1.7
+    container_name: canal-server
+    ports:
+      - "11111:11111"
+    volumes:
+      - ./canal/instance.properties:/home/admin/canal-server/conf/example/instance.properties
+    networks:
+      - my-ELK
+  canal-adapter:
+      image: coopersoft/canal-adapter:v1.1.6
+      container_name: canal-adapter
+      ports:
+        - "8082:8081"
+      volumes:
+        - ./canal-adapter/application.yml:/opt/canal-adapter/conf/application.yml
+        - ./canal-adapter/es7:/opt/canal-adapter/conf/es7
+      depends_on:
+        - canal-server
+      networks:
+        - my-ELK
+  elasticsearch:
+    image: elasticsearch:7.17.14
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    container_name: elasticsearch
+    environment:
+      - 'cluster.name=elasticsearch' # 设置集群名称为elasticsearch
+      - 'discovery.type=single-node' # 以单一节点模式启动
+      - "cluster.name=docker-cluster" # 设置名称
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m' # 设置使用jvm内存大小
+    networks:
+      - my-ELK
+  kibana:
+    image: kibana:7.17.14
+    container_name: kibana
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - '5601:5601'
+    links:
+      - elasticsearch:es #可以用es这个域名访问elasticsearch服务
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200 #设置访问elasticsearch的地址
+      - 'elasticsearch.hosts=http://es:9200' #设置访问elasticsearch的地址
+      - I18N_LOCALE=zh-CN
+    networks:
+      - my-ELK
+    depends_on:
+      - elasticsearch
+
+networks:
+  my-ELK:
+    driver: bridge
+
+

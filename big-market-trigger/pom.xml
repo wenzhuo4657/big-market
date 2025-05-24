@@ -52,7 +52,10 @@
             <artifactId>big-market-infrastructure</artifactId>
         </dependency>
 
-
+        <dependency>
+            <groupId>cn.wenzhuo4657.BigMarket</groupId>
+            <artifactId>big-market-querys</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

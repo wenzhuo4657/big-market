@@ -53,8 +53,8 @@ public class RedissonService implements IRedisService{
         return redissonClient.getDelayedQueue(rBlockingQueue);
     }
 
-      //  wenzhuo TODO 2025/3/14 : 分布式id 发号器解决，等待优化
-      //  wenzhuo TODO 2025/3/14 :  由于此处并未有其他调用，均为数据库id的分布式自增，所以暂时不设置判断，默认加锁
+
+//    todo  分布式发号器更换为zk节点解决，隐含问题，似乎id并不需要，或者说可以在数据库查询字段中删除id，采用其他的唯一字段？或者说主键id是用来保证mysql页存储的连续性
     @Override
     public long incr(String key, BugleCaller dao) {
 //          1,检测键存不存在，2，如果不存在且属于数据库表的id ，则尝试初始化，3，设置锁机制避免并发问题。

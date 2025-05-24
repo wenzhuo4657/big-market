@@ -25,6 +25,8 @@ public class DCCController implements IDCCService {
     @Resource
     private  CuratorFramework client;
 
+
+
 //    linux系统目录拼接
     private static final String BASE_CONFIG_PATH = "/big-market-dcc";
     private static final String BASE_CONFIG_PATH_CONFIG = BASE_CONFIG_PATH + "/config";

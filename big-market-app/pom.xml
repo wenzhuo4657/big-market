@@ -168,6 +168,32 @@
             <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
 
+        <!--        适配第三方的监控系统-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.10.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>micrometer-core</artifactId>
+                    <groupId>io.micrometer</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!--        核心包：默认的绑定配置-->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.10.2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

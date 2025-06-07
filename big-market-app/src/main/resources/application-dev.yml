@@ -1,6 +1,8 @@
 server:
   port: 8091
   tomcat:
+    mbeanregistry:
+      enabled: true
     threads:
       max: 200
       min-spare: 50
@@ -364,5 +366,27 @@ gateway:
     # big-market 大营销接口调用配置
     big-market-appId: big-market
     big-market-appToken: 6ec604541f8b1ce4a
+
+
+# actuator配置
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus  # 端点配置，此处为  /actuator/prometheus
+  metrics:
+    tags:  #应用于每个指标的的标签，便于通过区分不同应用
+      application: spring-mvc-demo
+    # 下面选项建议打开，以监控 http 请求的 P99/P95 等，具体的时间分布可以根据实际情况设置
+    distribution:
+      sla:
+        http:
+          server:
+            requests: 1ms,5ms,10ms,50ms,100ms,200ms,500ms,1s,5s
+      percentiles-histogram:
+        http:
+          server:
+            requests: true # 开启 http server 的请求监控
 
 

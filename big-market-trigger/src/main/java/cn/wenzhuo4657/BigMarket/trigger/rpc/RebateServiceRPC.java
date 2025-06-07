@@ -28,7 +28,7 @@ import java.util.Map;
  * @description: 返利服务
  */
 @Slf4j
-@DubboService(version = "1.0",group = "big-market")
+//@DubboService(version = "1.0",group = "big-market")
 public class RebateServiceRPC implements IRebateService {
 
     @Resource

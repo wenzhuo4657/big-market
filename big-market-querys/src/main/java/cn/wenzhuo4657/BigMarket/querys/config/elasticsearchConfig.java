@@ -17,7 +17,7 @@ public class elasticsearchConfig {
 
 //        todo  生产环境下应当有安全策略，事实上，这一块应当使用nacos的动态导入配置文件
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo("140.143.170.96:9200")
+                .connectedTo("47.92.150.10:9200")
                 .build();
         return RestClients.create(clientConfiguration).rest();
     }

@@ -1,3 +1,7 @@
+address:
+  RUN: 117.72.36.124
+  ELK: 154.64.245.158
+
 server:
   port: 8091
   tomcat:
@@ -28,7 +32,7 @@ thread:
 redis:
   sdk:
     config:
-      host: 117.72.36.124
+      host: ${address.RUN}
       port: 6379
       pool-size: 64
       minIdleSize: 10
@@ -39,7 +43,7 @@ rocketmq:
     send-message-timeout: 5000
     retry-times-when-send-failed: 2
     retryTimesWhenSendAsyncFailed: 2
-  name-server: 117.72.36.124:9876
+  name-server: ${address.RUN}:9876
 
 spring:
   shardingsphere:
@@ -50,19 +54,19 @@ spring:
       db00:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 465700
       db01:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 465700
       db02:
         type: com.zaxxer.hikari.HikariDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
         username: root
         password: 465700
     rules:
@@ -310,7 +314,7 @@ dubbo:
     version: 1.0
   registry:
     id: nacos-registry
-    address: nacos://117.72.36.124:8848
+    address: nacos://${address.RUN}:8848
   protocol:
     name: dubbo
     port: -1
@@ -323,7 +327,7 @@ zookeeper:
   sdk:
     config:
       enable: true
-      connect-string: 117.72.36.124:2181    # 远程地址
+      connect-string: ${address.RUN}:2181    # 远程地址
       base-sleep-time-ms: 1000  # 重试之间的等待时间
       max-retries: 3 # 重试最大次数
       session-timeout-ms: 30000  # 会话超时时间
@@ -335,7 +339,7 @@ xxl:
     accessToken: default_token
     # 注册地址-远程地址
     admin:
-      addresses: http://117.72.36.124:9090/xxl-job-admin
+      addresses: http://${address.RUN}:9090/xxl-job-admin
     # 注册执行器-本地
     executor:
       #  执行器注册 [选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 ”IP:PORT“ 作为注册地址。从而更灵活的支持容器类型执行器动态IP和动态映射端口问题。

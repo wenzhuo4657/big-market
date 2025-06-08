@@ -27,7 +27,7 @@ import java.util.List;
 @RequestMapping("/api/${app.config.api-version}/esu/query/")
 public class IEsuInfoController {
 
-
+// todo 这里的接口都访问不到
     @Autowired
     private IUserBehaviorRebateOrderRepository userBehaviorRebateOrderRepository;
 

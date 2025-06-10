@@ -2,6 +2,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -15,12 +16,11 @@ import java.util.List;
 public interface UserRaffleOrderDao extends BugleCaller {
 
     void insert(UserRaffleOrder userRaffleOrder);
-      //  wenzhuo TODO 2025/3/20 :  保证同用户同活动下，只有一个未使用活动订单，否则不允许插入，也就是是说不允许并发写入订单，
 
-    UserRaffleOrder queryNoUsedRaffleOrder(UserRaffleOrder userRaffleOrderReq);
+    List<UserRaffleOrder> queryNoUsedRaffleOrder(UserRaffleOrder userRaffleOrderReq);
 
 
-    int updateUserRaffleOrderStateUsed(UserRaffleOrder userRaffleOrderReq);
+    int updateUserRaffleOrderStateUsed(@Param("userId") String userId);
 
     @Override
     List<Long> getId();

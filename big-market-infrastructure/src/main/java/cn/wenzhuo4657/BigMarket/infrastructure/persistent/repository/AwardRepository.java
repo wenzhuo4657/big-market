@@ -81,16 +81,26 @@ public class AwardRepository implements IAwardRepository {
         task.setMessage(JSON.toJSONString(taskEntity.getMessage()));
         task.setState(taskEntity.getState().getCode());
 
-        UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
-        userRaffleOrderReq.setId(userAwardRecordEntity.getId());
-        userRaffleOrderReq.setUserId(userAwardRecordEntity.getUserId());
-        userRaffleOrderReq.setOrderId(userAwardRecordEntity.getOrderId());
+
+
 
 
         try {
 
             transactionTemplate.execute(status -> {
                 try {
+
+                    //                    更新抽奖单
+
+                    /**
+                     *  @author:wenzhuo4657
+                    des:
+                    sql中使用for update修饰，会对相关行进行加锁，且注意，select单独的查询语句需要获取读锁，而读锁和排他锁是不兼容的。
+                    这样做是为了避免，并发情况在查看是否有可使用的抽奖订单时，由于事务的进行
+                     */
+                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userId);
+
+
                     long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_award_record_id,userAwardRecordDao);
                     // 写入记录
                     userAwardRecord.setId(incr);
@@ -99,18 +109,8 @@ public class AwardRepository implements IAwardRepository {
                     incr=redissonService.incr(Constants.RedisKey.RedisKey_ID.task_id,taskDao);
                     task.setId(incr);
                     taskDao.insert(task);
-//                    更新抽奖单
-                      //  wenzhuo TODO 2025/3/19 : 回滚失败，需要重新构建sharding-jdbc的回滚策略,
-                    /**
-                     *  @author:wenzhuo4657
-                        des: 使用分布式id区分同一用户同一活动下的订单
-                    */
-                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
-                    if (1 != count) {
-                        status.setRollbackOnly();
-                        log.error("写入中奖记录，用户抽奖单已使用过，不可重复抽奖 userId: {} activityId: {} awardId: {}", userId, activityId, awardId);
-                        throw new AppException(ResponseCode.ACTIVITY_ORDER_ERROR.getCode(), ResponseCode.ACTIVITY_ORDER_ERROR.getInfo());
-                    }
+
+
                     return 1;
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
@@ -119,6 +119,7 @@ public class AwardRepository implements IAwardRepository {
                 }
 
             });
+
         }finally {
 
         }

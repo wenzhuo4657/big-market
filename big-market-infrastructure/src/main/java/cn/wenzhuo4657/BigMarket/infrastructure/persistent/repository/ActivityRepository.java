@@ -339,8 +339,9 @@ public class ActivityRepository implements IActivityRepository {
         userRaffleOrderReq.setUserId(partakeRaffleActivityEntity.getUserId());
         userRaffleOrderReq.setActivityId(partakeRaffleActivityEntity.getActivityId());
 
-        UserRaffleOrder userRaffleOrderRes = userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrderReq);
-        if (null == userRaffleOrderRes) return null;
+        List<UserRaffleOrder> userRaffleOrderList = userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrderReq);
+        if (userRaffleOrderList.size()==0) return null;
+        UserRaffleOrder userRaffleOrderRes = userRaffleOrderList.get(0);
         UserRaffleOrderEntity userRaffleOrderEntity = new UserRaffleOrderEntity();
         userRaffleOrderEntity.setId(userRaffleOrderRes.getId());
         userRaffleOrderEntity.setUserId(userRaffleOrderRes.getUserId());
@@ -424,7 +425,7 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public long saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate) {
+    public void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate) {
             String userId = createPartakeOrderAggregate.getUserId();
             Long activityId = createPartakeOrderAggregate.getActivityId();
 
@@ -435,11 +436,7 @@ public class ActivityRepository implements IActivityRepository {
 
             UserRaffleOrderEntity userRaffleOrderEntity = createPartakeOrderAggregate.getUserRaffleOrderEntity();
 
-            /**
-             *  @author:wenzhuo4657
-                des: 获取分布式id
-            */
-        long id = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id, userRaffleOrderDao);
+
 
         transactionTemplate.execute(status -> {
                 try {
@@ -479,7 +476,6 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountMonthDao.insertActivityAccountMonth(RaffleActivityAccountMonth.builder()
-                                .id(id)
                                 .userId(activityAccountMonthEntity.getUserId())
                                 .activityId(activityAccountMonthEntity.getActivityId())
                                 .month(activityAccountMonthEntity.getMonth())
@@ -528,13 +524,8 @@ public class ActivityRepository implements IActivityRepository {
                                 .dayCountSurplus(activityAccountEntity.getDayCountSurplus())
                                 .build());
                     }
-/**
- *  @author:wenzhuo4657
-    des:
-    使用分布式id区分并发订单
-*/
+
                     UserRaffleOrder userRaffleOrder = UserRaffleOrder.builder()
-                            .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.user_raffle_order_id, userRaffleOrderDao))
                             .userId(userRaffleOrderEntity.getUserId())
                             .activityId(userRaffleOrderEntity.getActivityId())
                             .activityName(userRaffleOrderEntity.getActivityName())
@@ -554,7 +545,6 @@ public class ActivityRepository implements IActivityRepository {
             });
 
 
-        return id;
 
     }
 

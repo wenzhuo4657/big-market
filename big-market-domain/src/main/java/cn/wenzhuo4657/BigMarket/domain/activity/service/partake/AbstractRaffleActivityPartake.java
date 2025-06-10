@@ -48,6 +48,8 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
             throw new AppException(ResponseCode.ACTIVITY_DATE_ERROR.getCode(), ResponseCode.ACTIVITY_DATE_ERROR.getInfo());
         }
 
+
+
         UserRaffleOrderEntity userRaffleOrderEntity = activityRepository.queryNoUsedRaffleOrder(partakeRaffleActivityEntity);
         if (null != userRaffleOrderEntity) {
             return userRaffleOrderEntity;
@@ -61,8 +63,8 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
 
         createPartakeOrderAggregate.setUserRaffleOrderEntity(userRaffleOrder);
 
-        long id = activityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
-        userRaffleOrder.setId(id);
+        activityRepository.saveCreatePartakeOrderAggregate(createPartakeOrderAggregate);
+
         return userRaffleOrder;
 
 

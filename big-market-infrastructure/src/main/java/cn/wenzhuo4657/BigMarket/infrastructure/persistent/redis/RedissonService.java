@@ -54,7 +54,8 @@ public class RedissonService implements IRedisService{
     }
 
 
-//    todo  分布式发号器更换为zk节点解决，隐含问题，似乎id并不需要，或者说可以在数据库查询字段中删除id，采用其他的唯一字段？或者说主键id是用来保证mysql页存储的连续性
+
+//     todo 删除分布式id逻辑，无用，库表的id主键无实际意义，数据库自增即可，仅仅方便页的存储
     @Override
     public long incr(String key, BugleCaller dao) {
 //          1,检测键存不存在，2，如果不存在且属于数据库表的id ，则尝试初始化，3，设置锁机制避免并发问题。

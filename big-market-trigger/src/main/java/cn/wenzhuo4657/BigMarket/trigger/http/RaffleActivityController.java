@@ -112,7 +112,7 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
 
 }
-    //  wenzhuo TODO 2024/11/19 :  查询得知hystrix基于线程池或者信号量实现资源隔离，待优化，或者更换组件，
+
     @Override
     @HystrixCommand(commandProperties = {
             @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value = "150")

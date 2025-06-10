@@ -65,9 +65,20 @@ public interface IActivityRepository {
 
 
     /**
-     * @author:wenzhuo4657 des: 查询参与活动订单，
-     * 该订单实际上代表成功参加活动，如果有则可以继续向下执行，否则不可以。
+
      */
+
+    /**
+     * @author:wenzhuo4657 des: 查询参与活动订单，没有则创建
+     *
+     *
+     *    并发风险：在进入事务之前，多个线程通过"不存在未使用订单的检查".
+     *    尽管我们使用了限流器，但依然不能忽略程序阻塞的情况下导致限流器失效（限流周期内并未完成请求）
+     *
+     *    解决： 在查询未使用订单时，我们采用宽松的方法，即允许存在多个未使用的订单，但这样的问题是，我们如何保证消费的订单，就是我们需要的？
+     *    todo  可以尝试使用ordeID解决，我们只需要保证orderid是用户维度的唯一即可。
+     *    todo 构建orderid的工具类
+     * */
     UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
 
     ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId);
@@ -76,7 +87,7 @@ public interface IActivityRepository {
 
     ActivityAccountDayEntity queryActivityAccountDayByUserId(String userId, Long activityId, String day);
 
-    long saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
+    void saveCreatePartakeOrderAggregate(CreatePartakeOrderAggregate createPartakeOrderAggregate);
 
     List<ActivitySkuEntity> queryActivitySkuListByActivityId(Long activityId);
 

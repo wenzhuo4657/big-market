@@ -1,0 +1,1 @@
+24-12-10.19:18:36.242 [main            ] WARN  ServiceAnnotationPostProcessor -  [DUBBO] No class annotated by Dubbo @Service was found under package [cn.wenzhuo4657.trigger.api], ignore re-scanned classes: 0, dubbo version: 3.0.9, current host: 169.254.139.88

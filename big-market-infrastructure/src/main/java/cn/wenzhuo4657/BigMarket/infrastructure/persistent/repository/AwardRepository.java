@@ -91,13 +91,7 @@ public class AwardRepository implements IAwardRepository {
                 try {
 
                     //                    更新抽奖单
-
-                    /**
-                     *  @author:wenzhuo4657
-                    des:
-                    sql中使用for update修饰，会对相关行进行加锁，且注意，select单独的查询语句需要获取读锁，而读锁和排他锁是不兼容的。
-                    这样做是为了避免，并发情况在查看是否有可使用的抽奖订单时，由于事务的进行
-                     */
+//                 todo   无需考虑，并发情况，因为这里需要更正为 user+orderid更改唯一指定的抽奖订单
                     int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userId);
 
 

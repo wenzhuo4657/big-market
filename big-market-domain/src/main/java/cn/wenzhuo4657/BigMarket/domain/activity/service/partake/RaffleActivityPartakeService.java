@@ -6,6 +6,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.UserRaffleOrderStat
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
+import cn.wenzhuo4657.BigMarket.types.utils.RandomOrderIdUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -83,7 +84,8 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake{
         userRaffleOrder.setActivityId(activityId);
         userRaffleOrder.setActivityName(activityEntity.getActivityName());
         userRaffleOrder.setStrategyId(activityEntity.getStrategyId());
-        userRaffleOrder.setOrderId(RandomStringUtils.randomNumeric(12));
+//        todo 目前通过时间戳+限流器实现了程序内订单id唯一，待使用zk实现分布式部署场景下的唯一
+        userRaffleOrder.setOrderId(RandomOrderIdUtils.getOrderIdByTime());
         userRaffleOrder.setOrderTime(currentDate);
         userRaffleOrder.setOrderState(UserRaffleOrderStateVO.create);
         userRaffleOrder.setEndDateTime(activityEntity.getEndDateTime());

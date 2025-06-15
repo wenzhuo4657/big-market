@@ -1,13 +1,17 @@
 package cn.wenzhuo4657.BigMarket.test;
 
 
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserRaffleOrderDao;
+import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.support.TransactionTemplate;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,7 +33,41 @@ public class DataSourcesTest {
     @Autowired
     private DataSource dataSource;
 
+    @Resource
+    private TransactionTemplate transactionTemplate;
 
+    @Autowired
+    private UserRaffleOrderDao userRaffleOrderDao;
+
+    /**
+     * 事务测试
+     */
+    @Test
+    public void transaction() throws SQLException {
+
+
+        transactionTemplate.execute(status -> {
+            try {
+                UserRaffleOrder userRaffleOrder = new UserRaffleOrder();
+                userRaffleOrder.setActivityId(1L);
+                userRaffleOrder.setUserId("456461");
+                userRaffleOrder.setOrderId("1");
+                userRaffleOrder.setOrderTime(new Date());
+                userRaffleOrder.setOrderState("1");
+                userRaffleOrder.setCreateTime(new Date());
+                userRaffleOrder.setUpdateTime(new Date());
+                userRaffleOrder.setStrategyId(1L);
+                userRaffleOrder.setActivityName("1");
+                userRaffleOrderDao.insert(userRaffleOrder);
+                throw  new RuntimeException();
+            }catch (Exception e){
+                log.error("回滚事务",e);
+                status.setRollbackOnly();
+            }
+            return 1;
+        });
+
+    }
 
 
 

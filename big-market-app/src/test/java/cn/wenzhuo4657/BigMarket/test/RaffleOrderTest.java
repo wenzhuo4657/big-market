@@ -34,8 +34,9 @@ public class RaffleOrderTest {
         skuRechargeEntity.setOutBusinessNo("700091009111");
         UnpaidActivityOrderEntity orderId = raffleOrder.createSkuRechargeOrder(skuRechargeEntity);
         log.info("测试结果：{}", orderId);
-
     }
+
+
 
 }
 

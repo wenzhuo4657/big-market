@@ -75,21 +75,6 @@ public  class Constants {
 
 
 
-        public static  class  RedisKey_ID{
-//            该类用于存储缓存存储库表id的key，且必须要注意的，由于并非只有一个活动，所以每一个将其设置统一的初值并不现实，此处key对应的值应尽量为最大的id,
-//            在我们尝试缓存这个key时，其他服务不应当使用自增，他的定位应当时程序的初始化，而非会失效的，在程序执行过程中面临并发危险的缓存。
-
-            public static  String raffle_activity_account_id="raffle_activity_account_id";
-            public  static  String raffle_activity_account_day_id="raffle_activity_account_day_id";
-            public static  String  raffle_activity_account_month_id="raffle_activity_account_month_id";
-            public  static  String raffle_activity_order_id="raffle_activity_order_id";
-            public  static  String task_id="task_id";
-            public  static  String  user_award_record_id="user_award_record_id";
-            public  static  String user_behavior_rebate_order_id="user_behavior_rebate_order_000";
-            public  static  String  user_credit_account_id="user_credit_account_id";
-            public  static  String   user_credit_order_id="user_credit_order_id";
-            public  static  String   user_raffle_order_id="user_raffle_order_id";
-        }
     }
 
 }

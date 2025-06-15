@@ -49,6 +49,8 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
         if (null == sku || StringUtils.isBlank(userId) || StringUtils.isBlank(outBusinessNo)) {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
+
+
 //        1，当需要创建的订单是有支付订单时，查询是否存在当前充值的sku商品是否存在未支付订单,如果存在直接返回
         UnpaidActivityOrderEntity unpaidCreditOrder =activityRepository.queryUnpaidActivityOrder(skuRechargeEntity);
         if (skuRechargeEntity.getOrderTradeType()  == OrderTradeTypeVO.credit_pay_trade &&null!=unpaidCreditOrder) return unpaidCreditOrder;

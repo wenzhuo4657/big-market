@@ -38,7 +38,7 @@
     <update id="updateUserRaffleOrderStateUsed" parameterType="cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder">
         update user_raffle_order
         set order_state = 'used', update_time = now()
-        where user_id = #{userId}   and order_state = 'create'
+        where user_id = #{userId}   and    activity_id=#{activityId}  and  order_id=#{orderId}  and order_state = 'create'
     </update>
 
 

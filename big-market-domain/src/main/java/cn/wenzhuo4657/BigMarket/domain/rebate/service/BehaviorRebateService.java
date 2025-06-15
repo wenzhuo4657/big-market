@@ -10,6 +10,7 @@ import cn.wenzhuo4657.BigMarket.domain.rebate.model.valobj.TaskStateVO;
 import cn.wenzhuo4657.BigMarket.domain.rebate.repository.IBehaviorRebateRepository;
 import cn.wenzhuo4657.BigMarket.types.common.Constants;
 import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
+import cn.wenzhuo4657.BigMarket.types.utils.RandomOrderIdUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -57,8 +58,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
             String bizid=behaviorEntity.getUserId()+ Constants.UNDERLINE+vo.getRebateType()+Constants.UNDERLINE+behaviorEntity.getOutBusinessNo();
             BehaviorRebateOrderEntity behaviorRebateOrderEntity = BehaviorRebateOrderEntity.builder()
                     .userId(behaviorEntity.getUserId())
-//                    id无需保证分布式一致
-                    .orderId(RandomStringUtils.randomNumeric(12))
+                    .orderId(RandomOrderIdUtils.getOrderIdByTime())
                     .behaviorType(vo.getBehaviorType())
                     .rebateDesc(vo.getRebateDesc())
                     .rebateType(vo.getRebateType())

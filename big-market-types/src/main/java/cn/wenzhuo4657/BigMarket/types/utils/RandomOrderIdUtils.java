@@ -24,7 +24,7 @@ public class RandomOrderIdUtils {
 
     public static String getOrderIdByTime(){
         long l = System.currentTimeMillis();
-        SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyMMddHHmmss");
         String format = simpleDateFormat.format(l);
         return format;
     }

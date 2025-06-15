@@ -63,6 +63,8 @@ public class AwardRepository implements IAwardRepository {
         String userId = userAwardRecordEntity.getUserId();
         Long activityId = userAwardRecordEntity.getActivityId();
         Integer awardId = userAwardRecordEntity.getAwardId();
+        String orderId = userAwardRecordEntity.getOrderId();
+
 
         UserAwardRecord userAwardRecord = new UserAwardRecord();
         userAwardRecord.setUserId(userAwardRecordEntity.getUserId());
@@ -91,17 +93,13 @@ public class AwardRepository implements IAwardRepository {
                 try {
 
                     //                    更新抽奖单
-//                 todo   无需考虑，并发情况，因为这里需要更正为 user+orderid更改唯一指定的抽奖订单
-                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userId);
+                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userId,activityId,orderId);
 
 
-                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_award_record_id,userAwardRecordDao);
+
                     // 写入记录
-                    userAwardRecord.setId(incr);
                     userAwardRecordDao.insert(userAwardRecord);
                     // 写入任务
-                    incr=redissonService.incr(Constants.RedisKey.RedisKey_ID.task_id,taskDao);
-                    task.setId(incr);
                     taskDao.insert(task);
 
 
@@ -162,8 +160,6 @@ public class AwardRepository implements IAwardRepository {
                 try{
                     int updateAccountCount = userCreditAccountDao.updateAddAmount(userCreditAccountReq);
                     if (0==updateAccountCount){
-                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.user_credit_account_id,userCreditAccountDao);
-                        userCreditAccountReq.setId(incr);
                         userCreditAccountDao.insert(userCreditAccountReq);
                     }
                     int updateAwardCount = userAwardRecordDao.updateAwardRecordCompletedState(userAwardRecord);

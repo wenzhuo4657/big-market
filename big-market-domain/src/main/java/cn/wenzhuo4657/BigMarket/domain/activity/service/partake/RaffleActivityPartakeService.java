@@ -84,7 +84,6 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake{
         userRaffleOrder.setActivityId(activityId);
         userRaffleOrder.setActivityName(activityEntity.getActivityName());
         userRaffleOrder.setStrategyId(activityEntity.getStrategyId());
-//        todo 目前通过时间戳+限流器实现了程序内订单id唯一，待使用zk实现分布式部署场景下的唯一
         userRaffleOrder.setOrderId(RandomOrderIdUtils.getOrderIdByTime());
         userRaffleOrder.setOrderTime(currentDate);
         userRaffleOrder.setOrderState(UserRaffleOrderStateVO.create);

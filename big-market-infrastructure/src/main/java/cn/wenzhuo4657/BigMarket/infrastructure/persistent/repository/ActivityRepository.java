@@ -179,16 +179,12 @@ public class ActivityRepository implements IActivityRepository {
                                             @Override
                                             public Integer doInTransaction(TransactionStatus status) {
                                                 try {
-                                                    // 1. 写入订单
-                                                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
-                                                    raffleActivityOrder.setId(incr);
                                                     raffleActivityOrderDao.insert(raffleActivityOrder);
                                                     // 2. 更新账户
                                                     int count = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                                                     // 3. 创建账户 - 更新为0，则账户不存在，创新新账户。
                                                     if (0 == count) {
-                                                        incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
-                                                        raffleActivityAccount.setId(incr);
+
                                                         raffleActivityAccountDao.insert(raffleActivityAccount);
                                                     }
 
@@ -239,8 +235,7 @@ public class ActivityRepository implements IActivityRepository {
 
             transactionTemplate.execute(status -> {
                 try {
-                    long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_order_id,raffleActivityOrderDao);
-                    raffleActivityOrder.setId(incr);
+
                     raffleActivityOrderDao.insert(raffleActivityOrder);
                     return 1;
                 } catch (DuplicateKeyException e) {
@@ -510,7 +505,6 @@ public class ActivityRepository implements IActivityRepository {
 
                     } else {
                         raffleActivityAccountDayDao.insert(RaffleActivityAccountDay.builder()
-                                .id(redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_day_id,raffleActivityAccountDayDao))
                                 .userId(activityAccountDayEntity.getUserId())
                                 .activityId(activityAccountDayEntity.getActivityId())
                                 .day(activityAccountDayEntity.getDay())
@@ -689,8 +683,6 @@ public class ActivityRepository implements IActivityRepository {
 
                     int update = raffleActivityAccountDao.updateAccountQuota(raffleActivityAccount);
                     if (update != 1) {
-                        long incr = redissonService.incr(Constants.RedisKey.RedisKey_ID.raffle_activity_account_id,raffleActivityAccountDao);
-                        raffleActivityAccount.setId(incr);
                         raffleActivityAccountDao.insert(raffleActivityAccount);
                     }
                     // 4. 更新账户 - 月

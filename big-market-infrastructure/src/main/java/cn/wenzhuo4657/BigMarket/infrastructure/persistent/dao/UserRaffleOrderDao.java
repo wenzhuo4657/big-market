@@ -20,7 +20,7 @@ public interface UserRaffleOrderDao extends BugleCaller {
     List<UserRaffleOrder> queryNoUsedRaffleOrder(UserRaffleOrder userRaffleOrderReq);
 
 
-    int updateUserRaffleOrderStateUsed(@Param("userId") String userId);
+    int updateUserRaffleOrderStateUsed(@Param("userId") String userId, @Param("activityId") Long activityId, @Param("orderId") String orderId);
 
     @Override
     List<Long> getId();

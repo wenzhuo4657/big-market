@@ -63,16 +63,12 @@ public class RebateMessageCustomer implements RocketMQListener<String> {
                     skuRechargeEntity.setOutBusinessNo(messageData.getBizId());
                     skuRechargeEntity.setOrderTradeType(OrderTradeTypeVO.rebate_no_pay_trade);
 
-//                    todo  等待厘清sku商品订单的逻辑，createSkuRechargeOrder这个是方法的逻辑目前似乎不适合返利，
-//                    目前以下的两个方法的逻辑借鉴创建sku订单，最终是要发送给credit_adjust_success来进行监听消息的，这样做似乎有点臃肿？
+//                    todo  返利订单，首先只需要走无需支付的接口，他不需要支付，所以创建订单无效的creditAdjustService.createOrder，
+//                     但问题是，raffleActivityAccountQuotaService.createSkuRechargeOrder内部会遵循类似与抽奖订单的逻辑，必须顺序消费sku订单
+//                    而且对于sku商品支付似乎也有问题，他首先是发放sku活动额度，然后才是扣减积分，
+
                     UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
-                    String orderId = creditAdjustService.createOrder(TradeEntity.builder()
-                            .userId(skuRechargeOrder.getUserId())
-                            .tradeName(TradeNameVO.CONVERT_SKU)
-                            .tradeType(TradeTypeVO.REVERSE)
-                            .amount(skuRechargeOrder.getPayAmount())
-                            .outBusinessNo(skuRechargeOrder.getOutBusinessNo())
-                            .build());
+
                 };break;
                 case "integral":{
                     TradeEntity tradeEntity = new TradeEntity();

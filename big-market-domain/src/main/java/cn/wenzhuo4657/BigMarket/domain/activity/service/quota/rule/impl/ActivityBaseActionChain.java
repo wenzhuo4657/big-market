@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.impl;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivityStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.AbstractActionChain;
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
@@ -22,7 +23,7 @@ import java.util.Date;
 @Component("activity_base_action")
 public class ActivityBaseActionChain extends AbstractActionChain {
     @Override
-    public boolean action(ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity) {
+    public boolean action(ActivitySkuEntity activitySkuEntity, ActivityEntity activityEntity, ActivityCountEntity activityCountEntity ) {
         log.info("活动责任链-基础信息【有效期、状态、库存(sku)】校验开始。sku:{} activityId:{}", activitySkuEntity.getSku(), activityEntity.getActivityId());
         if (!ActivityStateVO.open.equals(activityEntity.getState())){
             throw new AppException(ResponseCode.ACTIVITY_STATE_ERROR.getCode(),ResponseCode.ACTIVITY_STATE_ERROR.getInfo());

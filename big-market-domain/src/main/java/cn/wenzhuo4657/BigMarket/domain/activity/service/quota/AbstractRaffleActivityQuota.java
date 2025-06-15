@@ -8,6 +8,7 @@ import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQu
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.policy.ITradePolicy;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.IActionChain;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
+
 import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
 import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import com.alibaba.fastjson.JSON;
@@ -43,11 +44,11 @@ public abstract class AbstractRaffleActivityQuota extends RaffleActivityQuotaSup
         String userId = skuRechargeEntity.getUserId();
         Long sku = skuRechargeEntity.getSku();
         String outBusinessNo = skuRechargeEntity.getOutBusinessNo();
+
         if (null == sku || StringUtils.isBlank(userId) || StringUtils.isBlank(outBusinessNo)) {
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 //        1，查询是否存在当前充值的sku商品是否存在未支付订单,如果存在直接返回
-
         UnpaidActivityOrderEntity unpaidCreditOrder =activityRepository.queryUnpaidActivityOrder(skuRechargeEntity);
         if (null!=unpaidCreditOrder) return unpaidCreditOrder;
 

@@ -172,7 +172,6 @@ public class CreditRepository implements ICreditRepository {
         }catch (Exception e){
             log.error("查询用户积分账户出错，userId:{} e:{}",userId,e);
             return CreditAccountEntity.builder().userId(userId).adjustAmount(new BigDecimal(-1)).build();
-        } finally{
         }
 
     }

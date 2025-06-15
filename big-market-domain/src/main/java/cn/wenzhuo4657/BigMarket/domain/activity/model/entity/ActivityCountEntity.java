@@ -1,5 +1,6 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.model.entity;
 
+import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.CreditAccountEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,4 +35,6 @@ public class ActivityCountEntity {
      * 月次数
      */
     private Integer monthCount;
+
+
 }

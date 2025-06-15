@@ -129,4 +129,6 @@ public interface IActivityRepository {
         des: 查询活动账户（总）消耗抽奖次数
     */
     long queryActivityAccountByUserId(String userId);
+
+    CreditAccountEntity queryUserCreditAccount(String userId);
 }

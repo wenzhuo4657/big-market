@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.CreditAccountEntity;
 
 /**
  * @author: wenzhuo4657

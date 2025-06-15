@@ -26,6 +26,7 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -42,6 +43,9 @@ import java.util.concurrent.TimeUnit;
 @Repository
 @Slf4j
 public class ActivityRepository implements IActivityRepository {
+
+    @Resource
+    private UserCreditAccountDao userCreditAccountDao;
 
     @Resource
     private IRedisService redissonService;
@@ -749,5 +753,30 @@ public class ActivityRepository implements IActivityRepository {
 
         }
         return skuProductEntityList;
+    }
+
+    @Override
+    public CreditAccountEntity queryUserCreditAccount(String userId) {
+
+        UserCreditAccount userCreditAccountReq=new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        try{
+            UserCreditAccount userCreditAccount= userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+//            todo 提供一个账户初始化的接口，或者重新整理一下账户初始化的逻辑，不应当在某些接口中初始化，这样会影响接口的单一职责
+            if (Objects.isNull(userCreditAccount)){
+                userCreditAccount=UserCreditAccount.builder()
+                        .userId(userId)
+                        .accountStatus("open")
+                        .availableAmount(new BigDecimal(0))
+                        .totalAmount(new BigDecimal(0))
+                        .build();
+                userCreditAccountDao.insert(userCreditAccount);
+            }
+            return CreditAccountEntity.builder().userId(userId).adjustAmount(userCreditAccount.getAvailableAmount()).build();
+        }catch (Exception e){
+            log.error("查询用户积分账户出错，userId:{} e:{}",userId,e);
+            return CreditAccountEntity.builder().userId(userId).adjustAmount(new BigDecimal(-1)).build();
+        }
+
     }
 }

@@ -3,6 +3,7 @@ package cn.wenzhuo4657.BigMarket.domain.activity.service.quota.rule.impl;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityCountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivityEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.ActivitySkuEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.armory.IActivityArmory;
@@ -18,6 +19,8 @@ import javax.annotation.Resource;
  * @author: wenzhuo4657
  * @date: 2024/10/18
  * @description: 商品库存规则节点
+ * 该节点处理商品库存的哭件，他必须最后一个执行。
+ * 如果在中间处理，在后续节点处理异常时，无法撤回扣减的库存。
  */
 @Slf4j
 @Component("activity_sku_stock_action")

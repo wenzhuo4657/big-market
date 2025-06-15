@@ -1,9 +1,11 @@
 package cn.wenzhuo4657.BigMarket.domain.activity.service.quota.policy.impl;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.CreditAccountEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderStateVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.repository.IActivityRepository;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.quota.policy.ITradePolicy;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,6 +21,14 @@ public class CreditPayTradePolicy implements ITradePolicy {
     }
     @Override
     public void trade(CreateQuotaOrderAggregate createQuotaOrderAggregate) {
+
+        CreditAccountEntity creditAccountEntity = activityRepository.queryUserCreditAccount(createQuotaOrderAggregate.getUserId());
+
+        if (creditAccountEntity.getAdjustAmount().compareTo(createQuotaOrderAggregate.getActivityOrderEntity().getPayAmount()) < 0) {
+            throw new AppException("积分不足");
+        }
+
+
         createQuotaOrderAggregate.setOrderState(OrderStateVO.wait_pay);
         activityRepository.doSaveCreditPayOrder(createQuotaOrderAggregate);
     }

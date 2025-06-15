@@ -14,8 +14,6 @@ public interface IBehaviorRebateService {
     /**
      * 创建”行为动作“的入账订单
      *
-     * @param behaviorEntity 行为实体对象
-     * @return 订单ID  ：不保证唯一，返回订单id仅表示生成订单成功，类似于展示作用，例如可以根据订单个数得知返利类型个数
      */
     List<String> createOrder(BehaviorEntity behaviorEntity);
 

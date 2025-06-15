@@ -267,6 +267,8 @@ public class RaffleActivityController implements IRaffleActivityService {
             }
             ActivityAccountEntity activityAccountEntity=raffleActivityAccountQuotaService.queryActivityAccountEntity(request.getActivityId(), request.getUserId());
 
+
+
             UserActivityAccountResponseDTO userActivityAccountResponseDTO = UserActivityAccountResponseDTO.builder()
                     .totalCount(activityAccountEntity.getTotalCount())
                     .totalCountSurplus(activityAccountEntity.getTotalCountSurplus())

@@ -1,6 +1,7 @@
 package cn.wenzhuo4657.BigMarket.trigger.listener;
 
 import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.SkuRechargeEntity;
+import cn.wenzhuo4657.BigMarket.domain.activity.model.entity.UnpaidActivityOrderEntity;
 import cn.wenzhuo4657.BigMarket.domain.activity.model.valobj.OrderTradeTypeVO;
 import cn.wenzhuo4657.BigMarket.domain.activity.service.IRaffleActivityAccountQuotaService;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TradeEntity;
@@ -54,13 +55,24 @@ public class RebateMessageCustomer implements RocketMQListener<String> {
             SendRebateMessageEvent.RebateMessage messageData = eventMessage.getData();
 
             switch (messageData.getRebateType()){
+
                 case "sku":{
                     SkuRechargeEntity skuRechargeEntity = new SkuRechargeEntity();
                     skuRechargeEntity.setUserId(messageData.getUserId());
                     skuRechargeEntity.setSku(Long.valueOf(messageData.getRebateConfig()));
                     skuRechargeEntity.setOutBusinessNo(messageData.getBizId());
                     skuRechargeEntity.setOrderTradeType(OrderTradeTypeVO.rebate_no_pay_trade);
-                    raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
+
+//                    todo  等待厘清sku商品订单的逻辑，createSkuRechargeOrder这个是方法的逻辑目前似乎不适合返利，
+//                    目前以下的两个方法的逻辑借鉴创建sku订单，最终是要发送给credit_adjust_success来进行监听消息的，这样做似乎有点臃肿？
+                    UnpaidActivityOrderEntity skuRechargeOrder = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
+                    String orderId = creditAdjustService.createOrder(TradeEntity.builder()
+                            .userId(skuRechargeOrder.getUserId())
+                            .tradeName(TradeNameVO.CONVERT_SKU)
+                            .tradeType(TradeTypeVO.REVERSE)
+                            .amount(skuRechargeOrder.getPayAmount())
+                            .outBusinessNo(skuRechargeOrder.getOutBusinessNo())
+                            .build());
                 };break;
                 case "integral":{
                     TradeEntity tradeEntity = new TradeEntity();
@@ -69,7 +81,6 @@ public class RebateMessageCustomer implements RocketMQListener<String> {
                     tradeEntity.setTradeType(TradeTypeVO.FORWARD);
                     tradeEntity.setAmount(new BigDecimal(messageData.getRebateConfig()));
                     tradeEntity.setOutBusinessNo(messageData.getBizId());
-                    //  wenzhuo TODO 2024/12/14 : 如果想要将返利流程融入，则需要将返利作为奖品写入，将其视为商品订单，
                     creditAdjustService.saveIntegralRebateOrder(tradeEntity);
                 };break;
             }

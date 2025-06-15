@@ -34,7 +34,7 @@ public class SendAwardCustomer implements RocketMQListener<String> {
 //    该场景的核心在于，发奖不可进行，但消费奖品的消息，仍然会遵从顺序消费，虽然最终会进入死信队列，但中间的每一次重试都会带来额外的损耗，
 //    优化思路，设计一个奖品的可用性服务，
 
-//    todo，mysql当中的时区问题
+
     private  String topic="send_award";
 
     @Resource

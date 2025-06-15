@@ -8,6 +8,7 @@ import cn.wenzhuo4657.BigMarket.domain.credit.model.entity.TaskEntity;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeNameVO;
 import cn.wenzhuo4657.BigMarket.domain.credit.model.valobj.TradeTypeVO;
 import cn.wenzhuo4657.BigMarket.types.event.BaseEvent;
+import cn.wenzhuo4657.BigMarket.types.utils.RandomOrderIdUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,7 +47,7 @@ public class TradeAggregate {
                                                             String outBusinessNo) {
         return CreditOrderEntity.builder()
                 .userId(userId)
-                .orderId(RandomStringUtils.randomNumeric(12))
+                .orderId(RandomOrderIdUtils.getOrderIdByTime())
                 .tradeName(tradeName)
                 .tradeType(tradeType)
                 .tradeAmount(tradeAmount)

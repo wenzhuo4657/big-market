@@ -78,6 +78,12 @@ public interface IActivityRepository {
      * */
     UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
 
+
+    /**
+     *  查询未使用订单的数量
+     */
+    int queryNoUsedRaffleOrderSize(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
+
     ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId);
 
     ActivityAccountMonthEntity queryActivityAccountMonthByUserId(String userId, Long activityId, String month);

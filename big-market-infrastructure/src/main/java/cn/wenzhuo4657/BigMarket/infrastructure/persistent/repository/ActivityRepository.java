@@ -350,6 +350,14 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
+    public int queryNoUsedRaffleOrderSize(PartakeRaffleActivityEntity partakeRaffleActivityEntity) {
+        UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
+        userRaffleOrderReq.setUserId(partakeRaffleActivityEntity.getUserId());
+        userRaffleOrderReq.setActivityId(partakeRaffleActivityEntity.getActivityId());
+        return userRaffleOrderDao.queryNoUsedRaffleOrder(userRaffleOrderReq).size();
+    }
+
+    @Override
     public ActivityAccountEntity queryActivityAccountByUserId(String userId, Long activityId) {
         RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
         raffleActivityAccountReq.setUserId(userId);

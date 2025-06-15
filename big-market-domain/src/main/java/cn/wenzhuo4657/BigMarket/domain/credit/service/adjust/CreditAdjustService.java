@@ -82,6 +82,7 @@ public class CreditAdjustService implements ICreditAdjustService {
     @Override
     public CreditAccountEntity queryUserCreditAccount(String userId) {
 
+
         return creditRepository.queryUserCreditAccount(userId);
     }
 }

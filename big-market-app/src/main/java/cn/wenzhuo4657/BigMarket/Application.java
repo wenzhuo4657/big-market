@@ -14,6 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableDubbo
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class Application {
+//    todo 目前并不清楚tomcat如何启动，需要实现，只有所有准备完成（各种中间件连接、测试完毕），才会接受外部的流量，否则可能会出现未知的错误。
 
     public static void main(String[] args){
         SpringApplication.run(Application.class);

@@ -8,8 +8,6 @@ import lombok.EqualsAndHashCode;
 public class AppException extends RuntimeException {
 
 
-
-//   todo 修改异常处理机制，不要catch异常，而是将异常信息统一封装作为http的响应
     private static final long serialVersionUID = 5317680961212299217L;
 
     /** 异常码 */

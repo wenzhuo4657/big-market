@@ -45,6 +45,7 @@ rocketmq:
     retryTimesWhenSendAsyncFailed: 2
   name-server: ${address.RUN}:9876
 
+
 spring:
   shardingsphere:
     mode:
@@ -381,7 +382,7 @@ management:
         include: prometheus  # 端点配置，此处为  /actuator/prometheus
   metrics:
     tags:  #应用于每个指标的的标签，便于通过区分不同应用
-      application: spring-mvc-demo
+      application: big-market
     # 下面选项建议打开，以监控 http 请求的 P99/P95 等，具体的时间分布可以根据实际情况设置
     distribution:
       sla:

@@ -245,7 +245,7 @@ public class ActivityRepository implements IActivityRepository {
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("写入订单记录，唯一索引冲突 userId: {} activityId: {} sku: {}", activityOrderEntity.getUserId(), activityOrderEntity.getActivityId(), activityOrderEntity.getSku(), e);
-                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), ResponseCode.INDEX_DUP.getInfo());
                 }
             });
 
@@ -546,7 +546,7 @@ public class ActivityRepository implements IActivityRepository {
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("写入创建参与活动记录，唯一索引冲突 userId: {} activityId: {}", userId, activityId, e);
-                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), ResponseCode.INDEX_DUP.getInfo());
                 }
             });
 
@@ -705,7 +705,7 @@ public class ActivityRepository implements IActivityRepository {
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("更新订单记录，完成态，唯一索引冲突 userId: {} outBusinessNo: {}", deliveryOrderEntity.getUserId(), deliveryOrderEntity.getOutBusinessNo(), e);
-                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
+                    throw new AppException(ResponseCode.INDEX_DUP.getCode(), ResponseCode.INDEX_DUP.getInfo());
                 }
 
             });

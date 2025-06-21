@@ -38,6 +38,14 @@ public class RandomOrderIdUtils {
 //        1，处理库表的唯一索引失效问题（shareding-jdbc并不会处理分表下的唯一索引）。
 //        2，借助分布式id完成唯一索引。
 //        3，使用UUID生成唯一索引
+
+//        然而是高并发的情况下UUID也会产生唯一索引冲突，这还是在sharding-jdbc索引失效的场景下，
+//        可以尝试换个思路，我们不去让索引全局生效，而是单表索引有效！
+//        利用分片策略让一个用户只能走到一个分片，而orderid的唯一索引可以保证单表唯一，
+//        这样他的userid+orderid就可以保证全局唯一
+//        问题： 某些表可能会非常臃肿，因此在路由用户的id或者说生成用户id是需要合理分配
+
+//        todo 设计用户维度，管理用户的创建、生成
         long l = System.currentTimeMillis();
         SimpleDateFormat  simpleDateFormat = new SimpleDateFormat("yyMMddHHmmss");
         String format = simpleDateFormat.format(l);

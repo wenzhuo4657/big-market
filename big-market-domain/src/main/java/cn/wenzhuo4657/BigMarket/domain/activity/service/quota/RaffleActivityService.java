@@ -39,7 +39,7 @@ public class RaffleActivityService extends AbstractRaffleActivityQuota implement
         activityOrderEntity.setStrategyId(activityEntity.getStrategyId());
 
 
-        activityOrderEntity.setOrderId(RandomOrderIdUtils.getOrderIdByTime());
+        activityOrderEntity.setOrderId(RandomOrderIdUtils.getOrderId());
         activityOrderEntity.setOrderTime(new Date());
         activityOrderEntity.setTotalCount(activityCountEntity.getTotalCount());
         activityOrderEntity.setDayCount(activityCountEntity.getDayCount());

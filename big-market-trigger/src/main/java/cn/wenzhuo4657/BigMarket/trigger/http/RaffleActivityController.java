@@ -114,9 +114,11 @@ public class RaffleActivityController implements IRaffleActivityService {
 }
 
     @Override
+//    一次请求的安全策略，执行时间超过150毫秒，则熔断
     @HystrixCommand(commandProperties = {
             @HystrixProperty(name="execution.isolation.thread.timeoutInMilliseconds",value = "150")
     }, fallbackMethod = "drawHystrixError")
+//    用户维度的熔断，默认1秒内超过1次请求，则熔断，短时间多次熔断则加入黑名单
     @RateLimiterAccessInterceptor(key = "userId",fallbackMethod = "drawRateLimiterError", permitsPerSecond = 1.0d, blacklistCount = 1)
     @RequestMapping(value = "draw", method = RequestMethod.POST)
     public Response<ActivityDrawResponseDTO> draw(@RequestBody  ActivityDrawRequestDTO request) {

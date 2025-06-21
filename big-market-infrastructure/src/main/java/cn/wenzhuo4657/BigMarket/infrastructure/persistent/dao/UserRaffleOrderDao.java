@@ -2,8 +2,7 @@ package cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.BugleCaller;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
-import org.springframework.data.repository.query.Param;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**

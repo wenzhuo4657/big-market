@@ -3,11 +3,14 @@ package cn.wenzhuo4657.BigMarket.test;
 
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserRaffleOrderDao;
 import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
+import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
+import cn.wenzhuo4657.BigMarket.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -70,9 +73,9 @@ public class DataSourcesTest {
     }
 
 
-
-
-
+    /**
+     * 清空业务库表测试
+     */
 
     @Test
     public void deleteAll() throws SQLException {
@@ -84,6 +87,40 @@ public class DataSourcesTest {
         statement.executeUpdate("delete from user_raffle_order");
         statement.executeUpdate("delete from task");
     }
+
+
+    /**
+     * 唯一索引测试
+     *
+     * 测试结果： sharding-jdbc不会将单表的唯一索引应用到分表结构上
+     */
+    @Test
+    public  void  uniqueIndex() throws SQLException {
+        UserRaffleOrder userRaffleOrder = new UserRaffleOrder();
+        userRaffleOrder.setActivityId(1L);
+        userRaffleOrder.setUserId("456461");
+        userRaffleOrder.setOrderId("1");
+        userRaffleOrder.setOrderTime(new Date());
+        userRaffleOrder.setOrderState("1");
+        userRaffleOrder.setCreateTime(new Date());
+        userRaffleOrder.setUpdateTime(new Date());
+        userRaffleOrder.setStrategyId(1L);
+        userRaffleOrder.setActivityName("1");
+        long i=0;
+        try {
+            for (; i < 100; i++){
+                userRaffleOrder.setId(i);
+                userRaffleOrderDao.insert(userRaffleOrder);
+            }
+
+        } catch (DuplicateKeyException e) {
+           log.info("插入次数i= {}",i);
+        }
+
+
+    }
+
+
 
 
 

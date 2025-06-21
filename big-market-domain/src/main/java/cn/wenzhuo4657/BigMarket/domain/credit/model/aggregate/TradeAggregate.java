@@ -47,7 +47,7 @@ public class TradeAggregate {
                                                             String outBusinessNo) {
         return CreditOrderEntity.builder()
                 .userId(userId)
-                .orderId(RandomOrderIdUtils.getOrderIdByTime())
+                .orderId(RandomOrderIdUtils.getOrderId())
                 .tradeName(tradeName)
                 .tradeType(tradeType)
                 .tradeAmount(tradeAmount)

@@ -58,7 +58,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
             String bizid=behaviorEntity.getUserId()+ Constants.UNDERLINE+vo.getRebateType()+Constants.UNDERLINE+behaviorEntity.getOutBusinessNo();
             BehaviorRebateOrderEntity behaviorRebateOrderEntity = BehaviorRebateOrderEntity.builder()
                     .userId(behaviorEntity.getUserId())
-                    .orderId(RandomOrderIdUtils.getOrderIdByTime())
+                    .orderId(RandomOrderIdUtils.getOrderId())
                     .behaviorType(vo.getBehaviorType())
                     .rebateDesc(vo.getRebateDesc())
                     .rebateType(vo.getRebateType())

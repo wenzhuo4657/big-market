@@ -1,12 +1,22 @@
+address:
+  RUN: 117.72.36.124
+  ELK: 154.64.245.158
 spring:
+  cloud:
+    nacos:
+      server-addr: ${address.RUN}:8848
+
   apptoken:
     chatgpt-data: 89iu7o8732ijd9114
   config:
     name: big-market-app
-  profiles:
-    active: dev
+    import:
+        - nacos:application-dev.yml?refreshEnabled=true
+#  profiles:
+#    active: dev
   application:
     name: big-market-app
+
 
 
 

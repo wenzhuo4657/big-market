@@ -1,0 +1,395 @@
+
+
+server:
+  port: 8091
+  tomcat:
+    mbeanregistry:
+      enabled: true
+    threads:
+      max: 200
+      min-spare: 50
+    accept-count: 10
+# 应用配置
+app:
+  config:
+    # 版本，方便通过接口版本升级
+    api-version: v1
+    # 跨域，开发阶段可以设置为 * 不限制
+    cross-origin: '*'
+# 线程池配置
+thread:
+  pool:
+    executor:
+      config:
+        core-pool-size: 20
+        max-pool-size: 50
+        keep-alive-time: 5000
+        block-queue-size: 5000
+        policy: CallerRunsPolicy
+
+redis:
+  sdk:
+    config:
+      host: ${address.RUN}
+      port: 6379
+      pool-size: 64
+      minIdleSize: 10
+      password: 465700
+rocketmq:
+  producer:
+    group: big-market-app-producer
+    send-message-timeout: 5000
+    retry-times-when-send-failed: 2
+    retryTimesWhenSendAsyncFailed: 2
+  name-server: ${address.RUN}:9876
+
+
+spring:
+  shardingsphere:
+    mode:
+      type: Memory
+    datasource:
+      names: db01,db02,db00
+      db00:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        username: root
+        password: 465700
+      db01:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        username: root
+        password: 465700
+      db02:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://${address.RUN}:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        username: root
+        password: 465700
+    rules:
+      sharding:
+        tables:
+          ## 默认db00的查询，待修正
+          award:
+            actual-data-nodes: db00.award
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name:  default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+
+          daily_behavior_rebate:
+            actual-data-nodes: db00.daily_behavior_rebate
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          raffle_activity:
+            actual-data-nodes: db00.raffle_activity
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          raffle_activity_count:
+              actual-data-nodes: db00.raffle_activity_count
+              database-strategy:
+                standard:
+                  sharding-column: id
+                  sharding-algorithm-name: default-database-strategy
+              table-strategy:
+                standard:
+                  sharding-column: id
+                  sharding-algorithm-name: default-database-strategy_table
+          raffle_activity_sku:
+            actual-data-nodes: db00.raffle_activity_sku
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          rule_tree:
+            actual-data-nodes: db00.rule_tree
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          rule_tree_node:
+            actual-data-nodes: db00.rule_tree_node
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          rule_tree_node_line:
+            actual-data-nodes: db00.rule_tree_node_line
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          strategy:
+            actual-data-nodes: db00.strategy
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          strategy_award:
+            actual-data-nodes: db00.strategy_award
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+          strategy_rule:
+            actual-data-nodes: db00.strategy_rule
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: default-database-strategy_table
+
+          ## 分库分表，
+          raffle_activity_order:
+              actual-data-nodes:  db01.raffle_activity_order_00${0..3},db02.raffle_activity_order_00${0..3}
+              database-strategy:
+                  standard:
+                      sharding-column: id
+                      sharding-algorithm-name: alg_inline_userid
+              table-strategy:
+                standard:
+                  sharding-column:  id
+                  sharding-algorithm-name: alg_inline_userid_table
+          user_award_record:
+            actual-data-nodes: db01.user_award_record_00${0..3},db02.user_award_record_00${0..3}
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+            table-strategy:
+                standard:
+                  sharding-column: id
+                  sharding-algorithm-name: alg_inline_userid_table
+          user_behavior_rebate_order:
+            actual-data-nodes: db01.user_behavior_rebate_order_00${0..3},db02.user_behavior_rebate_order_00${0..3}
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid_table
+          user_credit_order:
+            actual-data-nodes: db01.user_credit_order_00${0..3},db02.user_credit_order_00${0..3}
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid_table
+          user_raffle_order:
+            actual-data-nodes: db01.user_raffle_order_00${0..3},db02.user_raffle_order_00${0..3}
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+            table-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid_table
+          raffle_activity_account:
+            actual-data-nodes: db01.raffle_activity_account,db02.raffle_activity_account
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+          raffle_activity_account_day:
+            actual-data-nodes: db01.raffle_activity_account_day,db02.raffle_activity_account_day
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+
+          raffle_activity_account_month:
+            actual-data-nodes: db01.raffle_activity_account_month,db02.raffle_activity_account_month
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+          task:
+            actual-data-nodes: db01.task,db02.task
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+
+          user_credit_account:
+            actual-data-nodes: db01.user_credit_account,db02.user_credit_account
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: alg_inline_userid
+        sharding-algorithms:
+          alg_inline_userid:
+              type: INLINE
+              props:
+                algorithm-expression: db0$->{id % 2+1}
+          alg_inline_userid_table:
+              type: HASH_MOD
+              props:
+                sharding-count: 4
+          default-database-strategy:
+            type: INLINE
+            props:
+              algorithm-expression: db00
+          default-database-strategy_table:
+            type: HASH_MOD
+            props:
+              sharding-count: 1
+
+
+
+
+
+
+
+
+
+
+
+    props:
+      sql-show: true
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+dubbo:
+  application:
+    name: big-market
+    version: 1.0
+  registry:
+    id: nacos-registry
+    address: nacos://${address.RUN}:8848
+  protocol:
+    name: dubbo
+    port: -1
+    group: big-market
+  scan:
+    base-packages: cn.wenzhuo4657.trigger.api
+
+
+zookeeper:
+  sdk:
+    config:
+      enable: true
+      connect-string: ${address.RUN}:2181    # 远程地址
+      base-sleep-time-ms: 1000  # 重试之间的等待时间
+      max-retries: 3 # 重试最大次数
+      session-timeout-ms: 30000  # 会话超时时间
+      connection-timeout-ms: 30000  #连接超时时间
+
+xxl:
+  job:
+    # 验证信息 官网Bug https://github.com/xuxueli/xxl-job/issues/1951
+    accessToken: default_token
+    # 注册地址-远程地址
+    admin:
+      addresses: http://${address.RUN}:9090/xxl-job-admin
+    # 注册执行器-本地
+    executor:
+      #  执行器注册 [选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 ”IP:PORT“ 作为注册地址。从而更灵活的支持容器类型执行器动态IP和动态映射端口问题。
+      address: http://wenzhuo.natapp1.cc
+      appname: big-market-job
+      # 执行器IP 配置为本机IP [选填]：默认为空表示自动获取IP，多网卡时可手动设置指定IP，该IP不会绑定Host仅作为通讯实用；地址信息用于 "执行器注册" 和 "调度中心请求并触发任务"；
+#      ip: 127.0.0.1
+#      # 执行器端口号 [选填]：小于等于0则自动获取；默认端口为9999，单机部署多个执行器时，注意要配置不同执行器端口；
+#      port: 9999
+      # 执行器运行日志文件存储磁盘路径 [选填] ：需要对该路径拥有读写权限；为空则使用默认路径；
+      logpath: ./data/applogs/xxl-job/jobhandler
+      # 执行器日志文件保存天数 [选填] ： 过期日志自动清理, 限制值大于等于3时生效; 否则, 如-1, 关闭自动清理功能；
+      logretentiondays: 30
+
+# 日志
+logging:
+  level:
+    root: info
+  config: classpath:logback-spring.xml
+
+
+# 外部接口调用配置
+gateway:
+  config:
+    # 状态；true = 开启、false 关闭
+    enable: true
+    apiHost: http://101.42.176.102:80
+    # big-market 大营销接口调用配置
+    big-market-appId: big-market
+    big-market-appToken: 6ec604541f8b1ce4a
+
+
+# actuator配置
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus  # 端点配置，此处为  /actuator/prometheus
+  metrics:
+    tags:  #应用于每个指标的的标签，便于通过区分不同应用
+      application: big-market
+    # 下面选项建议打开，以监控 http 请求的 P99/P95 等，具体的时间分布可以根据实际情况设置
+    distribution:
+      sla:
+        http:
+          server:
+            requests: 1ms,5ms,10ms,50ms,100ms,200ms,500ms,1s,5s
+      percentiles-histogram:
+        http:
+          server:
+            requests: true # 开启 http server 的请求监控
+
+

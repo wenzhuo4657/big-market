@@ -2,19 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.wenzhuo4657.BigMarket</groupId>
-    <artifactId>big-market</artifactId>
+    <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+    <artifactId>LuckySphere</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>big-market-app</module>
-        <module>big-market-domain</module>
-        <module>big-market-trigger</module>
-        <module>big-market-infrastructure</module>
-        <module>big-market-types</module>
-        <module>big-market-api</module>
-        <module>big-market-querys</module>
+        <module>LuckySphere-app</module>
+        <module>LuckySphere-domain</module>
+        <module>LuckySphere-trigger</module>
+        <module>LuckySphere-infrastructure</module>
+        <module>LuckySphere-types</module>
+        <module>LuckySphere-api</module>
+        <module>LuckySphere-querys</module>
     </modules>
 
 
@@ -140,28 +140,28 @@
 
             <!-- 工程模块 -->
             <dependency>
-                <groupId>cn.wenzhuo4657.BigMarket</groupId>
-                <artifactId>big-market-domain</artifactId>
+                <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+                <artifactId>LuckySphere-domain</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>cn.wenzhuo4657.BigMarket</groupId>
-                <artifactId>big-market-infrastructure</artifactId>
+                <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+                <artifactId>LuckySphere-infrastructure</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>cn.wenzhuo4657.BigMarket</groupId>
-                <artifactId>big-market-types</artifactId>
+                <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+                <artifactId>LuckySphere-types</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>cn.wenzhuo4657.BigMarket</groupId>
-                <artifactId>big-market-trigger</artifactId>
+                <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+                <artifactId>LuckySphere-trigger</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>cn.wenzhuo4657.BigMarket</groupId>
-                <artifactId>big-market-querys</artifactId>
+                <groupId>cn.wenzhuo4657.LuckySphere</groupId>
+                <artifactId>LuckySphere-querys</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -212,21 +212,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <java_jvm>-Xms1G -Xmx1G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=test -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/big-market-boot -Xloggc:/export/Logs/big-market-boot/gc-big-market-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
+                <java_jvm>-Xms1G -Xmx1G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=test -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/LuckySphere-boot -Xloggc:/export/Logs/LuckySphere-boot/gc-LuckySphere-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
                 <profileActive>dev</profileActive>
             </properties>
         </profile>
         <profile>
             <id>test</id>
             <properties>
-                <java_jvm>-Xms1G -Xmx1G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=test -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/big-market-boot -Xloggc:/export/Logs/big-market-boot/gc-big-market-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
+                <java_jvm>-Xms1G -Xmx1G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=test -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/LuckySphere-boot -Xloggc:/export/Logs/LuckySphere-boot/gc-LuckySphere-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
                 <profileActive>test</profileActive>
             </properties>
         </profile>
         <profile>
             <id>prod</id>
             <properties>
-                <java_jvm>-Xms6G -Xmx6G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=release -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/fq-mall-activity-app -Xloggc:/export/Logs/big-market-boot/gc-big-market-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
+                <java_jvm>-Xms6G -Xmx6G -server  -XX:MaxPermSize=256M -Xss256K -Dspring.profiles.active=release -XX:+DisableExplicitGC -XX:+UseG1GC  -XX:LargePageSizeInBytes=128m -XX:+UseFastAccessorMethods -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/export/Logs/LuckySphere-activity-app -Xloggc:/export/Logs/LuckySphere-boot/gc-LuckySphere-boot.log -XX:+PrintGCDetails -XX:+PrintGCDateStamps</java_jvm>
                 <profileActive>prod</profileActive>
             </properties>
         </profile>

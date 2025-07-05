@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/LuckySphere-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-app/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-domain/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-domain/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-infrastructure/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-infrastructure/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-querys/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-querys/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-trigger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-trigger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-types/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LuckySphere-types/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/big-market-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/big-market-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/big-market-app/src/main/java" charset="UTF-8" />

@@ -44,3 +44,4 @@ build/
 /data/applogs/
 /data/
 
+/${WORKSPACE_TMP}

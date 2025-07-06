@@ -20,7 +20,7 @@ public class UserInfoService implements  IUserInfoService{
 
     @Override
     public String register(RegisterSystemEntity registerSystemEntity) {
-        if (registerSystemEntity != null&& StringUtils.isBlank(registerSystemEntity.getExternal_system_Id())){
+        if (registerSystemEntity != null&& !StringUtils.isBlank(registerSystemEntity.getExternal_system_Id())){
             return userRepository.registerSystem(registerSystemEntity.getExternal_system_Id());
         }
         return "";

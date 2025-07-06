@@ -4,7 +4,6 @@ import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.System;
 
 public interface SystemDao {
 
-    System insertSystem(System system);
-
+    void insertSystem(System system);
 
 }

@@ -2,10 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.SystemDao">
 
-
-
-    <insert id="insertSystem" >
-        insert into system(system_id, system_name)
-        values (#{id}, #{systemName})
+    <insert id="insertSystem" parameterType="cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.System" >
+        insert into externalSystem(id, external_system_id)
+        values (#{id}, #{systemId})
     </insert>
 </mapper>

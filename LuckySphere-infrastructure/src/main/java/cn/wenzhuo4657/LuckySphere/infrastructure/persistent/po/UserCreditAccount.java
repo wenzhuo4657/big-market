@@ -1,5 +1,7 @@
 package cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -37,7 +39,7 @@ public class UserCreditAccount implements Serializable,Comparable<UserCreditAcco
     /**
      * 自增ID
      */
-    private Long  id;
+    private Long  id=1l;
     /**
      * 用户ID
      */

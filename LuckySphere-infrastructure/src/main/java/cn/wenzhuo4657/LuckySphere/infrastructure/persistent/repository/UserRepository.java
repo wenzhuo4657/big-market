@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 @Repository
 public class UserRepository  implements IUserRepository {
@@ -41,8 +42,9 @@ public class UserRepository  implements IUserRepository {
     @Override
     public String registerSystem(String external_system_Id) {
         System system = new System();
+        system.setId(UUID.randomUUID().toString());
         system.setSystemId(external_system_Id);
-        return systemDao.insertSystem(system).getId();
-
+        systemDao.insertSystem(system);
+        return system.getId();
     }
 }

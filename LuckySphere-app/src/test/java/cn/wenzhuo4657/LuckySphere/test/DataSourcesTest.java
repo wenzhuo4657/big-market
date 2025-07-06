@@ -1,10 +1,9 @@
 package cn.wenzhuo4657.LuckySphere.test;
 
 
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.dao.UserRaffleOrderDao;
-import cn.wenzhuo4657.BigMarket.infrastructure.persistent.po.UserRaffleOrder;
-import cn.wenzhuo4657.BigMarket.types.enums.ResponseCode;
-import cn.wenzhuo4657.BigMarket.types.exception.AppException;
+
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.UserRaffleOrderDao;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.UserRaffleOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

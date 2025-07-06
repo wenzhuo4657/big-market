@@ -10,9 +10,11 @@ import cn.wenzhuo4657.LuckySphere.infrastructure.event.EventPublisher;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.DailyBehaviorRebateDao;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.TaskDao;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.UserBehaviorRebateOrderDao;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.UserCreditAccountDao;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.DailyBehaviorRebate;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.UserBehaviorRebateOrder;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.UserCreditAccount;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.redis.RedissonService;
 import cn.wenzhuo4657.LuckySphere.types.common.Constants;
 import cn.wenzhuo4657.LuckySphere.types.enums.ResponseCode;
@@ -26,6 +28,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author: wenzhuo4657
@@ -50,6 +53,21 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
 
     @Resource
     private RedissonService redissonService;
+
+    @Resource
+    private UserCreditAccountDao userCreditAccountDao;
+
+    @Override
+    public boolean queryUserInfoByUserId(String userId) {
+        UserCreditAccount userCreditAccountReq=new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        UserCreditAccount userCreditAccount = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+
+        if (userCreditAccount==null){
+            return  false;
+        }
+        return true;
+    }
 
     @Override
     public List<DailyBehaviorRebateVO> queryDailyBehaviorRebateConfig(BehaviorTypeVO behaviorTypeVO) {

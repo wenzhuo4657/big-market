@@ -9,9 +9,13 @@ import cn.wenzhuo4657.LuckySphere.domain.rebate.model.valobj.DailyBehaviorRebate
 import cn.wenzhuo4657.LuckySphere.domain.rebate.model.valobj.TaskStateVO;
 import cn.wenzhuo4657.LuckySphere.domain.rebate.repository.IBehaviorRebateRepository;
 import cn.wenzhuo4657.LuckySphere.types.common.Constants;
+import cn.wenzhuo4657.LuckySphere.types.enums.ResponseCode;
 import cn.wenzhuo4657.LuckySphere.types.event.BaseEvent;
+import cn.wenzhuo4657.LuckySphere.types.exception.AppException;
 import cn.wenzhuo4657.LuckySphere.types.utils.RandomOrderIdUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.checkerframework.checker.units.qual.A;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,14 +35,23 @@ public class BehaviorRebateService implements IBehaviorRebateService{
     private IBehaviorRebateRepository behaviorRebateRepository;
     @Resource
     private SendRebateMessageEvent sendRebateMessageEvent;
+
+
     @Override
     public List<String> createOrder(BehaviorEntity behaviorEntity) {
+        /**
+         * 0,是否存在对应用户
+         */
+        if (null == behaviorEntity.getUserId()||!behaviorRebateRepository.queryUserInfoByUserId(behaviorEntity.getUserId()))
+            throw  new AppException(ResponseCode.USER_CREDIT_ACCOUNT_NOT_EXIST.getCode(),ResponseCode.USER_CREDIT_ACCOUNT_NOT_EXIST.getInfo());
         /**
          *  1，空配置查询
         */
         List<DailyBehaviorRebateVO> dailyBehaviorRebateVOS =
                 behaviorRebateRepository.queryDailyBehaviorRebateConfig(behaviorEntity.getBehaviorTypeVO());
         if (null ==dailyBehaviorRebateVOS ||dailyBehaviorRebateVOS.isEmpty()) return null;
+
+
 
 
         /**

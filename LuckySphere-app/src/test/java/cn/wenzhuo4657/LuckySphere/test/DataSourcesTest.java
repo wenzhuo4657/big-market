@@ -2,7 +2,11 @@ package cn.wenzhuo4657.LuckySphere.test;
 
 
 
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.SystemDao;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.UserCreditAccountDao;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.UserRaffleOrderDao;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.System;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.UserCreditAccount;
 import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.UserRaffleOrder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -15,6 +19,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -120,10 +125,32 @@ public class DataSourcesTest {
     }
 
 
-    /**
-     * 分片路由策略测试
-     *
-     */
+
+    @Autowired
+    private SystemDao systemDao;
+    @Test
+    public void insertexternal_system() throws SQLException {
+        System system = new System();
+        system.setId(UUID.randomUUID().toString());
+        system.setSystemId("baiduqianfan");
+        systemDao.insertSystem(system);
+    }
+
+    @Autowired
+    UserCreditAccountDao userCreditAccountDao;
+    @Test
+    public void insertUserAccount() throws SQLException {
+//        todo 搞清楚shard-jdbc是如何管理自增id，如果将自增id作为分片列，是否还可以
+//        todo 自增逻辑修复  1，数据库userid字段长度改为100，2，代码层面路由id逻辑修改，且注意，由于数据库自增会覆盖代码的赋值，所以只需要考虑分片均匀
+        UserCreditAccount open =new UserCreditAccount();
+        open.setUserId("baidu@c5c8e75a-6215-4a51-8ace-1fdb404e3653");
+        open.setAccountStatus("open");
+        open.setAvailableAmount(new BigDecimal(0));
+        open.setTotalAmount(new BigDecimal(0));
+        open.setCreateTime(new Date());
+        open.setUpdateTime(new Date());
+        userCreditAccountDao.insert(open);
+    }
 
 
 

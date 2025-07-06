@@ -101,6 +101,7 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
                         userBehaviorRebateOrder.setRebateConfig(behaviorRebateOrderEntity.getRebateConfig());
                         userBehaviorRebateOrder.setBizId(behaviorRebateOrderEntity.getBizId());
                         userBehaviorRebateOrder.setOutBusinessNo(behaviorRebateOrderEntity.getOutBusinessNo());
+
                         userBehaviorRebateOrderDao.insert(userBehaviorRebateOrder);
                         // 任务对象
                         TaskEntity taskEntity = behaviorRebateAggregate.getTaskEntity();

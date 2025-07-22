@@ -45,6 +45,7 @@ public class TradeAggregate {
                                                             TradeTypeVO tradeType,
                                                             BigDecimal tradeAmount,
                                                             String outBusinessNo) {
+//        todo 理清订单id的应用逻辑
         return CreditOrderEntity.builder()
                 .userId(userId)
                 .orderId(RandomOrderIdUtils.getOrderId())

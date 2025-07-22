@@ -44,6 +44,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import cn.wenzhuo4657.LuckySphere.config.PrometheusCustomMetricsConfig;
 
 /**
  * @author: wenzhuo4657
@@ -122,6 +123,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @RateLimiterAccessInterceptor(key = "userId",fallbackMethod = "drawRateLimiterError", permitsPerSecond = 1.0d, blacklistCount = 1)
     @RequestMapping(value = "draw", method = RequestMethod.POST)
     public Response<ActivityDrawResponseDTO> draw(@RequestBody  ActivityDrawRequestDTO request) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try {
             log.info("活动抽奖 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
             if (StringUtils.isBlank(request.getUserId())|| Objects.isNull(request.getActivityId())){
@@ -377,6 +379,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @RateLimiterAccessInterceptor(key = "userId",fallbackMethod = "drawRateLimiterError", permitsPerSecond = 1.0d, blacklistCount = 1)
     @RequestMapping(value = "credit_pay_exchange_sku", method = RequestMethod.POST)
     public Response<Boolean> creditPayExchangeSku(@RequestBody SkuProductShopCartRequestDTO request) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try{
             log.info("积分兑换商品开始 userId:{} sku:{}", request.getUserId(), request.getSku());
             SkuRechargeEntity build = SkuRechargeEntity.builder().
@@ -423,6 +426,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Override
     @RequestMapping(value = "draw_by_token", method = RequestMethod.POST)
     public Response<ActivityDrawResponseDTO> draw(@RequestHeader("Authorization") String token,@RequestBody ActivityDrawRequestDTO request) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try {
 
 
@@ -500,6 +504,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Override
     @RequestMapping(value = "query_user_activity_account_by_token", method = RequestMethod.POST)
     public Response<UserActivityAccountResponseDTO> queryUserActivityAccount(@RequestHeader("Authorization") String token, @RequestBody UserActivityAccountRequestDTO request) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try {
             // 1. Token 校验
             boolean success = authService.checkToken(token);
@@ -530,6 +535,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Override
     @RequestMapping(value = "query_user_credit_account_by_token", method = RequestMethod.POST)
     public Response<BigDecimal> queryUserCreditAccountByToken(@RequestHeader("Authorization") String token) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try {
             // 1. Token 校验
             boolean success = authService.checkToken(token);
@@ -562,6 +568,7 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Override
     @RequestMapping(value = "credit_pay_exchange_sku_by_token", method = RequestMethod.POST)
     public Response<Boolean> creditPayExchangeSku(@RequestHeader("Authorization") String token, @RequestBody SkuProductShopCartRequestDTO request) {
+        PrometheusCustomMetricsConfig.incrementHttpServerRequestsTotal();
         try {
             // 1. Token 校验
             boolean success = authService.checkToken(token);

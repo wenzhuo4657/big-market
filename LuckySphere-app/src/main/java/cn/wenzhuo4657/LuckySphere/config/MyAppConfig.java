@@ -1,9 +1,12 @@
 package cn.wenzhuo4657.LuckySphere.config;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import io.micrometer.core.instrument.MeterRegistryCustomizer;
 
 @Component
 @ConfigurationProperties(prefix = "spring")
@@ -16,5 +19,10 @@ public class MyAppConfig {
 
     public void setApptoken(Map<String, String> apptoken) {
         this.apptoken =apptoken;
+    }
+
+    @Bean
+    public MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+        return registry -> registry.config().commonTags("application", "big-market");
     }
 }

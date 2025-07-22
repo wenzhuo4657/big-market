@@ -24,6 +24,9 @@ import javax.annotation.Resource;
         topic ="activity_sku_stock_zero" )
 public class ActivitySkuStockZeroCustomer implements RocketMQListener<String> {
 
+
+//    todo 这里不要使用注解，采用代码构建，且注意，提前创建主题！这样做的目的是增强客户端的控制，注解控制易于封装，但很多特性无从下手
+
     private String topic="activity_sku_stock_zero";
     @Resource
     private IRaffleActivitySkuStockService skuStock;

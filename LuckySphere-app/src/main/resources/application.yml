@@ -1,22 +1,24 @@
 address:
-
   RUN: 117.72.36.124
   ELK: 154.64.245.158
 spring:
-  cloud:
-    nacos:
-      server-addr: ${address.RUN}:8848
+#  cloud:
+#    nacos:
+#      server-addr: ${address.RUN}:8848
 
   apptoken:
     chatgpt-data: 89iu7o8732ijd9114
-  config:
-    name: LuckySphere-app
-    import:
-        - nacos:application-dev.yml?refreshEnabled=true
-#  profiles:
-#    active: dev
+#  config:
+#    name: LuckySphere-app
+#    import:
+#        - nacos:application-dev.yml?refreshEnabled=true
+  profiles:
+    active: dev
   application:
     name: LuckySphere-app
+  datasource:
+    url: jdbc:shardingsphere:classpath:my.yaml
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
 
 
 

@@ -1,23 +1,29 @@
 package cn.wenzhuo4657.LuckySphere.config;
 
 
-import cn.wenzhuo4657.LuckySphere.types.utils.RandomOrderIdUtils;
-import org.apache.shardingsphere.sharding.spi.KeyGenerateAlgorithm;
 
-public class OrderIdGenerator implements KeyGenerateAlgorithm {
+import java.util.Properties;
 
-    @Override
-    public Comparable<?> generateKey() {
-        return RandomOrderIdUtils.getOrderId();
-    }
+public class OrderIdGenerator  {
 
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public String getType() {
-        return "my_Algorithm";
-    }
+//    implements KeyGenerateAlgorithm
+//    @Override
+//    public Comparable<?> generateKey() {
+//        return RandomOrderIdUtils.getOrderId();
+//    }
+//
+//
+//
+//    @Override
+//    public String getType() {
+//        return "my_Algorithm";
+//    }
+//
+//
+//
+//
+//    @Override
+//    public void init(Properties properties) {
+//
+//    }
 }

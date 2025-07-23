@@ -27,15 +27,16 @@ public class UserRepository  implements IUserRepository {
     @Override
     public String register(RegisterUserInfoEntity userInfoEntity) {
 //        todo 这里的积分账户表并未完全利用RegisterUserInfoEntity 信息，待修改
-        UserCreditAccount userCreditAccount = new UserCreditAccount();
+
         String userId = userInfoEntity.getExternal_system_userId()+"@"+userInfoEntity.getExternal_system_id();
-        userCreditAccount.builder()
+        UserCreditAccount open = UserCreditAccount.builder()
+                .id(0l)
                 .userId(userId)
                 .accountStatus("open")
                 .availableAmount(new BigDecimal(0))
                 .totalAmount(new BigDecimal(0))
                 .build();
-        userCreditAccountDao.insert(userCreditAccount);
+        userCreditAccountDao.insert(open);
         return userId;
     }
 

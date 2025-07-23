@@ -19,9 +19,10 @@ public class RandomOrderIdUtils {
 
     /**
      * 全局统一调用方法，内部调用本工具类的其他方法，便于修改实现。
+     * todo 暂时使用synchronized保证时间变量的唯一
      */
 
-    public  static String getOrderId(){
+    public  synchronized static String getOrderId(){
         return  getOrderIdByUUID();
     }
 

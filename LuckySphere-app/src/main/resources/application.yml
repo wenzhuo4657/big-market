@@ -2,7 +2,9 @@ address:
   RUN: 117.72.36.124
   ELK: 154.64.245.158
 spring:
-#  cloud:
+  main:
+      allow-bean-definition-overriding: true
+  #  cloud:
 #    nacos:
 #      server-addr: ${address.RUN}:8848
 
@@ -16,9 +18,9 @@ spring:
     active: dev
   application:
     name: LuckySphere-app
-  datasource:
-    url: jdbc:shardingsphere:classpath:my.yaml
-    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+#  datasource:
+#    url: jdbc:shardingsphere:classpath:my.yaml
+#    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
 
 
 

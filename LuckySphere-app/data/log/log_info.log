@@ -4664,3 +4664,343 @@ org.apache.zookeeper.ClientCnxn$SessionExpiredException: Unable to reconnect to 
 25-07-06.15:13:55.711 [Curator-Framework-0] INFO  CuratorFrameworkImpl   - backgroundOperationsLoop exiting
 25-07-06.15:13:55.922 [SpringApplicationShutdownHook] INFO  ZooKeeper              - Session: 0x10000004c340055 closed
 25-07-06.15:13:55.922 [main-EventThread] INFO  ClientCnxn             - EventThread shut down for session: 0x10000004c340055
+25-07-23.20:56:51.813 [main            ] INFO  WelcomeLogoApplicationListener -  [DUBBO] 
+
+ :: Dubbo (v3.2.5) : https://github.com/apache/dubbo
+ :: Discuss group : dev@dubbo.apache.org
+, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:51.907 [background-preinit] INFO  Version                - HV000001: Hibernate Validator 6.2.5.Final
+25-07-23.20:56:51.909 [main            ] INFO  DataSourcesTest        - Starting DataSourcesTest using Java 17.0.15 on wenzhuo4657 with PID 54700 (started by 25370 in C:\working\云code\code\LuckySphere\LuckySphere-app)
+25-07-23.20:56:51.911 [main            ] INFO  DataSourcesTest        - No active profile set, falling back to 1 default profile: "default"
+25-07-23.20:56:52.171 [main            ] INFO  NacosConfigDataLoader  - [Nacos Config] Load config[dataId=application-dev.yml, group=DEFAULT_GROUP] success
+25-07-23.20:56:53.452 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+25-07-23.20:56:53.452 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+25-07-23.20:56:53.936 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 476 ms. Found 4 Elasticsearch repository interfaces.
+25-07-23.20:56:53.945 [main            ] INFO  FrameworkModel         -  [DUBBO] Dubbo Framework[1] is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:53.959 [main            ] INFO  GlobalResourcesRepository -  [DUBBO] Creating global shared handler ..., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.183 [main            ] INFO  ApplicationModel       -  [DUBBO] Dubbo Application[1.0](unknown) is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.185 [main            ] INFO  ScopeModel             -  [DUBBO] Dubbo Module[1.0.0] is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.216 [main            ] INFO  AbstractConfigManager  -  [DUBBO] Config settings: {dubbo.config.mode=STRICT, dubbo.config.ignore-duplicated-interface=false}, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.216 [main            ] INFO  AbstractConfigManager  -  [DUBBO] Config settings: {dubbo.config.mode=STRICT, dubbo.config.ignore-duplicated-interface=false}, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.232 [main            ] INFO  SerializeSecurityManager -  [DUBBO] Serialize check serializable: true, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.233 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize allow list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.allowlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.255 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize blocked list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.blockedlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.382 [main            ] INFO  ApplicationModel       -  [DUBBO] Dubbo Application[1.1](unknown) is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.382 [main            ] INFO  ScopeModel             -  [DUBBO] Dubbo Module[1.1.0] is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.389 [main            ] INFO  AbstractConfigManager  -  [DUBBO] Config settings: {dubbo.config.mode=STRICT, dubbo.config.ignore-duplicated-interface=false}, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.389 [main            ] INFO  AbstractConfigManager  -  [DUBBO] Config settings: {dubbo.config.mode=STRICT, dubbo.config.ignore-duplicated-interface=false}, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.394 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize allow list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.allowlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.394 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize blocked list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.blockedlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.406 [main            ] INFO  DubboSpringInitializer -  [DUBBO] Use default application: Dubbo Application[1.1](unknown), dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.406 [main            ] INFO  ScopeModel             -  [DUBBO] Dubbo Module[1.1.1] is created, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.410 [main            ] INFO  AbstractConfigManager  -  [DUBBO] Config settings: {dubbo.config.mode=STRICT, dubbo.config.ignore-duplicated-interface=false}, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.413 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize allow list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.allowlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.414 [main            ] INFO  SerializeSecurityConfigurator -  [DUBBO] Read serialize blocked list from jar:file:/C:/working/software/apache-maven-3.9.9-bin/maven-localRepository/org/apache/dubbo/dubbo/3.2.5/dubbo-3.2.5.jar!/security/serialize.blockedlist, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.415 [main            ] INFO  DubboSpringInitializer -  [DUBBO] Use default module model of target application: Dubbo Module[1.1.1], dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.416 [main            ] INFO  DubboSpringInitializer -  [DUBBO] Bind Dubbo Module[1.1.1] to spring container: org.springframework.beans.factory.support.DefaultListableBeanFactory@5c59a0f7, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:54.852 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+25-07-23.20:56:54.853 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+25-07-23.20:56:54.924 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 70 ms. Found 0 Reactive Elasticsearch repository interfaces.
+25-07-23.20:56:54.938 [main            ] INFO  RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+25-07-23.20:56:54.940 [main            ] INFO  RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+25-07-23.20:56:54.988 [main            ] INFO  RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+25-07-23.20:56:54.988 [main            ] INFO  RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.wenzhuo4657.LuckySphere.querys.repository.IUserAwardRecordRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+25-07-23.20:56:54.989 [main            ] INFO  RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.wenzhuo4657.LuckySphere.querys.repository.IUserBehaviorRebateOrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+25-07-23.20:56:54.989 [main            ] INFO  RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface cn.wenzhuo4657.LuckySphere.querys.repository.IUserRaffleOrderRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+25-07-23.20:56:54.989 [main            ] INFO  RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 0 Redis repository interfaces.
+25-07-23.20:56:55.295 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] BeanNameGenerator bean can't be found in BeanFactory with name [org.springframework.context.annotation.internalConfigurationBeanNameGenerator], dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.295 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] BeanNameGenerator will be a instance of org.springframework.context.annotation.AnnotationBeanNameGenerator , it maybe a potential problem on bean name generation., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.334 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] Found 3 classes annotated by Dubbo @Service under package [cn.wenzhuo4657.LuckySphere]: [cn.wenzhuo4657.LuckySphere.trigger.http.RaffleActivityController, cn.wenzhuo4657.LuckySphere.trigger.http.RaffleStrategyController, cn.wenzhuo4657.LuckySphere.trigger.http.UserInfoController], dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.349 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] Register ServiceBean[ServiceBean:cn.wenzhuo4657.LuckySphere.tigger.api.IRaffleActivityService:1.0:]: Root bean: class [org.apache.dubbo.config.spring.ServiceBean]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.351 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] Register ServiceBean[ServiceBean:cn.wenzhuo4657.LuckySphere.tigger.api.IRaffleStrategyService:1.0:]: Root bean: class [org.apache.dubbo.config.spring.ServiceBean]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.352 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] Register ServiceBean[ServiceBean:cn.wenzhuo4657.LuckySphere.tigger.api.IUserInfoService:1.0:]: Root bean: class [org.apache.dubbo.config.spring.ServiceBean]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.353 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] BeanNameGenerator bean can't be found in BeanFactory with name [org.springframework.context.annotation.internalConfigurationBeanNameGenerator], dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.353 [main            ] INFO  ServiceAnnotationPostProcessor -  [DUBBO] BeanNameGenerator will be a instance of org.springframework.context.annotation.AnnotationBeanNameGenerator , it maybe a potential problem on bean name generation., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:55.354 [main            ] WARN  ServiceAnnotationPostProcessor -  [DUBBO] No class annotated by Dubbo @Service was found under package [cn.wenzhuo4657.trigger.api], ignore re-scanned classes: 0, dubbo version: 3.2.5, current host: 192.168.43.185, error code: 5-28. This may be caused by No annotations were found on the class, go to https://dubbo.apache.org/faq/5/28 to find instructions. 
+25-07-23.20:56:55.382 [main            ] INFO  ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'org.apache.dubbo.spring.boot.autoconfigure.DubboRelaxedBinding2AutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+25-07-23.20:56:55.383 [main            ] INFO  ConfigurationClassPostProcessor - Cannot enhance @Configuration bean definition 'org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+25-07-23.20:56:55.489 [main            ] INFO  GenericScope           - BeanFactory id=da5f185c-3d28-3e3b-acf2-76035665a55c
+25-07-23.20:56:56.391 [main            ] INFO  ReferenceAnnotationBeanPostProcessor -  [DUBBO] class org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor was destroying!, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:56:56.406 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.alibaba.cloud.nacos.NacosConfigAutoConfiguration' of type [com.alibaba.cloud.nacos.NacosConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.554 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration' of type [org.springframework.cloud.commons.config.CommonsConfigAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.556 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.559 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'loadBalancerClientsDefaultsMappingsProvider' of type [org.springframework.cloud.client.loadbalancer.LoadBalancerDefaultMappingsProviderAutoConfiguration$$Lambda$880/0x000001bd0784e7e0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.563 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'defaultsBindHandlerAdvisor' of type [org.springframework.cloud.commons.config.DefaultsBindHandlerAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.570 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'stringToNoneShardingStrategyConfigurationConverter' of type [org.apache.shardingsphere.spring.boot.converter.StringToNoneShardingStrategyConfigurationConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:56.577 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.shardingsphere-org.apache.shardingsphere.spring.boot.prop.SpringBootPropertiesConfiguration' of type [org.apache.shardingsphere.spring.boot.prop.SpringBootPropertiesConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:57.220 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.apache.shardingsphere.spring.boot.ShardingSphereAutoConfiguration' of type [org.apache.shardingsphere.spring.boot.ShardingSphereAutoConfiguration$$EnhancerBySpringCGLIB$$3d9f40ef] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:57.488 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'zooKeeperClientConfig' of type [cn.wenzhuo4657.LuckySphere.config.ZooKeeperClientConfig$$EnhancerBySpringCGLIB$$a51547e6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:57.496 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'zookeeper.sdk.config-cn.wenzhuo4657.LuckySphere.config.ZookeeperClientConfigProperties' of type [cn.wenzhuo4657.LuckySphere.config.ZookeeperClientConfigProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:56:57.562 [main            ] INFO  CuratorFrameworkImpl   - Starting
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:zookeeper.version=3.6.0--b4c89dc7f6083829e18fae6e446907ae0b1f22d7, built on 02/25/2020 14:38 GMT
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:host.name=wenzhuo4657
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.version=17.0.15
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.vendor=Microsoft
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.home=C:\Users\25370\.jdks\ms-17.0.15
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.class.path=C:\Users\25370\AppData\Local\Temp\classpath191241057.jar
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.library.path=C:\Users\25370\.jdks\ms-17.0.15\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\working\software\Git\cmd;c:\working\software\cursor\resources\app\bin;C:\working\software\Gpg4win\..\GnuPG\bin;C:\Users\25370\.jdks\ms-17.0.15\bin;C:\working\software\nvm;C:\Program Files\nodejs;C:\Users\25370\Desktop\hugo-blog;C:\Program Files\PowerShell\7\;C:\Users\25370\AppData\Local\Microsoft\WindowsApps;C:\working\software\idea\IntelliJ IDEA 2023.3.8\bin;;C:\working\software\cursor\resources\app\bin;C:\working\software\apache-maven-3.9.9-bin\apache-maven-3.9.9\bin;C:\working\software\nvm;C:\Program Files\nodejs;C:\Users\25370\Documents\MEGA\hugo;C:\working\software\Microsoft VS Code\bin;.
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.io.tmpdir=C:\Users\25370\AppData\Local\Temp\
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:java.compiler=<NA>
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.name=Windows 11
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.arch=amd64
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.version=10.0
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:user.name=25370
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:user.home=C:\Users\25370
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:user.dir=C:\working\云code\code\LuckySphere\LuckySphere-app
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.memory.free=59MB
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.memory.max=4060MB
+25-07-23.20:56:57.588 [main            ] INFO  ZooKeeper              - Client environment:os.memory.total=144MB
+25-07-23.20:56:57.591 [main            ] INFO  ZooKeeper              - Initiating client connection, connectString=117.72.36.124:2181 sessionTimeout=30000 watcher=org.apache.curator.ConnectionState@41413c5a
+25-07-23.20:56:57.596 [main            ] INFO  X509Util               - Setting -D jdk.tls.rejectClientInitiatedRenegotiation=true to disable client-initiated TLS renegotiation
+25-07-23.20:56:57.600 [main            ] INFO  ClientCnxnSocket       - jute.maxbuffer value is 1048575 Bytes
+25-07-23.20:56:57.607 [main            ] INFO  ClientCnxn             - zookeeper.request.timeout value is 0. feature enabled=false
+25-07-23.20:56:57.615 [main            ] INFO  CuratorFrameworkImpl   - Default schema
+25-07-23.20:56:57.622 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'zookeeperClient' of type [org.apache.curator.framework.imps.CuratorFrameworkImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:07.774 [main-SendThread(117.72.36.124:2181)] INFO  ClientCnxn             - Opening socket connection to server 117.72.36.124/117.72.36.124:2181.
+25-07-23.20:57:07.774 [main-SendThread(117.72.36.124:2181)] INFO  ClientCnxn             - SASL config status: Will not attempt to authenticate using SASL (unknown error)
+25-07-23.20:57:07.800 [main-SendThread(117.72.36.124:2181)] INFO  ClientCnxn             - Socket connection established, initiating session, client: /192.168.43.185:62083, server: 117.72.36.124/117.72.36.124:2181
+25-07-23.20:57:07.843 [main-SendThread(117.72.36.124:2181)] INFO  ClientCnxn             - Session establishment complete on server 117.72.36.124/117.72.36.124:2181, session id = 0x100db4f8e110027, negotiated timeout = 30000
+25-07-23.20:57:07.850 [main-EventThread] INFO  ConnectionStateManager - State change: CONNECTED
+25-07-23.20:57:07.882 [main-EventThread] INFO  EnsembleTracker        - New config event received: {}
+25-07-23.20:57:07.883 [main-EventThread] INFO  EnsembleTracker        - New config event received: {}
+25-07-23.20:57:07.894 [main            ] INFO  Compatibility          - Using org.apache.zookeeper.server.quorum.MultipleAddresses
+25-07-23.20:57:07.935 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.apache.rocketmq.spring.autoconfigure.ListenerContainerConfiguration' of type [org.apache.rocketmq.spring.autoconfigure.ListenerContainerConfiguration$$EnhancerBySpringCGLIB$$ec641c5c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:07.948 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.apache.rocketmq.spring.autoconfigure.MessageConverterConfiguration' of type [org.apache.rocketmq.spring.autoconfigure.MessageConverterConfiguration$$EnhancerBySpringCGLIB$$952a25c0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:07.979 [Curator-SafeNotifyService-0] INFO  DCCValueBeanFactory    - DCC监听生效，/big-market-dcc/config节点发生变化，
+25-07-23.20:57:08.046 [Curator-SafeNotifyService-0] INFO  DCCValueBeanFactory    - DCC监听生效，/big-market-dcc/config/rateLimiterSwitch节点发生变化，
+25-07-23.20:57:08.046 [Curator-SafeNotifyService-0] INFO  DCCValueBeanFactory    - DCC监听生效，/big-market-dcc/config/degradeSwitch节点发生变化，
+25-07-23.20:57:08.146 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'createRocketMQMessageConverter' of type [org.apache.rocketmq.spring.support.RocketMQMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:08.157 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'rocketmq-org.apache.rocketmq.spring.autoconfigure.RocketMQProperties' of type [org.apache.rocketmq.spring.autoconfigure.RocketMQProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:08.169 [main            ] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'rocketMQMessageListenerContainerRegistrar' of type [org.apache.rocketmq.spring.support.RocketMQMessageListenerContainerRegistrar] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+25-07-23.20:57:09.679 [main            ] INFO  HikariDataSource       - HikariPool-1 - Start completed.
+25-07-23.20:57:09.690 [main            ] INFO  HikariDataSource       - HikariPool-2 - Starting...
+25-07-23.20:57:09.997 [main            ] INFO  HikariDataSource       - HikariPool-2 - Start completed.
+25-07-23.20:57:09.998 [main            ] INFO  HikariDataSource       - HikariPool-3 - Starting...
+25-07-23.20:57:10.285 [main            ] INFO  HikariDataSource       - HikariPool-3 - Start completed.
+25-07-23.20:57:12.354 [main            ] INFO  DubboConfigBeanInitializer -  [DUBBO] loading dubbo config beans ..., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.359 [main            ] INFO  DubboConfigBeanInitializer -  [DUBBO] dubbo config beans are loaded., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.419 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] No value is configured in the registry, the DynamicConfigurationFactory extension[name : nacos] supports as the config center, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.420 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] The registry[<dubbo:registry id="nacos-registry" address="nacos://117.72.36.124:8848" protocol="nacos" port="8848" />] will be used as the config center, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.426 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] use registry as config-center: <dubbo:config-center highestPriority="false" id="config-center-nacos-117.72.36.124-8848" address="nacos://117.72.36.124:8848" protocol="nacos" port="8848" parameters="{client=null}" />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.450 [main            ] INFO  ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+25-07-23.20:57:12.451 [main            ] INFO  ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+25-07-23.20:57:12.779 [main            ] INFO  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.779 [main            ] INFO  ConfigurationUtils     -  [DUBBO] Config center was specified, but no config item found., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.805 [main            ] INFO  ConfigManager          -  [DUBBO] The current configurations or effective configurations are as follows:, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.806 [main            ] INFO  ConfigManager          -  [DUBBO] <dubbo:application enableFileCache="true" executorManagementMode="isolation" version="1.0" parameters="{}" name="big-market" qosEnable="true" protocol="dubbo" />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.806 [main            ] INFO  ConfigManager          -  [DUBBO] <dubbo:protocol preferSerialization="fastjson2,hessian2" port="-1" name="dubbo" />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.806 [main            ] INFO  ConfigManager          -  [DUBBO] <dubbo:registry id="nacos-registry" address="nacos://117.72.36.124:8848" protocol="nacos" port="8848" />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.806 [main            ] INFO  ConfigManager          -  [DUBBO] <dubbo:ssl />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.828 [main            ] INFO  DefaultModuleDeployer  -  [DUBBO] Dubbo Module[1.1.0] has been initialized!, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.831 [main            ] INFO  DefaultModuleDeployer  -  [DUBBO] Dubbo Module[1.1.1] has been initialized!, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.953 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] No value is configured in the registry, the MetadataReportFactory extension[name : nacos] supports as the metadata center, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.953 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] The registry[<dubbo:registry id="nacos-registry" address="nacos://117.72.36.124:8848" protocol="nacos" port="8848" />] will be used as the metadata center, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.957 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] use registry as metadata-center: <dubbo:metadata-report id="nacos-registry" address="nacos://117.72.36.124:8848" protocol="nacos" port="8848" parameters="{client=null}" />, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:12.979 [main            ] INFO  ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+25-07-23.20:57:12.979 [main            ] INFO  ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+25-07-23.20:57:13.274 [main            ] INFO  DefaultApplicationDeployer -  [DUBBO] Dubbo Application[1.1](big-market) has been initialized!, dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:13.339 [main            ] INFO  DCCValueBeanFactory    - DCC 节点监听 设置配置 /big-market-dcc/config/rateLimiterSwitch rateLimiterSwitch close
+25-07-23.20:57:14.203 [I/O dispatcher 1] WARN  RestClient             - request [GET http://154.64.245.158:9200/] returned 1 warnings: [299 Elasticsearch-7.17.14-774e3bfa4d52e2834e4d9d8d669d77e4e5c1017f "Elasticsearch built-in security features are not enabled. Without authentication, your cluster could be accessible to anyone. See https://www.elastic.co/guide/en/elasticsearch/reference/7.17/security-minimal-setup.html to enable security."]
+25-07-23.20:57:14.306 [main            ] WARN  RestClient             - request [HEAD http://154.64.245.158:9200/big_market.user_behavior_rebate_order] returned 1 warnings: [299 Elasticsearch-7.17.14-774e3bfa4d52e2834e4d9d8d669d77e4e5c1017f "Elasticsearch built-in security features are not enabled. Without authentication, your cluster could be accessible to anyone. See https://www.elastic.co/guide/en/elasticsearch/reference/7.17/security-minimal-setup.html to enable security."]
+25-07-23.20:57:14.354 [main            ] WARN  GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IEsuInfoController': Unsatisfied dependency expressed through field 'raffleActivityOrderRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IRaffleActivityOrderRepository' defined in cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository defined in @EnableElasticsearchRepositories declared on elasticsearchConfig: Invocation of init method failed; nested exception is java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+25-07-23.20:57:14.356 [main            ] INFO  HikariDataSource       - HikariPool-1 - Shutdown initiated...
+25-07-23.20:57:14.381 [main            ] INFO  HikariDataSource       - HikariPool-1 - Shutdown completed.
+25-07-23.20:57:14.381 [main            ] INFO  HikariDataSource       - HikariPool-2 - Shutdown initiated...
+25-07-23.20:57:14.411 [main            ] INFO  HikariDataSource       - HikariPool-2 - Shutdown completed.
+25-07-23.20:57:14.411 [main            ] INFO  HikariDataSource       - HikariPool-3 - Shutdown initiated...
+25-07-23.20:57:14.451 [main            ] INFO  HikariDataSource       - HikariPool-3 - Shutdown completed.
+25-07-23.20:57:14.453 [Curator-Framework-0] INFO  CuratorFrameworkImpl   - backgroundOperationsLoop exiting
+25-07-23.20:57:14.487 [main-SendThread(117.72.36.124:2181)] WARN  ClientCnxn             - An exception was thrown while closing send thread for session 0x100db4f8e110027.
+org.apache.zookeeper.ClientCnxn$EndOfStreamException: Unable to read additional data from server sessionid 0x100db4f8e110027, likely server has closed socket
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doIO(ClientCnxnSocketNIO.java:75)
+	at org.apache.zookeeper.ClientCnxnSocketNIO.doTransport(ClientCnxnSocketNIO.java:348)
+	at org.apache.zookeeper.ClientCnxn$SendThread.run(ClientCnxn.java:1262)
+25-07-23.20:57:14.600 [main            ] INFO  ZooKeeper              - Session: 0x100db4f8e110027 closed
+25-07-23.20:57:14.600 [main-EventThread] INFO  ClientCnxn             - EventThread shut down for session: 0x100db4f8e110027
+25-07-23.20:57:14.613 [main            ] INFO  ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+25-07-23.20:57:14.635 [main            ] ERROR SpringApplication      - Application run failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IEsuInfoController': Unsatisfied dependency expressed through field 'raffleActivityOrderRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IRaffleActivityOrderRepository' defined in cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository defined in @EnableElasticsearchRepositories declared on elasticsearchConfig: Invocation of init method failed; nested exception is java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:660)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:141)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:90)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IRaffleActivityOrderRepository' defined in cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository defined in @EnableElasticsearchRepositories declared on elasticsearchConfig: Invocation of init method failed; nested exception is java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:657)
+	... 46 common frames omitted
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.springframework.util.ReflectionUtils.makeAccessible(ReflectionUtils.java:791)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.doWith(AbstractMappingContext.java:575)
+	at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:714)
+	at org.springframework.data.mapping.context.AbstractMappingContext.doAddPersistentEntity(AbstractMappingContext.java:449)
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:406)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.lambda$createAndRegisterProperty$3(AbstractMappingContext.java:630)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.createAndRegisterProperty(AbstractMappingContext.java:627)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.doWith(AbstractMappingContext.java:581)
+	at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:714)
+	at org.springframework.data.mapping.context.AbstractMappingContext.doAddPersistentEntity(AbstractMappingContext.java:449)
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:406)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:291)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:209)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:92)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$6(RepositoryFactoryBeanSupport.java:326)
+	at java.base/java.util.Optional.ifPresent(Optional.java:178)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:326)
+	at org.springframework.data.elasticsearch.repository.support.ElasticsearchRepositoryFactoryBean.afterPropertiesSet(ElasticsearchRepositoryFactoryBean.java:69)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 56 common frames omitted
+25-07-23.20:57:14.636 [main            ] ERROR TestContextManager     - Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener@47f9738] to prepare test instance [cn.wenzhuo4657.LuckySphere.test.DataSourcesTest@19c47103]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:227)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:246)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38)
+	at com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11)
+	at com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35)
+	at com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232)
+	at com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'IEsuInfoController': Unsatisfied dependency expressed through field 'raffleActivityOrderRepository'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IRaffleActivityOrderRepository' defined in cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository defined in @EnableElasticsearchRepositories declared on elasticsearchConfig: Invocation of init method failed; nested exception is java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:660)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:640)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307)
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:141)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:90)
+	... 27 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'IRaffleActivityOrderRepository' defined in cn.wenzhuo4657.LuckySphere.querys.repository.IRaffleActivityOrderRepository defined in @EnableElasticsearchRepositories declared on elasticsearchConfig: Invocation of init method failed; nested exception is java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:657)
+	... 46 common frames omitted
+Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field private final java.math.BigInteger java.math.BigDecimal.intVal accessible: module java.base does not "opens java.math" to unnamed module @5579bb86
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.springframework.util.ReflectionUtils.makeAccessible(ReflectionUtils.java:791)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.doWith(AbstractMappingContext.java:575)
+	at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:714)
+	at org.springframework.data.mapping.context.AbstractMappingContext.doAddPersistentEntity(AbstractMappingContext.java:449)
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:406)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.lambda$createAndRegisterProperty$3(AbstractMappingContext.java:630)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.createAndRegisterProperty(AbstractMappingContext.java:627)
+	at org.springframework.data.mapping.context.AbstractMappingContext$PersistentPropertyCreator.doWith(AbstractMappingContext.java:581)
+	at org.springframework.util.ReflectionUtils.doWithFields(ReflectionUtils.java:714)
+	at org.springframework.data.mapping.context.AbstractMappingContext.doAddPersistentEntity(AbstractMappingContext.java:449)
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:406)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:291)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:209)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:92)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.lambda$afterPropertiesSet$6(RepositoryFactoryBeanSupport.java:326)
+	at java.base/java.util.Optional.ifPresent(Optional.java:178)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.afterPropertiesSet(RepositoryFactoryBeanSupport.java:326)
+	at org.springframework.data.elasticsearch.repository.support.ElasticsearchRepositoryFactoryBean.afterPropertiesSet(ElasticsearchRepositoryFactoryBean.java:69)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+	... 56 common frames omitted
+25-07-23.20:57:14.659 [Thread-1        ] WARN  HttpClientBeanHolder   - [HttpClientBeanHolder] Start destroying common HttpClient
+25-07-23.20:57:14.659 [DubboShutdownHook] INFO  DubboShutdownHook      -  [DUBBO] Run shutdown hook now., dubbo version: 3.2.5, current host: 192.168.43.185
+25-07-23.20:57:14.659 [Thread-6        ] WARN  NotifyCenter           - [NotifyCenter] Start destroying Publisher

@@ -1,252 +1,242 @@
-
+# todo 文档写的狗屎，这里配置需要转换为java配置解决，
 mode:
       type: Memory
 dataSources:
 #      names: db01,db02,db00
       db00:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://117.72.36.124:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
         username: root
         password: 465700
       db01:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://117.72.36.124:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
         username: root
         password: 465700
       db02:
         type: com.zaxxer.hikari.HikariDataSource
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        jdbc-url: jdbc:mysql://117.72.36.124:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://117.72.36.124:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
         username: root
         password: 465700
 rules:
-      sharding:
-        tables:
-          ## 默认db00的查询，待修正
+- !SHARDING
+  tables:
+      ## 默认db00的查询，待修正
           award:
-            actual-data-nodes: db00.award
-            database-strategy:
+            actualDataNodes: db00.award
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name:  default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName:  default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
 
           daily_behavior_rebate:
-            actual-data-nodes: db00.daily_behavior_rebate
-            database-strategy:
+            actualDataNodes: db00.daily_behavior_rebate
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           raffle_activity:
-            actual-data-nodes: db00.raffle_activity
-            database-strategy:
+            actualDataNodes: db00.raffle_activity
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           raffle_activity_count:
-            actual-data-nodes: db00.raffle_activity_count
-            database-strategy:
+            actualDataNodes: db00.raffle_activity_count
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           raffle_activity_sku:
-            actual-data-nodes: db00.raffle_activity_sku
-            database-strategy:
+            actualDataNodes: db00.raffle_activity_sku
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           rule_tree:
-            actual-data-nodes: db00.rule_tree
-            database-strategy:
+            actualDataNodes: db00.rule_tree
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           rule_tree_node:
-            actual-data-nodes: db00.rule_tree_node
-            database-strategy:
+            actualDataNodes: db00.rule_tree_node
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           rule_tree_node_line:
-            actual-data-nodes: db00.rule_tree_node_line
-            database-strategy:
+            actualDataNodes: db00.rule_tree_node_line
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           strategy:
-            actual-data-nodes: db00.strategy
-            database-strategy:
+            actualDataNodes: db00.strategy
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           strategy_award:
-            actual-data-nodes: db00.strategy_award
-            database-strategy:
+            actualDataNodes: db00.strategy_award
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
           strategy_rule:
-            actual-data-nodes: db00.strategy_rule
-            database-strategy:
+            actualDataNodes: db00.strategy_rule
+            databaseStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy
-            table-strategy:
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy
+            tableStrategy:
               standard:
-                sharding-column: id
-                sharding-algorithm-name: default-database-strategy_table
+                shardingColumn: id
+                shardingAlgorithmName: default-databaseStrategy_table
 
           ## 分库分表，
           raffle_activity_order:
-            actual-data-nodes:  db01.raffle_activity_order_00${0..3},db02.raffle_activity_order_00${0..3}
-            database-strategy:
+            actualDataNodes:  db01.raffle_activity_order_00${0..3},db02.raffle_activity_order_00${0..3}
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-            table-strategy:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+            tableStrategy:
               standard:
-                sharding-column:  userId
-                sharding-algorithm-name: alg_inline_userid_table
+                shardingColumn:  userId
+                shardingAlgorithmName: alg_inline_userid_table
           user_award_record:
-            actual-data-nodes: db01.user_award_record_00${0..3},db02.user_award_record_00${0..3}
-            database-strategy:
+            actualDataNodes: db01.user_award_record_00${0..3},db02.user_award_record_00${0..3}
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-            table-strategy:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+            tableStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid_table
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid_table
           user_behavior_rebate_order:
-            actual-data-nodes: db01.user_behavior_rebate_order_00${0..3},db02.user_behavior_rebate_order_00${0..3}
-            database-strategy:
+            actualDataNodes: db01.user_behavior_rebate_order_00${0..3},db02.user_behavior_rebate_order_00${0..3}
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-            table-strategy:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+            tableStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid_table
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid_table
           user_credit_order:
-            actual-data-nodes: db01.user_credit_order_00${0..3},db02.user_credit_order_00${0..3}
-            database-strategy:
+            actualDataNodes: db01.user_credit_order_00${0..3},db02.user_credit_order_00${0..3}
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-            table-strategy:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+            tableStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid_table
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid_table
           user_raffle_order:
-            actual-data-nodes: db01.user_raffle_order_00${0..3},db02.user_raffle_order_00${0..3}
-            database-strategy:
+            actualDataNodes: db01.user_raffle_order_00${0..3},db02.user_raffle_order_00${0..3}
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-            table-strategy:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+            tableStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid_table
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid_table
           raffle_activity_account:
-            actual-data-nodes: db01.raffle_activity_account,db02.raffle_activity_account
-            database-strategy:
+            actualDataNodes: db01.raffle_activity_account,db02.raffle_activity_account
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
           raffle_activity_account_day:
-            actual-data-nodes: db01.raffle_activity_account_day,db02.raffle_activity_account_day
-            database-strategy:
+            actualDataNodes: db01.raffle_activity_account_day,db02.raffle_activity_account_day
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
 
           raffle_activity_account_month:
-            actual-data-nodes: db01.raffle_activity_account_month,db02.raffle_activity_account_month
-            database-strategy:
+            actualDataNodes: db01.raffle_activity_account_month,db02.raffle_activity_account_month
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
           task:
-            actual-data-nodes: db01.task,db02.task
-            database-strategy:
+            actualDataNodes: db01.task,db02.task
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
 
           user_credit_account:
-            actual-data-nodes: db01.user_credit_account,db02.user_credit_account
-            database-strategy:
+            actualDataNodes: db01.user_credit_account,db02.user_credit_account
+            databaseStrategy:
               standard:
-                sharding-column: userId
-                sharding-algorithm-name: alg_inline_userid
-        sharding-algorithms:
+                shardingColumn: userId
+                shardingAlgorithmName: alg_inline_userid
+  shardingAlgorithms:
           alg_inline_userid:
             type: HASH_MOD
             props:
-              sharding-count: 2
+              shardingCount: 2
           alg_inline_userid_table:
             type: HASH_MOD
             props:
-              sharding-count: 4
-          default-database-strategy:
+              shardingCount: 4
+          default-databaseStrategy:
             type: INLINE
             props:
-              algorithm-expression: db00
-          default-database-strategy_table:
+              algorithmExpression: db00
+          default-databaseStrategy_table:
             type: HASH_MOD
             props:
-              sharding-count: 1
-
-
-
-
-
-
-
-
-
-
+              shardingCount: 1
 
 props:
   sql-show: true

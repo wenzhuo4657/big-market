@@ -25,6 +25,7 @@ import java.util.Map;
 
 @Slf4j
 public class DCCValueBeanFactory implements BeanPostProcessor {
+//    todo 这个路径待修改
     private static final String BASE_CONFIG_PATH = "/big-market-dcc";
     private static final String BASE_CONFIG_PATH_CONFIG = BASE_CONFIG_PATH + "/config";
     private final CuratorFramework client;

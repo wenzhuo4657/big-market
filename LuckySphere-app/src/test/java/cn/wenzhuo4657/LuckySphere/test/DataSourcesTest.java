@@ -144,6 +144,7 @@ public class DataSourcesTest {
 //        todo 自增逻辑修复  1，数据库userid字段长度改为100，2，代码层面路由id逻辑修改，且注意，由于数据库自增会覆盖代码的赋值，所以只需要考虑分片均匀
         UserCreditAccount open =new UserCreditAccount();
         open.setId(1l);
+
         open.setUserId("baidu@c5c8e75a-6215-4a51-8ace-1fdb404e3653");
         open.setAccountStatus("open");
         open.setAvailableAmount(new BigDecimal(0));
@@ -151,6 +152,15 @@ public class DataSourcesTest {
         open.setCreateTime(new Date());
         open.setUpdateTime(new Date());
         userCreditAccountDao.insert(open);
+    }
+
+
+
+    @Test
+    public void queryUserAccount() throws SQLException {
+        UserCreditAccount userCreditAccount = new UserCreditAccount();
+        userCreditAccount.setUserId("ohGUf67Vme6-oFdR7b1Ml8mw34_g");
+        userCreditAccountDao.queryUserCreditAccount(userCreditAccount);
     }
 
 

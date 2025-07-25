@@ -1,0 +1,227 @@
+
+mode:
+  type: Standalone
+  repository:
+    type: JDBC
+dataSources:
+  #      names: db01,db02,db00
+  db00:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://117.72.36.124:3306/big_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+    username: root
+    password: 465700
+  db01:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://117.72.36.124:3306/big_market_01?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+    username: root
+    password: 465700
+  db02:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://117.72.36.124:3306/big_market_02?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=true
+    username: root
+    password: 465700
+rules:
+  - !SHARDING
+    tables:
+      ## 默认db00的查询，待修正
+      award:
+        actualDataNodes: db00.award
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName:  defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+
+      daily_behavior_rebate:
+        actualDataNodes: db00.daily_behavior_rebate
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      raffle_activity:
+        actualDataNodes: db00.raffle_activity
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      raffle_activity_count:
+        actualDataNodes: db00.raffle_activity_count
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      raffle_activity_sku:
+        actualDataNodes: db00.raffle_activity_sku
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      rule_tree:
+        actualDataNodes: db00.rule_tree
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      rule_tree_node:
+        actualDataNodes: db00.rule_tree_node
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      rule_tree_node_line:
+        actualDataNodes: db00.rule_tree_node_line
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      strategy:
+        actualDataNodes: db00.strategy
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      strategy_award:
+        actualDataNodes: db00.strategy_award
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+      strategy_rule:
+        actualDataNodes: db00.strategy_rule
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: defaultShardingAlgorith
+
+      ## 分库分表，
+      raffle_activity_order:
+        actualDataNodes:  db01.raffle_activity_order_00${0..3},db02.raffle_activity_order_00${0..3}
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn:  userId
+            shardingAlgorithmName: myAlgorith
+      user_award_record:
+        actualDataNodes: db01.user_award_record_00${0..3},db02.user_award_record_00${0..3}
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      user_behavior_rebate_order:
+        actualDataNodes: db01.user_behavior_rebate_order_00${0..3},db02.user_behavior_rebate_order_00${0..3}
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      user_credit_order:
+        actualDataNodes: db01.user_credit_order_00${0..3},db02.user_credit_order_00${0..3}
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      user_raffle_order:
+        actualDataNodes: db01.user_raffle_order_00${0..3},db02.user_raffle_order_00${0..3}
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      raffle_activity_account:
+        actualDataNodes: db01.raffle_activity_account,db02.raffle_activity_account
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      raffle_activity_account_day:
+        actualDataNodes: db01.raffle_activity_account_day,db02.raffle_activity_account_day
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      raffle_activity_account_month:
+        actualDataNodes: db01.raffle_activity_account_month,db02.raffle_activity_account_month
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+      task:
+        actualDataNodes: db01.task,db02.task
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+
+      user_credit_account:
+        actualDataNodes: db01.user_credit_account,db02.user_credit_account
+        databaseStrategy:
+          standard:
+            shardingColumn: userId
+            shardingAlgorithmName: myAlgorith
+
+
+props:
+  sql-show: true

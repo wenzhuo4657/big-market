@@ -1,50 +1,59 @@
 package cn.wenzhuo4657.LuckySphere.config;
 
+import com.alibaba.nacos.common.utils.Preconditions;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shardingsphere.sharding.api.sharding.standard.PreciseShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.RangeShardingValue;
 import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
-import org.apache.shardingsphere.sharding.spi.ShardingAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Collections;
+import java.util.Properties;
+
 
 public final class myShardingAlgorith implements StandardShardingAlgorithm<String> {
 
     private Logger log = LoggerFactory.getLogger(myShardingAlgorith.class);
+
+    private static final String DATABASES_TABLES_RELEVANCE = "sharding-count";
+
+
+    private Properties props = new Properties();
+
+    @Override
+    public void init(Properties props) {
+        this.props=props;
+    }
+
     @Override
     public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<String> shardingValue) {
-//        todo 如果是表名，则后缀有4个和一个两种形式，但是如果是数据库名则有两种，
-//        如果这里一定要根据数据库后缀配置，则可以将后缀写在配置文件中，但是这样过于麻烦，倒不如做类似于hashmod自动分片的随机选择，我只要根据hashcode获取到一个随机制然后对availableTargetNames进行分片即可
+
+        Preconditions.checkArgument(props.containsKey(DATABASES_TABLES_RELEVANCE), "sharding-count cannot be null.");
+
+        Preconditions.checkArgument(StringUtils.isEmpty(shardingValue.getValue()), "sharding-value cannot be null.");
+
+        int shardingCount = Integer.parseInt(props.getProperty(DATABASES_TABLES_RELEVANCE));
 
         log.info("availableTargetName:{}", availableTargetNames.toString());
-        for (String each : availableTargetNames) {
 
-            if (each.endsWith(String.valueOf(shardingValue.getValue().hashCode() % 2))) {
-                return each;
-            }
-        }
-        return null;
+        int index =shardingValue.getValue().hashCode() %shardingCount;
+//        todo 通过hashcode来控制分片，难以控制分布均匀
+        String[] array = availableTargetNames.toArray(new String[availableTargetNames.size()]);
+        return array[index%array.length];
     }
 
     @Override
     public Collection<String> doSharding(Collection<String> availableTargetNames, RangeShardingValue<String> shardingValue) {
-        log.info("availableTargetName:{}", availableTargetNames.toString());
-        Collection<String> result = new HashSet<>(2, 1F);
-        for (int i = shardingValue.getValueRange().lowerEndpoint().hashCode(); i <= shardingValue.getValueRange().upperEndpoint().hashCode(); i++) {
-            for (String each : availableTargetNames) {
-                if (each.endsWith(String.valueOf(i % 2))) {
-                    result.add(each);
-                }
-            }
-        }
-        return result;
+        return availableTargetNames;
     }
 
     @Override
     public String getType() {
-        return "myAlgorith";
+        return "SubDatabaseAndSubTable";
     }
 }

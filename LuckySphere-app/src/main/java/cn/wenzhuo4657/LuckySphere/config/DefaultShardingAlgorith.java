@@ -15,7 +15,7 @@ public final class DefaultShardingAlgorith implements StandardShardingAlgorithm<
 
     @Override
     public String getType() {
-        return "defaultShardingAlgorith";
+        return "direct";
     }
 
     @Override

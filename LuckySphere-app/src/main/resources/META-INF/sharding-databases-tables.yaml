@@ -144,83 +144,111 @@ rules:
         actualDataNodes:  db01.raffle_activity_order_00${0..3},db02.raffle_activity_order_00${0..3}
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
         tableStrategy:
           standard:
-            shardingColumn:  userId
+            shardingColumn:  user_id
             shardingAlgorithmName: myAlgorith
       user_award_record:
         actualDataNodes: db01.user_award_record_00${0..3},db02.user_award_record_00${0..3}
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
         tableStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       user_behavior_rebate_order:
         actualDataNodes: db01.user_behavior_rebate_order_00${0..3},db02.user_behavior_rebate_order_00${0..3}
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
         tableStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       user_credit_order:
         actualDataNodes: db01.user_credit_order_00${0..3},db02.user_credit_order_00${0..3}
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
         tableStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       user_raffle_order:
         actualDataNodes: db01.user_raffle_order_00${0..3},db02.user_raffle_order_00${0..3}
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
         tableStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       raffle_activity_account:
         actualDataNodes: db01.raffle_activity_account,db02.raffle_activity_account
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       raffle_activity_account_day:
         actualDataNodes: db01.raffle_activity_account_day,db02.raffle_activity_account_day
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       raffle_activity_account_month:
         actualDataNodes: db01.raffle_activity_account_month,db02.raffle_activity_account_month
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
+            shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
       task:
         actualDataNodes: db01.task,db02.task
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: myAlgorith
+
 
       user_credit_account:
         actualDataNodes: db01.user_credit_account,db02.user_credit_account
         databaseStrategy:
           standard:
-            shardingColumn: userId
+            shardingColumn: user_id
             shardingAlgorithmName: myAlgorith
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: myAlgorith
+    shardingAlgorithms:
+        defaultShardingAlgorith:
+          type: direct
+        myAlgorith:
+          type: SubDatabaseAndSubTable
+          props:
+              sharding-count:  4
 
 
 props:

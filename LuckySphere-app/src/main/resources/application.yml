@@ -18,9 +18,9 @@ spring:
     active: dev
   application:
     name: LuckySphere-app
-#  datasource:
-#    url: jdbc:shardingsphere:classpath:my.yaml
-#    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+  datasource:
+    url: jdbc:shardingsphere:classpath:\\META-INF\\sharding-databases-tables.yaml
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
 
 
 

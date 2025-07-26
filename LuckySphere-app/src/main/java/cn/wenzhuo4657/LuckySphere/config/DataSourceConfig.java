@@ -13,8 +13,8 @@ import static com.alibaba.nacos.common.packagescan.util.ResourceUtils.getFile;
 @Component
 public class DataSourceConfig {
 
-    @Bean
-    public DataSource dataSource() throws IOException, SQLException {
-        return  YamlShardingSphereDataSourceFactory.createDataSource(getFile("classpath:\\META-INF\\sharding-databases-tables.yaml"));
-    }
+//    @Bean
+//    public DataSource dataSource() throws IOException, SQLException {
+//        return  YamlShardingSphereDataSourceFactory.createDataSource(getFile("classpath:\\META-INF\\sharding-databases-tables.yaml"));
+//    }
 }

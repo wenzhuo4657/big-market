@@ -35,7 +35,7 @@ public final class myShardingAlgorith implements StandardShardingAlgorithm<Strin
 
         Preconditions.checkArgument(props.containsKey(DATABASES_TABLES_RELEVANCE), "sharding-count cannot be null.");
 
-        Preconditions.checkArgument(StringUtils.isEmpty(shardingValue.getValue()), "sharding-value cannot be null.");
+        Preconditions.checkArgument(!StringUtils.isEmpty(shardingValue.getValue()), "sharding-value cannot be null.");
 
         int shardingCount = Integer.parseInt(props.getProperty(DATABASES_TABLES_RELEVANCE));
 

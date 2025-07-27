@@ -19,7 +19,6 @@ spring:
   application:
     name: LuckySphere-app
   datasource:
-    #  todo 这个路径分割符号  在win和linux上需要修改
     url: jdbc:shardingsphere:classpath:META-INF/sharding-databases-tables.yaml
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
 

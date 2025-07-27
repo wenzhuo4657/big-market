@@ -20,6 +20,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="test-module-info" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
@@ -45,38 +50,38 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.DataSourcesTest.deleteAll.executor": "Debug",
-    "JUnit.DataSourcesTest.queryUserAccount (1).executor": "Debug",
-    "JUnit.DataSourcesTest.queryUserAccount.executor": "Debug",
-    "Maven.LuckySphere [clean].executor": "Run",
-    "Maven.LuckySphere [install].executor": "Run",
-    "Maven.LuckySphere-app [clean].executor": "Run",
-    "Maven.LuckySphere-app [compile].executor": "Run",
-    "Maven.LuckySphere-app [package].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.Application.executor": "Debug",
-    "git-widget-placeholder": "test",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/working/software/apache-maven-3.9.9-bin/maven-localRepository",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "库",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.DataSourcesTest.deleteAll.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.DataSourcesTest.queryUserAccount (1).executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.DataSourcesTest.queryUserAccount.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.LuckySphere [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LuckySphere [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LuckySphere-app [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LuckySphere-app [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LuckySphere-app [package].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.Application.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/working/software/apache-maven-3.9.9-bin/maven-localRepository&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -179,6 +184,8 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.DataSourcesTest.queryUserAccount (1)" />
+        <item itemvalue="JUnit.DataSourcesTest.deleteAll" />
         <item itemvalue="JUnit.DataSourcesTest.deleteAll" />
         <item itemvalue="JUnit.DataSourcesTest.queryUserAccount (1)" />
         <item itemvalue="JUnit.DataSourcesTest.queryUserAccount" />

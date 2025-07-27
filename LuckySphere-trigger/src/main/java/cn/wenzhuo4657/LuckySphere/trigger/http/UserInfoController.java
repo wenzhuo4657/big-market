@@ -29,6 +29,7 @@ public class UserInfoController  implements IUserInfoService {
     @Override
     @PostMapping("registerUserInfo")
     public Response<String> registerUser(@RequestBody RegisterUserInfoDto registerUserInfoDto) {
+        log.info("用户注册   开始 userId:{}, systemId: {}", registerUserInfoDto.getExternal_system_userId(),registerUserInfoDto.getExternal_system_id());
 
         RegisterUserInfoEntity build = RegisterUserInfoEntity.builder()
                 .external_system_id(registerUserInfoDto.getExternal_system_id())
@@ -38,6 +39,7 @@ public class UserInfoController  implements IUserInfoService {
                 .build();
 
         String userId = userInfoService.registerUser(build);
+        log.info("用户注册 成功 userId:{}, systemId: {}", registerUserInfoDto.getExternal_system_userId(),registerUserInfoDto.getExternal_system_id());
         return  Response.<String>builder()
                 .info(ResponseCode.SUCCESS.getInfo())
                 .code(ResponseCode.SUCCESS.getCode())

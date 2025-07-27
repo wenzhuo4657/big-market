@@ -97,9 +97,9 @@ public class RaffleActivityService extends AbstractRaffleActivityQuota implement
         int noUsedRaffleOrderSize = activityRepository.queryNoUsedRaffleOrderSize(new PartakeRaffleActivityEntity(userId, activityId));
         ActivityAccountEntity activityAccountEntity = activityRepository.queryActivityAccountEntity(activityId, userId);
 
-        activityAccountEntity.setTotalCountSurplus(activityAccountEntity.getTotalCount() +noUsedRaffleOrderSize);
-        activityAccountEntity.setDayCountSurplus(activityAccountEntity.getDayCount() +noUsedRaffleOrderSize);
-        activityAccountEntity.setMonthCountSurplus(activityAccountEntity.getMonthCount() +noUsedRaffleOrderSize);
+        activityAccountEntity.setTotalCountSurplus(activityAccountEntity.getTotalCountSurplus() +noUsedRaffleOrderSize);
+        activityAccountEntity.setDayCountSurplus(activityAccountEntity.getDayCountSurplus() +noUsedRaffleOrderSize);
+        activityAccountEntity.setMonthCountSurplus(activityAccountEntity.getMonthCountSurplus() +noUsedRaffleOrderSize);
         activityAccountEntity.setTotalCount(activityAccountEntity.getTotalCount() +noUsedRaffleOrderSize);
         activityAccountEntity.setDayCount(activityAccountEntity.getDayCount() +noUsedRaffleOrderSize);
         activityAccountEntity.setMonthCount(activityAccountEntity.getMonthCount() +noUsedRaffleOrderSize);

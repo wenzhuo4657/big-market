@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="style: 插入日志">
+    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="style: 接口描述修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/RaffleActivityController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,37 +45,38 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.DataSourcesTest.deleteAll.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.DataSourcesTest.queryUserAccount (1).executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.DataSourcesTest.queryUserAccount.executor&quot;: &quot;Debug&quot;,
-    &quot;Maven.LuckySphere [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.LuckySphere [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.LuckySphere-app [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.LuckySphere-app [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.LuckySphere-app [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.Application.executor&quot;: &quot;Debug&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/working/software/apache-maven-3.9.9-bin/maven-localRepository&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;库&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.DataSourcesTest.deleteAll.executor": "Debug",
+    "JUnit.DataSourcesTest.queryUserAccount (1).executor": "Debug",
+    "JUnit.DataSourcesTest.queryUserAccount.executor": "Debug",
+    "Maven.LuckySphere [clean].executor": "Run",
+    "Maven.LuckySphere [install].executor": "Run",
+    "Maven.LuckySphere-app [clean].executor": "Run",
+    "Maven.LuckySphere-app [compile].executor": "Run",
+    "Maven.LuckySphere-app [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.Application.executor": "Debug",
+    "git-widget-placeholder": "test",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/working/software/apache-maven-3.9.9-bin/maven-localRepository",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "库",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -241,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753590479320</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="style: 接口描述修改">
+      <option name="closed" value="true" />
+      <created>1753591509048</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1753591509048</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,7 +270,8 @@
     <MESSAGE value="fix: sharding-jdbc依赖修复" />
     <MESSAGE value="feat: sharding-jdbc自定义分片算法" />
     <MESSAGE value="style: 插入日志" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: 插入日志" />
+    <MESSAGE value="style: 接口描述修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: 接口描述修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

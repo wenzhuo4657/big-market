@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="feat: sharding-jdbc自定义分片算法">
+    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="style: 插入日志">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/UserInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-trigger/src/main/java/cn/wenzhuo4657/LuckySphere/trigger/http/RaffleActivityController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +194,9 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="StructureViewState">
+    <option name="selectedTab" value="逻辑" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
       <changelist id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="" />
@@ -230,7 +233,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753519781581</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="style: 插入日志">
+      <option name="closed" value="true" />
+      <created>1753590479320</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1753590479320</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +261,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix: sharding-jdbc依赖修复" />
     <MESSAGE value="feat: sharding-jdbc自定义分片算法" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: sharding-jdbc自定义分片算法" />
+    <MESSAGE value="style: 插入日志" />
+    <option name="LAST_COMMIT_MESSAGE" value="style: 插入日志" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

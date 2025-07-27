@@ -1,0 +1,32 @@
+module LuckySphere.app {
+    requires spring.boot;
+    requires dubbo;
+    requires shardingsphere.jdbc.core;
+    requires org.mybatis.spring;
+    requires spring.boot.autoconfigure;
+    requires nacos.client;
+    requires curator.client;
+    requires curator.framework;
+    requires xxl.job.core;
+    requires LuckySphere.infrastructure;
+    requires spring.context;
+    requires retrofit2;
+    requires retrofit2.converter.jackson;
+    requires redisson;
+    requires org.apache.commons.lang3;
+    requires shardingsphere.sharding.api;
+    requires org.slf4j;
+    requires micrometer.core;
+    requires spring.boot.actuator.autoconfigure;
+    requires com.google.common;
+    requires java.annotation;
+    requires spring.beans;
+    requires LuckySphere.types;
+    requires commons.lang;
+    requires curator.recipes;
+    requires spring.aop;
+    requires java.sql;
+    requires LuckySphere.api;
+    requires org.aspectj.weaver;
+    requires static lombok;
+}

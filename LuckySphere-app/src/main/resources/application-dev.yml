@@ -3,6 +3,7 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
+#    todo  为了方便测试，tomcat等线程配置参数，应当设置在nacos中，便于修改
     threads:
       max: 1000
       min-spare: 500

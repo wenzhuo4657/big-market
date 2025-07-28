@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="style: 接口描述修改">
+    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="feat: tomcat连接参数优化">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application-dev.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +70,7 @@
     &quot;Spring Boot.Application.executor&quot;: &quot;Debug&quot;,
     &quot;git-widget-placeholder&quot;: &quot;test&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/working/software/apache-maven-3.9.9-bin/maven-localRepository&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/working/云code/code/ai-agent-station-study-main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -215,6 +216,10 @@
       <workItem from="1753427885925" duration="5403000" />
       <workItem from="1753433489346" duration="124000" />
       <workItem from="1753509029325" duration="10739000" />
+      <workItem from="1753608487112" duration="876000" />
+      <workItem from="1753610024063" duration="469000" />
+      <workItem from="1753610547011" duration="50000" />
+      <workItem from="1753666442807" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="fix: sharding-jdbc依赖修复">
       <option name="closed" value="true" />
@@ -256,7 +261,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753591509048</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: tomcat连接参数优化">
+      <option name="closed" value="true" />
+      <created>1753606459859</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1753606459859</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,7 +291,8 @@
     <MESSAGE value="feat: sharding-jdbc自定义分片算法" />
     <MESSAGE value="style: 插入日志" />
     <MESSAGE value="style: 接口描述修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="style: 接口描述修改" />
+    <MESSAGE value="feat: tomcat连接参数优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: tomcat连接参数优化" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

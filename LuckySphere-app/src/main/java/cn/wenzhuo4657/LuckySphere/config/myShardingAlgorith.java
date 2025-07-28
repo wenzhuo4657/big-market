@@ -41,7 +41,7 @@ public final class myShardingAlgorith implements StandardShardingAlgorithm<Strin
 
         log.info("availableTargetName:{}", availableTargetNames.toString());
 
-        int index =shardingValue.getValue().hashCode() %shardingCount;
+        int index =Math.abs(shardingValue.getValue().hashCode()) %shardingCount;
 //        todo 通过hashcode来控制分片，难以控制分布均匀
         String[] array = availableTargetNames.toArray(new String[availableTargetNames.size()]);
         return array[index%array.length];

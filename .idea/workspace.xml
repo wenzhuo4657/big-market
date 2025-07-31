@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="feat: tomcat连接参数优化">
+    <list default="true" id="a32c18fc-047f-452c-b06b-d22430b38af6" name="更改" comment="fix: 处理hashcode可能会越界的问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LuckySphere-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-app/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/LuckySphere-app/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/log/log_error.log" beforeDir="false" afterPath="$PROJECT_DIR$/data/log/log_error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/log/log_info.log" beforeDir="false" afterPath="$PROJECT_DIR$/data/log/log_info.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +65,7 @@
     &quot;Maven.LuckySphere-app [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.LuckySphere-app [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.LuckySphere-app [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.LuckySphere-app [validate].executor&quot;: &quot;Run&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
@@ -220,6 +225,10 @@
       <workItem from="1753610024063" duration="469000" />
       <workItem from="1753610547011" duration="50000" />
       <workItem from="1753666442807" duration="7000" />
+      <workItem from="1753683101522" duration="4003000" />
+      <workItem from="1753758179579" duration="28000" />
+      <workItem from="1753929069593" duration="479000" />
+      <workItem from="1753931208876" duration="62000" />
     </task>
     <task id="LOCAL-00001" summary="fix: sharding-jdbc依赖修复">
       <option name="closed" value="true" />
@@ -269,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1753606459859</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix: 处理hashcode可能会越界的问题">
+      <option name="closed" value="true" />
+      <created>1753684168589</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1753684168589</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +297,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="test" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -292,7 +321,8 @@
     <MESSAGE value="style: 插入日志" />
     <MESSAGE value="style: 接口描述修改" />
     <MESSAGE value="feat: tomcat连接参数优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: tomcat连接参数优化" />
+    <MESSAGE value="fix: 处理hashcode可能会越界的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 处理hashcode可能会越界的问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

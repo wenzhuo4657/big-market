@@ -3,7 +3,6 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
-#    todo  为了方便测试，tomcat等线程配置参数，应当设置在nacos中，便于修改
     threads:
       max: 1000
       min-spare: 500
@@ -18,7 +17,7 @@ app:
     api-version: v1
     # 跨域，开发阶段可以设置为 * 不限制
     cross-origin: '*'
-# 线程池配置
+# 任务补偿线程池线程池配置
 thread:
   pool:
     executor:
@@ -93,8 +92,8 @@ xxl:
     # 注册执行器-本地
     executor:
       #  执行器注册 [选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 ”IP:PORT“ 作为注册地址。从而更灵活的支持容器类型执行器动态IP和动态映射端口问题。
-      address: http://wenzhuo.natapp1.cc
-      appname: big-market-job
+      address: 47.91.14.42:9999
+      appname: LuckySphere-job
       # 执行器IP 配置为本机IP [选填]：默认为空表示自动获取IP，多网卡时可手动设置指定IP，该IP不会绑定Host仅作为通讯实用；地址信息用于 "执行器注册" 和 "调度中心请求并触发任务"；
 #      ip: 127.0.0.1
 #      # 执行器端口号 [选填]：小于等于0则自动获取；默认端口为9999，单机部署多个执行器时，注意要配置不同执行器端口；

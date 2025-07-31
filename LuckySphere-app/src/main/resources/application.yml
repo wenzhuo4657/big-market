@@ -4,18 +4,18 @@ address:
 spring:
   main:
       allow-bean-definition-overriding: true
-  #  cloud:
-#    nacos:
-#      server-addr: ${address.RUN}:8848
+  cloud:
+    nacos:
+      server-addr: ${address.RUN}:8848
 
   apptoken:
     chatgpt-data: 89iu7o8732ijd9114
-#  config:
-#    name: LuckySphere-app
-#    import:
-#        - nacos:application-dev.yml?refreshEnabled=true
-  profiles:
-    active: dev
+  config:
+    name: LuckySphere-app
+    import:
+        - nacos:application-dev.yml?refreshEnabled=true
+#  profiles:
+#    active: dev
   application:
     name: LuckySphere-app
   datasource:

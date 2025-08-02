@@ -28,7 +28,8 @@ public enum ResponseCode {
     ACCOUNT_DAY_QUOTA_ERROR("ERR_BIZ_008","账户日额度不足"),
     ACTIVITY_ORDER_ERROR("ERR_BIZ_009", "用户抽奖单已使用过，不可重复抽奖"),
     CREDIT_ACCOUNT_QUOTA_ERROR("ERR_BIZ_010","积分账户余额不足"),
-    USER_CREDIT_ACCOUNT_NOT_EXIST("ERR_BIZ_011","积分账户不存在")
+    USER_CREDIT_ACCOUNT_NOT_EXIST("ERR_BIZ_011","积分账户不存在"),
+    CALENDAR_SIGNREBATE_ERROR("ERR_BIZ_012","请勿重复签到")
 
     ;
 

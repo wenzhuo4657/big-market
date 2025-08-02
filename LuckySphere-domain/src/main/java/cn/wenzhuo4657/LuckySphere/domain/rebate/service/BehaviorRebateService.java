@@ -56,7 +56,7 @@ public class BehaviorRebateService implements IBehaviorRebateService{
         */
         List<BehaviorRebateOrderEntity> behaviorRebateOrderEntities = queryOrderByOutBusinessNo(behaviorEntity.getUserId(), behaviorEntity.getOutBusinessNo());
         if (behaviorRebateOrderEntities.size()!=0){
-            return  null;
+            throw  new AppException(ResponseCode.CALENDAR_SIGNREBATE_ERROR.getCode(),ResponseCode.CALENDAR_SIGNREBATE_ERROR.getInfo());
         }
 
 

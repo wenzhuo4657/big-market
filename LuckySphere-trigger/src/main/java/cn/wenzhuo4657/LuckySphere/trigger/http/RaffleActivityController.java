@@ -206,6 +206,7 @@ public class RaffleActivityController implements IRaffleActivityService {
             behaviorEntity.setOutBusinessNo(dateFormatDay.format(new Date()));
             List<String> orderIds = behaviorRebateService.createOrder(behaviorEntity);
             log.info("日历签到返利完成 userId:{} orderIds: {}", userId, JSON.toJSONString(orderIds));
+
             return Response.<Boolean>builder()
                     .code(ResponseCode.SUCCESS.getCode())
                     .info(ResponseCode.SUCCESS.getInfo())

@@ -213,7 +213,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .data(true)
                     .build();
         }  catch (AppException e) {
-            log.error("日历签到返利异常 userId:{} ", userId, e);
+            log.error("日历签到返利异常 userId:{}  e:{} ", userId, e);
             return Response.<Boolean>builder()
                     .code(e.getCode())
                     .info(e.getInfo())

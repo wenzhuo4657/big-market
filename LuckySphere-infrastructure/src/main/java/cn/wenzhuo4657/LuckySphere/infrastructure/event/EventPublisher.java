@@ -1,5 +1,8 @@
 package cn.wenzhuo4657.LuckySphere.infrastructure.event;
 
+import cn.wenzhuo4657.LuckySphere.domain.rebate.event.SendRebateMessageEvent;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.dao.TaskDao;
+import cn.wenzhuo4657.LuckySphere.infrastructure.persistent.po.Task;
 import cn.wenzhuo4657.LuckySphere.types.event.BaseEvent;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,9 @@ public class EventPublisher {
 
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
+
+    @Autowired
+    TaskDao taskDao;
 
     /**
      *  @author:wenzhuo4657
@@ -47,5 +53,30 @@ public class EventPublisher {
 
 
 
+    }
+
+    /**
+     *  异步发送消息，避免阻塞
+     */
+    public void publish(String topic, BaseEvent.EventMessage<SendRebateMessageEvent.RebateMessage> eventMessage, Task task) {
+        try {
+            String messageJson = JSON.toJSONString(eventMessage);
+            rocketMQTemplate.asyncSend(topic, messageJson, new org.apache.rocketmq.client.producer.SendCallback() {
+                @Override
+                public void onSuccess(org.apache.rocketmq.client.producer.SendResult sendResult) {
+                    taskDao.updateTaskSendMessageCompleted(task);
+                    log.info("异步发送MQ消息成功，topic:{} message:{} msgId:{}", topic, messageJson, sendResult.getMsgId());
+                }
+
+                @Override
+                public void onException(Throwable throwable) {
+                    log.error("异步发送MQ消息失败 userId: {} topic: {}", task.getUserId(), task.getTopic(), throwable);
+                    taskDao.updateTaskSendMessageFail(task);
+                }
+            });
+        } catch (Exception e) {
+            log.error("准备发送MQ消息时发生异常 userId: {} topic: {}", task.getUserId(), task.getTopic(), e);
+            throw new RuntimeException(e);
+        }
     }
 }

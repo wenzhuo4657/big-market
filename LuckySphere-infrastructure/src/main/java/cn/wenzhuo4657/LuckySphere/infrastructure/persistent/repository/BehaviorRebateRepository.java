@@ -130,13 +130,8 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
             Task task=new Task();
             task.setUserId(taskEntity.getUserId());
             task.setMessageId(taskEntity.getMessageId());
-            try {
-                eventPublisher.publish(taskEntity.getTopic(),taskEntity.getMessage());
-                taskDao.updateTaskSendMessageCompleted(task);
-            } catch (Exception e) {
-                log.error("写入返利记录，发送MQ消息失败 userId: {} topic: {}", userId, task.getTopic());
-                taskDao.updateTaskSendMessageFail(task);
-            }
+            eventPublisher.publish(taskEntity.getTopic(),taskEntity.getMessage(),task);
+
         }
 
     }
